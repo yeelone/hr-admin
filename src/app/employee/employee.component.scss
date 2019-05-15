@@ -1,0 +1,28 @@
+.ant-input-affix-wrapper .ant-input-suffix {
+    right: 0px !important;
+}
+
+.current-description {
+    background: turquoise;
+    padding: 2px;
+    border-radius: 10px;
+    text-align: center;
+    margin:10px 2px;
+    line-height: 36px;
+    
+    span{
+        margin-left:20px;
+    }
+}
+
+.target-selector {
+    background: deepskyblue;
+    padding: 2px;
+   margin:10px 2px;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 36px;
+    span{
+        margin-left:20px;
+    }
+}

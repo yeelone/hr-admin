@@ -1,0 +1,14 @@
+<nz-table >
+  <tbody>
+    <tr>
+      <td> 
+        如果人员属于: 
+        <app-group-tree-selector (onSelectedNode)="onGroupSelected($event)"></app-group-tree-selector>
+      </td>
+      <td> 
+        则选择此标签:  
+        <app-tag-selector (onSelectedTag)="onTagSelectedTop($event)" (onCheckedTags)="onTagSelected($event)" > </app-tag-selector>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

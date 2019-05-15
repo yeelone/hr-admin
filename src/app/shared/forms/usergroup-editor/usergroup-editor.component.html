@@ -1,0 +1,23 @@
+<nz-modal [(nzVisible)]="visible" nzTitle="群组" (nzOnCancel)="closeModal()" (nzOnOk)="submitForm()">
+    <nz-spin [nzSize]="'large'" [nzSpinning]="isSubmiting">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <nz-form-item>
+        <nz-form-label nzRequired >组名</nz-form-label>
+        <nz-form-control>
+            <input nz-input type="text" formControlName="name" >
+            <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">请输入组名!</nz-form-explain>
+        </nz-form-control>
+        </nz-form-item>
+      <!-- <div nz-row>
+        <div nz-col nzSpan="24">
+            <nz-form-item>
+                <nz-form-label>父群组</nz-form-label>
+                <nz-form-control>
+                    <app-usergroup-selector  (selectedValue)="getSelectedValue($event)" [defaultValues]="selectedGroup"></app-usergroup-selector>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+      </div> -->
+  </form>
+  </nz-spin>
+</nz-modal>

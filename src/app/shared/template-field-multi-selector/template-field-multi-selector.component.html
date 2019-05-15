@@ -1,0 +1,12 @@
+
+<nz-select style="width: 50%;margin:20px;" [(ngModel)]="selectedTemplate" (ngModelChange)="selectedChange($event)"  nzPlaceHolder="请选择模板">
+    <nz-option *ngFor="let option of templates" [nzLabel]="option.name" [nzValue]="option"></nz-option>
+</nz-select>
+
+<nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="onChecked($event)">
+  <div nz-row>
+    <div nz-col nzSpan="8"  *ngFor="let f of fields;let i=index;" >
+      <label nz-checkbox nzValue="{{f.name}}" >{{f.name}}</label>
+    </div>
+  </div>
+</nz-checkbox-wrapper>

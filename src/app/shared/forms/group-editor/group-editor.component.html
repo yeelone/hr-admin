@@ -1,0 +1,48 @@
+  <form nz-form>
+      <div nz-row>
+        <div nz-col nzSpan="24">
+          <nz-form-item>
+            <nz-form-label>分类名</nz-form-label>
+            <nz-form-control>
+                <input nz-input type="text" [formControl]="name" >
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <div nz-row>
+        <div nz-col nzSpan="24">
+            <nz-form-item>
+                <nz-form-label>编码</nz-form-label>
+                <nz-form-control>
+                    <input nz-input type="text" [formControl]="code">
+                </nz-form-control>
+              </nz-form-item>
+            <nz-form-item>
+                <nz-form-label>系数</nz-form-label>
+                <nz-form-control>
+                    <input nz-input type="text" [formControl]="coefficient">
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+      </div>
+        <div nz-row>
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-label>父分类</nz-form-label>
+                    <nz-form-control>
+                        <app-group-selector  (selectedValue)="getSelectedValue($event)" [defaultValues]="selectedGroup"></app-group-selector>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row *appCanAccess="['CREATE_GROUP']">
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="12" [nzOffset]="5" >
+                        <button *ngIf="isCreateAction" nz-button nzType="primary" (click)="submitForm()" [nzLoading]="isSubmiting">新增</button>
+                        <button *ngIf="!isCreateAction" nz-button nzType="primary" (click)="submitForm()" [nzLoading]="isSubmiting">更新</button>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+  </form>

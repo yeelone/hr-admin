@@ -1,0 +1,106 @@
+<div style="background: #ECECEC;padding:30px;">
+  <nz-card style="width:600px;" [nzBordered]="false" >
+  <nz-divider nzText="查看当月变动表" nzOrientation="left"></nz-divider>
+    <button nz-button nzType="primary"  (click)="openChangeTableModal()"><i nz-icon type="flag" theme="outline"></i>查询变动表</button>
+
+    <nz-divider nzText="计算工资" nzOrientation="left"></nz-divider>
+    <nz-spin [nzSpinning]="isSpinning">
+      <div nz-row>
+        <div nz-col nzSpan="12">
+          <nz-select style="width: 400px;" [(ngModel)]="selectedTemplateAccount" nzAllowClear nzPlaceHolder="选择账套">
+            <nz-option *ngFor="let item of list ;let i = index; " nzValue="{{item.id}}" nzLabel="{{item.name}}"></nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <br>
+      <div nz-row>
+        <div nz-col nzSpan="12">
+          <button nz-button nzType="primary" (click)="analysis()"><i nz-icon type="check" theme="outline"></i>开始运算</button>
+        </div>
+      </div>
+       <div nz-row>
+         <div nz-col nzSpan="12">
+           <nz-month-picker  [(ngModel)]="selectedMonth" nzPlaceHolder="指定月份"></nz-month-picker>
+         </div>
+       </div>
+        <div nz-row *ngIf="errFile">
+         <div nz-col nzSpan="12">
+           <a href="{{errFile}}"  class="download-btn"> 点击下载错误信息 </a>
+          </div>
+        </div>
+       
+    </nz-spin>
+
+    <nz-divider nzText="导出工资表" nzOrientation="left"></nz-divider>
+
+    <nz-spin [nzSize]="'large'" [nzSpinning]="isExporting">
+      <nz-month-picker   [(ngModel)]="selectedMonth" nzPlaceHolder="指定月份" ></nz-month-picker>
+      <button nz-button nzType="dashed" (click)="exportSalary()">请求导出工资表</button>
+      <button nz-button nzType="dashed" (click)="openTemplateModal()">上传工资模板</button>
+
+      <div *ngIf="done" >
+          <a href="{{downloadFile}}"  class="download-btn"> 点击下载 </a>
+      </div>
+    </nz-spin>
+  </nz-card>
+</div>
+<nz-modal [(nzVisible)]="transferModalVisible" nzTitle="变动表" (nzOnCancel)="closeChangeTableModal()" nzWidth="900">
+  <app-record></app-record>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="uploadModalVisible" nzTitle="导入数据" (nzOnCancel)="closeUploadModal()" nzOkText="上传完毕，开始核算工资" (nzOnOk)="start()" nzWidth="1100">
+    <nz-spin [nzSpinning]="isSpinning">
+    <nz-upload
+        [(nzFileList)]="fileList"
+        [nzBeforeUpload]="beforeUpload">
+        <button nz-button>
+          <i class="anticon anticon-upload"></i><span>选择上传文件</span>
+        </button>
+    </nz-upload>
+    <button nz-button [nzType]="'primary'" [nzLoading]="uploading" (click)="handleUpload()" [disabled]="fileList.length == 0" style="margin: 16px">
+            {{ uploading ? 'Uploading' : 'Start Upload' }}
+          </button>
+    <button nz-button [nzType]="'primary'"  (click)="previewModalVisible=true"  style="margin: 16px">
+            显示上传预览数据
+    </button>
+
+    <div>
+      <span>样例</span>
+      <nz-tabset [nzTabPosition]="'top'">
+          <nz-tab  *ngFor="let template of shouldUpload;let i = index;" nzTitle="{{template.name}}" >
+              <nz-table #basicTable [nzData]="template.fields" [nzHideOnSinglePage]="'true'"  [nzBordered]="'true'">
+                    <tr>
+                      <td>身份证号码</td>
+                      <td *ngFor="let field of template.fields">{{field}}</td>
+                    </tr>
+                </nz-table>
+          </nz-tab>
+        </nz-tabset>
+    </div>  
+  </nz-spin>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="templateUploadVisible" nzTitle="上传模板" (nzOnCancel)="closeTemplateUploadModal()" (nzOnOk)="closeTemplateUploadModal()" nzWidth="900">
+    <p>
+      注意：<br>
+      一、上传的模板表格名必须为 <span style="color:red">账套名字</span>；<br>
+      二、上传的项目名为系统模板配置中的‘显示名’，不是字段名;<br>
+      三、必须第一行开始;<br>
+    </p>
+    <p>
+       <a href="{{defaultTemplateFile}}" *ngIf="defaultTemplateFile"> 查看模板 </a>
+    </p>
+    <app-upload  (onSuccess)="onUploadSuccess($event)" (onError)="onUploadError()"></app-upload>
+</nz-modal> 
+
+<nz-modal [(nzVisible)]="previewModalVisible" nzTitle="校验导入数据" (nzOnCancel)="closePreviewModal()" nzOkText="校验" (nzOnOk)="closePreviewModal()" nzWidth="1100">
+    <ul>
+       <li *ngFor="let data of previewData">
+         <nz-card style="width:600px;" nzTitle="{{data['__name__']}} {{data['__id_card__']}}">
+            <ng-container *ngFor="let key of getKeys(data);">
+              <p><span  class="data-level">{{key}}</span> <span class="data-value">{{data[key]}}</span></p>
+            </ng-container>
+        </nz-card>
+       </li>
+    </ul>
+</nz-modal>

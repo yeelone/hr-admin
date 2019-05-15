@@ -1,0 +1,71 @@
+  <nz-layout class="layout">
+        <nz-sider [nzWidth]="200" style="background:#fff">
+            <app-usergroup-tree (selectedNode)="getSelectedNode($event)"></app-usergroup-tree>
+        </nz-sider>
+        
+        <nz-content style="padding:0 50px;">
+            <div class="table-operations">
+                <button nz-button (click)="openEditForm(null)">新增用户</button>
+                <button nz-button (click)="resetPassword()">重置密码</button>
+                <button nz-button (click)="freeze()">冻结</button>
+                <button nz-button (click)="active()">激活</button>
+            </div>
+
+            <nz-table #rowSelectionTable
+                [nzData]="users" 
+                [nzLoading]="loading" 
+                [nzTotal]="total" 
+                [nzBordered]="'true'"
+                [nzSimple]="'false'"
+                [nzSize]="'small'"
+                [nzPageSize]="limit"
+                [nzShowPagination]="pagination"
+                [nzFrontPagination]="'false'"
+                [nzShowSizeChanger]="pagination"
+                (nzPageSizeChange)="nzPageSizeChange($event)"
+                [(nzPageIndex)]="pageIndex"
+                (nzPageIndexChange)="getData()"
+               
+                >
+                <thead>
+                  <tr>
+                    <th nzShowCheckbox [(nzChecked)]="allChecked"  (nzCheckedChange)="checkAll($event)"></th>
+                    <th>ID</th>
+                    <th>
+                        用户名
+                        <nz-dropdown nzTrigger="click" [nzClickHide]="false">
+                            <i class="anticon anticon-search ant-table-filter-icon" nz-dropdown></i>
+                            <div class="custom-filter-dropdown">
+                                <input type="text" nz-input placeholder="搜索用户名" [(ngModel)]="searchValue">
+                                <button nz-button [nzType]="'primary'" (click)="search('username')">Search</button>
+                            </div>
+                            </nz-dropdown>
+                    </th>
+                    <th>身份证号码</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of rowSelectionTable.data">
+                        <td nzShowCheckbox [(nzChecked)]="checkedMap[data.id]" (nzCheckedChange)="refreshMap(data.id)"></td>
+                        <td>{{data.id}}</td>
+                        <td>{{data.username}}</td>
+                        <td>{{data.id_card}}</td>
+                        <td>{{stateMap[data.state]}}</td>
+                        <td>
+                            <button nz-button nzType="danger" (click)="showDeleteConfirm(data.id,data.username)">删除</button>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <button nz-button nzType="dashed" (click)="openEditForm(data)">更新</button>
+                        </td>
+                    </tr>
+                </tbody>
+              </nz-table>
+        </nz-content>
+      </nz-layout>
+    
+<nz-drawer [nzClosable]="false"  [nzWidth]="820" [nzVisible]="visible" nzTitle="新增或修改用户信息" (nzOnClose)="closeEditForm()">
+    <app-user-editor [user]="selectedUser" (onSubmit)="changeSubmitStatus($event)"></app-user-editor>
+</nz-drawer>
+
+

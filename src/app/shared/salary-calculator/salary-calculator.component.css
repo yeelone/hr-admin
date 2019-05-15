@@ -1,0 +1,22 @@
+.download-btn {
+    display: block;
+    margin: 10px;
+    background: bisque;
+    width: 275px;
+    padding: 5px;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+}
+
+.data-level{
+    background: aliceblue;
+    padding: 4px;
+}
+
+.data-value{
+    background: blanchedalmond;
+    padding: 4px;
+}

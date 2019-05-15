@@ -1,0 +1,29 @@
+
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+       <nz-form-item>
+         <div class="logo-div">
+           <img [src]="logo"  width="200">
+         </div>
+       </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="anticon anticon-user">
+            <input type="text" nz-input formControlName="username" placeholder="用户名">
+          </nz-input-group>
+          <nz-form-explain *ngIf="validateForm.get('username').dirty && validateForm.get('username').errors">请输入用户名!</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="anticon anticon-lock">
+            <input type="password" nz-input formControlName="password" placeholder="密码">
+          </nz-input-group>
+          <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">请输入密码!</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button class="login-form-button" [nzType]="'primary'" >登录</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>

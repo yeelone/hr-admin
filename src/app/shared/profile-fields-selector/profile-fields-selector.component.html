@@ -1,0 +1,32 @@
+<p>
+  关联指定职员信息之后，系统会将会这些指定的信息显示在模板与最终的excel报表中.
+</p>
+
+<div>
+  <nz-radio-group (ngModelChange)="onRadioChange($event)">
+      <label nz-radio nzValue="id">职员唯一标识符-ID</label>
+      <label nz-radio nzValue="name">姓名</label>
+      <label nz-radio nzValue="job_number">工号</label>
+      <label nz-radio nzValue="type_card">证件类型</label>
+      <label nz-radio nzValue="id_card">证件号码</label>
+      <label nz-radio nzValue="on_board_date">入职日期-由此来计算工龄</label>
+      <label nz-radio nzValue="phone">电话号码</label>
+      <label nz-radio nzValue="gender">性别</label>
+      <label nz-radio nzValue="birth_day">生日</label>
+      <label nz-radio nzValue="status">在职状态</label>
+      <label nz-radio nzValue="source">招聘来源</label>
+      <label nz-radio nzValue="school">毕业院校</label>
+      <label nz-radio nzValue="graduation_date">毕业日期</label>
+      <label nz-radio nzValue="specialty">专业</label>
+      <label nz-radio nzValue="nation">民族</label>
+      <label nz-radio nzValue="marital_status">婚姻状况</label>
+      <label nz-radio nzValue="account_location">户籍</label>
+      <label nz-radio nzValue="address">地址</label>
+      <label nz-radio nzValue="bank_card">银行账号</label>
+    </nz-radio-group>
+</div> 
+
+<div class="footer">
+    <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>取消</span></button>
+    <button type="button" (click)="submit()" class="ant-btn ant-btn-primary" [disabled]="disabled"><span>确定</span></button>
+</div>

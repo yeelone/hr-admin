@@ -1,0 +1,17 @@
+
+<app-template-account-selector (onSelected)="onSelectedTemplateAccount($event)"></app-template-account-selector>
+
+<nz-select style="width: 50%;margin:20px;" [(ngModel)]="selectedTemplate" (ngModelChange)="selectedChange($event)"  nzPlaceHolder="请选择模板">
+    <nz-option *ngFor="let option of templates" [nzLabel]="option.name" [nzValue]="option"></nz-option>
+</nz-select>
+
+<div *ngIf="checked">
+  <nz-radio-group [(ngModel)]="radioValue">
+      <label nz-radio  *ngFor="let f of fields;let i=index;" nzValue="{{f.key}}">{{f.name}}</label>
+  </nz-radio-group>
+</div>
+<!-- <nz-month-picker  [(ngModel)]="selectedMonth" nzPlaceHolder="指定月份"></nz-month-picker> -->
+<div class="footer">
+    <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>关闭</span></button>
+    <button type="button" (click)="submit()" class="ant-btn ant-btn-primary"><span>确定</span></button>
+</div>

@@ -1,0 +1,101 @@
+<!-- 
+ <nz-card style="width:300px;" nzTitle="年收入" >
+  <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning">
+    <nz-year-picker [(ngModel)]="annualYear" (ngModelChange)="onAnnualChange($event)" nzPlaceHolder="Select year"></nz-year-picker>
+    <br>
+    <button nz-button (click)="getAnnual()" *ngIf="showAnnualBtn">所有人年收入</button>
+    <a href="{{annualFile}}"  *ngIf="showAnnualFile"> 点击下载 </a>
+  </nz-spin>
+</nz-card> -->
+
+<!-- 
+  <nz-spin [nzSize]="'large'" [nzSpinning]="isInOutSpinning">
+    <nz-year-picker [(ngModel)]="annualYear" (ngModelChange)="onInExChange($event)" nzPlaceHolder="Select year"></nz-year-picker>
+    <br>
+    <button nz-button (click)="getIncomeExpenditure()" *ngIf="showInExBtn">收支明细</button>
+    <a href="{{inExFile}}"  *ngIf="showInExFile"> 点击下载 </a>
+  </nz-spin> -->
+    
+<!-- <nz-card style="width:300px;" nzTitle="收支明细" >
+  <div>
+    <span>选择部门:</span> 
+    <app-group-tree-selector></app-group-tree-selector>
+  </div>
+</nz-card> -->
+
+<div nz-row class="statistics-container">
+  <div nz-col nzSpan="12" *appCanAccess="['QUERY_DETAIL']">
+    <div nz-row class="cell">
+       <div nz-col nzSpan="12" >
+           <p><b>选择统计年度:</b></p>
+           <nz-year-picker [(ngModel)]="year"  style="margin:20px" nzPlaceHolder="选择查询年份"></nz-year-picker>
+       </div>
+       <div nz-col nzSpan="12" >
+           <p><b>选择统计账套:</b></p>
+           <div class="acccount-selector">
+              <app-template-account-selector   (onSelected)="onSelectedTemplateAccount($event)"></app-template-account-selector>
+           </div>
+       </div>
+    </div>
+    <!-- <div nz-row class="cell">
+      <p><b>选择统计项目:</b></p>
+      <app-template-field-multi-selector (onSelected)="onRelatedFieldSelected($event)"></app-template-field-multi-selector>
+    </div> -->
+    <div nz-row class="cell">
+        <div class="card-container">
+          <div style="margin:auto"><nz-spin [nzSpinning]="fieldSpinning"> </nz-spin></div>
+          <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
+             
+                 <nz-tab *ngFor="let month of tabs" [nzTitle]="month">
+                  <div *ngIf="fields[month]">
+                      <nz-tabset [nzTabPosition]="'left'" [nzType]="'line'">
+                        <nz-tab *ngFor="let template of fields[month]['__order__']" [nzTitle]="template">
+                          <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="onFieldChecked($event,template)">
+                            <div nz-row>
+                              <div nz-col nzSpan="8"  *ngFor="let field of fields[month][template]" >
+                                <label nz-checkbox nzValue="{{field}}" >{{field}}</label>
+                              </div>
+                            </div>
+                          </nz-checkbox-wrapper>
+                        </nz-tab>
+                      </nz-tabset>
+
+                  </div>
+                 </nz-tab>
+            
+          </nz-tabset>
+        </div>
+    </div>
+  </div>
+  <div nz-col nzSpan="12">
+    <div style="width:400px;">
+     <nz-card class='statistics-btn' nzTitle="查询员工个人收入明细" *appCanAccess="['QUERY_DETAIL']">
+      <nz-table #basicTable   nzBordered   [nzNoResult]="noresultTempalte">
+      <tbody>
+        <tr *ngFor="let t of selectedTemplates"> 
+          <td style="background-color:aquamarine;"> {{ selectedFieldMap.get(t).template }}</td>
+          <td *ngFor="let f of selectedFieldMap.get(t).fields">{{f}}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <ng-template #noresultTempalte>
+      <button nz-button [nzLoading]="isLoading" nzType="primary" (click)="submitQuery()">提交查询</button>
+       <a href="{{detailFile}}"  *ngIf="showDetailFile">点击下载 </a>
+    </ng-template>
+     </nz-card>
+    <nz-card class='statistics-btn' nzTitle="查询部室或支行收入明细" *appCanAccess="['QUERY_DETAIL']">
+        <button nz-button [nzLoading]="isLoading" nzType="primary" (click)="submitDepartmentQuery()">提交查询</button>
+        <a href="{{departmentIncomeFile}}"  *ngIf="showDepartmentIncomeFile">点击下载 </a>
+    </nz-card>
+    <nz-card *appCanAccess="['QUERY_PROFILE_SALARY']" class='profile-detail-btn'>
+        <p> <a routerLink="/salary/adjust">查询个人明细2</a></p>
+    </nz-card>
+    <nz-card *appCanAccess="['RECORD_TRANSFER']" class='profile-transfer-btn'>
+      <button nz-button [nzLoading]="isTransferLoading" nzType="primary" (click)="submitTransferQuery()">下载员工调动记录</button>
+      <a href="{{transferRecordFile}}"  *ngIf="showTransferRecordFile">点击下载 </a>
+    </nz-card>
+    </div>
+  </div>
+</div>
+
+

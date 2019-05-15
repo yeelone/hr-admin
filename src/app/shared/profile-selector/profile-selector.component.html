@@ -1,0 +1,80 @@
+
+<nz-modal [(nzVisible)]="visible" nzWidth="900" nzHeight="400" nzTitle="职员管理" (nzOnCancel)="closeModal()" (nzOnOk)="onSubmit()">
+
+<div nz-row>
+    <div nz-col nzSpan="8">
+        <app-grouptree (selectedNode)="getSelectedNode($event)"></app-grouptree>
+    </div>
+    <div nz-col nzSpan="16">
+      <div nz-row>
+        <nz-input-group nzSearch nzSize="default" [nzSuffix]="suffixButton">
+            <input type="text" nz-input placeholder="search" [(ngModel)]="searchValue">
+          </nz-input-group>
+          <ng-template #suffixButton>
+            <button nz-button nzType="primary" nzSize="default" nzSearch (click)="searchProfile()">搜索</button>
+        </ng-template>
+      </div>
+      <div nz-row>
+        <div nz-col nzSpan="12">
+          <div class="profile-list-div">
+              <nz-table #profileTable
+                        [nzData]="profiles" 
+                        [nzTotal]="total" 
+                        nzSize="small" 
+                        [nzShowPagination]="pagination"
+                        [nzFrontPagination]="'false'"
+                        [nzPageSize]="limit"
+                        [(nzPageIndex)]="pageIndex"
+                        (nzPageIndexChange)="getData()"
+                        [nzShowPagination]="'true'"
+                        [nzBordered]="'true'"
+                        [nzScroll]="{ y: '420px' }">
+                   <thead>
+                      <tr>
+                        <th>序号{{total}}</th>
+                        <th>姓名</th>
+                        <th>操作 <a (click)="checkAllProfiles()">全部</a></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let p of profileTable.data;let i = index" class="custom-tr">
+                        <td style="padding:2px">{{i+1}}</td>
+                        <td style="padding:2px">{{p.name}}</td>
+                        <td style="padding:2px">
+                            <nz-switch [ngModel]="selectedMap[p.id]"  (ngModelChange)="checkProfile(p)" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+                            <ng-template #checkedTemplate><i class="anticon anticon-check"></i></ng-template>
+                            <ng-template #unCheckedTemplate><i class="anticon anticon-cross"></i></ng-template>
+                        </td>
+                      </tr>
+                    </tbody>
+              </nz-table>
+          </div>
+        </div>
+        <div nz-col nzSpan="12">
+            <div class="profile-list-div">
+            <nz-table [nzData]="checkedProfiles" #checkedProfileTable nzSize="small" [nzBordered]="'true'" [nzScroll]="{ y: '420px' }">
+                <thead>
+                    <tr>
+                      <th>序号</th>
+                      <th>姓名</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let p of checkedProfileTable.data;let i = index">
+                      <td style="padding:2px">{{i+1}}</td>
+                      <td style="padding:2px">{{p.name}}</td>
+                      <td style="padding:2px">
+                        <a (click)="checkProfile(p)"><i class="anticon anticon-close"></i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+            </nz-table>
+            </div>
+        </div>
+      </div>
+ 
+  </div>
+</div>
+
+</nz-modal>

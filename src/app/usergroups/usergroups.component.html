@@ -1,0 +1,47 @@
+<nz-layout class="layout">
+    <nz-content style="padding:0 50px;">
+        <div class="table-operations">
+            <button nz-button (click)="openEditForm(null)">新增群组</button>
+        </div>
+        <nz-table #basicTable [nzData]="groups" 
+           [nzBordered]="'true'"
+            [nzLoading]="loading" 
+                [nzTotal]="total" 
+                [nzSimple]="'false'"
+                [nzSize]="'small'"
+                [nzPageSize]="limit"
+                [nzShowPagination]="pagination"
+                [nzFrontPagination]="'false'"
+                [nzShowSizeChanger]="pagination"
+                (nzPageSizeChange)="nzPageSizeChange($event)"
+                [(nzPageIndex)]="pageIndex"
+                (nzPageIndexChange)="getData()"
+        >
+            <thead>
+              <tr>
+                <th>组名</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of basicTable.data">
+                <td>{{data.name}}</td>
+                <td>
+                  <button nz-button nzType="default" (click)="openUserListDrawer(data)">添加人员</button>
+                  <nz-divider nzType="vertical"></nz-divider>
+                  <button nz-button nzType="dashed" (click)="openEditForm(data)">更新</button>
+                  <nz-divider nzType="vertical"></nz-divider>
+                  <button nz-button nzType="danger" (click)="showDeleteConfirm(data.id,data.name)">删除</button>
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
+    </nz-content>
+  </nz-layout>
+
+<app-usergroup-editor [group]="selectedGroup" (onOk)="onOk()" (onCancel)="onCancel()" [visible]="modalVisible"></app-usergroup-editor>
+
+<nz-drawer [nzClosable]="false"  [nzWidth]="900" [nzVisible]="userDrawerVisible" nzTitle="组员信息" (nzOnClose)="closeUserDrawer()">
+    <app-simple-user-list [group]="selectedGroup" ></app-simple-user-list>
+</nz-drawer>
+  

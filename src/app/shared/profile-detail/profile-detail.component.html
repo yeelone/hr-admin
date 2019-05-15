@@ -1,0 +1,46 @@
+
+<nz-tabset>
+  <nz-tab nzTitle="基本信息">
+    <nz-spin [nzSize]="'large'" [nzSpinning]="loading">
+      <div style="width: 650px;margin: auto;">
+        <app-profile-editor [profile]="profile" ></app-profile-editor>
+      </div>
+    </nz-spin>
+  </nz-tab>
+  <nz-tab nzTitle="关联标签">
+    <div style="margin:20px;">
+      <button nz-button (click)="openModal()">变更标签</button>
+    </div>
+    <ul style="list-style:none;">
+      <li *ngFor="let item of tags; let i = index ;"  >
+        <ul style="list-style:none;">
+          <li *ngFor="let c of item['children']">
+            <span class="tag-container" >
+              <nz-tag [nzColor]="'green'">{{item['tag'].name}}</nz-tag> -> <nz-tag [nzColor]="'cyan'">数值: [{{c.coefficient}}]</nz-tag>
+            </span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-tab>
+   <nz-tab nzTitle="调动记录">
+      <nz-timeline>
+        <nz-timeline-item *ngFor="let record of transferRecords ; let i = index">
+           <p>{{record.created_at | date:'yyyy-MM-dd'}}  {{record.old_group_name}} ==> {{record.new_group_name}} </p>
+           <p>{{record.description}}</p>
+        </nz-timeline-item>
+      </nz-timeline>
+   </nz-tab>
+</nz-tabset>
+
+<div nz-col nzSpan="12"  *ngFor="let t of selectedTags;let i=index;" >
+    <nz-tag [nzColor]="'lime'">标签名: {{t.name}}</nz-tag>
+    <nz-divider nzType="vertical"></nz-divider>
+    <nz-tag [nzColor]="'green'">值:{{t.coefficient}}</nz-tag>
+</div>
+
+<nz-modal [(nzVisible)]="modalVisible" nzTitle="标签" (nzOnCancel)="closeModal()" (nzOnOk)="submitTags()" nzOkText="提交更改" [nzOkLoading]="isOkLoading">
+  <app-tag-selector (onSelectedTag)="onSelectedTop($event)" (onCheckedTags)="onSelected($event)" [default]="defaultChecked"> </app-tag-selector>
+</nz-modal>
+
+

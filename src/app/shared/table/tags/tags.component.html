@@ -1,0 +1,64 @@
+  <div class="create-tag-btn">
+      <button nz-button  (click)="openEditForm(-1)"><i class="anticon anticon-edit"></i>新增标签</button>
+      <button nz-button  (click)="openImportModal()"><i class="anticon anticon-upload" ></i>导入标签表</button>
+  </div>
+<nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning">
+<ul class="tag-list">
+  <li *ngFor="let t of parentTags ; let i = index;trackBy: trackByIndex " class="tag-item">
+    
+    <nz-table  [nzSize]="small" [nzBordered]="'true'" [nzHideOnSinglePage]="'true'"  [nzNoResult]="noresultTempalte" nzWidth="300px" [nzScroll]="{ x:'300px',y: '240px' }">
+      <thead>
+        <tr>
+          <th style="background-color: lemonchiffon;"><a (click)="updateEditForm(t)">{{t.name}}</a></th>
+          <th>标签</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of childrenTags[t.id]">
+          <td><a (click)="updateEditForm(data)"> {{data.name}}</a></td>
+          <td>{{data.coefficient}}</td>
+          <td>
+            <a (click)="openProfileSelectorForm(data)"><i nz-icon type="team" theme="outline"></i></a>
+            <nz-divider [nzType]="vertical"></nz-divider>
+            <nz-popconfirm [nzTitle]="'确定删除?'" (nzOnConfirm)="deleteTag(data.id)">
+                <a nz-popconfirm style="color:red;"><i class="anticon anticon-close"></i></a>
+            </nz-popconfirm>
+          </td>
+        </tr>
+      </tbody>
+      <ng-template #noresultTempalte>
+        <div nz-row>
+          <div nz-col nzSpan="12" class="tag-action" ><a (click)="openEditForm(i)"> <i class="anticon anticon-file-add"></i>  子标签</a></div>
+          <div nz-col nzSpan="12" class="tag-action" >
+            <nz-popconfirm [nzTitle]="'确定删除整个组吗?'" (nzOnConfirm)="deleteTag(t.id)">
+              <a nz-popconfirm><i class="anticon anticon-close"></i>删除</a>
+            </nz-popconfirm>
+          </div>
+        </div>
+      </ng-template>
+    </nz-table>
+   
+  </li>
+</ul>   
+</nz-spin>
+<app-tag-editor [visible]="visible" [default]="currentTag" (onOk)="onChange($event)" (onCancel)="closeEditForm($event)"></app-tag-editor>
+
+<nz-drawer [nzClosable]="false"  [nzWidth]="900" [nzVisible]="profileDrawerVisible" nzTitle="组员信息" (nzOnClose)="closeProfileSelectorForm()">
+  <app-tag-profile-list [tag]="currentTag" ></app-tag-profile-list>
+</nz-drawer>
+
+<nz-modal [(nzVisible)]="importModalVisible" nzTitle="批量导入" (nzOnCancel)="closeImportModal()" (nzOnOk)="closeImportModal()">
+    <nz-upload
+        [(nzFileList)]="fileList"
+        [nzBeforeUpload]="beforeUpload">
+        <button nz-button>
+          <i class="anticon anticon-upload"></i><span>选择上传文件</span>
+        </button>
+    </nz-upload>
+    <button nz-button [nzType]="'primary'" [nzLoading]="uploading" (click)="handleUpload()" [disabled]="fileList.length == 0" style="margin-top: 16px">
+       {{ uploading ? 'Uploading' : 'Start Upload' }}
+    </button>
+
+    <p *ngIf="errFile">  <a href="{{errFile}}" > 发现错误，点击查看 </a> </p>
+</nz-modal>

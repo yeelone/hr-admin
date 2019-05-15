@@ -1,0 +1,31 @@
+<div class="header">
+  <div class="header-title">
+    人 事 工 资 操 作 系 统————Salary Management System
+  </div>
+  <nz-dropdown [nzTrigger]="'click'">
+      <a nz-dropdown>
+        <i class="anticon anticon-user"></i> 
+        {{currentUser.username}} 
+         <span *ngFor="let r of roles;" >
+         [{{r.name}}]
+      </span>
+        <i class="anticon anticon-down"></i>
+      </a>
+      <ul nz-menu>
+        <li nz-menu-item>{{currentUser.username}}</li>
+        <li nz-menu-item (click)="openModal()">修改密码</li>
+        <li nz-menu-item (click)="logout()">注销</li>
+      </ul>
+    </nz-dropdown>
+</div>
+
+<nz-modal [(nzVisible)]="visible" nzTitle="修改密码" (nzOnCancel)="closeModal()" (nzOnOk)="resetPassword()">
+  <nz-spin [nzSize]="'large'"  [nzSpinning]="isSubmiting">
+  <span>
+    {{currentUser.username}} 
+  </span>
+
+  <input type="text" nz-input  [(ngModel)]="newPassword">
+  </nz-spin>
+</nz-modal>
+

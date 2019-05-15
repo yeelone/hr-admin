@@ -1,0 +1,35 @@
+<p>
+  公式示例： ( [工龄]+[学历]*2+[岗位]*3 )/100 + [基本工资] + [全年总收入]
+</p>
+<p>
+    其中的 [工龄] [学历] [岗位] [基本工资] [全年总收入] 为公式所依赖的数据，这些数据必须在定义公式之前预先配置好。
+</p>
+
+<p>
+  系统已为你分析当前可选用字段
+  <span *ngFor="let f of fields;let i = index">
+      <nz-tag [nzColor]="'lime'" nzMode="checkable" [nzChecked]="true" (nzCheckedChange)="insertKey(f.key,f.name)">{{f.name}}</nz-tag>
+  </span>
+ 
+</p>
+
+<input nz-input #formulatinput 
+    placeholder="定义规则" 
+    [(ngModel)]="formula" 
+    (click)="savePos(formulatinput)">
+
+<div>
+    是否自动为您统计所有收入项、扣除项
+    <nz-radio-group [(ngModel)]="radioValue" (ngModelChange)="onSelectChange()">
+        <label nz-radio nzValue="所有输入项">所有输入项</label>
+        <label nz-radio nzValue="所有扣除项">所有扣除项</label>
+        <label nz-radio nzValue="所有扣税项">所有扣税项</label>
+        <label nz-radio nzValue="应发金额">所有输入项 - 所有扣除项</label>
+        <label nz-radio nzValue="实发金额">所有扣税项 - 所有扣除项</label>
+    </nz-radio-group>
+</div>
+
+<div class="footer">
+    <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>关闭</span></button>
+    <button type="button" (click)="submit()" class="ant-btn ant-btn-primary"><span>确定</span></button>
+</div>

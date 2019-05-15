@@ -1,0 +1,38 @@
+.cell {
+    margin: 5px;
+    padding: 5px;
+
+    span{
+        padding: 5px;
+    }
+}
+
+.profile-detail-btn {
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+
+    a {
+        color: white;
+        font-size: 18px;
+        display: block;
+        margin: auto;
+        width: 124px;
+    }
+}
+.profile-transfer-btn {
+    background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
+    button {
+        display: block;
+        margin: auto;
+    }
+}
+
+.statistics-btn{
+    margin: 5px;
+    box-shadow: 6px 4px 10px #cccccc;
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    color:white;
+}
+.acccount-selector {
+    width: 150px;
+    margin-top: 34px;
+}

@@ -1,0 +1,16 @@
+.salary-module-list{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+
+    li{
+        width: 150px;
+        height:100px;
+        margin-left: 10px;
+        text-align: center;
+        i {
+            font-size: 40px;
+        }
+    }
+}

@@ -1,0 +1,9 @@
+.tag-container{
+    padding: 5px;
+    background: darkgray;
+    display: block;
+    max-width: 311px;
+    float: left;
+    margin: 10px;
+    border-radius: 8px;
+}

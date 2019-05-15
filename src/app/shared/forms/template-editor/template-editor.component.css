@@ -1,0 +1,12 @@
+.form-item {
+    float: left;
+}
+
+.template-title-bar {
+    margin: 10px;
+}
+
+.template-action-bar{
+    width: 300px;
+    margin: 20px auto;
+}

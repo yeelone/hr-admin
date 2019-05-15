@@ -1,0 +1,23 @@
+  
+
+<button nz-button nzType="primary"  (click)="openModal()" ><i class="anticon anticon-download"></i>添加</button>
+
+<nz-table [nzData]="users" #userTable nzSize="small" [nzBordered]="'true'">
+    <thead>
+        <tr>
+          <th>序号</th>
+          <th>用户名</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of userTable.data;let i = index">
+          <td>{{i+1}}</td>
+          <td>{{u.username}}</td>
+          <td> <button nz-button nzType="dashed" class="btn btn-link" (click)="removeUser(u.id)">删除</button></td>
+        </tr>
+      </tbody>
+</nz-table>
+
+
+ <app-user-selector  [visible]="selectorModalVisible" (onCancel)="closeModal()" (onSelect)="changeMembers($event)"></app-user-selector>

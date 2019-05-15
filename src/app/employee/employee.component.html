@@ -1,0 +1,123 @@
+  <nz-layout class="layout">
+        <nz-sider [nzWidth]="200" style="background:#fff">
+            <app-grouptree (selectedNode)="getSelectedNode($event)"></app-grouptree>
+        </nz-sider>
+        
+        <nz-content style="padding:0 50px;">
+            <div class="table-operations table-action-bar">
+                <nz-input-group nzSearch [nzSuffix]="suffixIconButton">
+                    <input type="text"  nz-input placeholder="输入名字进行搜索" [(ngModel)]="searchValue" (keyup)="search('name')">
+                </nz-input-group>
+                <ng-template #suffixIconButton>
+                    <button nz-button nzType="primary" nzSearch  (click)="search('name')"><i nz-icon type="search"></i></button>
+                </ng-template>
+
+                <button nz-button (click)="showFreezedProfiles()">查看冻结用户</button>
+                <button nz-button (click)="openEditForm()" *appCanAccess="['CREATE_PROFILE']">增加员工</button>
+                <button nz-button (click)="openImportModal()" *appCanAccess="['IMPORT_PROFILE']">导入</button>
+                <button nz-button (click)="openMoveModal()" *appCanAccess="['MOVE_PROFILE_TO_GROUP']">调动</button>
+                <button nz-button (click)="openFreezeModal(true)" *appCanAccess="['FREEZE_PROFILE']" [disabled]="freezeButtonDisable">冻结</button>
+                <button nz-button (click)="openFreezeModal(false)" *appCanAccess="['UNFREEZE_PROFILE']" [disabled]="freezeButtonDisable">激活</button>
+            </div>
+
+            <nz-table #rowSelectionTable
+                [nzData]="profiles" 
+                [nzLoading]="loading" 
+                [nzTotal]="total" 
+                [nzBordered]="'true'"
+                [nzSimple]="'false'"
+                [nzSize]="'small'"
+                [nzPageSize]="limit"
+                [nzShowPagination]="pagination"
+                [nzFrontPagination]="'false'"
+                [nzHideOnSinglePage]="'true'"
+                [nzShowSizeChanger]="pagination"
+                (nzPageSizeChange)="nzPageSizeChange($event)"
+                [(nzPageIndex)]="pageIndex"
+                (nzPageIndexChange)="getData()"
+                [nzScroll]="{ x:'70%',y: '500px' }"
+                >
+                <thead>
+                  <tr>
+                    <th nzShowCheckbox [(nzChecked)]="allChecked"  (nzCheckedChange)="checkAll($event)"></th>
+                    <th>ID</th>
+                    <th>用户名 </th>
+                    <th>证件号码</th>
+                    <th>银行账号/卡号</th>
+                    <th>状态</th>
+                    <th>审核状态</th>
+                    <th>激活</th>
+                    <th *appCanAccess="['ADD_PROFILE','UPDATE_PROFILE']">操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of rowSelectionTable.data">
+                        <td nzShowCheckbox [(nzChecked)]="checkedMap[data.id]" (nzCheckedChange)="checkItem($event)"></td>
+                        <td>{{data.id}}</td>
+                        <td><a href="/profile/{{data.id}}" target="_blank" > {{data.name}}  </a></td>
+                        <td>{{data.id_card}}</td>
+                        <td>{{data.bank_card}}</td> 
+                        <td>{{data.status}}</td> 
+                        <td>{{stateMap[data.audit_state]}}</td>
+                        <td>
+                            <span *ngIf="data.freezed">冻结</span>
+                            <span *ngIf="!data.freezed">激活</span>
+                        </td>
+                        <td *appCanAccess="['ADD_PROFILE','UPDATE_PROFILE']">
+                            <!-- <button nz-button nzType="danger" (click)="showDeleteModal(data)" *appCanAccess="['DELETE_PROFILE']">删除</button> -->
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <button nz-button nzType="dashed" (click)="openEditForm(data)" *appCanAccess="['UPDATE_PROFILE']">更新</button>
+                        </td>
+                    </tr>
+                </tbody>
+              </nz-table>
+        </nz-content>
+      </nz-layout>
+    
+<nz-drawer [nzClosable]="false" [nzWidth]="820" [nzVisible]="visible" nzTitle="新增或修改用户信息" (nzOnClose)="closeEditForm()">
+    <app-profile-editor [profile]="selectedProfile" (onSubmit)="changeSubmitStatus($event)"></app-profile-editor>
+</nz-drawer>
+
+<nz-modal [(nzVisible)]="deleteModalVisible" nzTitle="删除" (nzOnCancel)="closeDeleteModal()" (nzOnOk)="onDelete()">
+    <span>{{targetProfile.name}}</span>
+    
+    <textarea nz-input [(ngModel)]="remark" rows="6"></textarea>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="freezeModalVisible" nzTitle="冻结/解冻" (nzOnCancel)="closeFreezeModal()" (nzOnOk)="onFreeze()">
+    <textarea nz-input [(ngModel)]="remark" rows="6"></textarea>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="importModalVisible" nzTitle="批量导入" (nzOnCancel)="closeImportModal()" (nzOnOk)="closeImportModal()">
+    <nz-upload
+        [(nzFileList)]="fileList"
+        [nzBeforeUpload]="beforeUpload">
+        <button nz-button>
+          <i class="anticon anticon-upload"></i><span>选择上传文件</span>
+        </button>
+    </nz-upload>
+    <button nz-button [nzType]="'primary'" [nzLoading]="uploading" (click)="handleUpload()" [disabled]="fileList.length == 0" style="margin-top: 16px">
+            {{ uploading ? 'Uploading' : 'Start Upload' }}
+          </button>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="moveModalVisible" nzTitle="调动" (nzOnCancel)="closeMoveModal()" (nzOnOk)="moveProfile()" [nzOkLoading]="moveLoading">
+    
+    <p class="current-description">
+        <span style="float:left;">调动类型？<app-group-selector [target]="0" (selectedValue)="getGroupType($event)"></app-group-selector></span>
+        <span>当前:</span> <span>{{targetGroup.name}}</span>
+    </p> 
+    
+    <textarea nz-input cols="30" rows="5" [(ngModel)]="description"></textarea>
+    
+    <p class="target-selector">
+        <span style="float:left;">调至:</span>
+        <app-group-selector [target]="moveTopGroup" (selectedValue)="getSelectedGroup($event)"></app-group-selector>
+    </p>
+    <br>
+    <p style="color:brown">
+            请注意,员工调动岗位,系统会自动清除用户原有岗位所关联之<span style="color:brown;font-size:18px;">任何</span>标签
+            并同时为用户关联上新岗位所持有的标签。请调动之后要进行检查验证。
+    </p>
+    <!-- <nz-switch [(ngModel)]="clearProfileTags" nzCheckedChildren="是" nzUnCheckedChildren="否"></nz-switch> -->
+</nz-modal>

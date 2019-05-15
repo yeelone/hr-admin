@@ -1,0 +1,25 @@
+  
+
+<button nz-button nzType="primary"  (click)="openModal()" ><i class="anticon anticon-user-add"></i>调入</button>
+
+<nz-table [nzData]="profiles" #profileTable nzSize="small" [nzBordered]="'true'">
+    <thead>
+        <tr>
+          <th>序号</th>
+          <th>姓名</th>
+          <th>身份证号码</th>
+          <!-- <th>操作</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of profileTable.data;let i = index">
+          <td>{{i+1}}</td>
+          <td>{{p.name}}</td>
+          <td>{{p.id_card}}</td>
+          <!-- <td> <button nz-button nzType="dashed" class="btn btn-link" (click)="removeProfile(p.id)">调出</button></td> -->
+        </tr>
+      </tbody>
+</nz-table>
+
+
+ <app-profile-selector  [visible]="selectorModalVisible" (onCancel)="closeModal()" (onSelect)="changeMembers($event)"></app-profile-selector>

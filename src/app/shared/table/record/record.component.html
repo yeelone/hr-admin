@@ -1,0 +1,49 @@
+<nz-table #rowSelectionTable
+        [nzData]="records" 
+        [nzLoading]="loading" 
+        [nzTotal]="total" 
+        [nzBordered]="'true'"
+        [nzSimple]="'false'"
+        [nzSize]="'small'"
+        [nzPageSize]="limit"
+        [nzShowPagination]="pagination"
+        [nzFrontPagination]="'false'"
+        [nzHideOnSinglePage]="'false'"
+        [nzShowSizeChanger]="pagination"
+        (nzPageSizeChange)="nzPageSizeChange($event)"
+        [(nzPageIndex)]="pageIndex"
+        (nzPageIndexChange)="getData()"
+        [nzWidthConfig]="['60px','100px']"
+        >
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>时间</th>
+            <th>内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of rowSelectionTable.data">
+                <td>{{data.id}}</td>
+                <td>{{data.CreatedAt | date:'yy-MM-dd'}}</td>
+                <td><a (click)="showBodyModal(data.body)">{{data.body}}</a></td>
+            </tr>
+        </tbody>
+</nz-table>
+
+
+    
+<nz-modal [(nzVisible)]="bodyModal" nzTitle="具体内容" (nzOnCancel)="closeBodyModal()" (nzOnOk)="closeBodyModal()">
+    <div>
+        <nz-table #basicTable  [nzHideOnSinglePage]="'true'" [nzNoResult]="noresultTempalte"  >
+            <tbody>
+                <tr *ngFor="let data of bodyString">
+                <td *ngFor="let item of data">{{item}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</nz-modal>
+
+<ng-template #noresultTempalte>
+</ng-template>

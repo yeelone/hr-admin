@@ -1,0 +1,16 @@
+<nz-select style="width: 50%;margin:20px;" [(ngModel)]="selectedTag" (ngModelChange)="selectedChange($event)"  nzPlaceHolder="选择标签表">
+  <nz-option *ngFor="let t of tags" [nzLabel]="t.name" [nzValue]="t"></nz-option>
+</nz-select>
+
+<nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="onChecked($event)">
+  <div nz-row>
+    <div nz-col nzSpan="12"  *ngFor="let c of children;let i=index;" >
+      <label nz-checkbox nzValue="{{c.id}}"  [(ngModel)]="defaultChecked[c.id]" >
+        <nz-tag [nzColor]="'lime'">标签名: {{c.name}}</nz-tag>
+        <nz-divider nzType="vertical"></nz-divider>
+        <nz-tag [nzColor]="'green'">值:{{c.coefficient}}</nz-tag>
+      </label>
+    </div>
+  </div>
+</nz-checkbox-wrapper>
+

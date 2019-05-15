@@ -1,0 +1,11 @@
+
+<div>
+  <button nz-button (click)="backup()"> 备份 </button>
+  <ul>
+    <li *ngFor="let file of backupFiles;let i = index ">
+      <a href="{{ file }}" target="_blank"> {{i+1}} - {{getName(file)}}</a>
+    </li>
+  </ul>
+
+</div>
+

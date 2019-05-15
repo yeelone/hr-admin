@@ -1,0 +1,104 @@
+<nz-layout class="layout">
+
+<nz-content style="padding:0 50px;">
+
+    <nz-table #rowSelectionTable
+        [nzData]="audits" 
+        [nzLoading]="loading" 
+        [nzTotal]="total" 
+        [nzBordered]="'true'"
+        [nzSimple]="'false'"
+        [nzSize]="'small'"
+        [nzPageSize]="limit"
+        [nzShowPagination]="pagination"
+        [nzFrontPagination]="'false'"
+        [nzHideOnSinglePage]="'false'"
+        [nzShowSizeChanger]="pagination"
+        (nzPageSizeChange)="nzPageSizeChange($event)"
+        [(nzPageIndex)]="pageIndex"
+        (nzPageIndexChange)="getData()"
+        [nzWidthConfig]="['60px','100px','50px','300px','100px','200px','150px','60px']"
+        >
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>审核对象</th>
+            <th>审核操作</th>
+            <th>审核内容</th>
+            <th>审核状态</th>
+            <th>备注</th>
+            <!-- <th>回复</th>
+            <th>操作</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of rowSelectionTable.data">
+                <td>{{data.id}}</td>
+                <td>{{objectMap[data.object]}}</td>
+                <td>{{actionMap[data.action]}}</td>
+                <td><a (click)="showBodyModal(data)">{{data.body}}</a></td>
+                <td>
+                    <ng-container *ngIf="data.state == 0; else stateTemplate">
+                        <b style="color:red">{{stateMap[data.state]}}</b> 
+                    </ng-container>
+                   <ng-template #stateTemplate>
+                       <span>{{stateMap[data.state]}}</span>
+                   </ng-template>
+                </td>
+                <td>{{data.remark}}</td>
+                <!-- <td>{{data.reply}}</td> -->
+                <!-- <td>
+                    <a (click)="openModal(data)" *ngIf="data.state == 0">审核</a>
+                </td> -->
+            </tr>
+        </tbody>
+        </nz-table>
+</nz-content>
+</nz-layout>
+    
+<!-- <nz-modal [(nzVisible)]="modalVisible" nzTitle="审核" [nzFooter]="modalFooter" (nzOnCancel)="closeModal()" >
+    <div *ngIf="current">
+        <nz-select style="width: 120px;" [(ngModel)]="current.state" nzAllowClear nzPlaceHolder="审核结果">
+            <nz-option nzValue="1" nzLabel="审核通过"></nz-option>
+            <nz-option nzValue="2" nzLabel="审核不通过"></nz-option>
+        </nz-select>
+        <nz-divider></nz-divider>
+
+        <span>审核回复:</span>
+        <textarea  nz-input [(ngModel)]="current.reply" rows="8"></textarea>
+    </div>
+     <ng-template #modalFooter>
+        <button nz-button nzType="default" (click)="closeModal()">关闭</button>
+        <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">提交</button>
+    </ng-template>
+
+</nz-modal> -->
+
+<nz-modal [(nzVisible)]="bodyModal" nzTitle="审核内容" [nzWidth]="900" [nzFooter]="modalFooter" (nzOnCancel)="closeBodyModal()" (nzOnOk)="closeBodyModal()">
+    <div *ngIf="current">
+        <span>
+           提交人: {{current.operator.username}}            
+        </span>
+        <nz-divider></nz-divider>
+        <a href="/salary/template/show/{{current.dest_object}}" target="_blank" >查看详细</a>
+        <nz-divider></nz-divider>
+        <nz-table #basicTable [nzData]="body" [nzHideOnSinglePage]="'true'">
+            <tbody>
+                <tr *ngFor="let data of body">
+                <td *ngFor="let item of data">{{item}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+     <ng-template #modalFooter>
+         <div *ngIf="current">
+             <div *ngIf="current.state == 0;else closebtn">
+                    <button nz-button   nzType="default" (click)="handleAudit(2)" [nzLoading]="isConfirmLoading">审核不通过</button>
+                    <button nz-button   nzType="primary" (click)="handleAudit(1)" [nzLoading]="isConfirmLoading">审核通过</button>
+             </div>
+             <ng-template #closebtn>
+                 <button nz-button nzType="default" (click)="closeBodyModal()">关闭</button>
+             </ng-template>
+         </div>
+        </ng-template>
+</nz-modal>

@@ -1,0 +1,68 @@
+
+<button nz-button nzType="dashed" (click)="openModal(-1)">增加账套</button>
+
+<nz-table #basicTable [nzBordered]="'true'"	[nzData]="list"  [nzHideOnSinglePage]="'true'">
+    <thead>
+        <tr>
+        <th>序号</th>
+        <th >账套名</th>
+        <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of basicTable.data;let i = index;">
+            <td>{{i+1}}</td>
+            <td>{{item.name}}</td>
+            <td>
+                <button nz-button nzType="dashed" (click)="openModal(i)">管理账套</button>
+                <nz-divider nzType="vertical"></nz-divider>
+                <button nz-button nzType="danger" (click)="showDeleteConfirm(item.id,item.name)" *appCanAccess="['DELETE_ACCOUNT']">删除</button>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+
+<nz-modal [(nzVisible)]="visible" nzTitle="账套设定" (nzOnCancel)="closeEditForm()" (nzOnOk)="onOk()" >
+    <div *ngIf="currentItem">
+        <div nz-row>
+            <input nz-input [(ngModel)]="currentItem.name" value="{{currentItem.name}}">
+        </div>
+        
+        <div nz-row>
+            <div nz-col nzSpan="11" style="background: cadetblue;margin: 5px;">
+
+                <nz-select style="width: 80%;margin:20px;" [(ngModel)]="selectedTemplate" (ngModelChange)="selectedChange($event)" [nzSize]="size"  nzPlaceHolder="请选择模板">
+                    <nz-option *ngFor="let option of templates" [nzLabel]="option.name" [nzValue]="option"></nz-option>
+                </nz-select>
+                <div [sortablejs]="selectedTemplates" [sortablejsOptions]="{ animation: 150 }" class="selected-templates">
+                    <div *ngFor="let item of selectedTemplates;let i = index ;" class="select-item">
+                        {{ item.name }}
+                        <button nz-button nzType="dashed" nzShape="circle" (click)="deleteSelectedTemplate(i)"><i class="anticon anticon-close"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div nz-col nzSpan="11" style="background:burlywood;margin: 5px;">
+                <nz-tree-select
+                      style="width: 200px;margin:10px;"
+                      [nzNodes]="groupTree"
+                      nzShowSearch
+                      nzCheckable
+                      nzPlaceHolder="请选择人员"
+                      (ngModelChange)="onTreeChange($event)"
+                      [nzDropdownStyle]="{ 'max-height': '200px' }"
+                      [(ngModel)]="groups">
+                  </nz-tree-select>
+
+                <div *ngIf="groups" class="selected-templates">
+                    <span *ngFor="let item of currentItem.groups" class="select-item">{{item.name}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</nz-modal>
+
+
+
+

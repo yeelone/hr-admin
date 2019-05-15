@@ -1,0 +1,46 @@
+  <nz-layout class="layout">
+        
+        <nz-content style="padding:0 50px;">
+
+            <nz-table #rowSelectionTable
+                [nzData]="roles" 
+                [nzLoading]="loading" 
+                [nzTotal]="total" 
+                [nzBordered]="'true'"
+                [nzSimple]="'false'"
+                [nzSize]="'small'"
+                [nzPageSize]="limit"
+                [nzShowPagination]="'true'"
+                [nzFrontPagination]="'false'"
+                [nzShowSizeChanger]="'true'"
+                (nzPageSizeChange)="nzPageSizeChange($event)"
+                [(nzPageIndex)]="pageIndex"
+                (nzPageIndexChange)="getData()"
+               
+                >
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>
+                        角色名
+                    </th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of rowSelectionTable.data">
+                        <td>{{data.id}}</td>
+                        <td>{{data.name}}</td>
+                        <td>
+                             <button nz-button nzType="default" (click)="openUserListDrawer(data)" *appCanAccess="['ADD_ROLE_USERS']">添加人员</button>
+                        </td>
+                    </tr>
+                </tbody>
+              </nz-table>
+        </nz-content>
+      </nz-layout>
+    
+<nz-drawer [nzClosable]="false"  [nzWidth]="900" [nzVisible]="userDrawerVisible" nzTitle="组员信息" (nzOnClose)="closeUserDrawer()">
+    <app-simple-user-list [role]="selectedRole" ></app-simple-user-list>
+</nz-drawer>
+

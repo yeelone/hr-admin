@@ -1,0 +1,190 @@
+<form nz-form>
+  
+  <nz-card nzTitle="基本信息">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" >员工姓名</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input type="text" [formControl]="name" >
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24">电话</nz-form-label>
+      <nz-form-control  [nzSm]="14" [nzXs]="24"> 
+          <input nz-input type="text" [formControl]="phone" >
+      </nz-form-control>
+    </nz-form-item>
+        
+        <!-- <div nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label>工号</nz-form-label>
+            <nz-form-control>
+                <input nz-input type="text" [formControl]="job_number" >
+            </nz-form-control>
+          </nz-form-item>
+        </div> -->
+
+    <nz-form-item>
+      <nz-form-label  [nzSm]="6" [nzXs]="24">性别</nz-form-label>
+      <nz-form-control  [nzSm]="14" [nzXs]="24">
+          <nz-select [formControl]="gender">
+            <nz-option [nzLabel]="'男'" [nzValue]="'男'"></nz-option>
+            <nz-option [nzLabel]="'女'" [nzValue]="'女'"></nz-option>
+          </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label  [nzSm]="6" [nzXs]="24">生日</nz-form-label>
+      <nz-form-control  [nzSm]="14" [nzXs]="24">
+          <nz-date-picker [formControl]="birth_day"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label  [nzSm]="6" [nzXs]="24">入职日期</nz-form-label>
+      <nz-form-control  [nzSm]="14" [nzXs]="24">
+          <nz-date-picker  [formControl]="on_board_date"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label  [nzSm]="6" [nzXs]="24">员工状态</nz-form-label>
+      <nz-form-control  [nzSm]="14" [nzXs]="24">
+          <nz-select [formControl]="status">
+            <nz-option [nzLabel]="'在职'" [nzValue]="'在职'"></nz-option>
+            <nz-option [nzLabel]="'离职'" [nzValue]="'离职'"></nz-option>
+            <nz-option [nzLabel]="'退休'" [nzValue]="'退休'"></nz-option>
+            <nz-option [nzLabel]="'内退'" [nzValue]="'内退'"></nz-option>
+            <nz-option [nzLabel]="'其它'" [nzValue]="'其它'"></nz-option>
+          </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+        <!-- <div nz-col nzSpan="4"> -->
+            <!-- <nz-form-item>
+              <nz-form-label>证件类型</nz-form-label>
+              <nz-form-control>
+                  <nz-select [formControl]="type_card">
+                    <nz-option *ngFor="let option of card_options"  [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+                  </nz-select>
+              </nz-form-control>
+            </nz-form-item> -->
+          <!-- </div> -->
+    <nz-form-item>
+      <nz-form-label  [nzSm]="6" [nzXs]="24">证件号码</nz-form-label>
+      <nz-form-control  [nzSm]="14" [nzXs]="24">
+          <input nz-input type="text" [formControl]="id_card" >
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label  [nzSm]="6" [nzXs]="24">银行账号\卡号</nz-form-label>
+      <nz-form-control  [nzSm]="14" [nzXs]="24">
+          <input nz-input type="text" [formControl]="bank_card" >
+      </nz-form-control>
+    </nz-form-item>
+  </nz-card>
+<!-- 
+    <nz-card nzTitle="学校">
+        <div nz-row>
+            <div nz-col nzSpan="4">
+                <nz-form-item>
+                  <nz-form-label>招聘来源</nz-form-label>
+                  <nz-form-control>
+                      <nz-select [formControl]="source">
+                        <nz-option [nzLabel]="'校招'" [nzValue]="'校招'"></nz-option>
+                        <nz-option [nzLabel]="'社招'" [nzValue]="'社招'"></nz-option>
+                      </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div nz-col nzSpan="4">
+                  <nz-form-item>
+                    <nz-form-label>毕业时间</nz-form-label>
+                    <nz-form-control>
+                        <nz-date-picker [formControl]="graduation_date" [nzFormat]="'M/d/yy'"></nz-date-picker>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+              <div nz-col nzSpan="8">
+                <nz-form-item>
+                  <nz-form-label>毕业院校</nz-form-label>
+                  <nz-form-control>
+                      <input nz-input type="text" [formControl]="school" >
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div nz-col nzSpan="8">
+                <nz-form-item>
+                  <nz-form-label>专业</nz-form-label>
+                  <nz-form-control>
+                      <input nz-input type="text" [formControl]="specialty" >
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+        </div>
+    </nz-card> -->
+   <nz-card>
+      <nz-form-item>
+        <nz-form-label  [nzSm]="6" [nzXs]="24" nzRequired >原因</nz-form-label>
+        <nz-form-control  [nzSm]="14" [nzXs]="24">
+            <textarea  nz-input [formControl]="remark" rows="4"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+   </nz-card>
+    
+<!--    
+    <div nz-col nzSpan="24">
+      <nz-form-item>
+        <nz-form-label>上一个公司</nz-form-label>
+        <nz-form-control>
+            <input nz-input type="text" [formControl]="last_company" >
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="4">
+      <nz-form-item>
+        <nz-form-label>工龄</nz-form-label>
+        <nz-form-control>
+            <input nz-input type="number" [formControl]="workage" >
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="4">
+      <nz-form-item>
+        <nz-form-label>民族</nz-form-label>
+        <nz-form-control>
+            <input nz-input type="text" [formControl]="nation" >
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="4">
+      <nz-form-item>
+        <nz-form-label>婚姻状态</nz-form-label>
+        <nz-form-control>
+            <nz-select [formControl]="marital_status">
+              <nz-option [nzLabel]="'已婚'" [nzValue]="'已婚'"></nz-option>
+              <nz-option [nzLabel]="'未婚'" [nzValue]="'未婚'"></nz-option>
+              <nz-option [nzLabel]="'离婚'" [nzValue]="'离婚'"></nz-option>
+            </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="24">
+      <nz-form-item>
+        <nz-form-label>户籍</nz-form-label>
+        <nz-form-control>
+            <input nz-input type="text" [formControl]="account_location" >
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="24">
+      <nz-form-item>
+        <nz-form-label>居住地址</nz-form-label>
+        <nz-form-control>
+            <input nz-input type="text" [formControl]="address" >
+        </nz-form-control>
+      </nz-form-item>
+    </div> -->
+  <div *appCanAccess="['CREATE_PROFILE']" style="width: 200px;margin: auto;">
+    <button *ngIf="isCreateAction" nz-button nzType="primary" (click)="submitForm()" [nzLoading]="isSubmiting">新增</button>
+    <button *ngIf="!isCreateAction" nz-button nzType="primary" (click)="submitForm()" [nzLoading]="isSubmiting">更新</button>
+  </div>
+</form>
+
+

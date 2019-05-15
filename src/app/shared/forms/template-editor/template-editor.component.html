@@ -1,0 +1,344 @@
+<div nz-row class="template-title-bar">
+    <div nz-col nzSpan="6">
+        <input nz-input placeholder="模板名" [(ngModel)]="templateName"  value="{{templateName}}">
+    </div>
+    <!-- <div nz-col nzSpan="4">
+        <nz-select style="width: 150px;" [(ngModel)]="templateType"  nzAllowClear nzPlaceHolder="Choose">
+        <nz-option nzValue="normal" nzLabel="普通模板"></nz-option>
+        <nz-option nzValue="instalment" nzLabel="智能分期模板"></nz-option>
+        </nz-select>
+    </div> -->
+</div>
+
+<div class="form">
+    <nz-table #basicTable [nzBordered]="'true'"	[nzSize]="'small'" [nzNoResult]="noresultTempalte" [nzFooter]="footer">
+        <thead>
+            <tr>
+            <th nzWidth="50px">类型</th>
+            <th nzWidth="120px">标识</th>
+            <th nzWidth="150px">字段名</th>
+            <!-- <th nzWidth="150px">显示名</th> -->
+            <th nzWidth="80px">扣税</th>
+            <th nzWidth="50px">收入项</th>
+            <th nzWidth="50px">扣除项</th>
+            <th nzWidth="50px">Excel可见?</th>
+            <th nzWidth="60px">纳入月</th>
+            <!-- <th nzWidth="200px">描述</th> -->
+            <th *ngIf="editable">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let item of config; let i = index;">
+            <tr  *ngIf="!item.invalid">
+                <td>
+                    <nz-select style="width: 150px;" [(ngModel)]="item.type" (ngModelChange)="onSelectChange(i,item.type)" nzAllowClear nzPlaceHolder="Choose">
+                        <nz-option nzValue="Base" nzLabel="基本"></nz-option>
+                        <nz-option nzValue="Buildin" nzLabel="内建函数"></nz-option>
+                        <nz-option nzValue="Input" nzLabel="固定输入值" ></nz-option>
+                        <nz-option nzValue="Coefficient" nzLabel="标签" ></nz-option>
+                        <nz-option nzValue="Calculate" nzLabel="公式" ></nz-option>
+                        <nz-option nzValue="Related" nzLabel="从其它模板取得" ></nz-option>
+                        <nz-option nzValue="Upload" nzLabel="数据取自上传" ></nz-option>
+                    </nz-select>
+                </td>
+
+                <td><a (click)="openUpdateField(i)">{{item.key}}</a></td>
+                <td>
+                    <input nz-input nzSize="small" class="form-control" [(ngModel)]="item.name" (ngModelChange)="checkName(i,item)" value="{{item.name}}">
+                </td>
+                <!-- <td>
+                    <input nz-input nzSize="small" class="form-control" [(ngModel)]="item.alias" value="{{item.alias}}">
+                </td> -->
+                <td>
+                    <nz-switch [(ngModel)]="item.should_tax" nzCheckedChildren="是" nzUnCheckedChildren="否"></nz-switch>
+                </td>
+                <td>
+                    <nz-switch [(ngModel)]="item.is_income" nzCheckedChildren="是" nzUnCheckedChildren="否" (ngModelChange)="switchButton(i,'is_income')"></nz-switch>
+                </td>
+                <td>
+                    <nz-switch [(ngModel)]="item.is_deduct" nzCheckedChildren="是" nzUnCheckedChildren="否" (ngModelChange)="switchButton(i,'is_deduct')"></nz-switch>
+                </td>
+                 <td>
+                    <nz-switch [(ngModel)]="item.visible" nzCheckedChildren="是" nzUnCheckedChildren="否" ></nz-switch>
+                </td>
+                <td>
+                    <nz-select style="width: 120px;" nzShowSearch nzAllowClear nzPlaceHolder="" [(ngModel)]="item.fit_into_month">
+                        <nz-option nzLabel="纳入上个月" nzValue="LASTMONTH"></nz-option>
+                        <nz-option nzLabel="纳入去年12月份" nzValue="LASTYEAR"></nz-option>
+                    </nz-select>
+                </td>
+                <!-- <td>
+                    {{item.description}}
+                </td> -->
+                <td *ngIf="editable">
+                    <button nz-button nzType="dashed" class="btn btn-link" (click)="moveUp(i)">
+                        <i class="anticon anticon-arrow-up"></i>
+                    </button>
+                    <button nz-button nzType="dashed" class="btn btn-link" (click)="moveDown(i)">
+                        <i class="anticon anticon-arrow-down"></i>
+                    </button>
+                    <nz-popconfirm [nzTitle]="'确定删除?'" (nzOnConfirm)="removeInput(item)">
+                        <a nz-popconfirm style="color:red;"><i class="anticon anticon-close"></i>删除</a>
+                    </nz-popconfirm>
+                    <!-- <nz-popconfirm [nzTitle]="'确定作废?作废之后将不可见'" (nzOnConfirm)="invalidInput(item)">
+                        <a nz-popconfirm style="color:red;"><i class="anticon anticon-close"></i>作废</a>
+                    </nz-popconfirm> -->
+                </td>
+            </tr>
+            </ng-container>
+        </tbody>
+        <ng-template #footer>
+           <button nz-button nzType="dashed" (click)="addInput()"  *ngIf="editable">点击新增模板项目</button>
+            <span *appCanAccess="['SET_TEMPLATE']" class="template-action-bar" >
+                <button nz-button nzType="dashed" (click)="openInitDataModal()" >上传固定初始数据</button>
+                <div *ngIf="isCreateAction;else other_content" >
+                    <button nz-button nzType="primary" (click)="create()" [nzLoading]="isConfirmLoading" *ngIf="editable">新建模板</button>
+                </div>
+                <ng-template #other_content>
+                     <span *ngIf="changeMessage;else other_content2" >
+                        <button nz-button nzType="primary" (click)="changeMessageModalVisible=true" [nzLoading]="isConfirmLoading" *ngIf="editable">更新模板</button>
+                     </span>
+                      <ng-template #other_content2>
+                           <button nz-button nzType="primary" (click)="create()"  [nzLoading]="isConfirmLoading" *ngIf="editable">更新模板</button>
+                      </ng-template>
+                </ng-template>
+            </span>
+        </ng-template>
+    </nz-table>
+</div>
+
+
+<!-- <div>
+    <p>Excel表模预览</p>
+    <nz-table [nzBordered]="'true'"	>
+        <thead>
+            <tr>
+                <th *ngFor="let item of config; let i = index;" >{{item.alias}}</th>
+            </tr>
+        </thead>
+    </nz-table>
+</div> -->
+<!-- <p>以下为已作废的字段列表，注意，作废字段依然占用着字段名，字段名是全网唯一标识，所以字段名一旦被使用就无法删除，就具有全网唯一性。</p>
+<p>为什么要这样设计？ 因为当一个字段被使用，且已经核算过，那么系统将会将这个字段以及相应核算出来的数据保存进数据库。字段一旦生成即具有永久性，才能使得以后在查询统计时具有准确性。</p>
+<div class="form">
+    <nz-table #basicTable [nzBordered]="'true'"	[nzSize]="'small'" [nzNoResult]="noresultTempalte">
+        <thead>
+            <tr>
+            <th nzWidth="50px">类型</th>
+            <th nzWidth="120px">标识</th>
+            <th nzWidth="150px">字段名</th>
+            <th nzWidth="150px">显示名</th>
+            <th *ngIf="editable">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let item of config; let i = index;">
+            <tr  *ngIf="item.invalid">
+                <td>
+                    <nz-select style="width: 150px;" [(ngModel)]="item.type" (ngModelChange)="onSelectChange(i,item.type)" nzAllowClear nzPlaceHolder="Choose">
+                        <nz-option nzValue="Base" nzLabel="基本"></nz-option>
+                        <nz-option nzValue="Buildin" nzLabel="内建函数"></nz-option>
+                        <nz-option nzValue="Input" nzLabel="固定输入值" ></nz-option>
+                        <nz-option nzValue="Coefficient" nzLabel="标签" ></nz-option>
+                        <nz-option nzValue="Calculate" nzLabel="公式" ></nz-option>
+                        <nz-option nzValue="Related" nzLabel="从其它模板取得" ></nz-option>
+                        <nz-option nzValue="Upload" nzLabel="数据取自上传" ></nz-option>
+                    </nz-select>
+                </td>
+
+                <td><a (click)="openUpdateField(i)">{{item.key}}</a></td>
+                <td>
+                    <input nz-input nzSize="small" class="form-control" disabled [(ngModel)]="item.name" (ngModelChange)="checkName(i,item)" value="{{item.name}}">
+                </td>
+                <td>
+                    <input nz-input nzSize="small" class="form-control" disabled [(ngModel)]="item.alias" value="{{item.alias}}">
+                </td>
+                <td *ngIf="editable">
+                    <nz-popconfirm [nzTitle]="'确定作废?作废之后将不可见'" (nzOnConfirm)="invalidInput(item)">
+                        <a nz-popconfirm style="color:red;"><i class="anticon anticon-close"></i>作废</a>
+                    </nz-popconfirm>
+                </td>
+            </tr>
+            </ng-container>
+        </tbody>
+    </nz-table>
+</div> -->
+
+<nz-drawer [nzClosable]="false"  [nzWidth]="800" [nzVisible]="baseVisible" nzTitle="关联职员基本信息" (nzOnClose)="closeEditForm()">
+    <app-profile-fields-selector (selectedField)="onFieldsSelected($event)" (onClose)="closeEditForm()"></app-profile-fields-selector>
+</nz-drawer>
+
+<nz-drawer [nzClosable]="false"  [nzWidth]="1100" [nzVisible]="buildinVisible" nzTitle="选择系统内置函数辅助计算" (nzOnClose)="closeEditForm()">
+    <app-buildinfunc-selector [fields]="availableFields" (selectedFunc)="onFuncSelected($event)" (onClose)="closeEditForm()"></app-buildinfunc-selector>
+</nz-drawer>
+
+<nz-modal [(nzVisible)]="inputVisible" nzTitle="请输入值" (nzOnCancel)="closeEditForm()" (nzOnOk)="closeEditForm()">
+    <input nz-input nzSize="small" class="form-control" [(ngModel)]="inputValue" (ngModelChange)="handleInputValue()" value="{{inputValue}}">
+</nz-modal>
+
+<nz-drawer [nzClosable]="false"  [nzWidth]="800" [nzVisible]="coefficientVisible" nzTitle="标签关联" (nzOnClose)="closeEditForm()">
+    <app-coefficient-selector (selectedCoe)="onCoefficientSelected($event)" (onClose)="closeEditForm()"></app-coefficient-selector>
+</nz-drawer>
+
+<nz-drawer [nzClosable]="false"  [nzWidth]="800" [nzVisible]="calculateVisible" nzTitle="公式定义" (nzOnClose)="closeEditForm()">
+    <app-formula-input [fields]="availableFields" (value)="onFormulaInput($event)" (onClose)="closeEditForm()"></app-formula-input>
+</nz-drawer>
+
+<nz-drawer [nzClosable]="false"  [nzWidth]="800" [nzVisible]="relatedVisible" nzTitle="关联其它模板" (nzOnClose)="closeEditForm()">
+    <app-template-fields-selector  (selectedField)="onRelatedFieldSelected($event)" (onClose)="closeEditForm()"></app-template-fields-selector>
+</nz-drawer>
+
+<nz-modal [(nzVisible)]="fieldModalVisible" nzTitle="请输入值" (nzOnCancel)="closeUpdateFieldForm()" (nzOnOk)="updateField()">
+    <div *ngIf="config[currentIndex]">
+        <nz-table #basicTable nzBordered     [nzNoResult]="noresultTempalte">
+            <thead>
+                <tr>
+                <th>标识</th>
+                <th>值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Key</td>
+                    <td> {{config[currentIndex].key}} </td>
+                </tr>
+                <tr>
+                    <td>字段名</td>
+                    <td>  <input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].name"  value="{{config[currentIndex].name}}"></td>
+                </tr>
+                <tr>
+                    <td>字段别名</td>
+                    <td> <input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].alias"  value="{{config[currentIndex].alias}}"> </td>
+                </tr>
+                <ng-container *ngIf="config[currentIndex].type == 'Buildin'">
+                    <tr >
+                        <td>函数名</td>
+                        <td><input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].call"  value="{{config[currentIndex].call}}"></td>
+                    </tr>
+                    <tr >
+                        <td>函数依赖字段</td>
+                        <td><textarea disabled  nz-input rows="2" nzSize="small" class="form-control" [(ngModel)]="require"  value="{{config[currentIndex].require}}" ></textarea></td>
+                    </tr>
+                    <tr >
+                        <td>函数依赖参数</td>
+                        <td>
+                            <textarea nz-input nzSize="small" class="form-control" 
+                                *ngFor="let p of config[currentIndex].params; let i = index; trackBy:trackByIdx "
+                                [(ngModel)]="config[currentIndex].params[i]"  
+                                value="{{config[currentIndex].params[i]}}"
+                                (ngModelChange)="onFuncParamsInput($event,i)"
+                                ></textarea>
+                        </td>
+                    </tr>
+                </ng-container>
+                
+                <ng-container *ngIf="config[currentIndex].type == 'Calculate'">
+                    <tr>
+                        <td>公式 </td>
+                        <td>
+                            <textarea nz-input rows="4" nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].formula"  value="{{config[currentIndex].formula}}" (ngModelChange)="onFormulaInput($event)"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>公式依赖</td>
+                        <td>
+                            <textarea disabled nz-input rows="2" nzSize="small" class="form-control" [(ngModel)]="require"  value="{{config[currentIndex].require}}"></textarea>
+                        </td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="config[currentIndex].type == 'Input'">
+                    <tr>
+                        <td>固定值</td>
+                        <td>
+                            <input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].value"  value="{{config[currentIndex].value}}">
+                        </td>
+                    </tr>
+                </ng-container>
+            
+                <ng-container *ngIf="config[currentIndex].type == 'Related'">
+                    <tr>
+                        <td>关联账套</td>
+                        <td> <input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].related_templateaccount"  value="{{config[currentIndex].related_templateaccount}}"></td>
+                    </tr>
+
+                    <tr>
+                        <td>关联模板</td>
+                        <td> <input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].related_template"  value="{{config[currentIndex].related_template}}"></td>
+                    </tr>
+                    <tr>
+                        <td>关联健</td>
+                        <td>                  
+                            <input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].related_key"  value="{{config[currentIndex].related_key}}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>关联年份</td>
+                        <td>
+                            <input nz- nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].related_year"  value="{{config[currentIndex].related_year}}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>关联月份</td>
+                        <td>
+                            <input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].related_month"  value="{{config[currentIndex].related_month}}">        
+                        </td>
+                    </tr>
+                </ng-container>
+                <br>
+                <span>是否只保留正整数</span>
+                <nz-switch [(ngModel)]="config[currentIndex].must_rounding" nzCheckedChildren="是" nzUnCheckedChildren="否"></nz-switch>
+            </tbody>
+        </nz-table>
+       
+    </div>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="initUploadVisible" nzTitle="上传初始化数据" (nzOnCancel)="closeInitUploadModal()" (nzOnOk)="closeInitUploadModal()">
+    <div style="height: 40px; border: 1px solid darkturquoise;    line-height: 2.5;">
+        <a href="{{init_data_file}}" *ngIf="init_data_file"> 点击查看已上传的文件 </a>
+        <button nz-button (click)="removeInitUploadFile()" style="float:right;margin: 3px;"><i nz-icon type="close"></i> 关闭上传文件 </button>
+    </div>
+    <p>
+      注意：<br>
+      一、上传的模板表格名必须为 <span style="color:red">模板名字</span>；<br>
+      二、上传的项目名为系统模板配置中的‘显示名’，不是字段名;<br>
+      三、必须第一行开始;<br>
+    </p>
+
+    <app-upload  (onSuccess)="onUploadSuccess($event)" (onError)="onUploadError()"></app-upload>
+</nz-modal> 
+
+<nz-modal [(nzVisible)]="uploadVisible" nzTitle="上传数据" (nzOnCancel)="closeUploadModal()" (nzOnOk)="closeUploadModal()">
+    <nz-switch [(ngModel)]="is_fixed_data" nzCheckedChildren="固定上传" nzUnCheckedChildren="手工上传"></nz-switch>
+</nz-modal> 
+
+
+<nz-modal [(nzVisible)]="changeMessageModalVisible" [nzWidth]="800" nzTitle="变更" (nzOnCancel)="changeMessageModalVisible=false" nzOkText="确定并更新" (nzOnOk)="create()">
+    <ul>
+        <li *ngFor="let msg of changeMessage;">
+            {{msg}}
+        </li>
+        <li>
+            <b style="color:red;">注意：字段名变更之后，要注意以下四点：</b>
+            <ul>
+                <li>
+                    1、依赖到该变更字段的所有<span style="color: crimson">公式</span>都必须一并变更,请注意检查 
+                </li>
+                <li>
+                    2、依赖到该变更字段的所有 <span style="color: crimson"> 函数 </span> 参数以及依赖都必须一并变更,请注意检查 
+                </li>
+                 <li>
+                    3、若有其它模板关联到该变更字段 ,也要一并变更,请注意检查 
+                </li>
+                <li>
+                    4、当字段名变更，不会影响到以前已核算过的数据。比如2月核算的 个人所得税=200.00 , 3月将 个人所得税 改为 新个人所得税，系统数据库里将会保存着2月份 个人所得税=200.00， 
+                    3月份 新个人所得税=200.00。即是，核算并确认过的数据是不可变更的。
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nz-modal> 
+
+
+<ng-template #noresultTempalte>
+</ng-template> 

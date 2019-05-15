@@ -1,0 +1,30 @@
+<form nz-form >
+  
+  <nz-card nzTitle="基本信息">
+    <div nz-row>
+      <div nz-col nzSpan="8">
+          <nz-form-item>
+            <nz-form-label>用户名</nz-form-label>
+            <nz-form-control>
+                <input nz-input type="text" [formControl]="username" >
+            </nz-form-control>
+          </nz-form-item>
+           <nz-form-item>
+            <nz-form-label>身份证号码</nz-form-label>
+            <nz-form-control>
+                <input nz-input type="text" [formControl]="id_card" >
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+    <div nz-row>
+       <app-usergroup-selector [defaultValues]="selectedGroup" (selectedValue)="onSelectGroup($event)"></app-usergroup-selector>
+    </div>
+  </nz-card>
+ 
+</form>
+
+<div class="footer">
+    <button *ngIf="isCreateAction" nz-button nzType="primary" (click)="submitForm()" [nzLoading]="isSubmiting">新增</button>
+    <button *ngIf="!isCreateAction" nz-button nzType="primary" (click)="submitForm()" [nzLoading]="isSubmiting">更新</button>
+</div>

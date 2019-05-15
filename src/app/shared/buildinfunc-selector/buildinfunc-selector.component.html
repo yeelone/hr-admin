@@ -1,0 +1,71 @@
+
+<nz-table #basicTable [nzData]="allFunctions" [nzBordered]="'true'" nzSize="small">
+    <thead>
+      <tr>
+        <th>函数名</th>
+        <th>函数别名</th>
+        <th>函数使用方法</th>
+        <th>函数依赖</th>
+        <th>输入参数</th>
+        <th>返回结果</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data;">
+        <td>{{data.Name}}</td>
+        <td>{{data.Alias}}</td>
+        <td>{{data.Method}}</td>
+        <td>{{data.Required}}</td>
+        <td>{{data.Params}}</td>
+        <td>{{data.Return}}</td>
+        <td>
+            <nz-switch [ngModel]="false" 
+            [nzCheckedChildren]="checkedTemplate" 
+            [nzUnCheckedChildren]="unCheckedTemplate"
+            (ngModelChange)="chooseFunc($event,data)"></nz-switch>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <div class="footer">
+          
+      <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>关闭</span></button>
+      <button type="button" (click)="submit()" class="ant-btn ant-btn-primary" ><span>确定</span></button>
+  </div>
+
+
+<nz-modal [(nzVisible)]="visible" nzTitle="输入参数" (nzOnCancel)="closeModal()" (nzOnOk)="submitForm()">
+
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item *ngIf="needRequired">
+      <nz-form-label [nzXs]="24" [nzSm]="4"  >选择依赖</nz-form-label>
+      <span *ngFor="let f of fields;let i = index">
+       <nz-tag  nzMode="checkable"  [nzColor]="'lime'" nzMode="checkable" [nzChecked]="checkedMap[f.key]" (nzCheckedChange)="onCheckTag(f.key,f.name)">{{f.name}}</nz-tag>
+      </span>
+
+      <p *ngFor="let r of currentChooseFunc?.Required">
+         依赖项： [{{r}}]
+      </p>
+    </nz-form-item>
+
+      <nz-form-item *ngFor="let control of controlArray ; let i = index">
+        <nz-form-label [nzXs]="24" [nzSm]="4"  [nzFor]="control.controlInstance"> {{ currentChooseFunc.Params[i] }}</nz-form-label>
+        <nz-form-control [nzXs]="24" [nzSm]="20" >
+          <input nz-input style="width: 60%; margin-right:8px;" placeholder="placeholder" [formControlName]="control.controlInstance">
+          <!-- <i class="anticon anticon-minus-circle-o dynamic-delete-button" (click)="removeField(control,$event)"></i> -->
+          <nz-form-explain *ngIf="getFormControl(control.controlInstance)?.dirty&&getFormControl(control.controlInstance)?.hasError('required')">
+            请输入参数
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- <nz-form-item>
+        <nz-form-control [nzXs]="{span:24,offset:0}" [nzSm]="{span:20,offset:4}">
+          <button nz-button nzType="dashed" style="width:60%" (click)="addField($event)"><i class="anticon anticon-plus"></i> 新增参数</button>
+        </nz-form-control>
+      </nz-form-item> -->
+    </form>
+
+
+</nz-modal>

@@ -1,0 +1,27 @@
+<nz-table [nzData]="allCoes" [nzBordered]="'true'" #coesTempalte [nzSize]="'small'">
+    <thead>
+      <tr>
+        <th>序号</th>
+        <th>标签名</th>
+        <th>标签来源</th>
+        <th>选择（只能选一个）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of coesTempalte.data;let i = index ;">
+        <td>{{i+1}}</td>
+        <td>{{data.name}}</td>
+        <td>{{data.type}}</td>
+        <td>
+            <nz-switch [ngModel]="false" 
+                       [nzCheckedChildren]="checkedTemplate" 
+                       [nzUnCheckedChildren]="unCheckedTemplate"
+                       (ngModelChange)="chooseCoe(data)"></nz-switch>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <div class="footer">
+      <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>关闭</span></button>
+      <button type="button" (click)="submit()" class="ant-btn ant-btn-primary"><span>确定</span></button>
+  </div>
