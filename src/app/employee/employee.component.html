@@ -1,9 +1,9 @@
   <nz-layout class="layout">
         <nz-sider [nzWidth]="200" style="background:#fff">
-            <app-grouptree (selectedNode)="getSelectedNode($event)"></app-grouptree>
+            <app-grouptree (selectedNode)="getSelectedNode($event)" height="635px"></app-grouptree>
         </nz-sider>
         
-        <nz-content style="padding:0 50px;">
+        <nz-content style="padding:0 50px;margin: 10px;">
             <div class="table-operations table-action-bar">
                 <nz-input-group nzSearch [nzSuffix]="suffixIconButton">
                     <input type="text"  nz-input placeholder="输入名字进行搜索" [(ngModel)]="searchValue" (keyup)="search('name')">

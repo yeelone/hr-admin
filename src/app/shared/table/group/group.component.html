@@ -1,12 +1,12 @@
 
 <nz-layout class="layout">
     <nz-sider [nzWidth]="200" style="background:#fff">
-      <ul nz-menu [nzMode]="'horizontal'">
+      <ul nz-menu [nzMode]="'horizontal'" class="left-nav">
         <li *ngFor="let g of topGroups ; let i = index " class="group-item">
           <div nz-menu-item (click)="renderChildGroup(i)" >
               <i nz-icon type="contacts" theme="outline"></i>{{g.name}} 
           </div>
-          <nz-divider></nz-divider>
+          <!-- <nz-divider></nz-divider> -->
           <div class="group-edit-btn">
               <a   (click)="openEditForm(g)"><i nz-icon type="edit" theme="outline"></i></a>
           </div>

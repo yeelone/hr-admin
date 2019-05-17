@@ -1,12 +1,12 @@
 <div  class="nav-bar">
-  <!-- <button nz-button [nzType]="'primary'" (click)="toggleCollapsed()" style="margin-bottom: 10px;">
-    <i class="anticon" [class.anticon-menu-unfold]="isCollapsed" [class.anticon-menu-fold]="!isCollapsed">
-    </i>
-  </button> -->
-  <div class="site-title">
-    <img [src]="logo"  width="400"> <br>
-  </div>
-  <ul nz-menu [nzMode]="'inline'" nzTheme='dark' [nzInlineCollapsed]="isCollapsed">
+ 
+  <ul nz-menu [nzMode]="'horizontal'" [nzMode]="'inline'" nzTheme='dark' [nzInlineCollapsed]="isCollapsed">
+    
+    <li nz-submenu>
+       <span title>
+        欢乐桐人力资源管理系统
+      </span>
+    </li>
     <li nz-submenu *appCanAccess="['ADD_PERMISSIONS', 'CREATE_USER','CREATE_USER_GROUP','CREATE_ROLE']">
       <span title><i class="anticon anticon-setting"></i> 管理 </span>
         <ul>

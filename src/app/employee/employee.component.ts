@@ -64,7 +64,6 @@ export class EmployeeComponent implements OnInit {
 
   clearProfileTags:false ;//员工调动时是否清除员工相应的标签
   
-  
   constructor(private profileService: ProfileService,
               private uploadService: UploadService,
               private modalService: NzModalService,

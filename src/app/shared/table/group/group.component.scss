@@ -1,5 +1,6 @@
 .group-item{
     display: flex;
+    border-bottom: 1px solid #cccccc;
 }
 
 .group-edit-btn{
@@ -8,10 +9,16 @@
 }
 
 .group-table {
-    width: 500px !important;
     text-align: center !important;
 
     td {
         text-align: center;
+    }
+}
+
+.layout {
+    ul.left-nav{
+         border: 1px solid #cccccc;
+        box-shadow: 4px 4px 10px #cccccc;
     }
 }

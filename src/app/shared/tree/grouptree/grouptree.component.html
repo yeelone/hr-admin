@@ -1,4 +1,4 @@
-<ul nz-menu [nzMode]="'inline'" style="width: 250px; overflow-x: hidden; overflow-y: auto; height: 450px;">
+<ul nz-menu [nzMode]="'inline'" style="width: 250px; overflow-x: hidden; overflow-y: auto; " [style.height]="height">
     <li nz-submenu *ngFor="let node of tree" >
         <span title (click)="renderUsers(node.value)"><i class="anticon anticon-mail"></i> {{node.label}}</span>
         <ul>

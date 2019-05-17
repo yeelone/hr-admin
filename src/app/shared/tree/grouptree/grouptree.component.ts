@@ -1,4 +1,4 @@
-import { Component, OnInit,Output,EventEmitter, } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter, Input, } from '@angular/core';
 import { toTreeData } from '../../../util/covertTree';
 import { GroupService } from '../../../service/group.service';
 import { Group } from '../../../model/group';
@@ -16,7 +16,9 @@ export class GrouptreeComponent implements OnInit {
   ngOnInit() {
     this.getGroups()
   }
-
+  @Input()
+  height:string = "450px";
+  
   @Output()
   selectedNode:EventEmitter<Group>=new EventEmitter();
 

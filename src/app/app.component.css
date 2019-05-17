@@ -18,7 +18,7 @@
 
 :host ::ng-deep .ant-layout-content {
     padding: 10px;
-    background: white;
+    background: #F4DECB;
     height: 90%;
     overflow: auto;
 }
@@ -36,7 +36,8 @@
 }
 
 :host ::ng-deep .ant-table-body tbody{
-    background: ivory !important;
+    background: #666666 !important;
+    color: white;
 }
 
 :host ::ng-deep .table-action-bar {
@@ -51,4 +52,8 @@
 
 :host .ant-table-small>.ant-table-content>.ant-table-body>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-body>table>.ant-table-thead>tr>th, .ant-table-small>.ant-table-content>.ant-table-fixed-left>.ant-table-body-outer>.ant-table-body-inner>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-fixed-left>.ant-table-body-outer>.ant-table-body-inner>table>.ant-table-thead>tr>th, .ant-table-small>.ant-table-content>.ant-table-fixed-left>.ant-table-header>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-fixed-left>.ant-table-header>table>.ant-table-thead>tr>th, .ant-table-small>.ant-table-content>.ant-table-fixed-right>.ant-table-body-outer>.ant-table-body-inner>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-fixed-right>.ant-table-body-outer>.ant-table-body-inner>table>.ant-table-thead>tr>th, .ant-table-small>.ant-table-content>.ant-table-fixed-right>.ant-table-header>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-fixed-right>.ant-table-header>table>.ant-table-thead>tr>th, .ant-table-small>.ant-table-content>.ant-table-header>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-header>table>.ant-table-thead>tr>th, .ant-table-small>.ant-table-content>.ant-table-scroll>.ant-table-body>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-scroll>.ant-table-body>table>.ant-table-thead>tr>th, .ant-table-small>.ant-table-content>.ant-table-scroll>.ant-table-header>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-scroll>.ant-table-header>table>.ant-table-thead>tr>th{
     padding:  2px !important;
+}
+
+:host ::ng-deep .ant-layout{
+    background: transparent !important;
 }
