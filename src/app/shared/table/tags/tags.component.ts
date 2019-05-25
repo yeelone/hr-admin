@@ -26,6 +26,7 @@ export class TagsComponent implements OnInit {
 
   //当前tag
   currentParentTagIndex:number = -1; 
+  topTag:Tag = new Tag(); 
   currentTag:Tag = new Tag(); 
 
   //modal 
@@ -47,6 +48,7 @@ export class TagsComponent implements OnInit {
     this.getTags();
   }
 
+  
   getTags():void {
     this.isSpinning = true ; 
      this.tagService.getTags()

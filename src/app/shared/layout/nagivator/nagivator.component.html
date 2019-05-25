@@ -16,6 +16,8 @@
             <li nz-menu-item> <span><a routerLink="/admin/permissions">权限管理</a></span></li>
             <li nz-menu-item> <span><a routerLink="/admin/backup">备份与还原</a></span></li>
         </ul>
+
+        
     </li>
     <li nz-menu-item *appCanAccess="['CREATE_GROUP']">
       <span title>
@@ -53,6 +55,9 @@
         <span><a routerLink="/task">任务</a></span>
       </span>
     </li>
+     <li nz-menu-item *appCanAccess="['LIST_AUDIT']" style="float:right;">
+        <app-header></app-header>
+     </li>
   </ul>  
   
 </div>

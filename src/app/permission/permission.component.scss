@@ -1,0 +1,25 @@
+
+.action-bar {
+    width: 50%;
+    margin: 20px auto;
+    text-align: center;
+
+    button {
+        margin-left: 20px;
+        border: 0px;
+        background: red;
+        color:white;
+    }
+}
+
+.permission-checkbox{
+    margin: 5px;
+    width: 300px;
+    float: left;
+
+    p { 
+        display: block !important;
+    }
+}
+
+

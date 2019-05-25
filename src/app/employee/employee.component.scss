@@ -18,11 +18,17 @@
 .target-selector {
     background: deepskyblue;
     padding: 2px;
-   margin:10px 2px;
+    margin:10px 2px;
     border-radius: 10px;
     text-align: center;
     line-height: 36px;
     span{
         margin-left:20px;
+    }
+}
+
+.table-action-bar {
+    button {
+        margin-left:10px;
     }
 }

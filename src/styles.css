@@ -1,5 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+html,body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+
+}
 app-root {
     display: flex;
     height: 100%;
+}
+
+.blue-btn {
+    
+}
+
+.ok-btn  {
+    background: #1abc9c;
+    border: 0px;
+    color: white;
+}
+
+.warn-btn  {
+    background: #c0392b;
+    border: 0px;
+    color: white;
+}
+
+.little-warn-btn{
+    background: #f39c12;
+    border: 0px;
+    color: white;
+}
+
+.purple-btn {
+    color: white;
+    border: 0px;
+    background: #8e44ad;
+}
+
+.table-operations {
+    margin: 10px;
+}
+
+.table-operations  button  {
+    margin-left: 5px;
+    float: right;
 }

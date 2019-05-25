@@ -1,10 +1,10 @@
 <nz-layout class="layout">
     <nz-content style="padding:0 50px;">
         <div class="table-operations">
-            <button nz-button (click)="openEditForm(null)">新增群组</button>
+            <button nz-button  class="ok-btn" (click)="openEditForm(null)">新增群组</button>
         </div>
         <nz-table #basicTable [nzData]="groups" 
-           [nzBordered]="'true'"
+            [nzBordered]="'true'"
             [nzLoading]="loading" 
                 [nzTotal]="total" 
                 [nzSimple]="'false'"

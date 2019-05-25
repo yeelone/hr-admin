@@ -1,16 +1,16 @@
-import { Component, OnInit, Input ,SimpleChanges} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../model/user';
 import { UserService } from '../service/user.service';
-import { NzModalService,NzMessageService, UploadFile } from 'ng-zorro-antd';
+import { NzModalService,NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
 
-  users: User[] ;
+  users: User[] = [];
   selectedUser:User;
   targetGroup:number ; 
   total:number ;
@@ -91,7 +91,6 @@ export class UsersComponent implements OnInit {
       this.loading = true ; 
       this.userService.updateUser(user)
         .subscribe(response => {
-          console.log(response);
           this.users = response["data"]["userList"];
           this.total = response["data"]["totalCount"];
           this.loading = false ; 

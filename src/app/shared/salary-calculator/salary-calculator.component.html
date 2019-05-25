@@ -1,5 +1,5 @@
-<div style="background: #ECECEC;padding:30px;">
-  <nz-card style="width:600px;" [nzBordered]="false" >
+<div class="container">
+  <nz-card [nzBordered]="false" >
   <nz-divider nzText="查看当月变动表" nzOrientation="left"></nz-divider>
     <button nz-button nzType="primary"  (click)="openChangeTableModal()"><i nz-icon type="flag" theme="outline"></i>查询变动表</button>
 
@@ -13,16 +13,18 @@
         </div>
       </div>
       <br>
-      <div nz-row>
-        <div nz-col nzSpan="12">
-          <button nz-button nzType="primary" (click)="analysis()"><i nz-icon type="check" theme="outline"></i>开始运算</button>
-        </div>
-      </div>
        <div nz-row>
          <div nz-col nzSpan="12">
            <nz-month-picker  [(ngModel)]="selectedMonth" nzPlaceHolder="指定月份"></nz-month-picker>
          </div>
        </div>
+       <br>
+      <div nz-row>
+        <div nz-col nzSpan="12">
+          <button nz-button nzType="primary" (click)="analysis()"><i nz-icon type="check" theme="outline"></i>开始运算</button>
+        </div>
+      </div>
+      
         <div nz-row *ngIf="errFile">
          <div nz-col nzSpan="12">
            <a href="{{errFile}}"  class="download-btn"> 点击下载错误信息 </a>

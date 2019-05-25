@@ -1,6 +1,6 @@
 
 <nz-layout class="layout">
-    <nz-sider [nzWidth]="200" style="background:#fff">
+    <nz-sider [nzWidth]="200" style="background: rgb(0, 21, 41); color: white;">
       <ul nz-menu [nzMode]="'horizontal'" class="left-nav">
         <li *ngFor="let g of topGroups ; let i = index " class="group-item">
           <div nz-menu-item (click)="renderChildGroup(i)" >
@@ -17,9 +17,9 @@
     
     <nz-content style="padding:0 50px;">
         <div class="table-operations table-action-bar">
-            <button nz-button (click)="openEditForm()" *appCanAccess="['CREATE_GROUP']">新增分类群组</button>
-            <button nz-button (click)="openImportModal()" *appCanAccess="['IMPORT_GROUP']">导入人员表</button>
-            <button nz-button (click)="openImportTagsModal()" *appCanAccess="['IMPORT_GROUP_TAGS']">导入系数表</button>
+            <button nz-button (click)="openEditForm()" class="blue-btn" *appCanAccess="['CREATE_GROUP']">新增分类群组</button>
+            <button nz-button (click)="openImportModal()" class="blue-btn" *appCanAccess="['IMPORT_GROUP']">导入人员表</button>
+            <button nz-button (click)="openImportTagsModal()" class="blue-btn" *appCanAccess="['IMPORT_GROUP_TAGS']">导入系数表</button>
         </div>
         <nz-table #basicTable [nzData]="groups" [nzHideOnSinglePage]="'true'" [nzBordered]="'true'" class="group-table" [nzLoading]="loading">
             <thead>

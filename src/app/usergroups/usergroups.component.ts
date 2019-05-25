@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserGroupService } from '../service/usergroup.service';
-import { UserService } from '../service/user.service';
 import { UserGroup } from '../model/usergroup';
-import { User } from '../model/user';
 import { NzModalService } from 'ng-zorro-antd';
 import { NzMessageService } from 'ng-zorro-antd';
-
 
 @Component({
   selector: 'app-usergroups',
@@ -13,7 +10,7 @@ import { NzMessageService } from 'ng-zorro-antd';
   styleUrls: ['./usergroups.component.css']
 })
 export class UsergroupsComponent implements OnInit {
-  groups:UserGroup[];
+  groups:UserGroup[] = [];
   total:number ;
   selectedGroup:UserGroup = new UserGroup();
 
@@ -45,13 +42,19 @@ export class UsergroupsComponent implements OnInit {
      this.groupService.getUserGroups(this.offset,this.limit)
       .subscribe(response => {
         this.groups = response["data"]["groupList"];
+        console.log(this.groups);
         this.total = response["data"]["totalCount"];
         this.loading = false; 
       }) 
   }
 
   openEditForm(g:UserGroup):void {
-    this.selectedGroup = g ;
+    if  ( g ){
+      this.selectedGroup =  g ;
+    }else {
+      this.selectedGroup = new UserGroup() ;
+    }
+   
     this.modalVisible = true;
   }
   

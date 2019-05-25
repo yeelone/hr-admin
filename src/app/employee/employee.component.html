@@ -1,11 +1,11 @@
   <nz-layout class="layout">
-        <nz-sider [nzWidth]="200" style="background:#fff">
+        <nz-sider style="background:transparent">
             <app-grouptree (selectedNode)="getSelectedNode($event)" height="635px"></app-grouptree>
         </nz-sider>
         
         <nz-content style="padding:0 50px;margin: 10px;">
             <div class="table-operations table-action-bar">
-                <nz-input-group nzSearch [nzSuffix]="suffixIconButton">
+                <nz-input-group nzSearch [nzSuffix]="suffixIconButton" style="width: 200px">
                     <input type="text"  nz-input placeholder="输入名字进行搜索" [(ngModel)]="searchValue" (keyup)="search('name')">
                 </nz-input-group>
                 <ng-template #suffixIconButton>
@@ -74,9 +74,11 @@
         </nz-content>
       </nz-layout>
     
-<nz-drawer [nzClosable]="false" [nzWidth]="820" [nzVisible]="visible" nzTitle="新增或修改用户信息" (nzOnClose)="closeEditForm()">
+<nz-modal [(nzVisible)]="visible" nzTitle="新增或修改用户信息" (nzOnCancel)="closeEditForm()" nzOkDisabled="'true'"  [nzFooter]="modalFooter">
     <app-profile-editor [profile]="selectedProfile" (onSubmit)="changeSubmitStatus($event)"></app-profile-editor>
-</nz-drawer>
+</nz-modal>
+<ng-template #modalFooter>
+</ng-template>
 
 <nz-modal [(nzVisible)]="deleteModalVisible" nzTitle="删除" (nzOnCancel)="closeDeleteModal()" (nzOnOk)="onDelete()">
     <span>{{targetProfile.name}}</span>

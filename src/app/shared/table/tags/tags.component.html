@@ -1,21 +1,30 @@
-  <div class="create-tag-btn">
-      <button nz-button  (click)="openEditForm(-1)"><i class="anticon anticon-edit"></i>新增标签</button>
-      <button nz-button  (click)="openImportModal()"><i class="anticon anticon-upload" ></i>导入标签表</button>
-  </div>
+<div class="create-tag-btn table-operations">
+    <button nz-button  (click)="openEditForm(-1)" class="ok-btn"><i class="anticon anticon-edit"></i>新增标签</button>
+    <button nz-button  (click)="openImportModal()" class="purple-btn"><i class="anticon anticon-upload" ></i>导入标签表</button>
+</div>
 <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning">
+
 <ul class="tag-list">
-  <li *ngFor="let t of parentTags ; let i = index;trackBy: trackByIndex " class="tag-item">
-    
-    <nz-table  [nzSize]="small" [nzBordered]="'true'" [nzHideOnSinglePage]="'true'"  [nzNoResult]="noresultTempalte" nzWidth="300px" [nzScroll]="{ x:'300px',y: '240px' }">
+  <li *ngFor="let t of parentTags ; let i = index;trackBy: trackByIndex" class="tag-item" (click)="topTag=t;currentParentTagIndex=i;">
+    <span class="content">{{t.name}}</span>
+    <span class="triangle"></span>
+  </li>  
+   
+  <!-- </li> -->
+</ul>   
+</nz-spin>
+
+<div *ngIf="currentTag" class="tag-table">
+   <table>
       <thead>
         <tr>
-          <th style="background-color: lemonchiffon;"><a (click)="updateEditForm(t)">{{t.name}}</a></th>
+          <th style="background-color: lemonchiffon;"><a (click)="updateEditForm(topTag)">{{topTag.name}}</a></th>
           <th>标签</th>
           <th>操作</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of childrenTags[t.id]">
+        <tr *ngFor="let data of childrenTags[topTag.id]">
           <td><a (click)="updateEditForm(data)"> {{data.name}}</a></td>
           <td>{{data.coefficient}}</td>
           <td>
@@ -27,21 +36,23 @@
           </td>
         </tr>
       </tbody>
-      <ng-template #noresultTempalte>
-        <div nz-row>
-          <div nz-col nzSpan="12" class="tag-action" ><a (click)="openEditForm(i)"> <i class="anticon anticon-file-add"></i>  子标签</a></div>
+      <tfoot>
+        <tr>
+          <td colspan="3">
+           <div nz-row>
+          <div nz-col nzSpan="12" class="tag-action" ><a (click)="openEditForm(currentParentTagIndex)"> <i class="anticon anticon-file-add"></i>  子标签</a></div>
           <div nz-col nzSpan="12" class="tag-action" >
-            <nz-popconfirm [nzTitle]="'确定删除整个组吗?'" (nzOnConfirm)="deleteTag(t.id)">
-              <a nz-popconfirm><i class="anticon anticon-close"></i>删除</a>
+            <nz-popconfirm [nzTitle]="'确定删除整个组吗?'" (nzOnConfirm)="deleteTag(topTag.id)">
+              <a nz-popconfirm class="warn-brn"><i class="anticon anticon-close"></i>删除</a>
             </nz-popconfirm>
           </div>
         </div>
-      </ng-template>
-    </nz-table>
-   
-  </li>
-</ul>   
-</nz-spin>
+          </td>
+        </tr>
+      </tfoot>
+     
+    </table>
+</div>
 <app-tag-editor [visible]="visible" [default]="currentTag" (onOk)="onChange($event)" (onCancel)="closeEditForm($event)"></app-tag-editor>
 
 <nz-drawer [nzClosable]="false"  [nzWidth]="900" [nzVisible]="profileDrawerVisible" nzTitle="组员信息" (nzOnClose)="closeProfileSelectorForm()">

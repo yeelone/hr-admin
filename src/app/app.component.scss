@@ -18,7 +18,7 @@
 
 :host ::ng-deep .ant-layout-content {
     padding: 10px;
-    background: #F4DECB;
+    background: rgb(0, 21, 41);
     height: 90%;
     overflow: auto;
 }
@@ -31,13 +31,44 @@
     margin: 0;
 }
 
+:host ::ng-deep .ant-table-small>.ant-table-content>.ant-table-body  {
+    margin: 0px !important;
+}
+
+:host ::ng-deep .ant-table-small.ant-table-bordered .ant-table-content{
+    border:0px;
+}
+
+:host ::ng-deep .ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left{
+        border-right:  0px;
+}
+
 :host ::ng-deep .ant-table-body table {
     padding: 0px !important;
 }
+:host ::ng-deep .ant-table-body{
+    overflow: auto !important;
+}
 
 :host ::ng-deep .ant-table-body tbody{
-    background: #666666 !important;
-    color: white;
+    background: linen !important;
+}
+
+:host ::ng-deep  .ant-table-thead{
+    background: antiquewhite   !important;
+}
+:host ::ng-deep .ant-table-header{
+    // height: 75px !important;
+    // overflow: hidden  !important; 
+}
+
+:host ::ng-deep .ant-table-fixed-header .ant-table-scroll .ant-table-header{
+    overflow:  hidden !important;
+        margin-bottom: 0px !important;
+}
+
+:host ::ng-deep .ant-input-affix-wrapper .ant-input-suffix {
+    right: 0px !important;
 }
 
 :host ::ng-deep .table-action-bar {
@@ -56,4 +87,8 @@
 
 :host ::ng-deep .ant-layout{
     background: transparent !important;
+}
+
+:host ::ng-deep .ant-card-head {
+    background: gold !important;
 }

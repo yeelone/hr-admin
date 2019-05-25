@@ -1,3 +1,7 @@
+.container {
+    width: 50%;
+    margin: auto;
+}
 .download-btn {
     display: block;
     margin: 10px;

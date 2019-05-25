@@ -1,64 +1,25 @@
-<nz-divider nzText="核算与调整" nzOrientation="left"></nz-divider>
-
 <ul class="salary-module-list">
     <li *appCanAccess="['CALCULATE_SALARY']">
-        <nz-card>
-            <i nz-icon type="calculator" theme="twotone"></i>
-            <p> <a routerLink="/salary/calculate">核算</a> </p>
-        </nz-card>
+        <i nz-icon type="calculator" theme="twotone"></i>
+        <p> <a routerLink="/salary/calculate">工资计算</a> </p>
     </li>
 
     <li *appCanAccess="['QUERY_PROFILE_SALARY']">
-        <nz-card>
             <i nz-icon type="calculator" theme="twotone"></i>
             <p> <a routerLink="/salary/adjust">调整</a> </p>
-        </nz-card>
     </li>
 
-</ul>
-
-<nz-divider nzText="配置" nzOrientation="left"></nz-divider>
-
-<ul class="salary-module-list">
-    <li *appCanAccess="['SET_TEMPLATE']">
-        <nz-card>
-            <i nz-icon type="switcher" theme="twotone"></i>
-            <p><a routerLink="/salary/template">配置模板</a></p>
-        </nz-card>
+     <li *appCanAccess="['SET_TEMPLATE']">
+        <i nz-icon type="switcher" theme="twotone"></i>
+        <p><a routerLink="/salary/template">配置模板</a></p>
     </li>
+
     <li *appCanAccess="['UPDATE_ACCOUNT','CREATE_ACCOUNT']">
-        <nz-card>
-            <i nz-icon type="build" theme="twotone"></i>
-            <p> <a routerLink="/salary/templateaccount">配置账套</a> </p>
-        </nz-card>
-    </li>
-    
-</ul>
-
-<nz-divider nzText="配置" nzOrientation="left"></nz-divider>
-
-<ul class="salary-module-list" *appCanAccess="['SET_BASE_SALARY','SET_TAX']">
-    <li>
-        <nz-card>
-            <span>{{this.inputValue}}</span>
-            <button nz-button nzType="primary" (click)="createTplModal(tplTitle, tplContent, tplFooter)">
-                <span>基本工资</span>
-            </button>
-            <ng-template #tplTitle>
-            <span>基本工资设定</span>
-            </ng-template>
-            <ng-template #tplContent>
-             <input nz-input nzSize="small" [(ngModel)]="inputValue" (ngModelChange)="handleInputValue($event)" value="{{inputValue}}">
-            </ng-template>
-            <ng-template #tplFooter>
-            <button nz-button nzType="primary" (click)="destroyTplModal()" [nzLoading]="tplModalButtonLoading">提交保存</button>
-            </ng-template>
-        </nz-card>
+        <i nz-icon type="build" theme="twotone"></i>
+        <p> <a routerLink="/salary/templateaccount">配置账套</a> </p>
     </li>
 
-    <li>
-        <nz-card>
-            <span>{{taxConf.threshold}}</span>
+     <li *appCanAccess="['SET_TAX']">
             <button nz-button nzType="primary" (click)="createTaxModal(tplTitle2, tplContent2, tplFooter2)">
                 <span>个税起征点</span>
             </button>
@@ -69,7 +30,7 @@
                 <span>起征点</span>
                 <input nz-input nzSize="small" type="number"  [(ngModel)]="taxConf.threshold" >
 
-                <nz-table #editRowTable  nzBordered nzSize="small">
+                <nz-table #editRowTable  nzBordered nzSize="small"  [nzNoResult]="noresultTempalte">
                     <thead>
                         <tr>
                         <th>级别</th>
@@ -93,15 +54,13 @@
                     </nz-table>
                 
             </ng-template>
+         
             <ng-template #tplFooter2>
             <button nz-button nzType="primary" (click)="destroyTaxModal()" [nzLoading]="taxModalButtonLoading">提交保存</button>
             </ng-template>
-        </nz-card>
     </li> 
 
-
      <li>
-        <nz-card>
             <button nz-button nzType="primary" (click)="createTaxModal(tplTitle3, tplContent3, tplFooter3)">
                 <span>预扣率表</span>
             </button>
@@ -110,7 +69,7 @@
             </ng-template>
             <ng-template #tplContent3>
 
-                <nz-table #editRowTable  nzBordered nzSize="small">
+                <nz-table #editRowTable  nzBordered nzSize="small"  [nzNoResult]="noresultTempalte">
                     <thead>
                         <tr>
                         <th>累计预扣预缴应纳税所得额别</th>
@@ -137,8 +96,9 @@
             <ng-template #tplFooter3>
             <button nz-button nzType="primary" (click)="destroyPreDeductionRateModal()" [nzLoading]="taxModalButtonLoading">提交保存</button>
             </ng-template>
-        </nz-card>
     </li> 
 
 </ul>
 
+   <ng-template #noresultTempalte>
+            </ng-template> 

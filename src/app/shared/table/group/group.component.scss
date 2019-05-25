@@ -1,6 +1,8 @@
 .group-item{
     display: flex;
     border-bottom: 1px solid #cccccc;
+    background:rgb(0, 21, 41);
+    color: white;
 }
 
 .group-edit-btn{
@@ -19,6 +21,11 @@
 .layout {
     ul.left-nav{
          border: 1px solid #cccccc;
-        box-shadow: 4px 4px 10px #cccccc;
+    }
+}
+
+.table-action-bar {
+    button {
+       margin: 10px;
     }
 }

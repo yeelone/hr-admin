@@ -1,22 +1,22 @@
+<div class="action-bar">
+  <nz-select style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="选择角色" [(ngModel)]="selectedRole" (ngModelChange)="onSelected()">
+    <nz-option *ngFor="let role of roles;" nzLabel="{{role.name}}" nzValue="{{role.id}}"></nz-option>
+  </nz-select>
 
-<nz-select style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="选择角色" [(ngModel)]="selectedRole" (ngModelChange)="onSelected()">
-  <nz-option *ngFor="let role of roles;" nzLabel="{{role.name}}" nzValue="{{role.id}}"></nz-option>
-</nz-select>
-
+  <ng-container *appCanAccess="['ADD_PERMISSIONS']"> 
+    <button nz-button [nzType]="primary" (click)="submit()"> 提交(修改权限须谨慎) </button>
+  </ng-container>
+</div>
 
 <nz-checkbox-wrapper style="width: 100%;" >
   <div nz-row *ngFor="let item of checkOptions;" class="permission-checkbox">
-     <nz-card style="width:800px;" [nzBordered]="false" nzTitle="{{item.name}}" [nzExtra]="extraTemplate">
-        <label nz-checkbox *ngFor="let option of item.options;let i = index ;" 
+     <nz-card style="width:300px;height: 400px;" [nzBordered]="false" nzTitle="{{item.name}}" [nzExtra]="extraTemplate">
+        <p nz-checkbox *ngFor="let option of item.options;let i = index ;" 
           nzValue="{{option.value}}" 
           [(ngModel)]="permissions[item.name][option.value]['checked']"
-          >{{option.label}}</label>
+          >{{option.label}}</p>
       </nz-card>
-      <nz-divider></nz-divider>
   </div>
 </nz-checkbox-wrapper>
 
 
-<div *appCanAccess="['ADD_PERMISSIONS']"> 
-  <button nz-button [nzType]="primary" (click)="submit()"> 提交 </button>
-</div>

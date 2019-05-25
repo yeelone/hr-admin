@@ -1,16 +1,60 @@
 .tag-list {
     list-style: none;
     padding: 0 ; 
+    width: 200px;
+    color: white;
 
     .tag-number {
         padding: 2rem;
     }
 
     li{
-        margin: 10px;
+        margin: 5px;
         float: left;
+        width: 100%;
+        background: steelblue;
+        color: white;
+        padding: 5px;
+        border-radius: 10px;
+        position: relative;
+        cursor: pointer;
+
+        .triangle:before {
+            content: "";
+            position: absolute;
+            right: -10px;
+            top: 4px;
+            width: 0;
+            height: 0;
+            border-top: 12px solid transparent;
+            border-left: 12px solid steelblue;
+            border-bottom: 12px solid transparent;
+        }
     }
 }
+
+.tag-table{
+    table{
+            width: 700px;
+            margin: auto;
+            color: white;
+            border: 1px solid white;
+
+            th {
+                text-align: center;
+            }
+            tr {
+                height: 30px;
+
+                td{
+                    border: 0.5px solid white;
+                    padding: 5px;
+                    text-align: center;
+                }
+            }
+        }
+}
+
 .ant-tag{
     line-height: 40px !important;
     height: 40px !important;
@@ -26,11 +70,7 @@
 }
 
 .create-tag-btn{
-    height: 100px;
-    width: 110px;
-    text-align: center;
-
-    button{
-        margin: 5px
-    }
+    height: 30px;
+    width: 300px;
+    float: right;
 }

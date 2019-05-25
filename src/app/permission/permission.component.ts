@@ -7,7 +7,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 @Component({
   selector: 'app-permission',
   templateUrl: './permission.component.html',
-  styleUrls: ['./permission.component.css']
+  styleUrls: ['./permission.component.scss']
 })
 export class PermissionComponent implements OnInit {
   roles:Role[] = [];

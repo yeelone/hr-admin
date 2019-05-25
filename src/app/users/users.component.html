@@ -1,14 +1,14 @@
   <nz-layout class="layout">
-        <nz-sider [nzWidth]="200" style="background:#fff">
+        <nz-sider [nzWidth]="200">
             <app-usergroup-tree (selectedNode)="getSelectedNode($event)"></app-usergroup-tree>
         </nz-sider>
         
         <nz-content style="padding:0 50px;">
             <div class="table-operations">
-                <button nz-button (click)="openEditForm(null)">新增用户</button>
-                <button nz-button (click)="resetPassword()">重置密码</button>
-                <button nz-button (click)="freeze()">冻结</button>
-                <button nz-button (click)="active()">激活</button>
+                <button nz-button  class="ok-btn" (click)="openEditForm(null)">新增用户</button>
+                <button nz-button class="warn-btn" (click)="resetPassword()">重置密码</button>
+                <button nz-button  class="little-warn-btn"  (click)="freeze()">冻结</button>
+                <button nz-button class="purple-btn" (click)="active()">激活</button>
             </div>
 
             <nz-table #rowSelectionTable
@@ -31,15 +31,15 @@
                   <tr>
                     <th nzShowCheckbox [(nzChecked)]="allChecked"  (nzCheckedChange)="checkAll($event)"></th>
                     <th>ID</th>
-                    <th>
-                        用户名
+                    <th nzCustomFilter>
+                            用户名
                         <nz-dropdown nzTrigger="click" [nzClickHide]="false">
                             <i class="anticon anticon-search ant-table-filter-icon" nz-dropdown></i>
                             <div class="custom-filter-dropdown">
                                 <input type="text" nz-input placeholder="搜索用户名" [(ngModel)]="searchValue">
                                 <button nz-button [nzType]="'primary'" (click)="search('username')">Search</button>
                             </div>
-                            </nz-dropdown>
+                        </nz-dropdown>  
                     </th>
                     <th>身份证号码</th>
                     <th>状态</th>

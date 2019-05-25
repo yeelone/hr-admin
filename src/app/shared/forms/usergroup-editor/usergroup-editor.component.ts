@@ -1,5 +1,5 @@
 import { Component, OnInit, Input,Output,SimpleChanges,EventEmitter } from '@angular/core';
-import { FormControl,FormGroup,FormBuilder,Validators } from '@angular/forms';
+import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { UserGroupService } from '../../../service/usergroup.service';
 import { UserGroup } from '../../../model/usergroup';
 @Component({
@@ -8,11 +8,12 @@ import { UserGroup } from '../../../model/usergroup';
   styleUrls: ['./usergroup-editor.component.css']
 })
 export class UserGroupEditorComponent implements OnInit {
+  updateGroup:UserGroup;
   validateForm: FormGroup;
 
   isSubmiting = false;
 
-  isCreateAction = false;
+  isCreateAction = true;
 
   @Input()
   visible:boolean = false; 
@@ -27,13 +28,19 @@ export class UserGroupEditorComponent implements OnInit {
   set group(group:UserGroup){
     if ( group ){
       if ( this.validateForm) {
-        this.validateForm.controls['name'].setValue(group.name)
+        this.validateForm.controls['name'].setValue(group.name);
       }
+      this.updateGroup = group;
+
+      this.isCreateAction = false ; 
     }else{
       if ( this.validateForm) {
-        this.validateForm.controls['name'].setValue("")
+        this.validateForm.controls['name'].setValue("");
       }
+      this.isCreateAction = true;
     }
+
+    console.log(" this.isCreateAction22 ",  group, this.isCreateAction  );
   }
   // group:UserGroup
   
@@ -54,7 +61,7 @@ export class UserGroupEditorComponent implements OnInit {
     g.parent = 0 ;
     g.name = this.validateForm.controls.name.value;
     this.isSubmiting = true;
-
+  console.log( " this.isCreateAction",this.isCreateAction )
     if ( this.isCreateAction ){
       this.groupService.createUserGroup(g)
       .subscribe(response => { 
@@ -62,14 +69,13 @@ export class UserGroupEditorComponent implements OnInit {
         this.onOk.emit(true);
       });
     }else{
-      g.id = this.group.id;
+      g.id = this.updateGroup.id;
       this.groupService.updateUserGroup(g)
       .subscribe(response => { 
         this.isSubmiting = false; 
         this.onOk.emit(true);
       });
     }
-    
   }
 
   updateConfirmValidator(): void {
