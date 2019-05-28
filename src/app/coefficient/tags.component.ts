@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TagsService } from '../../../service/tags.service';
-import { UploadService } from '../../../service/upload.service';
-import { Tag } from '../../../model/tag';
+import { TagsService } from '../service/tags.service';
+import { UploadService } from '../service/upload.service';
+import { Tag } from '../model/tag';
 import { NzMessageService, UploadFile } from 'ng-zorro-antd';
-import config from '../../../config/config';
+import config from '../config/config';
 
 @Component({
   selector: 'app-tags',
@@ -48,7 +48,6 @@ export class TagsComponent implements OnInit {
     this.getTags();
   }
 
-  
   getTags():void {
     this.isSpinning = true ; 
      this.tagService.getTags()
@@ -72,11 +71,22 @@ export class TagsComponent implements OnInit {
               this.childrenTags[parent] = [];
             }
             this.childrenTags[parent].push(_tags[i]);
+            this.childrenTags[parent].sort(this.compare("coefficient"));
           }
+
         }
         this.total = response["data"]["totalCount"];
       }) 
   }
+
+   compare(property){
+    return function(obj1,obj2){
+      var value1 = obj1[property];
+      var value2 = obj2[property];
+      return value1 - value2;     // 升序
+    }
+  }
+
 
   openEditForm(i:number):void {
     this.isCreateAction = true ; 

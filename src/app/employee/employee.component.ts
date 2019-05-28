@@ -67,7 +67,8 @@ export class EmployeeComponent implements OnInit {
   constructor(private profileService: ProfileService,
               private uploadService: UploadService,
               private modalService: NzModalService,
-              private msg: NzMessageService) { }
+              private msg: NzMessageService) {
+               }
 
   ngOnInit() {
     this.targetGroup = new Group();

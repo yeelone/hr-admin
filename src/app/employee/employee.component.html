@@ -1,4 +1,4 @@
-  <nz-layout class="layout">
+  <nz-layout class="layout container">
         <nz-sider style="background:transparent">
             <app-grouptree (selectedNode)="getSelectedNode($event)" height="635px"></app-grouptree>
         </nz-sider>
@@ -37,27 +37,24 @@
                 (nzPageIndexChange)="getData()"
                 [nzScroll]="{ x:'70%',y: '500px' }"
                 >
-                <thead>
-                  <tr>
+                <tbody>
+                    <tr class="thead">
                     <th nzShowCheckbox [(nzChecked)]="allChecked"  (nzCheckedChange)="checkAll($event)"></th>
                     <th>ID</th>
                     <th>用户名 </th>
                     <th>证件号码</th>
                     <th>银行账号/卡号</th>
-                    <th>状态</th>
                     <th>审核状态</th>
                     <th>激活</th>
                     <th *appCanAccess="['ADD_PROFILE','UPDATE_PROFILE']">操作</th>
                   </tr>
-                </thead>
-                <tbody>
+
                     <tr *ngFor="let data of rowSelectionTable.data">
                         <td nzShowCheckbox [(nzChecked)]="checkedMap[data.id]" (nzCheckedChange)="checkItem($event)"></td>
                         <td>{{data.id}}</td>
                         <td><a href="/profile/{{data.id}}" target="_blank" > {{data.name}}  </a></td>
                         <td>{{data.id_card}}</td>
                         <td>{{data.bank_card}}</td> 
-                        <td>{{data.status}}</td> 
                         <td>{{stateMap[data.audit_state]}}</td>
                         <td>
                             <span *ngIf="data.freezed">冻结</span>

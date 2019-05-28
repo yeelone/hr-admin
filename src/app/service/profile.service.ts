@@ -47,6 +47,16 @@ export class ProfileService extends MyService{
     );
   }
 
+  getProfileDetail(id:number): Observable<Profile[]> {
+    let url = '/api/v1/profile/' + String(id)+"/detail";
+
+    return this.http.get<Profile[]>(url)
+      .pipe(
+        tap(response => this.log('get profile')),
+        catchError(this.handleError('getProfileDetail', []))
+    );
+  }
+
   getProfileWithTags(id:number): Observable<Response[]> {
     let url = '/api/v1/profile/' + String(id) + '/tags';
 

@@ -8,15 +8,22 @@
     </nz-spin>
   </nz-tab>
   <nz-tab nzTitle="关联标签">
-    <div style="margin:20px;">
-      <button nz-button (click)="openModal()">变更标签</button>
+    <div style="margin:20px;text-align:center;">
+      <button nz-button (click)="openModal()" class="ok-btn">变更标签</button>
     </div>
     <ul style="list-style:none;">
       <li *ngFor="let item of tags; let i = index ;"  >
         <ul style="list-style:none;">
           <li *ngFor="let c of item['children']">
             <span class="tag-container" >
-              <nz-tag [nzColor]="'green'">{{item['tag'].name}}</nz-tag> -> <nz-tag [nzColor]="'cyan'">数值: [{{c.coefficient}}]</nz-tag>
+              <table>
+                <tr>
+                  <td>{{item['tag'].name}}</td>
+                </tr>
+                <tr>
+                  <td> <nz-tag [nzColor]="'cyan'">数值: [{{c.coefficient}}]</nz-tag></td>
+                </tr>
+              </table>
             </span>
           </li>
         </ul>
@@ -24,12 +31,15 @@
     </ul>
   </nz-tab>
    <nz-tab nzTitle="调动记录">
-      <nz-timeline>
+     <div style="margin:auto;width:500px;">
+        <nz-timeline>
         <nz-timeline-item *ngFor="let record of transferRecords ; let i = index">
-           <p>{{record.created_at | date:'yyyy-MM-dd'}}  {{record.old_group_name}} ==> {{record.new_group_name}} </p>
-           <p>{{record.description}}</p>
+           <p class="transfer-content">{{record.created_at | date:'yyyy-MM-dd'}}  {{record.old_group_name}} ==> {{record.new_group_name}} </p>
+           <p class="transfer-content">{{record.description}}</p>
         </nz-timeline-item>
       </nz-timeline>
+     </div>
+      
    </nz-tab>
 </nz-tabset>
 

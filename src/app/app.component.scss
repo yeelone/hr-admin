@@ -62,9 +62,28 @@
     // overflow: hidden  !important; 
 }
 
+:host ::ng-deep .ant-pagination-item a {
+    color: #1890ff !important;
+}
+
+:host ::ng-deep .ant-tabs-nav .ant-tabs-tab{
+    background: transparent;
+    color: white;
+}
+
+:host ::ng-deep .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab{
+    background: transparent;
+    color: white;
+}
+
+:host ::ng-deep .ant-tabs-bar{
+    text-align: center;
+
+}
+
 :host ::ng-deep .ant-table-fixed-header .ant-table-scroll .ant-table-header{
     overflow:  hidden !important;
-        margin-bottom: 0px !important;
+    margin-bottom: 0px !important;
 }
 
 :host ::ng-deep .ant-input-affix-wrapper .ant-input-suffix {
@@ -83,6 +102,10 @@
 
 :host .ant-table-small>.ant-table-content>.ant-table-body>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-body>table>.ant-table-thead>tr>th, .ant-table-small>.ant-table-content>.ant-table-fixed-left>.ant-table-body-outer>.ant-table-body-inner>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-fixed-left>.ant-table-body-outer>.ant-table-body-inner>table>.ant-table-thead>tr>th, .ant-table-small>.ant-table-content>.ant-table-fixed-left>.ant-table-header>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-fixed-left>.ant-table-header>table>.ant-table-thead>tr>th, .ant-table-small>.ant-table-content>.ant-table-fixed-right>.ant-table-body-outer>.ant-table-body-inner>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-fixed-right>.ant-table-body-outer>.ant-table-body-inner>table>.ant-table-thead>tr>th, .ant-table-small>.ant-table-content>.ant-table-fixed-right>.ant-table-header>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-fixed-right>.ant-table-header>table>.ant-table-thead>tr>th, .ant-table-small>.ant-table-content>.ant-table-header>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-header>table>.ant-table-thead>tr>th, .ant-table-small>.ant-table-content>.ant-table-scroll>.ant-table-body>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-scroll>.ant-table-body>table>.ant-table-thead>tr>th, .ant-table-small>.ant-table-content>.ant-table-scroll>.ant-table-header>table>.ant-table-tbody>tr>td, .ant-table-small>.ant-table-content>.ant-table-scroll>.ant-table-header>table>.ant-table-thead>tr>th{
     padding:  2px !important;
+}
+
+:host ::ng-deep .ant-table-thead>tr>th{
+    background: transparent !important;
 }
 
 :host ::ng-deep .ant-layout{

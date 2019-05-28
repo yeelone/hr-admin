@@ -32,3 +32,14 @@
         margin-left:10px;
     }
 }
+
+.container {
+    .thead{
+        height: 35px;
+        text-align: center;
+
+        td{
+            border: 0.5px solid #cccccc;
+        }
+    }
+}

@@ -1,11 +1,13 @@
 <div class="form">
+    <div class="action-bar">
+        <a nz-button nzType="dashed" routerLink="/salary/template/create" class="ok-btn">新建模板</a> 
+    </div>
+
     <nz-table #basicTable [nzBordered]="'true'"	[nzData]="list" [nzFrontPagination]="'false'" [nzHideOnSinglePage]="'true'">
         <thead>
             <tr>
-            <th>
-                <div class="action-bar">
-                    <a routerLink="/salary/template/create">新建模板</a> 
-                </div>
+            <th style="width:80px;">
+               
             </th>
             <th >模板名</th>
             <!-- <th >模板类型</th> -->
@@ -18,7 +20,7 @@
                 <td>{{item.name}}</td>
                 <!-- <td>{{item.type}}</td> -->
                 <td>
-                     <a nz-button nzType="dashed"  routerLink="/salary/template/update/{{item.id}}">更新</a>
+                     <a nz-button nzType="dashed" class="ok-btn"  routerLink="/salary/template/update/{{item.id}}">更新</a>
                      <nz-divider nzType="vertical"></nz-divider>
                      <button nz-button nzType="danger" (click)="showDeleteConfirm(item.id,item.name)" *appCanAccess="['DELETE_TEMPLATE']">删除</button>
                 </td>
@@ -26,8 +28,8 @@
         </tbody>
         <tfoot *ngIf="updateOrderBtnVisible">
             <tr  *appCanAccess="['UPDATE_TEMPLATE_ORDER']">
-                <td>  
-                    <button nz-button  (click)="updateOrderConfirm()">更新顺序</button>
+                <td colspan="3">  
+                    <button nz-button class="warn-btn order-btn" (click)="updateOrderConfirm()">更新顺序</button>
                 </td>
             </tr>
         </tfoot>

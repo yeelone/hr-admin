@@ -7,6 +7,13 @@
     }
 }
 
+.card-container {
+    div{
+        color: #84fab0 !important;
+    }
+}
+
+
 .profile-detail-btn {
     background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
 
@@ -26,12 +33,20 @@
     }
 }
 
-.statistics-btn{
-    margin: 5px;
-    box-shadow: 6px 4px 10px #cccccc;
-    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-    color:white;
+.statistics-container {
+    color: white;
+
+    .tab {
+        color: #d57eeb !important;
+    }
 }
+.statistics-btn{
+    border: 0px;
+    margin: 5px;
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+        text-align: center;
+}
+
 .acccount-selector {
     width: 150px;
     margin-top: 34px;

@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -16,11 +16,8 @@ import { SortablejsModule } from 'angular-sortablejs';
 
 import { NagivatorComponent } from './shared/layout/nagivator/nagivator.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ProfileComponent } from './profile/profile.component';
 import { EmployeeComponent } from './employee/employee.component';
-import { OrganizationComponent } from './organization/organization.component';
-import { TagsComponent } from './shared/table/tags/tags.component';
-import { GroupComponent } from './shared/table/group/group.component';
+import { GroupComponent } from './organization/group.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GroupEditorComponent } from './shared/forms/group-editor/group-editor.component';
 import { UserGroupEditorComponent } from './shared/forms/usergroup-editor/usergroup-editor.component';
@@ -42,7 +39,7 @@ import { TemplateFieldsSelectorComponent } from './shared/template-fields-select
 import { SimpleProfileListComponent } from './shared/table/simple-profile-list/simple-profile-list.component';
 import { TagProfileListComponent } from './shared/table/tag-profile-list/tag-profile-list.component';
 import { StatisticsComponent } from './statistics/statistics.component';
-import { CoefficientComponent } from './coefficient/coefficient.component';
+import { TagsComponent } from './coefficient/tags.component';
 import { AuditComponent } from './audit/audit.component';
 import { UsersComponent } from './users/users.component';
 import { UsergroupsComponent } from './usergroups/usergroups.component';
@@ -78,9 +75,7 @@ enableProdMode();
   declarations: [
     AppComponent,
     NagivatorComponent,
-    ProfileComponent,
     EmployeeComponent,
-    OrganizationComponent,
     TagsComponent,
     GroupComponent,
     GroupEditorComponent,
@@ -104,7 +99,7 @@ enableProdMode();
     SimpleProfileListComponent,
     TagProfileListComponent,
     StatisticsComponent,
-    CoefficientComponent,
+    TagsComponent,
     AuditComponent,
     UsersComponent,
     UsergroupsComponent,
@@ -140,7 +135,7 @@ enableProdMode();
     ReactiveFormsModule,
     SortablejsModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN },{ provide: NZ_ICONS, useValue: icons },httpInterceptorProviders,AuthGuard,],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN },{ provide: NZ_ICONS, useValue: icons },httpInterceptorProviders,AuthGuard,Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

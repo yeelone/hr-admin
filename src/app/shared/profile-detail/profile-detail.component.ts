@@ -1,5 +1,6 @@
 import { Component, OnInit  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Title }     from '@angular/platform-browser';
 import { ProfileService } from '../../service/profile.service';
 import { TagsService } from '../../service/tags.service';
 import { Profile } from '../../model/profile';
@@ -25,11 +26,13 @@ export class ProfileDetailComponent implements OnInit {
   defaultChecked:Tag[] = [];
   isOkLoading:boolean = false ;
 
-  constructor(private route:ActivatedRoute,private profileService:ProfileService,private tagsService:TagsService ) { }
+  constructor(private route:ActivatedRoute,private profileService:ProfileService,private tagsService:TagsService,private titleService: Title ) {
+  }
 
   ngOnInit() {
       let id = this.route.snapshot.paramMap.get('id');
       this.getProfile(+id);
+      this.titleService.setTitle( this.profile.name );
       this.getRecords(+id);
   }
   
@@ -38,6 +41,7 @@ export class ProfileDetailComponent implements OnInit {
     this.profileService.getProfileWithTags(id)
       .subscribe(
         response => {
+          console.log(response)
           if (response["code"] !== 200 ){
             alert("获取用户详细信息失败，请联系系统管理员" + response["message"] );
             console.log("获取用户详细信息失败，请联系系统管理员" + response["message"] );
@@ -69,7 +73,7 @@ export class ProfileDetailComponent implements OnInit {
   }
 
   onDeleteTag(event):void{
-    console.log(event)
+    console.log(event);
   }
 
   openModal():void{
@@ -81,33 +85,40 @@ export class ProfileDetailComponent implements OnInit {
   }
 
   onSelected(checked:any):void{
-    console.log("checked",checked)
     this.checkedResult = checked;
   }
 
   onSelectedTop(tag:Tag):void{
     this.selectedTopTag = tag ;
     this.defaultChecked = [];
+    if ( !this.tags ) {
+      return ;
+    }
+
     for(let i=0;i < this.tags.length;i++) {
       if ( this.tags[i].tag.id === tag.id ){
         this.defaultChecked = this.tags[i].children;
       }
     }
   }
+
   submitTags():void{
     this.isOkLoading = true;
 
-    for(let i=0;i < this.tags.length;i++) {
-      for ( let j=0;j< this.tags[i].children.length;j++){
-        if ( this.checkedResult.hasOwnProperty(this.tags[i].children[j].id) ) {
-          continue;
+    if ( this.tags ) {
+      for(let i=0;i < this.tags.length;i++) {
+        for ( let j=0;j< this.tags[i].children.length;j++){
+          if ( this.checkedResult.hasOwnProperty(this.tags[i].children[j].id) ) {
+            continue;
+          }
+          this.checkedResult[this.tags[i].children[j].id] = true ;
         }
-        this.checkedResult[this.tags[i].children[j].id] = true ;
       }
     }
-   
+    
+    console.log("this.checkedResult", this.checkedResult)
     let ids:number[] = [];
-    const keys =  Object.keys(this.checkedResult);
+    const keys = Object.keys(this.checkedResult);
     for ( let i=0 ;i< keys.length;i++){ //string 要转成 number 
       if ( this.checkedResult[keys[i]] ){
           ids.push(+keys[i]);
@@ -115,6 +126,7 @@ export class ProfileDetailComponent implements OnInit {
     }
     this.profileService.addProfileTagRelationship(this.profile.id, ids)
       .subscribe(response =>{
+        console.log("response",response);
           if (response["code"] !== 200 ){
             alert("更新档案与系数关联，请联系系统管理员" + response["message"] );
             console.log("更新档案与系数关联，请联系系统管理员" + response["message"] );

@@ -17,9 +17,9 @@
     
     <nz-content style="padding:0 50px;">
         <div class="table-operations table-action-bar">
-            <button nz-button (click)="openEditForm()" class="blue-btn" *appCanAccess="['CREATE_GROUP']">新增分类群组</button>
-            <button nz-button (click)="openImportModal()" class="blue-btn" *appCanAccess="['IMPORT_GROUP']">导入人员表</button>
-            <button nz-button (click)="openImportTagsModal()" class="blue-btn" *appCanAccess="['IMPORT_GROUP_TAGS']">导入系数表</button>
+            <button nz-button (click)="openEditForm()" class="blue-btn" *appCanAccess="['CREATE_GROUP']" class="ok-btn">新增分类群组</button>
+            <button nz-button (click)="openImportModal()" class="blue-btn" *appCanAccess="['IMPORT_GROUP']" class="purple-btn">导入人员表</button>
+            <button nz-button (click)="openImportTagsModal()" class="blue-btn" *appCanAccess="['IMPORT_GROUP_TAGS']" class="purple-btn">导入系数表</button>
         </div>
         <nz-table #basicTable [nzData]="groups" [nzHideOnSinglePage]="'true'" [nzBordered]="'true'" class="group-table" [nzLoading]="loading">
             <thead>
@@ -38,10 +38,12 @@
                 <td>{{data.coefficient}}</td>
                 <td><span *ngIf="data.default">默认组</span></td>
                 <td *appCanAccess="['CREATE_GROUP']">
-                    <!-- <button nz-button nzType="dashed" (click)="checkProfile(data)">查看员工</button> -->
-                  <button nz-button nzType="dashed" (click)="openTagModal(data)">关联标签</button>
+                    <button nz-button nzType="dashed" (click)="checkProfile(data)">查看员工</button>
                   <nz-divider nzType="vertical"></nz-divider>
-                  <button nz-button nzType="dashed" (click)="openEditForm(data)">更新</button>
+
+                  <button nz-button nzType="dashed" (click)="openTagModal(data)" class="ok-btn">关联标签</button>
+                  <nz-divider nzType="vertical"></nz-divider>
+                  <button nz-button nzType="dashed" (click)="openEditForm(data)" class="ok-btn">更新</button>
                   <!-- <nz-divider nzType="vertical"></nz-divider> -->
                   <!-- <button nz-button nzType="danger" (click)="showDeleteConfirm(data.id,data.name)">删除</button> -->
                   <nz-divider nzType="vertical"></nz-divider>
@@ -56,13 +58,13 @@
   </nz-layout>
 
 <div >
-    <nz-drawer [nzClosable]="false"  [nzWidth]="300" [nzVisible]="visible" nzTitle="新增或修改群组信息" (nzOnClose)="closeEditForm()">
-      <app-group-editor [defaultGroup]="selectedGroup"></app-group-editor>
-    </nz-drawer>
+    <nz-modal [nzWidth]="300" [nzVisible]="visible" nzTitle="新增或修改群组信息" (nzOnCancel)="closeEditForm()" [nzFooter]="null">
+      <app-group-editor [defaultGroup]="selectedGroup" ></app-group-editor>
+    </nz-modal>
 
-  <!-- <nz-drawer [nzClosable]="false"  [nzWidth]="900" [nzVisible]="profileDrawerVisible" nzTitle="组员信息" (nzOnClose)="closeProfileEditForm()">
+    <nz-drawer [nzClosable]="false"  [nzWidth]="900" [nzVisible]="profileDrawerVisible" nzTitle="组员信息" (nzOnClose)="closeProfileEditForm()">
       <app-simple-profile-list [group]="selectedGroup" ></app-simple-profile-list>
-  </nz-drawer> -->
+  </nz-drawer>
 </div>
 
 <nz-modal [(nzVisible)]="importModalVisible" nzTitle="批量导入" (nzOnCancel)="closeImportModal()" (nzOnOk)="closeImportModal()">
@@ -80,10 +82,10 @@
     <p *ngIf="errFile">  <a href="{{errFile}}" > 发现错误，点击查看 </a> </p>
 </nz-modal>
 
-<nz-modal [(nzVisible)]="tagModalVisible" nzTitle="关联标签" [nzOkLoading]="isOkLoading" (nzOnCancel)="closeTagModal()" (nzOnOk)="submitTags()">
+<nz-modal [(nzVisible)]="tagModalVisible" nzTitle="关联标签"  [nzWidth]="800" [nzOkLoading]="isOkLoading" (nzOnCancel)="closeTagModal()" (nzOnOk)="submitTags()">
    <h2 style="padding: 2px;">{{selectedGroup?.name}}</h2> 
     <nz-row  *ngFor="let t of selectedGroup?.tags;let i=index;" >
-      <nz-tag nzMode="closeable" (nzOnClose)="onTagClose(i)" >
+      <nz-tag nzMode="closeable" (nzOnClose)="onTagClose(i)" style="padding: 4px;">
           <nz-tag [nzColor]="'lime'" *ngIf="parentTagMap[t.parent]" > {{parentTagMap[t.parent]}} </nz-tag>
         <nz-tag [nzColor]="'lime'">系数名:{{t.name}}</nz-tag>
         <nz-divider nzType="vertical"></nz-divider>
@@ -110,15 +112,14 @@
           </tbody>
         </nz-table>
         <ng-template #footer>
-           <button nz-button nzType="dashed" (click)="openRuleModal()" >增加</button>
+           <button nz-button nzType="dashed" (click)="openRuleModal()" class="ok-btn">增加</button>
         </ng-template>
      
 </nz-modal>
 
-<nz-modal [(nzVisible)]="ruleModalVisible" nzTitle="分类与标签规则编写" (nzOnCancel)="closeRuleModal()" (nzOnOk)="submitRules()">
+<nz-modal [(nzVisible)]="ruleModalVisible" [nzWidth]="950" nzTitle="分类与标签规则编写" (nzOnCancel)="closeRuleModal()" (nzOnOk)="submitRules()">
     如果人员属于: 
     <app-group-tree-selector (onSelectedText)="onGroupSelected($event)"></app-group-tree-selector>
     则选择此系数:  
     <app-tag-selector  (onSelectedText)="onTagSelected($event)"></app-tag-selector>
 </nz-modal>
-<!-- (onSelectedTag)="onTagSelectedTop($event)" (onCheckedTags)="onTagSelected($event)"  -->

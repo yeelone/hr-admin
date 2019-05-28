@@ -7,18 +7,7 @@
         欢乐桐人力资源管理系统
       </span>
     </li>
-    <li nz-submenu *appCanAccess="['ADD_PERMISSIONS', 'CREATE_USER','CREATE_USER_GROUP','CREATE_ROLE']">
-      <span title><i class="anticon anticon-setting"></i> 管理 </span>
-        <ul>
-            <li nz-menu-item> <span><a routerLink="/admin/users">用户管理</a></span> </li>
-            <li nz-menu-item> <span><a routerLink="/admin/usergroups">群组管理</a></span></li>
-            <li nz-menu-item> <span><a routerLink="/admin/roles">角色管理</a></span></li>
-            <li nz-menu-item> <span><a routerLink="/admin/permissions">权限管理</a></span></li>
-            <li nz-menu-item> <span><a routerLink="/admin/backup">备份与还原</a></span></li>
-        </ul>
-
-        
-    </li>
+  
     <li nz-menu-item *appCanAccess="['CREATE_GROUP']">
       <span title>
         <i class="anticon anticon-team"></i>
@@ -37,11 +26,16 @@
         <span><a routerLink="/coefficient">标签</a></span>
       </span>
     </li>
-    <li nz-menu-item *appCanAccess="['CALCULATE_SALARY']">
+    <li nz-submenu  *appCanAccess="['CALCULATE_SALARY']">
       <span title>
         <i class="anticon anticon-calculator"></i>
         <span><a routerLink="/salary">薪酬</a></span>
       </span>
+      <ul>
+            <li nz-menu-item> <span><a routerLink="/salary/calculate">工资计算</a> </span> </li>
+            <li nz-menu-item> <span><a routerLink="/salary/template">配置模板</a></span></li>
+            <li nz-menu-item> <span><a routerLink="/salary/templateaccount">配置账套</a></span></li>
+        </ul>
     </li>
     <li nz-menu-item >
       <span title>
@@ -55,6 +49,17 @@
         <span><a routerLink="/task">任务</a></span>
       </span>
     </li>
+      <li nz-submenu *appCanAccess="['ADD_PERMISSIONS', 'CREATE_USER','CREATE_USER_GROUP','CREATE_ROLE']">
+      <span title><i class="anticon anticon-setting"></i> 管理 </span>
+        <ul>
+            <li nz-menu-item> <span><a routerLink="/admin/users">用户管理</a></span> </li>
+            <li nz-menu-item> <span><a routerLink="/admin/usergroups">群组管理</a></span></li>
+            <li nz-menu-item> <span><a routerLink="/admin/roles">角色管理</a></span></li>
+            <li nz-menu-item> <span><a routerLink="/admin/permissions">权限管理</a></span></li>
+            <li nz-menu-item> <span><a routerLink="/admin/backup">备份与还原</a></span></li>
+        </ul>
+    </li>
+
      <li nz-menu-item *appCanAccess="['LIST_AUDIT']" style="float:right;">
         <app-header></app-header>
      </li>

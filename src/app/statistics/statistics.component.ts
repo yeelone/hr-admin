@@ -83,6 +83,7 @@ export class StatisticsComponent implements OnInit {
     let year = moment(this.year).format('YYYY')  ;
     this.accountService.getAllFieldByYear(tc.id,year)
       .subscribe(response=>{
+        console.log(response);
         if ( response['code'] == 200 ){
           this.fields = response['data']['fields'];
         }else{

@@ -24,7 +24,7 @@ export class LoginFormComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   
-  logo = baseurl + "/api/static/img/icon.png"
+  logo = baseurl + "/api/static/img/icon-min.png"
   
   constructor(
           private fb: FormBuilder, 

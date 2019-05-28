@@ -1,6 +1,7 @@
+<div class="container">
+
 <form nz-form>
   
-  <nz-card nzTitle="基本信息">
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" >员工姓名</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
@@ -78,7 +79,6 @@
           <input nz-input type="text" [formControl]="bank_card" >
       </nz-form-control>
     </nz-form-item>
-  </nz-card>
 <!-- 
     <nz-card nzTitle="学校">
         <div nz-row>
@@ -119,14 +119,12 @@
               </div>
         </div>
     </nz-card> -->
-   <nz-card>
       <nz-form-item>
         <nz-form-label  [nzSm]="6" [nzXs]="24" nzRequired >原因</nz-form-label>
         <nz-form-control  [nzSm]="14" [nzXs]="24">
             <textarea  nz-input [formControl]="remark" rows="4"></textarea>
         </nz-form-control>
       </nz-form-item>
-   </nz-card>
     
 <!--    
     <div nz-col nzSpan="24">
@@ -181,10 +179,10 @@
         </nz-form-control>
       </nz-form-item>
     </div> -->
-  <div *appCanAccess="['CREATE_PROFILE']" style="width: 200px;margin: auto;">
+  <div *appCanAccess="['CREATE_PROFILE']" class="action-bar-bottom">
     <button *ngIf="isCreateAction" nz-button nzType="primary" (click)="submitForm()" [nzLoading]="isSubmiting">新增</button>
     <button *ngIf="!isCreateAction" nz-button nzType="primary" (click)="submitForm()" [nzLoading]="isSubmiting">更新</button>
   </div>
 </form>
 
-
+</div>

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { GroupService } from '../../../service/group.service';
-import { UploadService } from '../../../service/upload.service';
-import { TagsService } from '../../../service/tags.service';
-import { Group } from '../../../model/group';
-import { Tag } from '../../../model/tag';
+import { GroupService } from '../service/group.service';
+import { UploadService } from '../service/upload.service';
+import { TagsService } from '../service/tags.service';
+import { Group } from '../model/group';
+import { Tag } from '../model/tag';
 import { NzModalService } from 'ng-zorro-antd';
 import { Profile } from 'selenium-webdriver/firefox';
 import { NzMessageService,UploadFile} from 'ng-zorro-antd';
-import config from '../../../config/config';
+import config from '../config/config';
 
 @Component({
   selector: 'app-group',
@@ -37,7 +37,7 @@ export class GroupComponent implements OnInit {
   isOkLoading = false;
   modalVisible = false ; 
   importModalVisible = false; 
-  tagModalVisible = false; 
+  tagModalVisible = true; 
   
   //
   importType = "employee"  //判断上传的类型，employee 表示导入人员表，coefficient表示导入系数表
@@ -264,12 +264,11 @@ export class GroupComponent implements OnInit {
   }
 
   onSelectedTop(tag:Tag):void{
-    let tags = this.selectedGroup.tags
     this.selectedTopTag = tag ;
     this.defaultChecked = [];
-    if ( !tags) return ;
-    for(let i=0;i < tags.length;i++) {
-        this.defaultChecked.push(tags[i]);
+    if ( !this.selectedGroup.tags) return ;
+    for(let i=0;i < this.selectedGroup.tags.length;i++) {
+        this.defaultChecked.push(this.selectedGroup.tags[i]);
     }
   }
 
@@ -393,8 +392,10 @@ export class GroupComponent implements OnInit {
             console.log("更新档案与系数关联，请联系系统管理员" + response["message"] );
             return ; 
           }
+          
           this.getGroup(+this.selectedGroup.id);
           this.isOkLoading = false;
+          alert("已移除该标签");
       })
   }
 }

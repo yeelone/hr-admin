@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProfileComponent } from './profile/profile.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { SalaryComponent } from './salary/salary.component';
 import { StatisticsComponent } from './statistics/statistics.component';
-import { OrganizationComponent } from './organization/organization.component';
-import { CoefficientComponent } from './coefficient/coefficient.component';
+import { TagsComponent } from './coefficient/tags.component';
 import { TemplateComponent } from './shared/salary/template/template.component';
 import { TemplateaccountComponent } from './shared/salary/templateaccount/templateaccount.component';
 import { AdjustComponent } from './shared/salary/adjust/adjust.component';
@@ -20,14 +18,14 @@ import { AuthGuard } from './shared/injectable/authguard';
 import { PermissionComponent } from './permission/permission.component';
 import { AuditComponent } from './audit/audit.component';
 import { BackupComponent } from './backup/backup.component';
+import { GroupComponent } from './organization/group.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/task', pathMatch: 'full',canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent,canActivate: [AuthGuard] },
   { path: 'profile/:id', component: ProfileDetailComponent,canActivate: [AuthGuard] },
   { path: 'employee', component: EmployeeComponent,canActivate: [AuthGuard] },
-  { path: 'org', component: OrganizationComponent ,canActivate: [AuthGuard]},
-  { path: 'coefficient', component: CoefficientComponent,canActivate: [AuthGuard] },
+  { path: 'org', component: GroupComponent ,canActivate: [AuthGuard]},
+  { path: 'coefficient', component: TagsComponent,canActivate: [AuthGuard] },
   { path: 'salary', component: SalaryComponent ,canActivate: [AuthGuard]},
   { path: 'salary/template', component: TemplateComponent,canActivate: [AuthGuard] },
   { path: 'salary/templateaccount', component: TemplateaccountComponent,canActivate: [AuthGuard] },
