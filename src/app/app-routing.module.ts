@@ -18,13 +18,12 @@ import { AuthGuard } from './shared/injectable/authguard';
 import { PermissionComponent } from './permission/permission.component';
 import { AuditComponent } from './audit/audit.component';
 import { BackupComponent } from './backup/backup.component';
-import { GroupComponent } from './organization/group.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/task', pathMatch: 'full',canActivate: [AuthGuard] },
   { path: 'profile/:id', component: ProfileDetailComponent,canActivate: [AuthGuard] },
   { path: 'employee', component: EmployeeComponent,canActivate: [AuthGuard] },
-  { path: 'org', component: GroupComponent ,canActivate: [AuthGuard]},
+  { path: 'org', loadChildren: './pages/organization/organization.module#OrganizationModule', canActivate: [AuthGuard]},
   { path: 'coefficient', component: TagsComponent,canActivate: [AuthGuard] },
   { path: 'salary', component: SalaryComponent ,canActivate: [AuthGuard]},
   { path: 'salary/template', component: TemplateComponent,canActivate: [AuthGuard] },
@@ -41,7 +40,7 @@ const routes: Routes = [
   { path: 'admin/permissions', component: PermissionComponent,canActivate: [AuthGuard] },
   { path: 'admin/backup', component: BackupComponent,canActivate: [AuthGuard] },
   { path: 'task', component: AuditComponent,canActivate: [AuthGuard] },
-
+  { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

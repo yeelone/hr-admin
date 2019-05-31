@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="health-container">
+  <ul>
+    <li *ngFor="let m of messages;">
+        {{m}}
+    </li>
+  </ul>
+</div>
+
+<div class="record-container">
+  <nz-table #rowSelectionTable
+        [nzData]="records" 
+        [nzLoading]="loading" 
+        [nzTotal]="total" 
+        [nzBordered]="'true'"
+        [nzSimple]="'false'"
+        [nzSize]="'small'"
+        [nzPageSize]="limit"
+        [nzShowPagination]="pagination"
+        [nzFrontPagination]="'false'"
+        [nzHideOnSinglePage]="'false'"
+        [nzShowSizeChanger]="pagination"
+        (nzPageSizeChange)="nzPageSizeChange($event)"
+        [(nzPageIndex)]="pageIndex"
+        (nzPageIndexChange)="getData()"
+        [nzWidthConfig]="['60px','100px']"
+        >
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>时间</th>
+            <th>内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of rowSelectionTable.data">
+                <td>{{data.id}}</td>
+                <td>{{data.CreatedAt | date:'yy-MM-dd hh:mm'}}</td>
+                <td><a (click)="showBodyModal(data.body)">{{data.body}}</a></td>
+            </tr>
+        </tbody>
+</nz-table>
+
+</div>
+</div>

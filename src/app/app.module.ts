@@ -54,7 +54,6 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './shared/layout/header/header.component';
 import { AuthGuard } from './shared/injectable/authguard';
 import { PermissionComponent } from './permission/permission.component';
-import { CanAccessDirective } from './directive/can-access.directive';
 import { UploadComponent } from './shared/upload/upload.component';
 import { GroupTreeSelectorComponent } from './shared/tree/group-tree-selector/group-tree-selector.component';
 import { TemplateFieldMultiSelectorComponent } from './shared/template-field-multi-selector/template-field-multi-selector.component';
@@ -69,59 +68,25 @@ const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill ];
 registerLocaleData(zh);
 import { enableProdMode } from '@angular/core';
 import { BackupComponent } from './backup/backup.component';
+import { CustomDirectiveModule } from './directive/directive.module';
+import { SharedModule } from './shared/shared.module';
 enableProdMode();
 
 @NgModule({
   declarations: [
     AppComponent,
-    NagivatorComponent,
     EmployeeComponent,
     TagsComponent,
     GroupComponent,
-    GroupEditorComponent,
-    UserGroupEditorComponent,
-    GroupSelectorComponent,
-    UserGroupSelectorComponent,
-    TagEditorComponent,
-    GrouptreeComponent,
-    ProfileEditorComponent,
-    ProfileSelectorComponent,
     SalaryComponent,
-    TemplateEditorComponent,
-    TemplateaccountComponent,
-    ProfileFieldsSelectorComponent,
-    BuildinfuncSelectorComponent,
-    CoefficientSelectorComponent,
-    FormulaInputComponent,
-    TemplateComponent,
-    SalaryCalculatorComponent,
-    TemplateFieldsSelectorComponent,
-    SimpleProfileListComponent,
-    TagProfileListComponent,
     StatisticsComponent,
     TagsComponent,
     AuditComponent,
     UsersComponent,
     UsergroupsComponent,
     RolesComponent,
-    UserSelectorComponent,
-    UsergroupTreeComponent,
-    SimpleUserListComponent,
-    UserEditorComponent,
-    LoginFormComponent,
     LoginComponent,
-    HeaderComponent,
     PermissionComponent,
-    CanAccessDirective,
-    UploadComponent,
-    GroupTreeSelectorComponent,
-    TemplateFieldMultiSelectorComponent,
-    TemplateAccountSelectorComponent,
-    ProfileDetailComponent,
-    TagSelectorComponent,
-    TransferComponent,
-    RecordComponent,
-    GroupTagRuleEditorComponent,
     AdjustComponent,
     BackupComponent,
   ],
@@ -134,6 +99,8 @@ enableProdMode();
     AppRoutingModule,
     ReactiveFormsModule,
     SortablejsModule,
+    CustomDirectiveModule,
+    SharedModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN },{ provide: NZ_ICONS, useValue: icons },httpInterceptorProviders,AuthGuard,Title],
   bootstrap: [AppComponent]

@@ -62,6 +62,10 @@
     // overflow: hidden  !important; 
 }
 
+:host ::ng-deep .ant-menu-inline{
+        background: #001529 !important;
+}
+
 :host ::ng-deep .ant-pagination-item a {
     color: #1890ff !important;
 }

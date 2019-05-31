@@ -1,0 +1,31 @@
+.group-item{
+    display: flex;
+    border-bottom: 1px solid #cccccc;
+    background:rgb(0, 21, 41);
+    color: white;
+}
+
+.group-edit-btn{
+    width:24px;
+    height:24px;
+}
+
+.group-table {
+    text-align: center !important;
+
+    td {
+        text-align: center;
+    }
+}
+
+.layout {
+    ul.left-nav{
+         border: 1px solid #cccccc;
+    }
+}
+
+.table-action-bar {
+    button {
+       margin: 10px;
+    }
+}

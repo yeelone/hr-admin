@@ -23,4 +23,18 @@ export class RecordService extends MyService{
         catchError(this.handleError('getAudits', []))
     );
   }
+
+  getOperationRecords(offset:number,limit:number): Observable<Record[]> {
+    let url = '/api/v1/record/operation';
+
+    if ( limit ){
+      url += "?offset="+String(offset)+"&limit="+String(limit);
+    }
+    return this.http.get<Record[]>(url)
+      .pipe(
+        tap(response => this.log('fetched operate list ')),
+        catchError(this.handleError('getOperationRecords', []))
+    );
+  }
+
 }

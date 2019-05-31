@@ -13,11 +13,11 @@
                 </ng-template>
 
                 <button nz-button (click)="showFreezedProfiles()">查看冻结用户</button>
-                <button nz-button (click)="openEditForm()" *appCanAccess="['CREATE_PROFILE']">增加员工</button>
-                <button nz-button (click)="openImportModal()" *appCanAccess="['IMPORT_PROFILE']">导入</button>
-                <button nz-button (click)="openMoveModal()" *appCanAccess="['MOVE_PROFILE_TO_GROUP']">调动</button>
-                <button nz-button (click)="openFreezeModal(true)" *appCanAccess="['FREEZE_PROFILE']" [disabled]="freezeButtonDisable">冻结</button>
-                <button nz-button (click)="openFreezeModal(false)" *appCanAccess="['UNFREEZE_PROFILE']" [disabled]="freezeButtonDisable">激活</button>
+                <button nz-button (click)="openEditForm()" *appCanAccess="['CREATE_PROFILE']" class="ok-btn">增加员工</button>
+                <button nz-button (click)="openImportModal()" *appCanAccess="['IMPORT_PROFILE']" class="purple-btn">导入</button>
+                <button nz-button (click)="openMoveModal()" *appCanAccess="['MOVE_PROFILE_TO_GROUP']" class="purple-btn">调动</button>
+                <button nz-button (click)="openFreezeModal(true)" *appCanAccess="['FREEZE_PROFILE']" [disabled]="freezeButtonDisable" class="warn-btn">冻结</button>
+                <button nz-button (click)="openFreezeModal(false)" *appCanAccess="['UNFREEZE_PROFILE']" [disabled]="freezeButtonDisable" class="ok-btn">激活</button>
             </div>
 
             <nz-table #rowSelectionTable
@@ -35,7 +35,7 @@
                 (nzPageSizeChange)="nzPageSizeChange($event)"
                 [(nzPageIndex)]="pageIndex"
                 (nzPageIndexChange)="getData()"
-                [nzScroll]="{ x:'70%',y: '500px' }"
+                [nzScroll]="{ x:'70%',y: '550px' }"
                 >
                 <tbody>
                     <tr class="thead">
@@ -63,7 +63,7 @@
                         <td *appCanAccess="['ADD_PROFILE','UPDATE_PROFILE']">
                             <!-- <button nz-button nzType="danger" (click)="showDeleteModal(data)" *appCanAccess="['DELETE_PROFILE']">删除</button> -->
                             <nz-divider nzType="vertical"></nz-divider>
-                            <button nz-button nzType="dashed" (click)="openEditForm(data)" *appCanAccess="['UPDATE_PROFILE']">更新</button>
+                            <button nz-button nzType="dashed" (click)="openEditForm(data)" *appCanAccess="['UPDATE_PROFILE']" class="ok-btn">更新</button>
                         </td>
                     </tr>
                 </tbody>

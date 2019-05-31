@@ -9,7 +9,7 @@ const baseurl = config.baseurl;
 export class NagivatorComponent implements OnInit {
   isCollapsed = false;
   
-  logo = baseurl + "/api/static/img/icon.png"
+  logo = baseurl + "/api/static/img/icon-min.png"
 
   constructor() { }
 

@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { GroupService } from '../service/group.service';
-import { UploadService } from '../service/upload.service';
-import { TagsService } from '../service/tags.service';
-import { Group } from '../model/group';
-import { Tag } from '../model/tag';
+import { GroupService } from '../../service/group.service';
+import { UploadService } from '../../service/upload.service';
+import { TagsService } from '../../service/tags.service';
+import { Group } from '../../model/group';
+import { Tag } from '../../model/tag';
 import { NzModalService } from 'ng-zorro-antd';
-import { Profile } from 'selenium-webdriver/firefox';
 import { NzMessageService,UploadFile} from 'ng-zorro-antd';
-import config from '../config/config';
-
+import config from '../../config/config';
+import { Profile } from 'src/app/model/profile';
 @Component({
-  selector: 'app-group',
-  templateUrl: './group.component.html',
-  styleUrls: ['./group.component.scss']
+  selector: 'app-organization',
+  templateUrl: './organization.component.html',
+  styleUrls: ['./organization.component.scss']
 })
-export class GroupComponent implements OnInit {
+export class OrganizationComponent implements OnInit {
+
   topGroups:Group[];
   groups:Group[];
   total:number ;
@@ -398,4 +398,5 @@ export class GroupComponent implements OnInit {
           alert("已移除该标签");
       })
   }
+
 }

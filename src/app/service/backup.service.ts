@@ -12,7 +12,7 @@ export class BackupService extends MyService {
   constructor(private http: HttpClient) { super() }
 
   backup(): Observable<Response[]> {
-    let url = "/api/v1/tool/backup"
+    let url = "/api/v1/tool/backup";
     return this.http.get<Response[]>(url)
       .pipe(
         tap(response => this.log('request backup service ')),
@@ -21,7 +21,7 @@ export class BackupService extends MyService {
   }
 
   list(): Observable<Response[]> {
-    let url = "/api/v1/tool/backup/files"
+    let url = "/api/v1/tool/backup/files";
     return this.http.get<Response[]>(url)
       .pipe(
         tap(response => this.log('request backup service ')),
