@@ -32,7 +32,7 @@ export class BuildinfuncSelectorComponent implements OnInit {
   needRequired:boolean = false;
   paramCount:number = 1;
 
-  allFunctions: BuildinFunc[];
+  allFunctions: BuildinFunc[] = [];
   checkedMap = {};
 
   @Input()

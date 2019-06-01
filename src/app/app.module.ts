@@ -17,16 +17,10 @@ import { SortablejsModule } from 'angular-sortablejs';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuditComponent } from './audit/audit.component';
-import { UsersComponent } from './users/users.component';
-import { UsergroupsComponent } from './usergroups/usergroups.component';
-import { RolesComponent } from './roles/roles.component';
 import { AuthGuard } from './shared/injectable/authguard';
-import { PermissionComponent } from './permission/permission.component';
-import { AdjustComponent } from './shared/salary/adjust/adjust.component';
 const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill ];
 registerLocaleData(zh);
 import { enableProdMode } from '@angular/core';
-import { BackupComponent } from './backup/backup.component';
 import { CustomDirectiveModule } from './directive/directive.module';
 import { SharedModule } from './shared/shared.module';
 import { StatisticsComponent } from './statistics/statistics.component';
@@ -37,12 +31,6 @@ enableProdMode();
   declarations: [
     AppComponent,
     AuditComponent,
-    UsersComponent,
-    UsergroupsComponent,
-    RolesComponent,
-    PermissionComponent,
-    AdjustComponent,
-    BackupComponent,
     StatisticsComponent,
     LoginComponent 
   ],

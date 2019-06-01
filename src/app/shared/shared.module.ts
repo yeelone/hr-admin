@@ -11,13 +11,10 @@ import { GrouptreeComponent } from './tree/grouptree/grouptree.component';
 import { ProfileEditorComponent } from './forms/profile-editor/profile-editor.component';
 import { ProfileSelectorComponent } from './profile-selector/profile-selector.component';
 import { TemplateEditorComponent } from './forms/template-editor/template-editor.component';
-import { TemplateaccountComponent } from './salary/templateaccount/templateaccount.component';
 import { ProfileFieldsSelectorComponent } from './profile-fields-selector/profile-fields-selector.component';
 import { BuildinfuncSelectorComponent } from './buildinfunc-selector/buildinfunc-selector.component';
 import { CoefficientSelectorComponent } from './coefficient-selector/coefficient-selector.component';
 import { FormulaInputComponent } from './formula-input/formula-input.component';
-import { TemplateComponent } from './salary/template/template.component';
-import { SalaryCalculatorComponent } from './salary-calculator/salary-calculator.component';
 import { TemplateFieldsSelectorComponent } from './template-fields-selector/template-fields-selector.component';
 import { SimpleProfileListComponent } from './table/simple-profile-list/simple-profile-list.component';
 import { TagProfileListComponent } from './table/tag-profile-list/tag-profile-list.component';
@@ -38,7 +35,6 @@ import { RecordComponent } from './table/record/record.component';
 import { GroupTagRuleEditorComponent } from './forms/group-tag-rule-editor/group-tag-rule-editor.component';
 import { CustomDirectiveModule } from '../directive/directive.module';
 import { SortablejsModule } from 'angular-sortablejs';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NagivatorComponent } from './layout/nagivator/nagivator.component';
 
@@ -52,13 +48,10 @@ const COMPONENTS = [
     ProfileEditorComponent,
     ProfileSelectorComponent,
     TemplateEditorComponent,
-    TemplateaccountComponent,
     ProfileFieldsSelectorComponent,
     BuildinfuncSelectorComponent,
     CoefficientSelectorComponent,
     FormulaInputComponent,
-    TemplateComponent,
-    SalaryCalculatorComponent,
     TemplateFieldsSelectorComponent,
     SimpleProfileListComponent,
     TagProfileListComponent,
