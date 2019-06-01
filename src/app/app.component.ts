@@ -8,6 +8,6 @@ import { Component , OnInit} from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'app';
   ngOnInit() {
-    console.log("Power by Jiangyilong 2018")
+    console.log("Power by LeTong 2018")
   }
 }

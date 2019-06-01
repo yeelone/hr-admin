@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EmployeeComponent } from './employee/employee.component';
 import { SalaryComponent } from './salary/salary.component';
 import { StatisticsComponent } from './statistics/statistics.component';
-import { TagsComponent } from './coefficient/tags.component';
 import { TemplateComponent } from './shared/salary/template/template.component';
 import { TemplateaccountComponent } from './shared/salary/templateaccount/templateaccount.component';
 import { AdjustComponent } from './shared/salary/adjust/adjust.component';
@@ -22,10 +20,11 @@ import { BackupComponent } from './backup/backup.component';
 const routes: Routes = [
   { path: '', redirectTo: '/task', pathMatch: 'full',canActivate: [AuthGuard] },
   { path: 'profile/:id', component: ProfileDetailComponent,canActivate: [AuthGuard] },
-  { path: 'employee', component: EmployeeComponent,canActivate: [AuthGuard] },
+   { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard]},
+  { path: 'employee',  loadChildren: './pages/employee/employee.module#EmployeeModule',canActivate: [AuthGuard] },
   { path: 'org', loadChildren: './pages/organization/organization.module#OrganizationModule', canActivate: [AuthGuard]},
-  { path: 'coefficient', component: TagsComponent,canActivate: [AuthGuard] },
-  { path: 'salary', component: SalaryComponent ,canActivate: [AuthGuard]},
+  { path: 'tags', loadChildren: './pages/tags/tags.module#TagsModule',canActivate: [AuthGuard] },
+  { path: 'salary', loadChildren: './pages/salary/salary.module#SalaryModule',canActivate: [AuthGuard]},
   { path: 'salary/template', component: TemplateComponent,canActivate: [AuthGuard] },
   { path: 'salary/templateaccount', component: TemplateaccountComponent,canActivate: [AuthGuard] },
   { path: 'salary/template/create', component: TemplateEditorComponent,canActivate: [AuthGuard] },
@@ -40,7 +39,7 @@ const routes: Routes = [
   { path: 'admin/permissions', component: PermissionComponent,canActivate: [AuthGuard] },
   { path: 'admin/backup', component: BackupComponent,canActivate: [AuthGuard] },
   { path: 'task', component: AuditComponent,canActivate: [AuthGuard] },
-  { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard]},
+ 
   { path: 'login', component: LoginComponent },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

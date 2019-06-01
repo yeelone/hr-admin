@@ -15,14 +15,14 @@ import { Profile } from 'src/app/model/profile';
 })
 export class OrganizationComponent implements OnInit {
 
-  topGroups:Group[];
-  groups:Group[];
+  topGroups:Group[] = [];
+  groups:Group[] = [];
   total:number ;
   selectedGroup:Group;
   selectedGroupText:String;
   selectedTags:Tag[] = [];
   selectedTopTag:Tag;
-  profiles:Profile[];
+  profiles:Profile[] = [];
 
   parentTagMap = {} ; //getGroup获取到的关联标签都是子标签，在显示出来时希望能再进一步显示其父标签的名字
   checkedResult:any = {};
@@ -101,7 +101,6 @@ export class OrganizationComponent implements OnInit {
         }else{
           this.groups = response["data"]["groupList"].sort(this.compare("code"));
           this.total = response["data"]["totalCount"];
-          console.log(this.groups);
         }
         this.loading = false ; 
       }) 
