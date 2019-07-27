@@ -21,7 +21,7 @@
             <button nz-button (click)="openImportModal()" class="blue-btn" *appCanAccess="['IMPORT_GROUP']" class="purple-btn">导入人员表</button>
             <button nz-button (click)="openImportTagsModal()" class="blue-btn" *appCanAccess="['IMPORT_GROUP_TAGS']" class="purple-btn">导入系数表</button>
         </div>
-        <nz-table #basicTable [nzData]="groups" [nzHideOnSinglePage]="'true'" [nzBordered]="'true'" class="group-table" [nzLoading]="loading">
+        <nz-table #basicTable [nzData]="groups" [nzHideOnSinglePage]="'true'" nzShowSizeChanger [nzBordered]="'true'" class="group-table" [nzLoading]="loading">
             <thead>
               <tr>
                 <th>编码</th> 

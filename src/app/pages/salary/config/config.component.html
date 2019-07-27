@@ -1,0 +1,83 @@
+<div nz-row nzType="flex" nzJustify="start">
+        <div nz-col nzSpan="8" class="col">
+            <div class="create-form">
+
+              <div nz-row nzType="flex" nzJustify="start" class="select-bar">
+                      <div nz-col nzSpan="12" class="col">
+                        <button nz-button (click)="selectProfile()"> 选择人员 </button>
+                      </div>
+                      <div nz-col nzSpan="12" class="col">
+                        <span class="text">{{profile?.name}}</span>
+                      </div>
+              </div>
+               <div nz-row nzType="flex" nzJustify="start" class="select-bar">
+                      <div nz-col nzSpan="12" class="col">
+                        <button nz-button (click)="openSelectTemplateModal()"> 选择模板 </button>
+                      </div>
+                      <div nz-col nzSpan="12" class="col">
+                        <span class="text">{{ templateField?.template }}</span>
+                      </div>
+               </div>
+                      
+              <div nz-row nzType="flex" nzJustify="start" class="select-bar">
+                  <div nz-col nzSpan="16" class="col">
+                          <nz-select style="width: 120px;" [(ngModel)]="selectedOperator"  nzPlaceHolder="Choose">
+                              <nz-option nzValue="+" nzLabel="+"></nz-option>
+                              <nz-option nzValue="-" nzLabel="-"></nz-option>
+                              <nz-option nzValue="*" nzLabel="*" ></nz-option>
+                              <nz-option nzValue="/" nzLabel="/" ></nz-option>
+                          </nz-select>
+                      </div>
+
+                      <div nz-col nzSpan="8" class="col">
+                          <nz-input-number [(ngModel)]="opeateValue" [nzStep]="1"></nz-input-number>
+                        </div>
+              </div>
+                      
+              <textarea rows="4" nz-input [(ngModel)]="description"></textarea>
+                <button nz-button (click)="saveConfig()" class="save-btn"> 提交 </button>
+              <app-profile-selector  [visible]="selectorModalVisible" [onlyOne]="'true'" (onCancel)="closeModal()" (onSelect)="changeMembers($event)"></app-profile-selector>
+
+              <nz-modal [(nzVisible)]="templateVisible" nzTitle="选择模板" nzFooter="nothing">
+                <app-template-fields-selector  (selectedField)="onRelatedFieldSelected($event)" (onClose)="closeTempalteSelector()"></app-template-fields-selector>
+                <ng-template #nothing></ng-template>
+              </nz-modal>
+            </div>
+        </div>
+
+        <div nz-col nzSpan="16" class="col">
+            
+        <nz-spin [nzSpinning]="loading">
+          <nz-table [nzData]="configList" #nzTable nzSize="small" [nzBordered]="'true'" [nzWidthConfig]="widthConfig">
+            <thead>
+                <tr>
+                  <th nzShowExpand></th>
+                  <th>姓名</th>
+                  <th>模板</th>
+                  <th>操作</th>
+                  <th>值</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-template ngFor let-data [ngForOf]="nzTable.data">
+                    <tr>
+                    <td nzShowExpand [(nzExpand)]="mapOfExpandData[data.id]"></td>
+                    <td>{{data.profile.name}}</td>
+                    <td>{{data.template_field.name}}</td>
+                    <td>{{data.operate}}</td>
+                    <td>{{data.value}}</td>
+                    <td>
+                    <a nz-popconfirm nzTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data.id)">Delete</a>
+                    </td>
+                  </tr>
+                  <tr [nzExpand]="mapOfExpandData[data.id]">
+                    <td></td>
+                    <td colspan="3">{{ data.description }}</td>
+                  </tr>
+                </ng-template>
+              </tbody>
+        </nz-table>
+        </nz-spin>
+        </div>
+ </div>

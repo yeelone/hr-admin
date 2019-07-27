@@ -22,6 +22,36 @@ export class SalaryService extends MyService {
     );
   }
 
+  createProfileConfig(config:SalaryProfileConfig): Observable<Response[]> {
+    let url = '/api/v1/salary/profile/config';
+
+    return this.http.post<Response[]>(url,config)
+      .pipe(
+        tap(response => this.log('create profile config')),
+        catchError(this.handleError('createProfileConfig', []))
+    );
+  }
+
+  getProfileConfig(): Observable<Response[]> {
+    let url = '/api/v1/salary/profile/config';
+
+    return this.http.get<Response[]>(url)
+      .pipe(
+        tap(response => this.log('get profile config list')),
+        catchError(this.handleError('getProfileConfig', []))
+    );
+  }
+
+   deleteProfileConfig(id:number): Observable<Response[]> {
+    let url = '/api/v1/salary/profile/config/' + String(id);
+
+    return this.http.delete<Response[]>(url)
+      .pipe(
+        tap(response => this.log('delete profile config' + String(id))),
+        catchError(this.handleError('deleteProfileConfig', []))
+    );
+  }
+
   getBase(): Observable<BaseSalary[]> {
     let url = '/api/v1/salary/base';
 

@@ -1,4 +1,6 @@
 <nz-modal [(nzVisible)]="visible" nzTitle="新增标签" (nzOnCancel)="closeModal()" (nzOnOk)="submitForm()">
+<nz-spin [nzSpinning]="loading">
+
 <form nz-form>
     <div nz-row>
       <div nz-col nzSpan="24">
@@ -31,4 +33,29 @@
           </div>
       </div> -->
 </form>
+
+    <div nz-row *ngIf="default?.parent==0">
+        <div nz-col nzSpan="24">
+            创建共生关联标签组
+            <p>
+                <nz-checkbox-group [(ngModel)]="checkOptions" ></nz-checkbox-group>
+            </p>
+             <nz-collapse>
+                <nz-collapse-panel
+                    [nzHeader]="'标签共生组是为了解决以下这种场景:'"
+                    [nzActive]="false"
+                >
+                    <p>比如操作员手工（记住这里，是手工为员工贴上标签）为员工贴上标签A,在做调动时（比如说调动岗位），目标组（岗位）没有关联标签A且希望你不再持有标签A，此时系统应该如何知道需要自动地去除标签A？</p>
+                    <p>解决方法就是，将标签与组进行关联，当调动时，系统以目标组为标准，如果目标组有关联到该标签，则以目标组为准，目标组有该标签，则该标签保留或者更新，否则则为用户去除该标签。</p>
+                    <P>打个比方，我们为信贷员工手工添加了《延期支付》的标签，此时我们要为此员工调整岗位，调到办事员组，办事员不需要延期支付，所以应该去除该标签，但是因为《延期支付》这个标签是我们手工为员工添加的，
+                        所以系统并不知道，是不是该去掉该标签。此时，我们可以将 《岗位》这个大分类与 《延期支付》这个标签进行关联，如果目标岗位，即办事员岗没有关联《延期支付》的话，就将该员工的延期支付标签去掉。
+                    </P>
+                </nz-collapse-panel>
+                </nz-collapse>
+        </div>
+     </div>
+
+
+</nz-spin>
+
 </nz-modal>

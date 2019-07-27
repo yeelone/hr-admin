@@ -4,6 +4,7 @@ export class Tag {
     name: string;
     coefficient:number;
     parent:number;
+    commensalism_group_ids:number[];
 }
 
 export class Tags {

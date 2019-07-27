@@ -1,5 +1,6 @@
 import { Template } from "./template";
 import { Group } from "./group";
+import { Profile } from "./profile";
 
 export class BaseSalary{
     base:number;
@@ -19,7 +20,15 @@ export class SalaryTemplate{
     body:Map<string,Template>;
     Fields:Template[];
 }
-
+export class SalaryProfileConfig{
+    template_field_id:string;
+    template_field:Template;
+    description:string;
+    value:number;
+    operate:string;
+    profile_id:number;
+    profile:Profile;
+}
 
 export class SalaryTemplateAccount{
     id:number;
@@ -45,6 +54,7 @@ export class RelatedSalary{
     account:string;
     template:string;
     field:string;
+    fieldId:string;
     fields:string[];
     year:string;
     month:string;

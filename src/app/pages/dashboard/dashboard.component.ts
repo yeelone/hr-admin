@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   limit = this.defaultLimit ; 
   offset = 0;
   total:number ;
+  loading:boolean = false;
 
   constructor(private healthService:HealthService,private recordService:RecordService) { }
 

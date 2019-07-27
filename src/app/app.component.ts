@@ -1,4 +1,5 @@
 import { Component , OnInit} from '@angular/core';
+import config from './config/config';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,10 @@ import { Component , OnInit} from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'app';
+  version = '';
+  
   ngOnInit() {
-    console.log("Power by LeTong 2018")
+    this.version = config.version;
+    console.log("Power by Jiangyilong 2018 Version " + this.version);
   }
 }

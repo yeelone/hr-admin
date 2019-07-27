@@ -132,13 +132,14 @@ export class TagsComponent implements OnInit {
         //创建子标签
         tag.parent = +this.parentTags[this.currentParentTagIndex].id;
       }else{
-      //创建父标签
-      tag.parent = 0 ;
-    }
-        this.createTag(tag);    
+        //创建父标签
+        tag.parent = 0 ;
+      }
+      this.createTag(tag);    
     }else{
       this.currentTag.name = tag.name ; 
       this.currentTag.coefficient = tag.coefficient;
+      this.currentTag.commensalism_group_ids = tag.commensalism_group_ids;
       this.tagService.updateTag(+this.currentTag.id, this.currentTag)
             .subscribe(response => {
               this.isOkLoading = false;

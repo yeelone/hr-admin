@@ -3,9 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { SalaryComponent } from './salary.component';
 import { SalaryCalculatorComponent } from './calculator/salary-calculator.component';
 import { AdjustComponent } from './adjust/adjust.component';
-import { TemplateEditorComponent } from 'src/app/shared/forms/template-editor/template-editor.component';
 import { TemplateaccountComponent } from './templateaccount/templateaccount.component';
 import { TemplateComponent } from './template/template.component';
+import { TemplateEditorComponent } from './component/template-editor/template-editor.component';
+import { SalaryConfigComponent } from './config/config.component';
 
 const routes: Routes = [
   {path: '', component: SalaryComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'template/update/:id', component: TemplateEditorComponent},
   { path: 'template/show/:id', component: TemplateEditorComponent },
   { path: 'adjust', component: AdjustComponent },
+  { path: 'config', component: SalaryConfigComponent },
 ];
 
 @NgModule({

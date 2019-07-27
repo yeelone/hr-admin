@@ -12,6 +12,10 @@ import { Group } from '../../model/group';
 export class ProfileSelectorComponent implements OnInit {
   @Input()
   visible:boolean = true;
+
+  @Input()
+  onlyOne:boolean = false; //只选择一个
+
   
   list:any[] = [];
   profiles: Profile[] = [];
@@ -105,9 +109,18 @@ export class ProfileSelectorComponent implements OnInit {
   }
 
 
-  checkProfile(p:Profile){
-    this.selectedMap[p.id] = !this.selectedMap[p.id] ; 
+  checkProfile(p:Profile): void{
     let _temp :Profile[] = this.checkedProfiles.slice();
+
+     if ( this.onlyOne ){
+      if ( _temp.length >= 1 ){
+        alert("此页面只能选择一个");
+        return;
+      }
+    }
+
+    this.selectedMap[p.id] = !this.selectedMap[p.id] ;
+
     if ( this.selectedMap[p.id]) {
       _temp.push(p);
       this.checkedProfiles = _temp;

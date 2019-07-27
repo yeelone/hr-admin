@@ -1,0 +1,27 @@
+.create-form {
+    width: 80%;
+    margin: auto;
+    background: slategrey;
+    padding: 15px;
+    border-radius: 10px;
+
+    .select-bar {
+        margin: 10px;
+
+        .text {
+            background-color: aquamarine;
+            display: block;
+            text-align: center;
+            width: 80%;
+            margin: auto;
+            height: 32px;
+            line-height: 30px;
+            border-radius: 4px;
+        }
+    }
+
+    .save-btn{
+        margin: 8px auto;
+        display: block;
+    }
+}
