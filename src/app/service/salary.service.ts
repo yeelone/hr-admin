@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { MyService } from './service';
-import { BaseSalary,QuerySalary,DownloadSalary,TaxConf } from '../model/salary';
+import { BaseSalary,QuerySalary,DownloadSalary,TaxConf, SalaryProfileConfig } from '../model/salary';
 
 @Injectable({
   providedIn: 'root'
