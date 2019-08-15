@@ -44,10 +44,12 @@ export class GroupEditorComponent implements OnInit {
     let levels = group.levels;
     let groups:number[] = []
     for (let v of levels.split(".")){
+      console.log("v",v)
       if ( v ){
         groups.push(+v);//string to number 
       }
     }
+    console.log("groups",groups)
     this.selectedGroup = groups;
   }
   constructor(private groupService: GroupService) { }
@@ -55,8 +57,11 @@ export class GroupEditorComponent implements OnInit {
   ngOnInit() {
   }
   
-  getSelectedValue(event:number[]){
-    this.selectedGroup = event;
+  getSelectedValue(groups:Group[]){
+    this.selectedGroup = [];
+    for (let g of groups){
+        this.selectedGroup.push(+g.id);//string to number 
+    }
   }
 
   // ngOnChanges(changes: SimpleChanges): void { 
@@ -95,12 +100,14 @@ export class GroupEditorComponent implements OnInit {
     
     if (this.selectedGroup) {
       g.parent = this.selectedGroup[this.selectedGroup.length-1];
+      console.log(this.selectedGroup[this.selectedGroup.length-1])
     }else{
       g.parent = 0 ;
     }
     this.isSubmiting = true;
 
     if ( this.isCreateAction ){
+      console.log(g);
       this.groupService.createGroup(g)
       .subscribe(response => { 
          if (response["code"] != 200 ){

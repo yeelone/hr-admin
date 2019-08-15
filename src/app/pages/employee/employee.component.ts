@@ -346,21 +346,25 @@ export class EmployeeComponent implements OnInit {
   //获取用户选择调动的类型，比如岗位，部门，学历 ，职称
   getGroupType(event:Group[]):void{
     let typeID:number = +event[0].id ; 
-    for ( let i=0 ; i< this.selectedProfile.groups.length ; i++) {
+    if (this.selectedProfile.groups){
+      for ( let i=0 ; i< this.selectedProfile.groups.length ; i++) {
       if ( this.selectedProfile.groups[i].parent == typeID ) {
         this.targetGroup = this.selectedProfile.groups[i];
       }
+    }
     }
     this.moveTopGroup = event[0].id;
   }
 
   moveProfile(){
-    let oldG: number ;
-    for (let i=0; i < this.selectedProfile.groups.length;i++ ){
-      let g = this.selectedProfile.groups[i];
-      if ( this.targetGroup.id == g.id || this.targetGroup.id == String(g.parent) ){
-        oldG = +g.id ; 
-      }
+    let oldG: number = 0 ;
+    if (this.selectedProfile.groups){
+        for (let i=0; i < this.selectedProfile.groups.length;i++ ){
+          let g = this.selectedProfile.groups[i];
+          if ( this.targetGroup.id == g.id || this.targetGroup.id == String(g.parent) ){
+            oldG = +g.id ; 
+          }
+        }
     }
 
     this.moveLoading = true;

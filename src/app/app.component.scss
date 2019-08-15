@@ -119,3 +119,10 @@
 :host ::ng-deep .ant-card-head {
     background: gold !important;
 }
+
+:host ::ng-deep .ant-tabs .ant-tabs-left-bar .ant-tabs-tab-prev, .ant-tabs .ant-tabs-right-bar .ant-tabs-tab-prev span{
+        color: white !important;
+    }
+:host ::ng-deep .ant-tabs .ant-tabs-left-bar .ant-tabs-tab-next, .ant-tabs .ant-tabs-right-bar .ant-tabs-tab-next span{
+        color: white !important;
+    }

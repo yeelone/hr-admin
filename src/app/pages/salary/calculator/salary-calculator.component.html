@@ -1,51 +1,81 @@
-<div class="container">
-  <nz-card [nzBordered]="false" >
-  <nz-divider nzText="查看当月变动表" nzOrientation="left"></nz-divider>
-    <button nz-button nzType="primary"  (click)="openChangeTableModal()"><i nz-icon type="flag" theme="outline"></i>查询变动表</button>
 
-    <nz-divider nzText="计算工资" nzOrientation="left"></nz-divider>
-    <nz-spin [nzSpinning]="isSpinning">
-      <div nz-row>
-        <div nz-col nzSpan="12">
-          <nz-select style="width: 400px;" [(ngModel)]="selectedTemplateAccount" nzAllowClear nzPlaceHolder="选择账套">
-            <nz-option *ngFor="let item of list ;let i = index; " nzValue="{{item.id}}" nzLabel="{{item.name}}"></nz-option>
-          </nz-select>
-        </div>
-      </div>
-      <br>
-       <div nz-row>
-         <div nz-col nzSpan="12">
-           <nz-month-picker  [(ngModel)]="selectedMonth" nzPlaceHolder="指定月份"></nz-month-picker>
+ <nz-steps [nzCurrent]="current">
+      <nz-step nzTitle="Finished"></nz-step>
+      <nz-step nzTitle="In Progress"></nz-step>
+      <nz-step nzTitle="Waiting"></nz-step>
+    </nz-steps>
+
+    <div class="steps-content">
+         <div  *ngIf="current==0">
+            <nz-card [nzBordered]="false" >
+              <p>变动表</p>
+               <app-record></app-record>
+            </nz-card>
          </div>
-       </div>
-       <br>
-      <div nz-row>
-        <div nz-col nzSpan="12">
-          <button nz-button nzType="primary" (click)="analysis()"><i nz-icon type="check" theme="outline"></i>开始运算</button>
+
+        <div class="container" *ngIf="current==1">
+          <nz-card [nzBordered]="false" >
+          <!-- <nz-divider nzText="查看当月变动表" nzOrientation="left"></nz-divider>
+            <button nz-button nzType="primary"  (click)="openChangeTableModal()"><i nz-icon type="flag" theme="outline"></i>查询变动表</button> -->
+
+            <nz-divider nzText="计算工资" nzOrientation="left"></nz-divider>
+            <nz-spin [nzSpinning]="isSpinning">
+              <div nz-row>
+                <div nz-col nzSpan="12">
+                  <nz-select style="width: 400px;" [(ngModel)]="selectedTemplateAccount" nzAllowClear nzPlaceHolder="选择账套">
+                    <nz-option *ngFor="let item of list ;let i = index; " nzValue="{{item.id}}" nzLabel="{{item.name}}"></nz-option>
+                  </nz-select>
+                </div>
+              </div>
+              <br>
+              <div nz-row>
+                <div nz-col nzSpan="12">
+                  <nz-month-picker  [(ngModel)]="selectedMonth" nzPlaceHolder="指定月份"></nz-month-picker>
+                </div>
+              </div>
+              <br>
+              <div nz-row>
+                <div nz-col nzSpan="12">
+                  <button nz-button nzType="primary" (click)="analysis()"><i nz-icon type="check" theme="outline"></i>开始运算</button>
+                </div>
+              </div>
+              
+                <div nz-row *ngIf="errFile">
+                <div nz-col nzSpan="12">
+                  <a href="{{errFile}}"  class="download-btn"> 点击下载错误信息 </a>
+                  </div>
+                </div>
+              
+            </nz-spin>
+
+            <nz-divider nzText="导出工资表" nzOrientation="left"></nz-divider>
+
+            <nz-spin [nzSize]="'large'" [nzSpinning]="isExporting">
+              <nz-month-picker   [(ngModel)]="selectedMonth" nzPlaceHolder="指定月份" ></nz-month-picker>
+              <button nz-button nzType="dashed" (click)="exportSalary()">请求导出工资表</button>
+              <button nz-button nzType="dashed" (click)="openTemplateModal()">上传工资模板</button>
+
+              <div *ngIf="done" >
+                  <a href="{{downloadFile}}"  class="download-btn"> 点击下载 </a>
+              </div>
+            </nz-spin>
+          </nz-card>
         </div>
-      </div>
-      
-        <div nz-row *ngIf="errFile">
-         <div nz-col nzSpan="12">
-           <a href="{{errFile}}"  class="download-btn"> 点击下载错误信息 </a>
-          </div>
-        </div>
-       
-    </nz-spin>
-
-    <nz-divider nzText="导出工资表" nzOrientation="left"></nz-divider>
-
-    <nz-spin [nzSize]="'large'" [nzSpinning]="isExporting">
-      <nz-month-picker   [(ngModel)]="selectedMonth" nzPlaceHolder="指定月份" ></nz-month-picker>
-      <button nz-button nzType="dashed" (click)="exportSalary()">请求导出工资表</button>
-      <button nz-button nzType="dashed" (click)="openTemplateModal()">上传工资模板</button>
-
-      <div *ngIf="done" >
-          <a href="{{downloadFile}}"  class="download-btn"> 点击下载 </a>
-      </div>
-    </nz-spin>
-  </nz-card>
+    </div>
+    
+    <div class="steps-action">
+      <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+        <span>Previous</span>
+      </button>
+      <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
+        <span>Next</span>
+      </button>
+      <button nz-button nzType="primary" (click)="finish()" *ngIf="current === 2">
+        <span>Done</span>
+      </button>
 </div>
+
+
 <nz-modal [(nzVisible)]="transferModalVisible" nzTitle="变动表" (nzOnCancel)="closeChangeTableModal()" nzWidth="900">
   <app-record></app-record>
 </nz-modal>

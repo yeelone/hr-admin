@@ -48,12 +48,12 @@
              
                  <nz-tab *ngFor="let month of tabs" [nzTitle]="month">
                   <div *ngIf="fields[month]">
-                      <nz-tabset [nzTabPosition]="'left'" [nzType]="'line'">
-                        <nz-tab *ngFor="let template of fields[month]['__order__']" [nzTitle]="template" class="tab">
+                      <nz-tabset [nzTabPosition]="'left'" [nzType]="'line'"  style="height:450px;">
+                        <nz-tab *ngFor="let template of fields[month]['__order__']" [nzTitle]="template" class="tab" style="margin:0;">
                           <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="onFieldChecked($event,template)">
                             <div nz-row>
                               <div nz-col nzSpan="8"  *ngFor="let field of fields[month][template]" >
-                                <label nz-checkbox nzValue="{{field}}" >{{field}}</label>
+                                <label nz-checkbox nzValue="{{field}}" style="color:white;">{{field}}</label>
                               </div>
                             </div>
                           </nz-checkbox-wrapper>

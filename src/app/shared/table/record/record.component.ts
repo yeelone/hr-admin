@@ -69,7 +69,9 @@ export class RecordComponent implements OnInit {
       for (let i=0;i<data.length;i++){
         let s = data[i].replace("：", ":");
         let line = s.split(":")
-        this.bodyString.push(line);
+        if (line.length === 2 ){
+          this.bodyString.push(line);
+        }
       }
     }
 }
