@@ -48,7 +48,7 @@ export class TemplateEditorComponent implements OnInit {
   
   changeMessage:string[] = []; //记录改变之后的提示信息
 
-  @ViewChild("FuncParamsTextarea") funcParamsTextarea;
+  @ViewChild("FuncParamsTextarea",{static:false}) funcParamsTextarea;
 
   constructor(private route:ActivatedRoute, private templateService:TemplateService,private msg: NzMessageService,private location: Location, ) { }
   
