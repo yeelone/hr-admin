@@ -16,6 +16,7 @@ export class GrouptreeComponent implements OnInit {
   ngOnInit() {
     this.getGroups()
   }
+  
   @Input()
   height:string = "450px";
   

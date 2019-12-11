@@ -17,10 +17,9 @@
 }
 
 :host ::ng-deep .ant-layout-content {
-    padding: 10px;
-    background: rgb(0, 21, 41);
     height: 90%;
     overflow: auto;
+    background: #e2e2e2 !important;
 }
 
 :host > ::ng-deep .ant-layout {
@@ -55,8 +54,13 @@
 }
 
 :host ::ng-deep  .ant-table-thead{
-    background: antiquewhite   !important;
+    background: lightgrey   !important;
 }
+
+:host ::ng-deep  .ant-table-thead th{
+    text-align: center !important;
+}
+
 :host ::ng-deep .ant-table-header{
     // height: 75px !important;
     // overflow: hidden  !important; 
@@ -82,7 +86,6 @@
 
 :host ::ng-deep .ant-tabs-bar{
     text-align: center;
-
 }
 
 :host ::ng-deep .ant-table-fixed-header .ant-table-scroll .ant-table-header{
@@ -114,6 +117,7 @@
 
 :host ::ng-deep .ant-layout{
     background: transparent !important;
+    height: 100% !important;
 }
 
 :host ::ng-deep .ant-card-head {
@@ -122,7 +126,8 @@
 
 :host ::ng-deep .ant-tabs .ant-tabs-left-bar .ant-tabs-tab-prev, .ant-tabs .ant-tabs-right-bar .ant-tabs-tab-prev span{
         color: white !important;
-    }
+}
+
 :host ::ng-deep .ant-tabs .ant-tabs-left-bar .ant-tabs-tab-next, .ant-tabs .ant-tabs-right-bar .ant-tabs-tab-next span{
         color: white !important;
-    }
+}
