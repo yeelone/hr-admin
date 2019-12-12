@@ -20,7 +20,6 @@
     background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
 
     a {
-        color: white;
         font-size: 18px;
         display: block;
         margin: auto;
@@ -36,11 +35,8 @@
 }
 
 .statistics-container {
-    color: white;
-
-    .tab {
-        color: #d57eeb !important;
-    }
+    background: white;    
+    color: black;
 }
 .statistics-btn{
     border: 0px;

@@ -2,7 +2,6 @@
     list-style: none;
     padding: 0 ; 
     width: 200px;
-    color: white;
 
     .tag-number {
         padding: 2rem;
@@ -37,8 +36,15 @@
     table{
             width: 700px;
             margin: auto;
-            color: white;
             border: 1px solid white;
+
+            thead{
+                background-image: linear-gradient(60deg, #29323c 0%, #485563 100%) !important;
+                th{
+                    text-align: center !important;
+                    color: blanchedalmond;
+                }
+            }
 
             th {
                 text-align: center;

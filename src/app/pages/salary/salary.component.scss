@@ -1,13 +1,22 @@
 .salary-module-list{
     list-style: none;
+    display: -webkit-box;
     display: flex;
     flex-wrap: wrap;
-    margin: 20px;
+    margin: 50px auto;
+    text-align: center;
+    width: 50%;
 
     li{
         width: 150px;
         margin-left: 10px;
         text-align: center;
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 1px 1px 10px #cccccc;
+        background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
         i {
             font-size: 55px;
         }

@@ -50,15 +50,16 @@
 }
 
 :host ::ng-deep .ant-table-body tbody{
-    background: linen !important;
+    background: white !important;
 }
 
 :host ::ng-deep  .ant-table-thead{
-    background: lightgrey   !important;
+    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
 }
 
 :host ::ng-deep  .ant-table-thead th{
     text-align: center !important;
+    color: blanchedalmond;
 }
 
 :host ::ng-deep .ant-table-header{
@@ -80,7 +81,7 @@
 }
 
 :host ::ng-deep .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab{
-    background: transparent;
+    background: black;
     color: white;
 }
 
