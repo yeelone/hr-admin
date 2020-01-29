@@ -47,9 +47,10 @@ export class LoginFormComponent implements OnInit {
         response => {
           if (response['code'] == 200 ) {
             this.msg.success("登录成功，进入系统");
-            console.log(response);
             let roles = response['data']['user']['roles'];
-            console.log(roles);
+            if ( !roles ) {
+              return;
+            }
             for(let i=0;i<roles.length;i++){
               if ( roles[i].name == '查询岗'){
                 this.returnUrl = '/statistics';

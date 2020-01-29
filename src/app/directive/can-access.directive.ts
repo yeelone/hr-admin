@@ -25,6 +25,7 @@ export class CanAccessDirective  implements OnInit, OnDestroy{
     
     let role: Role;
     if (Object.keys(currentUser).length ){
+      if ( !currentUser.roles ) return ;
       if (  currentUser.roles.length ){
         role = currentUser.roles[0];
       }

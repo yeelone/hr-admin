@@ -9,9 +9,11 @@ const config = {
     api: 'http://127.0.0.1:8080/api'
 }
 
-// for production 
+// for production 腾讯云
 // const config = {
-//     baseurl : 'http://jd96138.com'
+//     version: '1.1.1',
+//     baseurl : 'http://49.235.219.96:8080',
+//     api: 'http://49.235.219.96:8080/api'
 // }
 
 
