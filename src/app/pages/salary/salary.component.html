@@ -5,7 +5,7 @@
     </li>
 
     <li *appCanAccess="['SALARY_PROFILE_CUSTOM_CONFIG']">
-            <i nz-icon type="calculator" theme="twotone"></i>
+            <i nz-icon type="setting" theme="twotone"></i>
             <p> <a routerLink="/salary/config">特殊人员配置</a> </p>
     </li>
 
@@ -20,9 +20,10 @@
     </li>
 
      <li *appCanAccess="['SET_TAX']">
-            <button nz-button nzType="primary" (click)="createTaxModal(tplTitle2, tplContent2, tplFooter2)">
-                <span>个税起征点</span>
-            </button>
+            <i nz-icon nzType="account-book" nzTheme="outline"></i>
+            <p> <a class="button"  >
+                <span (click)="createTaxModal(tplTitle2, tplContent2, tplFooter2)">个税起征点</span>
+            </a></p>
             <ng-template #tplTitle2>
             <span>设定个税起征点</span>
             </ng-template>
@@ -61,9 +62,11 @@
     </li> 
 
      <li>
-            <button nz-button nzType="primary" (click)="createTaxModal(tplTitle3, tplContent3, tplFooter3)">
+            <i nz-icon nzType="account-book" ></i>
+            <p><a class="button" (click)="createTaxModal(tplTitle3, tplContent3, tplFooter3)">
                 <span>预扣率表</span>
-            </button>
+            </a>
+            </p>
             <ng-template #tplTitle3>
             <span>个人所得税税率表</span>
             </ng-template>

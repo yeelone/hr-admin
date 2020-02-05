@@ -1,13 +1,45 @@
 <div class="container">
-  <div class="health-container">
-  <ul>
-    <li *ngFor="let m of messages;">
-        {{m}}
-    </li>
-  </ul>
-</div>
 
-<div class="record-container">
+  <div class="row-container">
+      <div class="card" style="width: 150px;height: 150px;">
+          <div class="card-header">员工数</div>
+          <div class="card-content">
+            <span>{{summary.profile_count}}</span>
+          </div>
+        </div>
+        <div class="card" style="width: 150px;height: 150px;">
+          <div class="card-header">用户数</div>
+          <div class="card-content">
+              <span>{{summary.user_count}}</span>
+          </div>
+        </div>
+        <div class="card" style="width: 150px;height: 150px;">
+            <div class="card-header">群组数</div>
+            <div class="card-content">
+                <span>{{summary.group_count}}</span>
+            </div>
+          </div>
+        <div class="card" style="width: 150px;height: 150px;">
+            <div class="card-header">复核</div>
+            <div class="card-content">
+                <span>{{summary.audit_count}}</span>
+            </div>
+          </div>
+  </div>
+
+  <div class="health-container card">
+    <div class="card-header">系统运行状况</div>
+    <div class="card-content">
+        <ul>
+            <li *ngFor="let m of messages;">
+                {{m}}
+            </li>
+          </ul>
+    </div>
+  </div>
+
+<div class="record-container card">
+  <div class="card-header">访问状况</div>
   <nz-table #rowSelectionTable
         [nzData]="records" 
         [nzLoading]="loading" 
@@ -18,7 +50,7 @@
         [nzPageSize]="limit"
         [nzShowPagination]="pagination"
         [nzFrontPagination]="'false'"
-        [nzHideOnSinglePage]="'false'"
+        [nzHideOnSinglePage]="'true'"
         [nzShowSizeChanger]="pagination"
         (nzPageSizeChange)="nzPageSizeChange($event)"
         [(nzPageIndex)]="pageIndex"

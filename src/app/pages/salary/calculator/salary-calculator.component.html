@@ -1,4 +1,6 @@
 
+<div class="content">
+
  <nz-steps [nzCurrent]="current">
       <nz-step nzTitle="Finished"></nz-step>
       <nz-step nzTitle="In Progress"></nz-step>
@@ -74,6 +76,7 @@
         <span>Done</span>
       </button>
 </div>
+</div>
 
 
 <nz-modal [(nzVisible)]="transferModalVisible" nzTitle="变动表" (nzOnCancel)="closeChangeTableModal()" nzWidth="900">
@@ -136,3 +139,4 @@
        </li>
     </ul>
 </nz-modal>
+

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HealthService } from 'src/app/service/health.service';
 import { RecordService } from 'src/app/service/record.service';
 import { Record } from 'src/app/model/record';
+import { SummaryService } from 'src/app/service/summary.service';
+import { Summary } from 'src/app/model/summary';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,14 +21,16 @@ export class DashboardComponent implements OnInit {
   pageIndex = 1 ;
   limit = this.defaultLimit ; 
   offset = 0;
-  total:number ;
-  loading:boolean = false;
+  total: number ;
+  loading: boolean = false;
+  summary: Summary = new Summary();
 
-  constructor(private healthService:HealthService,private recordService:RecordService) { }
+  constructor(private healthService: HealthService, private summaryService: SummaryService, private recordService: RecordService) { }
 
   ngOnInit() {
     this.getData();
     this.getRecords();
+    this.getSummary();
   }
 
   getData():void{
@@ -40,6 +44,20 @@ export class DashboardComponent implements OnInit {
       }
      }) 
   }
+
+  getSummary(): void {
+    this.summaryService.getSummary()
+     .subscribe(response => {
+       console.log("response",response);
+      if (response['code'] !== 200 ) {
+        return ;
+      } else {
+        this.summary = response['data'];
+        console.log(this.summary);
+      }
+     });
+  }
+
 
   nzPageSizeChange(event:number):void {
     this.limit = event;

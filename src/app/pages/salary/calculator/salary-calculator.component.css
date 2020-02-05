@@ -1,7 +1,13 @@
+.content {
+  padding: 20px;
+}
+
 .container {
     width: 80%;
     margin: auto;
 }
+
+
 .download-btn {
     display: block;
     margin: 10px;
