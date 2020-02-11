@@ -1,3 +1,5 @@
+<div class="container">
+
 <div nz-row class="template-title-bar">
     <div nz-col nzSpan="6">
         <input nz-input placeholder="模板名" [(ngModel)]="templateName"  value="{{templateName}}">
@@ -43,8 +45,8 @@
                 </td>
 
                 <td><a (click)="openUpdateField(i)">{{item.key}}</a></td>
-                <td>
-                    <input nz-input nzSize="small" class="form-control" [(ngModel)]="item.name" (ngModelChange)="checkName(i,item)" value="{{item.name}}">
+                <td >
+                    <input nz-input nzSize="small" style="width: 300px;" class="form-control" [(ngModel)]="item.name" (ngModelChange)="checkName(i,item)" value="{{item.name}}">
                 </td>
                 <!-- <td>
                     <input nz-input nzSize="small" class="form-control" [(ngModel)]="item.alias" value="{{item.alias}}">
@@ -99,13 +101,38 @@
                         <button nz-button nzType="primary" (click)="changeMessageModalVisible=true" [nzLoading]="isConfirmLoading" *ngIf="editable">更新模板</button>
                      </span>
                       <ng-template #other_content2>
-                           <button nz-button nzType="primary" (click)="create()"  [nzLoading]="isConfirmLoading" *ngIf="editable">更新模板</button>
+                        <p>
+                        <button nz-button nzType="primary" (click)="create()"  [nzLoading]="isConfirmLoading" *ngIf="editable">更新模板</button>
+                        </p>   
                       </ng-template>
                 </ng-template>
             </span>
         </ng-template>
     </nz-table>
 </div>
+
+    <div class="description">
+        <ul>
+            <li>
+                <p class="subject">类型</p> 
+                <p class="item">1 基本:基本数据有职工姓名、身份证号、手机号等基本信息</p>
+                <p class="item">2 内建函数：系统内建了一些计算函数，如Range() 用来取上限和下限,TimeRange()用来计算时间范围内的值，比如说公司会有一年的5月-9月发放高温补贴，用TimeRange来自动判断5月到9月之间自动给工资加上指定数额</p>
+                <p class="item">3 固定输入值：有一些工资项是固定的，比如基本工资</p>
+                <p class="item">4 标签:标签是一个比较复杂的功能，系统根据员工的标签，取得相应标签值</p>
+                <p class="item">5 公式:比较好理解，就是根据公式来计算</p>
+                <p class="item">6 从其它模板取得:从名字就可以看得出来是从其它模板取得数据来进行填充</p>
+                <p class="item">7 数据取自上传:这一项主要是用于初始化数据的，有一些工资项，因为历史原因，每个人都不太一样，可用于从excel导入。</p>
+            </li>
+            <li>
+                <p class="subject">固定上传初始数据</p>
+                <p class="item">
+                    固定上传数据，就是从excel上传数据之后，系统会为从这个表里取得数据对系统进行数据初始化操作。只需要上传一次。
+                </p> 
+            </li>
+        </ul>
+    </div>
+</div>
+
 
 
 <!-- <div>

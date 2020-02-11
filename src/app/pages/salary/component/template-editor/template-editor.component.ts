@@ -12,7 +12,7 @@ import config from '../../../../config/config';
 @Component({
   selector: 'app-template-editor',
   templateUrl: './template-editor.component.html',
-  styleUrls: ['./template-editor.component.css']
+  styleUrls: ['./template-editor.component.scss']
 })
 export class TemplateEditorComponent implements OnInit {
   isCreateAction:boolean = true;

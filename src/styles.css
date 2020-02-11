@@ -47,3 +47,18 @@ app-root {
     margin-left: 5px;
     float: right;
 }
+
+.description{
+        margin: 20px;
+        background: antiquewhite;
+        padding: 10px;
+        border-radius: 20px;
+ }  
+.description  ul{
+            list-style: none;
+}
+
+.description   .subject{
+    font-size: 20px;
+    font-weight: bolder;
+}

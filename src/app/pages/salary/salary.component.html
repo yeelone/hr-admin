@@ -1,107 +1,130 @@
-<ul class="salary-module-list">
-    <li *appCanAccess="['CALCULATE_SALARY']">
-        <i nz-icon type="calculator" theme="twotone"></i>
-        <p> <a routerLink="/salary/calculate">工资计算</a> </p>
-    </li>
 
-    <li *appCanAccess="['SALARY_PROFILE_CUSTOM_CONFIG']">
-            <i nz-icon type="setting" theme="twotone"></i>
-            <p> <a routerLink="/salary/config">特殊人员配置</a> </p>
-    </li>
+<div class="container">
+        <ul class="salary-module-list">
+                <li *appCanAccess="['CALCULATE_SALARY']">
+                    <i nz-icon type="calculator" theme="twotone"></i>
+                    <p> <a routerLink="/salary/calculate">工资计算</a> </p>
+                </li>
+            
+                <li *appCanAccess="['SALARY_PROFILE_CUSTOM_CONFIG']">
+                        <i nz-icon type="setting" theme="twotone"></i>
+                        <p> <a routerLink="/salary/config">特殊人员配置</a> </p>
+                </li>
+            
+                 <li *appCanAccess="['SET_TEMPLATE']">
+                    <i nz-icon type="switcher" theme="twotone"></i>
+                    <p><a routerLink="/salary/template">配置模板</a></p>
+                </li>
+            
+                <li *appCanAccess="['UPDATE_ACCOUNT','CREATE_ACCOUNT']">
+                    <i nz-icon type="build" theme="twotone"></i>
+                    <p> <a routerLink="/salary/templateaccount">配置账套</a> </p>
+                </li>
+            
+                 <li *appCanAccess="['SET_TAX']">
+                        <i nz-icon nzType="account-book" nzTheme="outline"></i>
+                        <p> <a class="button"  >
+                            <span (click)="createTaxModal(tplTitle2, tplContent2, tplFooter2)">个税起征点</span>
+                        </a></p>
+                        <ng-template #tplTitle2>
+                        <span>设定个税起征点</span>
+                        </ng-template>
+                        <ng-template #tplContent2>
+                            <span>起征点</span>
+                            <input nz-input nzSize="small" type="number"  [(ngModel)]="taxConf.threshold" >
+            
+                            <nz-table #editRowTable  nzBordered nzSize="small"  [nzNoResult]="noresultTempalte">
+                                <thead>
+                                    <tr>
+                                    <th>级别</th>
+                                    <th>税率</th>
+                                    <th>速算扣除数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of taxConf.rating; let i = index;">
+                                    <td>
+                                        <input type="number" nz-input [(ngModel)]="taxConf.level[i]">
+                                    </td>
+                                    <td>
+                                        <input type="number" nz-input [(ngModel)]="taxConf.rating[i]">
+                                    </td>
+                                    <td>
+                                        <input type="number" nz-input [(ngModel)]="taxConf.deduction[i]">
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </nz-table>
+                            
+                        </ng-template>
+                     
+                        <ng-template #tplFooter2>
+                        <button nz-button nzType="primary" (click)="destroyTaxModal()" [nzLoading]="taxModalButtonLoading">提交保存</button>
+                        </ng-template>
+                </li> 
+            
+                 <li>
+                        <i nz-icon nzType="account-book" ></i>
+                        <p><a class="button" (click)="createTaxModal(tplTitle3, tplContent3, tplFooter3)">
+                            <span>预扣率表</span>
+                        </a>
+                        </p>
+                        <ng-template #tplTitle3>
+                        <span>个人所得税税率表</span>
+                        </ng-template>
+                        <ng-template #tplContent3>
+            
+                            <nz-table #editRowTable  nzBordered nzSize="small"  [nzNoResult]="noresultTempalte">
+                                <thead>
+                                    <tr>
+                                    <th>累计预扣预缴应纳税所得额别</th>
+                                    <th>预扣率</th>
+                                    <th>速算扣除数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of preDeductionRate.rating; let i = index;">
+                                    <td>
+                                        <input type="number" nz-input [(ngModel)]="preDeductionRate.level[i]">
+                                    </td>
+                                    <td>
+                                        <input type="number" nz-input [(ngModel)]="preDeductionRate.rating[i]">
+                                    </td>
+                                    <td>
+                                        <input type="number" nz-input [(ngModel)]="preDeductionRate.deduction[i]">
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </nz-table>
+                            
+                        </ng-template>
+                        <ng-template #tplFooter3>
+                        <button nz-button nzType="primary" (click)="destroyPreDeductionRateModal()" [nzLoading]="taxModalButtonLoading">提交保存</button>
+                        </ng-template>
+                </li> 
+            </ul>
 
-     <li *appCanAccess="['SET_TEMPLATE']">
-        <i nz-icon type="switcher" theme="twotone"></i>
-        <p><a routerLink="/salary/template">配置模板</a></p>
-    </li>
 
-    <li *appCanAccess="['UPDATE_ACCOUNT','CREATE_ACCOUNT']">
-        <i nz-icon type="build" theme="twotone"></i>
-        <p> <a routerLink="/salary/templateaccount">配置账套</a> </p>
-    </li>
+            <div class="description">
+                    <ul>
+                        <li>
+                            <p class="subject">第一步：配置模板</p> 
+                            <p class="item">配置模板，所有工资计算都是基于配置好的模板来进行计算。</p>
+                            <p class="subject">第二步：配置账套</p> 
+                            <p class="item">配置账套，即模板的有序组合，计算工资时会按设定的账套来对模板进行运算。</p>
+                            <p class="subject">第三步：特殊人员配置</p>
+                            <p class="item">特殊人员配置，即是特殊场景下会用到的功能。比如某员工，因为一些特殊的原因，需要在
+                                某一工资项目中增加或者减少指定的数额。特殊人员配置里包含了 + - × / 四个功能。
+                            </p>
+                            <p class="subject">第三步：计算工资</p>
+                            <p class="item">计算工资分为两步，第一步，系统为提示你当前月份有哪些变动，操作员要一一核对变动信息是否
+                                正确，正确的话即可开始计算工资。如果模板配置是正确的话，工资计算将是全自动的。
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+</div>
 
-     <li *appCanAccess="['SET_TAX']">
-            <i nz-icon nzType="account-book" nzTheme="outline"></i>
-            <p> <a class="button"  >
-                <span (click)="createTaxModal(tplTitle2, tplContent2, tplFooter2)">个税起征点</span>
-            </a></p>
-            <ng-template #tplTitle2>
-            <span>设定个税起征点</span>
-            </ng-template>
-            <ng-template #tplContent2>
-                <span>起征点</span>
-                <input nz-input nzSize="small" type="number"  [(ngModel)]="taxConf.threshold" >
-
-                <nz-table #editRowTable  nzBordered nzSize="small"  [nzNoResult]="noresultTempalte">
-                    <thead>
-                        <tr>
-                        <th>级别</th>
-                        <th>税率</th>
-                        <th>速算扣除数</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let data of taxConf.rating; let i = index;">
-                        <td>
-                            <input type="number" nz-input [(ngModel)]="taxConf.level[i]">
-                        </td>
-                        <td>
-                            <input type="number" nz-input [(ngModel)]="taxConf.rating[i]">
-                        </td>
-                        <td>
-                            <input type="number" nz-input [(ngModel)]="taxConf.deduction[i]">
-                        </td>
-                        </tr>
-                    </tbody>
-                    </nz-table>
-                
-            </ng-template>
-         
-            <ng-template #tplFooter2>
-            <button nz-button nzType="primary" (click)="destroyTaxModal()" [nzLoading]="taxModalButtonLoading">提交保存</button>
-            </ng-template>
-    </li> 
-
-     <li>
-            <i nz-icon nzType="account-book" ></i>
-            <p><a class="button" (click)="createTaxModal(tplTitle3, tplContent3, tplFooter3)">
-                <span>预扣率表</span>
-            </a>
-            </p>
-            <ng-template #tplTitle3>
-            <span>个人所得税税率表</span>
-            </ng-template>
-            <ng-template #tplContent3>
-
-                <nz-table #editRowTable  nzBordered nzSize="small"  [nzNoResult]="noresultTempalte">
-                    <thead>
-                        <tr>
-                        <th>累计预扣预缴应纳税所得额别</th>
-                        <th>预扣率</th>
-                        <th>速算扣除数</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let data of preDeductionRate.rating; let i = index;">
-                        <td>
-                            <input type="number" nz-input [(ngModel)]="preDeductionRate.level[i]">
-                        </td>
-                        <td>
-                            <input type="number" nz-input [(ngModel)]="preDeductionRate.rating[i]">
-                        </td>
-                        <td>
-                            <input type="number" nz-input [(ngModel)]="preDeductionRate.deduction[i]">
-                        </td>
-                        </tr>
-                    </tbody>
-                    </nz-table>
-                
-            </ng-template>
-            <ng-template #tplFooter3>
-            <button nz-button nzType="primary" (click)="destroyPreDeductionRateModal()" [nzLoading]="taxModalButtonLoading">提交保存</button>
-            </ng-template>
-    </li> 
-
-</ul>
 
    <ng-template #noresultTempalte>
             </ng-template> 

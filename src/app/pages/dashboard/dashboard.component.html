@@ -1,28 +1,28 @@
 <div class="container">
 
   <div class="row-container">
-      <div class="card" style="width: 150px;height: 150px;">
+      <div class="card card-1" style="width: 150px;height: 100px;">
           <div class="card-header">员工数</div>
           <div class="card-content">
             <span>{{summary.profile_count}}</span>
           </div>
         </div>
-        <div class="card" style="width: 150px;height: 150px;">
+        <div class="card card-2" style="width: 150px;height: 100px;">
           <div class="card-header">用户数</div>
           <div class="card-content">
               <span>{{summary.user_count}}</span>
           </div>
         </div>
-        <div class="card" style="width: 150px;height: 150px;">
+        <div class="card card-3" style="width: 150px;height: 100px;">
             <div class="card-header">群组数</div>
             <div class="card-content">
                 <span>{{summary.group_count}}</span>
             </div>
           </div>
-        <div class="card" style="width: 150px;height: 150px;">
+        <div class="card card-4" style="width: 150px;height: 100px;">
             <div class="card-header">复核</div>
             <div class="card-content">
-                <span>{{summary.audit_count}}</span>
+                <span style="color:red;">{{summary.audit_count}}</span>
             </div>
           </div>
   </div>
@@ -30,8 +30,8 @@
   <div class="health-container card">
     <div class="card-header">系统运行状况</div>
     <div class="card-content">
-        <ul>
-            <li *ngFor="let m of messages;">
+        <ul >
+            <li *ngFor="let m of messages;" style="color:black">
                 {{m}}
             </li>
           </ul>
