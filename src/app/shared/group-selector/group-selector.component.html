@@ -4,6 +4,17 @@
       [nzShowSearch]="true"
       (ngModelChange)="onChanges($event)">
 </nz-cascader>
+
+<!-- <ng-template #renderTpl let-labels="labels" let-selectedOptions="selectedOptions">
+      <ng-container *ngFor="let label of labels; let i = index; let isLast = last">
+            <span *ngIf="!isLast"> {{label}}/ </span>
+            <span *ngIf="isLast">
+            {{label}}
+            </span>
+      </ng-container>
+</ng-template> -->
+
+
  <!-- [nzTriggerAction]="'hover'"
       [nzExpandTrigger]="'hover'" -->
 <!-- <nz-tree-select

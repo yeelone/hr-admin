@@ -15,44 +15,42 @@ import { Profile } from 'src/app/model/profile';
 })
 export class OrganizationComponent implements OnInit {
 
-  topGroups:Group[] = [];
-  groups:Group[] = [];
-  total:number ;
-  selectedGroup:Group;
-  selectedGroupText:String;
-  selectedTags:Tag[] = [];
-  selectedTopTag:Tag;
-  profiles:Profile[] = [];
+  topGroups: Group[] = [];
+  groups: Group[] = [];
+  total: number ;
+  selectedGroup: Group;
+  selectedGroupText: String;
+  selectedTags: Tag[] = [];
+  selectedTopTag: Tag;
+  profiles: Profile[] = [];
 
-  parentTagMap = {} ; //getGroup获取到的关联标签都是子标签，在显示出来时希望能再进一步显示其父标签的名字
-  checkedResult:any = {};
-  checkedTagTextList:string[] = [];
-  defaultChecked:Tag[] = [];
+  parentTagMap = {} ; // getGroup获取到的关联标签都是子标签，在显示出来时希望能再进一步显示其父标签的名字
+  checkedResult: any = {};
+  checkedTagTextList: string[] = [];
+  defaultChecked: Tag[] = [];
 
   visible = false;
   profileDrawerVisible = false;
-  currentGroupIndex:number ;
+  currentGroupIndex: number ;
 
-  //modal 
+  // modal 
   isOkLoading = false;
-  modalVisible = false ; 
-  importModalVisible = false; 
-  tagModalVisible = false; 
-  
-  //
-  importType = "employee"  //判断上传的类型，employee 表示导入人员表，coefficient表示导入系数表
+  modalVisible = false ;
+  importModalVisible = false;
+  tagModalVisible = false;
 
-  errFile: string = ""; 
-  //upload 
+  importType = 'employee'; // 判断上传的类型，employee 表示导入人员表，coefficient表示导入系数表
+
+  errFile = '';
   uploading = false;
   fileList: UploadFile[] = [];
-  loading:boolean = false; 
+  loading = false;
 
-  rules:string[] = [];
-  ruleModalVisible:boolean = false;
+  rules: string[] = [];
+  ruleModalVisible = false;
 
   constructor(private groupService: GroupService,
-              private tagService:TagsService,
+              private tagService: TagsService,
               private modalService: NzModalService,
               public msg: NzMessageService,
               private uploadService: UploadService) { }
@@ -61,95 +59,94 @@ export class OrganizationComponent implements OnInit {
     this.getTopGroup();
   }
 
-  getTopGroup():void {
+  getTopGroup(): void {
     this.loading = true ;
     this.groupService.getTopGroup()
      .subscribe(response => {
-      if (response["code"] !== 200 ){
-        alert("获取列表失败，失败信息:" + response["message"]);
-        console.log("group.components getGroups failed , 获取列表失败，失败信息:" + response["message"])
-        return ; 
-      }else{
-        this.topGroups = response["data"]["groupList"].sort(this.compare("code"));
+      if (response['code'] !== 200 ) {
+        alert('获取列表失败，失败信息:' + response['message']);
+        console.log('group.components getGroups failed , 获取列表失败，失败信息:' + response['message'])
+        return ;
+      } else {
+        this.topGroups = response['data']['groupList'].sort(this.compare('code'));
        this.getGroups(0);
-       this.total = response["data"]["totalCount"];
+       this.total = response['data']['totalCount'];
       }
-      this.loading = false ; 
+      this.loading = false ;
 
-     }) 
+     });
  }
 
-  compare(property){
-    return function(obj1,obj2){
-      var value1 = obj1[property];
-      var value2 = obj2[property];
+  compare(property) {
+    return function(obj1,obj2) {
+      const value1 = obj1[property];
+      const value2 = obj2[property];
       return value1 - value2;     // 升序
-    }
+    };
   }
 
-  getGroups(index:number):void {
-    this.loading= true ; 
+  getGroups(index: number): void {
+    this.loading = true ;
     this.currentGroupIndex = index;
-    let id = this.topGroups[index].id;
-    
+    const id = this.topGroups[index].id;
+
      this.groupService.getGroupByParent(id)
       .subscribe(response => {
-        if (response["code"] !== 200 ){
-          alert("获取列表失败，失败信息:" + response["message"]);
-          console.log("group.components getGroups failed , 获取列表失败，失败信息:" + response["message"])
-          return ; 
-        }else{
-          this.groups = response["data"]["groupList"].sort(this.compare("code"));
-          this.total = response["data"]["totalCount"];
+        if (response['code'] !== 200 ) {
+          alert('获取列表失败，失败信息:' + response['message']);
+          console.log('group.components getGroups failed , 获取列表失败，失败信息:' + response['message'])
+          return ;
+        } else {
+          this.groups = response['data']['groupList'].sort(this.compare('code'));
+          this.total = response['data']['totalCount'];
         }
-        this.loading = false ; 
-      }) 
+        this.loading = false ;
+      });
   }
 
-  getGroup(id:number):void {
-    this.isOkLoading= true ; 
+  getGroup(id: number): void {
+    this.isOkLoading = true ;
     this.rules = [];
     this.groupService.getGroup(id)
       .subscribe(response => {
-        if (response["code"] !== 200 ){
-          alert("获取指定的组信息失败，失败信息:" + response["message"]);
-          console.log("group.components getGroup failed , 获取指定的组信息失败:" + response["message"])
-          return ; 
-        }else{
-          this.selectedGroup = response["data"]["group"];
-          this.rules = response["data"]["rules"] || []; 
+        if (response['code'] !== 200 ){
+          alert('获取指定的组信息失败，失败信息:' + response['message']);
+          return ;
+        } else {
+          this.selectedGroup = response['data']['group'];
+          this.rules = response['data']['rules'] || [];
         }
-        this.isOkLoading = false ; 
-      }) 
+        this.isOkLoading = false ;
+      });
   }
 
-  renderChildGroup(i:number):void {
+  renderChildGroup(i: number): void {
     this.getGroups(i);
   }
 
-  openEditForm(g:Group):void {
+  openEditForm(g: Group): void {
     this.selectedGroup = g ;
     this.visible = true;
   }
 
-  closeEditForm():void{
-    this.visible = false ; 
+  closeEditForm(): void {
+    this.visible = false ;
+    this.getGroups(this.currentGroupIndex);
   }
 
-  closeProfileEditForm():void{
+  closeProfileEditForm(): void {
     this.profileDrawerVisible = false;
   }
 
-  checkProfile(g:Group):void{
-    this.profileDrawerVisible = true; 
+  checkProfile(g: Group): void {
+    this.profileDrawerVisible = true;
     this.selectedGroup = g ;
-   
   }
-  
-  showDeleteConfirm(id:number,name:string): void {
+
+  showDeleteConfirm(id: number, name: string): void {
     this.modalService.confirm({
-      nzTitle     : '你确定要删除分类群组'+name+'吗?',
-      nzContent   : '<b style="color: red;"> 分类群组: '+ name +'</b>',
+      nzTitle     : '你确定要删除分类群组' + name + '吗?',
+      nzContent   : '<b style="color: red;"> 分类群组: ' + name + '</b>',
       nzOkText    : 'Yes',
       nzOkType    : 'danger',
       nzOkLoading  : this.isOkLoading ,
@@ -158,12 +155,12 @@ export class OrganizationComponent implements OnInit {
         this.groupService.deleteGroup(id)
             .subscribe(response => {
               this.isOkLoading = false;
-              if ( response["code"] != 200 ) {
+              if ( response['code'] !== 200 ) {
                 reject();
-              } 
+              }
               this.getGroups(this.currentGroupIndex);
               resolve();
-            })
+            });
         }).catch(() => console.log('Oops errors!')),
       nzCancelText: 'No',
       nzOnCancel  : () => console.log('Cancel')
@@ -178,41 +175,41 @@ export class OrganizationComponent implements OnInit {
   //     })
   // }
 
-  lock(id,$event){
-    if ($event){
+  lock(id, $event) {
+    if ($event) {
       this.groupService.lockGroup(id)
-        .subscribe(response => {})
-    }else{
+        .subscribe(response => {});
+    } else {
       this.groupService.unlockGroup(id)
-        .subscribe(response => {})
+        .subscribe(response => {});
     }
   }
 
-  invalid(id,$event){
-    if ($event){
+  invalid(id,$event) {
+    if ($event) {
       this.groupService.invalidGroup(id)
-        .subscribe(response => {})
-    }else{
+        .subscribe(response => {});
+    } else {
       this.groupService.validGroup(id)
-        .subscribe(response => {})
+        .subscribe(response => {});
     }
   }
 
   handleUpload(): void {
-    this.errFile = "";
+    this.errFile = '';
     const formData = new FormData();
     this.fileList.forEach((file: any) => {
       formData.append('file', file);
     });
 
     this.uploading = true;
-    if ( this.importType == "employee") {
+    if ( this.importType === 'employee') {
       this.uploadService.uploadGroups(formData)
       .subscribe(
         (event: {}) => {
           this.uploading = false;
-          if ( event["data"]["file"].length ){
-            this.errFile =  config.baseurl + "/api/download/"+ event["data"]["file"];
+          if ( event['data']['file'].length ) {
+            this.errFile =  config.baseurl + '/api/download/' + event['data']['file'];
           }
           this.msg.success('upload successfully.');
         },
@@ -221,13 +218,13 @@ export class OrganizationComponent implements OnInit {
           this.msg.error('upload failed.');
         }
       );
-    }else{
+    } else {
        this.uploadService.uploadGroupTags(formData)
         .subscribe(
           (event: {}) => {
             this.uploading = false;
-            if ( event["data"]["file"].length ){
-              this.errFile =  config.baseurl + "/api/download/"+ event["data"]["file"];
+            if ( event['data']['file'].length ) {
+              this.errFile =  config.baseurl + '/api/download/' + event['data']['file'];
             }
             this.msg.success('upload successfully.');
           },
@@ -237,132 +234,127 @@ export class OrganizationComponent implements OnInit {
           }
         );
     }
-    
   }
-  
   beforeUpload = (file: UploadFile): boolean => {
     this.fileList.push(file);
     return false;
   }
   closeImportModal(){
-    this.importModalVisible = false ; 
+    this.importModalVisible = false ;
   }
 
   openImportModal(){
-    this.importType = "employee";
-    this.importModalVisible = true ; 
+    this.importType = 'employee';
+    this.importModalVisible = true ;
   }
 
-  openImportTagsModal(){
-    this.importType = "tags";
-    this.importModalVisible = true ; 
+  openImportTagsModal() {
+    this.importType = 'tags';
+    this.importModalVisible = true ;
   }
 
-  onSelected(checked:any):void{
+  onSelected(checked: any): void {
     this.checkedResult = checked;
   }
 
-  onSelectedTop(tag:Tag):void{
+  onSelectedTop(tag: Tag): void{
     this.selectedTopTag = tag ;
     this.defaultChecked = [];
-    if ( !this.selectedGroup.tags) return ;
-    for(let i=0;i < this.selectedGroup.tags.length;i++) {
+    if ( !this.selectedGroup.tags ) { return ; }
+    for (let i = 0; i < this.selectedGroup.tags.length; i++) {
         this.defaultChecked.push(this.selectedGroup.tags[i]);
     }
   }
 
-  openTagModal(group:Group):void{
+  openTagModal(group: Group): void {
     this.selectedGroup = group ;
     this.tagService.getTopTags()
       .subscribe(
         response => {
-           if (response["code"] !== 200 ){
-            console.log("获取系数表失败，请联系系统管理员" + response["message"] );
-            return ; 
+           if (response['code'] !== 200 ){
+            console.log('获取系数表失败，请联系系统管理员' + response['message'] );
+            return ;
           }
-          let tags = response["data"]["tagList"];
-          for (let i=0;i < response["data"]["tagList"].length; i++){
+          const tags = response['data']['tagList'];
+          for (let i = 0; i < response['data']['tagList'].length; i++) {
             this.parentTagMap[tags[i].id] = tags[i].name;
           }
         }
-      )
-
+      );
 
     this.getGroup(+this.selectedGroup.id);
     this.tagModalVisible = true ;
   }
 
-  closeTagModal():void{
+  closeTagModal(): void {
     this.tagModalVisible = false;
   }
 
-  submitTags():void{
+  submitTags(): void {
     this.isOkLoading = true;
-    let  tags = this.selectedGroup.tags;
-    if ( tags ){
-      for(let i=0;i < tags.length;i++) {
+    const tags = this.selectedGroup.tags;
+    if ( tags ) {
+      for (let i = 0; i < tags.length; i++) {
         if ( this.checkedResult.hasOwnProperty( tags[i].id) ) {
           continue;
         }
         this.checkedResult[tags[i].id] = true ;
       }
     }
-   
-    let ids:number[] = [];
+    let ids: number[] = [];
     const keys =  Object.keys(this.checkedResult);
-    for ( let i=0 ;i < keys.length;i++){ //string 要转成 number 
-      if ( this.checkedResult[keys[i]] ){
+    for ( let i = 0 ; i < keys.length; i++) { // string 要转成 number 
+      if ( this.checkedResult[keys[i]] ) {
           ids.push(+keys[i]);
       }
     }
     this.groupService.addGroupTagRelationship(+this.selectedGroup.id, ids,this.rules)
       .subscribe(response =>{
-          if (response["code"] !== 200 ){
-            alert("更新档案与系数关联，请联系系统管理员" + response["message"] );
-            console.log("更新档案与系数关联，请联系系统管理员" + response["message"] );
-            return ; 
+          if (response['code'] !== 200 ){
+            alert('更新档案与系数关联，请联系系统管理员' + response['message'] );
+            console.log('更新档案与系数关联，请联系系统管理员' + response['message'] );
+            return ;
           }
           this.getGroup(+this.selectedGroup.id);
           this.isOkLoading = false;
-      })
+      });
   }
 
-  removeRule(index:number) {
+  removeRule(index: number) {
     var _temp = this.rules.slice();
     _temp.splice(index, 1);
     this.rules =  _temp;
   }
-  
-  openRuleModal():void{
+
+  openRuleModal(): void {
     this.ruleModalVisible = true ;
   }
 
-  closeRuleModal():void{
-    this.ruleModalVisible = false ; 
+  closeRuleModal(): void {
+    this.ruleModalVisible = false ;
   }
 
-
-  submitRules():void{
-    let r:string[] = [];
+  submitRules(): void {
+    let r: string[] = [];
     if (this.rules.length > 0 ) {
       r = this.rules.concat();
     }
-    
-    let parentGroup = "";
-    for (let i=0;i < this.topGroups.length;i++){
-      if ( +this.topGroups[i].id == this.selectedGroup.parent){
+
+    let parentGroup = '';
+    for (let i = 0; i < this.topGroups.length; i++) {
+      if ( +this.topGroups[i].id === this.selectedGroup.parent) {
         parentGroup = this.topGroups[i].name;
       }
-    } 
-    for ( let i=0 ;i< this.checkedTagTextList.length;i++){  
-      let text = parentGroup + "." +this.selectedGroup.name + ", " + this.selectedGroupText + "," + this.checkedTagTextList[i] ;
+    }
+    for ( let i = 0 ; i < this.checkedTagTextList.length; i++) {
+      const text = parentGroup + '.' + this.selectedGroup.name + ', ' + this.selectedGroupText + ',' + this.checkedTagTextList[i] ;
       r.push(text);
     }
 
     this.rules = r ;
   }
 
-  onTagSelected(checkedText:string[]):void{
+  onTagSelected(checkedText: string[]): void {
     this.checkedTagTextList = checkedText;
   }
 
@@ -370,32 +362,32 @@ export class OrganizationComponent implements OnInit {
   //   this.selectedTopTag = tag ;
   // }
 
-  onGroupSelected(event:string):void{
-    this.selectedGroupText = event ; 
+  onGroupSelected(event: string): void {
+    this.selectedGroupText = event ;
   }
 
-  onTagClose(index:number):void{
-    
+  onTagClose(index: number): void {
+
     this.isOkLoading = true;
     let tags = this.selectedGroup.tags.concat();
-    tags.splice(index,1);
-   
-    let ids:number[] = [];
-    for ( let i=0 ;i < tags.length;i++){ //string 要转成 number 
+    tags.splice(index, 1);
+
+    let ids: number[] = [];
+    for ( let i = 0 ; i < tags.length; i++) { // string 要转成 number 
         ids.push(+tags[i].id);
     }
-    this.groupService.addGroupTagRelationship(+this.selectedGroup.id, ids,this.rules)
+    this.groupService.addGroupTagRelationship(+this.selectedGroup.id, ids, this.rules)
       .subscribe(response =>{
-          if (response["code"] !== 200 ){
-            alert("更新档案与系数关联，请联系系统管理员" + response["message"] );
-            console.log("更新档案与系数关联，请联系系统管理员" + response["message"] );
-            return ; 
+          if (response['code'] !== 200 ){
+            alert('更新档案与系数关联，请联系系统管理员' + response['message'] );
+            console.log('更新档案与系数关联，请联系系统管理员' + response['message'] );
+            return ;
           }
-          
+
           this.getGroup(+this.selectedGroup.id);
           this.isOkLoading = false;
-          alert("已移除该标签");
-      })
+          alert('已移除该标签');
+      });
   }
 
 }

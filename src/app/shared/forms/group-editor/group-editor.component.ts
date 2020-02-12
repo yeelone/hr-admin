@@ -14,25 +14,23 @@ export class GroupEditorComponent implements OnInit {
   code = new FormControl('0');
   parent = new FormControl('');
   coefficient = new FormControl('0');
-  selectedGroup:number[];
+  selectedGroup: number[];
   isSubmiting = false;
 
   isCreateAction = false;
-  group:Group ;
+  group: Group ;
   // @Input()
   // group:Group
-  
   @Input()
-  set defaultGroup(group:Group){
+  set defaultGroup(group: Group) {
     if ( !group ) {
       this.isCreateAction = true;
-      this.name.setValue("");
-      this.code.setValue("");
-      this.parent.setValue("");
-      this.coefficient.setValue("");
+      this.name.setValue('');
+      this.code.setValue('');
+      this.parent.setValue('');
+      this.coefficient.setValue('');
       return ;
     }
-    
     this.group = group;
     this.isCreateAction = false;
 
@@ -41,26 +39,23 @@ export class GroupEditorComponent implements OnInit {
     this.parent.setValue(group.parent);
     this.coefficient.setValue(group.coefficient);
 
-    let levels = group.levels;
-    let groups:number[] = []
-    for (let v of levels.split(".")){
-      console.log("v",v)
-      if ( v ){
-        groups.push(+v);//string to number 
+    const levels = group.levels;
+    const groups: number[] = [];
+    for (const v of levels.split('.')) {
+      if ( v ) {
+        groups.push(+v); // string to number
       }
     }
-    console.log("groups",groups)
     this.selectedGroup = groups;
   }
   constructor(private groupService: GroupService) { }
 
   ngOnInit() {
   }
-  
-  getSelectedValue(groups:Group[]){
+  getSelectedValue(groups: Group[]) {
     this.selectedGroup = [];
-    for (let g of groups){
-        this.selectedGroup.push(+g.id);//string to number 
+    for (const g of groups) {
+        this.selectedGroup.push(+g.id); // string to number 
     }
   }
 
@@ -92,40 +87,36 @@ export class GroupEditorComponent implements OnInit {
    
   // }
 
-  submitForm():void{
-    let g = new Group();
+  submitForm(): void {
+    const g = new Group();
     g.name = this.name.value;
     g.code = +this.code.value;
     g.coefficient = +this.coefficient.value;
-    
     if (this.selectedGroup) {
-      g.parent = this.selectedGroup[this.selectedGroup.length-1];
-      console.log(this.selectedGroup[this.selectedGroup.length-1])
-    }else{
+      g.parent = this.selectedGroup[this.selectedGroup.length - 1];
+    } else {
       g.parent = 0 ;
     }
     this.isSubmiting = true;
 
-    if ( this.isCreateAction ){
-      console.log(g);
+    if ( this.isCreateAction ) {
       this.groupService.createGroup(g)
-      .subscribe(response => { 
-         if (response["code"] != 200 ){
-          alert("创建发生错误，错误信息请参考:" + response["message"] +  "," +  response["data"]);
+      .subscribe(response => {
+         if (response['code'] !== 200 ){
+          alert('创建发生错误，错误信息请参考:' + response['message'] +  ',' +  response['data']);
         }
-        this.isSubmiting = false; 
+        this.isSubmiting = false;
       });
-    }else{
+    } else {
       g.id = this.group.id;
       this.groupService.updateGroup(g)
-      .subscribe(response => { 
-        if (response["code"] != 200 ){
-          alert("更新发生错误，错误信息请参考:" + response["message"]+  "," +  response["data"]);
-          return ; 
+      .subscribe(response => {
+        if (response['code'] !== 200 ) {
+          alert('更新发生错误，错误信息请参考:' + response['message'] +  ',' +  response['data']);
+          return ;
         }
-        this.isSubmiting = false; 
+        this.isSubmiting = false;
       });
     }
-    
   }
 }
