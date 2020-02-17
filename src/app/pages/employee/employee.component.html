@@ -6,7 +6,7 @@
         <nz-content style="padding:0 50px;margin: 10px;">
             <div class="table-operations table-action-bar">
                 <nz-input-group nzSearch [nzSuffix]="suffixIconButton" style="width: 200px">
-                    <input type="text"  nz-input placeholder="输入名字进行搜索" [(ngModel)]="searchValue" (keyup)="search('name')">
+                    <input type="text"  nz-input placeholder="输入名字进行搜索" [(ngModel)]="searchValue" (keyup.enter)="search('name')">
                 </nz-input-group>
                 <ng-template #suffixIconButton>
                     <button nz-button nzType="primary" nzSearch  (click)="search('name')"><i nz-icon type="search"></i></button>
@@ -88,16 +88,34 @@
 </nz-modal>
 
 <nz-modal [(nzVisible)]="importModalVisible" nzTitle="批量导入" (nzOnCancel)="closeImportModal()" (nzOnOk)="closeImportModal()">
-    <nz-upload
-        [(nzFileList)]="fileList"
-        [nzBeforeUpload]="beforeUpload">
-        <button nz-button>
-          <i class="anticon anticon-upload"></i><span>选择上传文件</span>
-        </button>
-    </nz-upload>
+    
+    <p>
+        注意：<br>
+        一、上传的模板表格名必须为 <span style="color:red">Sheet1</span>；<br>
+        二、上传的要素必须与系统一一对应<br>
+        三、必须第一行开始;<br>
+    </p>
+    <p>
+            <nz-upload
+            [(nzFileList)]="fileList"
+            [nzBeforeUpload]="beforeUpload">
+            <button nz-button>
+              <i class="anticon anticon-upload"></i><span>选择上传文件</span>
+            </button>
+        </nz-upload>
+        <a href="{{defaultTemplateFile}}" > 查看导入模板 </a>
+    </p>
     <button nz-button [nzType]="'primary'" [nzLoading]="uploading" (click)="handleUpload()" [disabled]="fileList.length == 0" style="margin-top: 16px">
             {{ uploading ? 'Uploading' : 'Start Upload' }}
           </button>
+    
+    <div class="error-msg-container" *ngIf="importErrorFile">
+        <p>导入失败:</p>
+        <p>{{importErrorMsg}}</p>
+
+        <p> <a  href="{{importErrorFile}}" > 下载 </a></p>
+    </div>
+
 </nz-modal>
 
 <nz-modal [(nzVisible)]="moveModalVisible" nzTitle="调动" (nzOnCancel)="closeMoveModal()" (nzOnOk)="moveProfile()" [nzOkLoading]="moveLoading">

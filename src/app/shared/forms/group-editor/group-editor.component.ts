@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input,SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { GroupService } from '../../../service/group.service';
 import { Group } from '../../../model/group';
@@ -16,11 +16,10 @@ export class GroupEditorComponent implements OnInit {
   coefficient = new FormControl('0');
   selectedGroup: number[];
   isSubmiting = false;
+  isDeleting = false;
 
   isCreateAction = false;
   group: Group ;
-  // @Input()
-  // group:Group
   @Input()
   set defaultGroup(group: Group) {
     if ( !group ) {
@@ -48,6 +47,10 @@ export class GroupEditorComponent implements OnInit {
     }
     this.selectedGroup = groups;
   }
+
+  @Output()
+  afterDelete: EventEmitter<boolean> = new EventEmitter();
+
   constructor(private groupService: GroupService) { }
 
   ngOnInit() {
@@ -84,8 +87,23 @@ export class GroupEditorComponent implements OnInit {
   //     }
   //   }
   //   this.selectedGroup = groups;
-   
   // }
+  deleteGroup(): void {
+
+    if ( this.group ) {
+      this.isDeleting = true;
+      this.groupService.deleteGroup(+this.group.id)
+      .subscribe(response => {
+         if (response['code'] !== 200 ) {
+          alert('删除群组发生错误，错误信息请参考:' + response['message'] +  ',' +  response['data']);
+        } else {
+          alert('删除成功');
+          this.afterDelete.emit(true);
+        }
+        this.isDeleting = false;
+      });
+    }
+  }
 
   submitForm(): void {
     const g = new Group();

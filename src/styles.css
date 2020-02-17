@@ -62,3 +62,11 @@ app-root {
     font-size: 20px;
     font-weight: bolder;
 }
+
+.error-msg-container {
+    background: #c0392b;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    color: white;
+}

@@ -15,30 +15,30 @@ import * as moment from 'moment';
 export class SalaryCalculatorComponent implements OnInit {
   list: SalaryTemplateAccount[];
   selectedMonth:any ;
-  selectedTemplateAccount:SalaryTemplateAccount;
-  isSpinning:boolean = false ;
-  isExporting:boolean = false ;
-  done:boolean = false ;
-  disabled:boolean = true ;
-  transferModalVisible:boolean = false;
-  canStart:boolean = false ;  //是否可以开始计算，在点击开始按钮时，会判断账套中的模板是否存在依赖于操作人员上传的数据 ，如果存在，则弹出对话框请求用户先上传数据 。
+  selectedTemplateAccount: SalaryTemplateAccount;
+  isSpinning = false ;
+  isExporting = false ;
+  done = false ;
+  disabled = true ;
+  transferModalVisible = false;
+  canStart = false ;  // 是否可以开始计算，在点击开始按钮时，会判断账套中的模板是否存在依赖于操作人员上传的数据 ，如果存在，则弹出对话框请求用户先上传数据 。
 
-  downloadFile:string ;
-  templateUploadVisible:boolean = false ; 
-  //处理上传
+  downloadFile: string ;
+  templateUploadVisible = false ;
+  // 处理上传
   shouldUpload = [];
-  uploadModalVisible:boolean = false;
-  uploading:boolean = false;
-  uploadFinish:boolean = false;  
+  uploadModalVisible = false;
+  uploading = false;
+  uploadFinish = false;
   fileList: UploadFile[] = [];
-  uploadedFile:string = "";
-  downloadTemplateFile:string = "";
-  defaultTemplateFile:string = "";
+  uploadedFile = '';
+  downloadTemplateFile = '';
+  defaultTemplateFile = '';
 
-  previewModalVisible:boolean = false;
+  previewModalVisible = false;
   previewData = [];
 
-  errFile:string = "";
+  errFile = '';
 
   current = 0;
 
@@ -86,7 +86,7 @@ export class SalaryCalculatorComponent implements OnInit {
 
   ngOnInit() {
     this.get();
-    this.defaultTemplateFile = config.baseurl +"/api/download/template/工资导出模板.xlsx"; 
+    this.defaultTemplateFile = config.baseurl + '/api/download/template/工资导出模板.xlsx';
   }
 
   get(){

@@ -10,5 +10,8 @@
 }
 
 .transfer-content{
-    color:white;
+        font-size: larger;
+        background: antiquewhite;
+        padding: 10px;
+        border-radius: 5px;
 }

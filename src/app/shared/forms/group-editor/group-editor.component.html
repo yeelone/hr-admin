@@ -28,7 +28,7 @@
         <div nz-row>
             <div nz-col nzSpan="24">
                 <nz-form-item>
-                    <nz-form-label>父分类</nz-form-label>
+                    <nz-form-label>父分类（不选择的话会生成顶层父类 ）</nz-form-label>
                     <nz-form-control>
                         <app-group-selector  (selectedValue)="getSelectedValue($event)" [defaultValues]="selectedGroup"></app-group-selector>
                     </nz-form-control>
@@ -41,6 +41,7 @@
                     <nz-form-control [nzSpan]="12" [nzOffset]="5" >
                         <button *ngIf="isCreateAction" nz-button nzType="primary" (click)="submitForm()" [nzLoading]="isSubmiting">新增</button>
                         <button *ngIf="!isCreateAction" nz-button nzType="primary" (click)="submitForm()" [nzLoading]="isSubmiting">更新</button>
+                        <button *appCanAccess="['DELETE_GROUP']" nz-button nzType="danger" (click)="deleteGroup()" [nzLoading]="isDeleting">删除</button>
                     </nz-form-control>
                 </nz-form-item>
             </div>

@@ -4,7 +4,7 @@
       <ul nz-menu [nzMode]="'horizontal'" class="left-nav">
         <li *ngFor="let g of topGroups ; let i = index " class="group-item">
           <div nz-menu-item (click)="renderChildGroup(i)" >
-              <i nz-icon type="contacts" theme="outline"></i>{{g.name}} 
+              <i nz-icon nzType="deployment-unit" nzTheme="outline"></i>{{g.name}} 
           </div>
           <!-- <nz-divider></nz-divider> -->
           <div class="group-edit-btn">
@@ -59,7 +59,7 @@
 
 <div >
     <nz-modal [nzWidth]="300" [nzVisible]="visible" nzTitle="新增或修改群组信息" (nzOnCancel)="closeEditForm()" [nzFooter]="null">
-      <app-group-editor [defaultGroup]="selectedGroup" ></app-group-editor>
+      <app-group-editor [defaultGroup]="selectedGroup" (afterDelete)="getTopGroup($event)"></app-group-editor>
     </nz-modal>
 
     <nz-drawer [nzClosable]="false"  [nzWidth]="900" [nzVisible]="profileDrawerVisible" nzTitle="组员信息" (nzOnClose)="closeProfileEditForm()">
