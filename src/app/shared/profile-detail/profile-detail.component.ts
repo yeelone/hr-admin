@@ -43,7 +43,7 @@ export class ProfileDetailComponent implements OnInit {
     this.profileService.getProfileWithTags(id)
       .subscribe(
         response => {
-          if (response['code'] !== 200 ){
+          if (response['code'] !== 200 ) {
             alert('获取用户详细信息失败，请联系系统管理员' + response['message'] );
             console.log('获取用户详细信息失败，请联系系统管理员' + response['message'] );
             return ;
@@ -61,7 +61,7 @@ export class ProfileDetailComponent implements OnInit {
     this.profileService.getProfileTransferRecord(id)
       .subscribe(
         response => {
-          if (response['code'] !== 200 ){
+          if (response['code'] !== 200 ) {
             alert('获取职工变更记录失败，请联系系统管理员' + response['message'] );
             console.log('获取职工变更记录失败，请联系系统管理员' + response['message'] );
             return ;

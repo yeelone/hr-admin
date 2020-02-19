@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { MyService } from './service';
+import { stringify } from '@angular/compiler/src/util';
 class ProfileResponse {
   totalCount: number;
   profileList: Profile[];
@@ -47,8 +48,8 @@ export class ProfileService extends MyService{
     );
   }
 
-  getProfileDetail(id:number): Observable<Profile[]> {
-    let url = '/api/v1/profile/' + String(id)+"/detail";
+  getProfileDetail(id: number): Observable<Profile[]> {
+    const url = '/api/v1/profile/' + String(id) + '/detail';
 
     return this.http.get<Profile[]>(url)
       .pipe(
@@ -57,8 +58,8 @@ export class ProfileService extends MyService{
     );
   }
 
-  getProfileWithTags(id:number): Observable<Response[]> {
-    let url = '/api/v1/profile/' + String(id) + '/tags';
+  getProfileWithTags(id: number): Observable<Response[]> {
+    const url = '/api/v1/profile/' + String(id) + '/tags';
 
     return this.http.get<Response[]>(url)
       .pipe(
@@ -246,25 +247,25 @@ export class ProfileService extends MyService{
       );
   }
 
-  unFreezeProfile(ids:number[],remark:string):Observable<Response[]>{
-    let url = "/api/v1/profile/unfreeze";
-    let data = {
-      profiles:ids,
+  unFreezeProfile(ids: number[], remark: string): Observable<Response[]>{
+    const url = '/api/v1/profile/unfreeze';
+    const data = {
+      profiles: ids,
       remark
-    }
-    return this.http.post<Response[]>(url,data)
+    };
+    return this.http.post<Response[]>(url, data)
       .pipe(
         tap(response => this.log('unfreeze profile')),
         catchError(this.handleError('unFreezeProfile', []))
       );
   }
 
-  getProfileTransferRecord(id:number):Observable<TransferRecord[]>{
-    let url = "/api/v1/profile/" + String(id) + "/transfer";
+  getProfileTransferRecord(id: number): Observable<TransferRecord[]> {
+    const url = '/api/v1/profile/' + String(id) + '/transfer';
     return this.http.get<TransferRecord[]>(url)
       .pipe(
-        tap(response => this.log('unfreeze profile')),
-        catchError(this.handleError('unFreezeProfile', []))
+        tap(response => this.log('get Profile TransferRecord')),
+        catchError(this.handleError('getProfileTransferRecord', []))
       );
   }
 }

@@ -97,8 +97,9 @@ export class EmployeeComponent implements OnInit {
     this.loading = true ;
     this.profileService.getProfiles(this.offset, this.limit, this.queryFreezed)
       .subscribe(response => {
-        if ( response['code'] === 200 ){
+        if ( response['code'] === 200 ) {
            this.profiles = response['data']['profileList'];
+           console.log(this.profiles);
            this.total = response['data']['totalCount'];
         } else {
           this.msg.error(response['message']);

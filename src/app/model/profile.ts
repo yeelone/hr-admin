@@ -1,11 +1,12 @@
-import { Group } from "./group";
+import { Group } from './group';
 
-export class Profile{
-    id:number ;
+export class Profile {
+    id: number ;
+    uuid:   string;
     name:        string;
-	job_number:   string;
-	id_card:      string;
-	bank_card:      string;
+    job_number:   string;
+    id_card:      string;
+    bank_card:      string;
     on_board_date: string;
     type_card: string;
     phone: string;
@@ -18,7 +19,7 @@ export class Profile{
     specialty: string;
     last_company: string;
     first_job_date: string;
-    workage:number
+    workage: number
     nation: string;
     marital_status: string;
     account_location: string;

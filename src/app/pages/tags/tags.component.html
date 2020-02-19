@@ -1,58 +1,65 @@
-<div class="create-tag-btn table-operations">
-    <button nz-button  (click)="openEditForm(-1)" class="ok-btn"><i class="anticon anticon-edit"></i>新增标签</button>
-    <button nz-button  (click)="openImportModal()" class="purple-btn"><i class="anticon anticon-upload" ></i>导入标签表</button>
-</div>
+<div class="container">
+  
+
 <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning">
-
-<ul class="tag-list">
-  <li *ngFor="let t of parentTags ; let i = index;trackBy: trackByIndex" class="tag-item" (click)="topTag=t;currentParentTagIndex=i;">
-    <span class="content">{{t.name}}</span>
-    <span class="triangle"></span>
-  </li>  
-   
-  <!-- </li> -->
-</ul>   
+  <ul class="tag-list">
+    <li *ngFor="let t of parentTags ; let i = index;trackBy: trackByIndex" class="tag-item" (click)="topTag=t;currentParentTagIndex=i;">
+      <span class="content">{{t.name}}</span>
+      <span class="triangle"></span>
+    </li>  
+    
+    <!-- </li> -->
+  </ul>   
 </nz-spin>
-
+<!-- 
 <div *ngIf="currentTag" class="tag-table">
-   <table>
-      <thead>
-        <tr>
-          <th style="background-color: lemonchiffon;"><a (click)="updateEditForm(topTag)">{{topTag.name}}</a></th>
-          <th>标签</th>
-          <th>操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of childrenTags[topTag.id]">
-          <td><a (click)="updateEditForm(data)"> {{data.name}}</a></td>
-          <td>{{data.coefficient}}</td>
-          <td>
-            <a (click)="openProfileSelectorForm(data)"><i nz-icon type="team" theme="outline"></i></a>
-            <nz-divider [nzType]="vertical"></nz-divider>
-            <nz-popconfirm [nzTitle]="'确定删除?'" (nzOnConfirm)="deleteTag(data.id)">
-                <a nz-popconfirm style="color:red;"><i class="anticon anticon-close"></i></a>
-            </nz-popconfirm>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="3">
-           <div nz-row>
-          <div nz-col nzSpan="12" class="tag-action" ><a (click)="openEditForm(currentParentTagIndex)"> <i class="anticon anticon-file-add"></i>  子标签</a></div>
-          <div nz-col nzSpan="12" class="tag-action" >
-            <nz-popconfirm [nzTitle]="'确定删除整个组吗?'" (nzOnConfirm)="deleteTag(topTag.id)">
-              <a nz-popconfirm class="warn-brn"><i class="anticon anticon-close"></i>删除</a>
-            </nz-popconfirm>
-          </div>
-        </div>
-          </td>
-        </tr>
-      </tfoot>
-     
-    </table>
+  <table>
+     <thead>
+       <tr>
+         <th style="background-color: lemonchiffon;"><a (click)="updateEditForm(topTag)">{{topTag.name}}</a></th>
+         <th>标签</th>
+         <th>操作</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let data of childrenTags[topTag.id]">
+         <td><a (click)="updateEditForm(data)"> {{data.name}}</a></td>
+         <td>{{data.coefficient}}</td>
+         <td>
+           <a (click)="openProfileSelectorForm(data)"><i nz-icon type="team" theme="outline"></i></a>
+           <nz-divider [nzType]="vertical"></nz-divider>
+           <nz-popconfirm [nzTitle]="'确定删除?'" (nzOnConfirm)="deleteTag(data.id)">
+               <a nz-popconfirm style="color:red;"><i class="anticon anticon-close"></i></a>
+           </nz-popconfirm>
+         </td>
+       </tr>
+     </tbody>
+     <tfoot>
+       <tr>
+         <td colspan="3">
+          <div nz-row>
+         <div nz-col nzSpan="12" class="tag-action" ><a (click)="openEditForm(currentParentTagIndex)"> <i class="anticon anticon-file-add"></i>  子标签</a></div>
+         <div nz-col nzSpan="12" class="tag-action" >
+           <nz-popconfirm [nzTitle]="'确定删除整个组吗?'" (nzOnConfirm)="deleteTag(topTag.id)">
+             <a nz-popconfirm class="warn-brn"><i class="anticon anticon-close"></i>删除</a>
+           </nz-popconfirm>
+         </div>
+       </div>
+         </td>
+       </tr>
+     </tfoot>
+    
+   </table>
 </div>
+
+<div class="create-tag-btn table-operations">
+  <button nz-button  (click)="openEditForm(-1)" class="ok-btn"><i class="anticon anticon-edit"></i>新增标签</button>
+  <button nz-button  (click)="openImportModal()" class="purple-btn"><i class="anticon anticon-upload" ></i>导入标签表</button>
+</div> -->
+</div>
+
+
+
 <app-tag-editor [visible]="visible" [default]="currentTag" (onOk)="onChange($event)" (onCancel)="closeEditForm($event)"></app-tag-editor>
 
 <nz-drawer [nzClosable]="false"  [nzWidth]="900" [nzVisible]="profileDrawerVisible" nzTitle="组员信息" (nzOnClose)="closeProfileSelectorForm()">
