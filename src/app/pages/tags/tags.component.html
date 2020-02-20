@@ -1,18 +1,22 @@
 <div class="container">
   
 
-<nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning">
-  <ul class="tag-list">
-    <li *ngFor="let t of parentTags ; let i = index;trackBy: trackByIndex" class="tag-item" (click)="topTag=t;currentParentTagIndex=i;">
-      <span class="content">{{t.name}}</span>
-      <span class="triangle"></span>
-    </li>  
-    
-    <!-- </li> -->
-  </ul>   
-</nz-spin>
-<!-- 
-<div *ngIf="currentTag" class="tag-table">
+<div class="create-tag-btn ">
+    <button nz-button  (click)="openEditForm(-1)" class="ok-btn"><i class="anticon anticon-edit"></i>新增标签</button>
+    <button nz-button  (click)="openImportModal()" class="purple-btn"><i class="anticon anticon-upload" ></i>导入标签表</button>
+  </div> 
+
+
+  <div class="tag-container" *ngIf="!showTag">
+      <ul class="tag-list">
+          <li *ngFor="let t of parentTags ; let i = index;trackBy: trackByIndex" class="tag-item" (click)="topTag=t;currentParentTagIndex=i;showTag=true;">
+            <span class="content">{{t.name}}</span>
+          </li>  
+        </ul>  
+  </div>
+  
+<div *ngIf="showTag" class="tag-table">
+  <a href="javascript:;" (click)="showTag=false;">返回标签列表</a>
   <table>
      <thead>
        <tr>
@@ -52,10 +56,6 @@
    </table>
 </div>
 
-<div class="create-tag-btn table-operations">
-  <button nz-button  (click)="openEditForm(-1)" class="ok-btn"><i class="anticon anticon-edit"></i>新增标签</button>
-  <button nz-button  (click)="openImportModal()" class="purple-btn"><i class="anticon anticon-upload" ></i>导入标签表</button>
-</div> -->
 </div>
 
 

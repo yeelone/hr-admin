@@ -1,47 +1,53 @@
 .container {
-    display: flex;
-    flex-direction: row;
     height: 100%;
 }
 
-.tag-list {
-    list-style: none;
-    padding: 0 ; 
-    width: 200px;
-
-    .tag-number {
-        padding: 2rem;
-    }
-
-    li{
-        margin: 5px;
-        float: left;
-        width: 100%;
-        background: steelblue;
-        color: white;
-        padding: 5px;
-        border-radius: 10px 0px 0px 10px;
-        position: relative;
-        cursor: pointer;
-
-        .triangle:before {
-            content: "";
-            position: absolute;
-            right: -12px;
-            top: -3px;
-            width: 0;
-            height: 0;
-            border-top: 18px solid transparent;
-            border-left: 12px solid steelblue;
-            border-bottom: 18px solid transparent;
+.tag-container {
+    width: 80%;
+    height: 90%;
+    margin: auto;
+    
+    .tag-list {
+        list-style: none;
+        padding: 0 ; 
+    
+        .tag-number {
+            padding: 2rem;
+        }
+    
+        li{
+            margin: 5px;
+            float: left;
+            width: 150px;
+            background: steelblue;
+            text-align: center;
+            color: white;
+            padding: 5px;
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
         }
     }
 }
 
+
 .tag-table{
+    width: 700px;
+    margin: auto;
+    
+    a {
+        display: inline-block;
+        padding: 5px;
+        border: 1px solid #cccccc;
+        background: white;
+        border-radius: 10px;
+        margin: 5px;
+        width: 120px;
+        text-align: center;
+    }
+
     table{
-            width: 700px;
-            margin: auto;
+            width:100%;        
             border: 1px solid white;
 
             thead{
@@ -50,6 +56,10 @@
                     text-align: center !important;
                     color: blanchedalmond;
                 }
+            }
+
+            tbody {
+                background: lightsteelblue;
             }
 
             th {
@@ -82,7 +92,13 @@
 }
 
 .create-tag-btn{
-    height: 30px;
-    width: 300px;
-    float: right;
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    background: darkcyan;
+    button{
+        margin-top: 10px;
+        margin-left: 20px;
+    }
 }

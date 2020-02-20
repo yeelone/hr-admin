@@ -1,0 +1,29 @@
+.tag-container{
+    padding: 5px;
+        background: gainsboro;
+        display: block;
+        max-width: 310px;
+        min-width: 100px;
+        float: left;
+        margin: 10px;
+        text-align: center;
+        border-radius: 5px;
+}
+
+.transfer-content{
+        font-size: larger;
+        background: antiquewhite;
+        padding: 10px;
+        border-radius: 5px;
+}
+
+
+.profile-tag-container{
+    list-style: none;
+    width: 50%;
+    margin: auto;
+
+    li {
+        
+    }
+}

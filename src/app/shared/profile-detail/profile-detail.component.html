@@ -11,8 +11,8 @@
     <div style="margin:20px;text-align:center;">
       <button nz-button (click)="openModal()" class="ok-btn">变更标签</button>
     </div>
-    <ul style="list-style:none;">
-      <li *ngFor="let item of tags; let i = index ;"  >
+    <ul class="profile-tag-container">
+      <li *ngFor="let item of tags; let i = index ;"  class="">
         <ul style="list-style:none;">
           <li *ngFor="let c of item['children']">
             <span class="tag-container" >
