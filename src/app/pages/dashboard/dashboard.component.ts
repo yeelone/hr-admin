@@ -4,6 +4,8 @@ import { RecordService } from 'src/app/service/record.service';
 import { Record } from 'src/app/model/record';
 import { SummaryService } from 'src/app/service/summary.service';
 import { Summary } from 'src/app/model/summary';
+import { Title } from '@angular/platform-browser';
+import config from 'src/app/config/config';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,64 +17,61 @@ export class DashboardComponent implements OnInit {
   messages: string[] = [];
   records: Record[] = [];
 
-   //pagination 
+  // pagination
   pagination = true ;
   defaultLimit = 20;
   pageIndex = 1 ;
-  limit = this.defaultLimit ; 
+  limit = this.defaultLimit ;
   offset = 0;
   total: number ;
-  loading: boolean = false;
+  loading = false;
   summary: Summary = new Summary();
 
-  constructor(private healthService: HealthService, private summaryService: SummaryService, private recordService: RecordService) { }
+  constructor(private healthService: HealthService,
+    private titleService: Title ,
+    private summaryService: SummaryService, private recordService: RecordService) { }
 
   ngOnInit() {
     this.getData();
     this.getRecords();
     this.getSummary();
+    this.titleService.setTitle(config.title + ' Dashboard');
   }
 
-  getData():void{
+  getData(): void {
     this.healthService.getHealth()
      .subscribe(response => {
-       console.log("response",response);
-      if (response["code"] !== 200 ){
-        return ; 
-      }else{
-        this.messages = response["data"].split(";");
+      if (response['code'] !== 200 ) {
+        return ;
+      } else {
+        this.messages = response['data'].split(';');
       }
-     }) 
+     });
   }
 
   getSummary(): void {
     this.summaryService.getSummary()
      .subscribe(response => {
-       console.log("response",response);
       if (response['code'] !== 200 ) {
         return ;
       } else {
         this.summary = response['data'];
-        console.log(this.summary);
       }
      });
   }
 
-
-  nzPageSizeChange(event:number):void {
+  nzPageSizeChange(event: number): void {
     this.limit = event;
     this.offset = 0 ;
-    this.records.splice(0,this.records.length) ;
+    this.records.splice(0, this.records.length) ;
     this.getRecords();
   }
 
-  getRecords():void{
+  getRecords(): void {
     this.recordService.getOperationRecords(this.offset,this.limit )
        .subscribe(response => {
-         console.log(response);
-        this.records = response["data"]["operateRecordList"];
-        this.total = response["data"]["totalCount"];
-      }) 
+        this.records = response['data']['operateRecordList'];
+        this.total = response['data']['totalCount'];
+      });
   }
-
 }

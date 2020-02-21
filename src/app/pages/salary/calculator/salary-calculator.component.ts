@@ -7,6 +7,7 @@ import { NzMessageService, UploadFile } from 'ng-zorro-antd';
 import config from '../../../config/config';
 
 import * as moment from 'moment';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-salary-calculator',
   templateUrl: './salary-calculator.component.html',
@@ -14,7 +15,7 @@ import * as moment from 'moment';
 })
 export class SalaryCalculatorComponent implements OnInit {
   list: SalaryTemplateAccount[];
-  selectedMonth:any ;
+  selectedMonth: any ;
   selectedTemplateAccount: SalaryTemplateAccount;
   isSpinning = false ;
   isExporting = false ;
@@ -79,35 +80,37 @@ export class SalaryCalculatorComponent implements OnInit {
   }
 
 
-  constructor(private templateAccountService:TemplateaccountService,
-    private salaryService:SalaryService,
+  constructor(private templateAccountService: TemplateaccountService,
+    private salaryService: SalaryService,
+    private titleService: Title,
     private uploadService: UploadService,
     private msg: NzMessageService) { }
 
   ngOnInit() {
     this.get();
     this.defaultTemplateFile = config.baseurl + '/api/download/template/工资导出模板.xlsx';
+    this.titleService.setTitle('工资计算管理');
   }
 
-  get(){
+  get() {
     this.templateAccountService.list()
     .subscribe(response => {
       this.list = response['data']['List'];
-    })
+    });
   }
 
-  analysis(){
-   //分析账套，如果账套中有模板字段依赖于上传，则提示用户需要先上传数据 。
-  
+  analysis() {
+   // 分析账套，如果账套中有模板字段依赖于上传，则提示用户需要先上传数据 。
+
    this.templateAccountService.listAllTemplateFields(+this.selectedTemplateAccount)
-   .subscribe(response=>{
-     let ts = response['data']['templates'];
+   .subscribe(response => {
+     const ts = response['data']['templates'];
      this.shouldUpload = [];
-     for (let i = 0 ;i < ts.length ; i++ ){
+     for (let i = 0 ; i < ts.length ; i++ ) {
       let temp = {};
-      let fields = ts[i].fields;
+      const fields = ts[i].fields;
       let uploadFields = [];
-      for ( let j = 0 ; j < fields.length ;j++ ){
+      for ( let j = 0 ; j < fields.length ; j++ ) {
         if ( fields[j].type === 'Upload' && !fields[j].fixed_data) {
           uploadFields.push(fields[j].key);
         }
@@ -119,56 +122,56 @@ export class SalaryCalculatorComponent implements OnInit {
       }
 
      }
-     if ( this.shouldUpload.length > 0 ) { 
-       this.canStart = false; //必须先上传数据 。
-       this.uploadModalVisible = true ; 
-     }else {
-       this.canStart = true ; 
+     if ( this.shouldUpload.length > 0 ) {
+       this.canStart = false; // 必须先上传数据 。
+       this.uploadModalVisible = true ;
+     } else {
+       this.canStart = true ;
        this.start();
      }
-   })
+   });
 
   }
 
-  start(){
-    this.done = false ; 
-    this.errFile = "";
-    var dateObj = new Date();
+  start() {
+    this.done = false ;
+    this.errFile = '';
+    const dateObj = new Date();
     // var month = dateObj.getUTCMonth() + 1; //months from 1-12
     // // var day = dateObj.getUTCDate();
     // var year = dateObj.getUTCFullYear();
 
-    let data = {
+    const data = {
       template_account_id : +this.selectedTemplateAccount,
       year: moment(this.selectedMonth).format('YYYY'),
-      month:moment(this.selectedMonth).format('MM'),
+      month: moment(this.selectedMonth).format('MM'),
       // year:String(dateObj.getUTCFullYear()),
       // month:String(dateObj.getUTCMonth() + 1),
       file: this.uploadedFile
     };
 
-    this.isSpinning = true ; 
+    this.isSpinning = true ;
     this.salaryService.calculate(data)
       .subscribe(response => {
         this.isSpinning = false ;
         this.disabled = false ;
-        if (response["code"] != 200 ){
-          alert("计算期间发生错误，错误信息:" + response["message"]);
-          this.errFile = config.baseurl +"/api/download/" + response["data"]["ErrorMessageFile"]; 
+        if (response['code'] !== 200 ) {
+          alert('计算期间发生错误，错误信息:' + response['message']);
+          this.errFile = config.baseurl + '/api/download/' + response['data']['ErrorMessageFile'];
           return ;
         }
       });
   }
 
-  //工资核算成功之后 ，可以请求下载工资表
-  exportSalary(){
+  // 工资核算成功之后 ，可以请求下载工资表
+  exportSalary() {
     if ( !this.selectedMonth ) {
-      alert("请选择日期")
+      alert('请选择日期');
       return ;
     }
-    
+
     if ( !this.selectedTemplateAccount ) {
-      alert("请选择账套")
+      alert('请选择账套');
       return ;
     }
 
@@ -180,22 +183,21 @@ export class SalaryCalculatorComponent implements OnInit {
     this.isExporting = true ;
     this.salaryService.export(data)
       .subscribe(response => {
-        if ( response["code"] == 200 ) {
+        if ( response['code'] === 200 ) {
            this.done = true ;
-          this.isExporting = false; 
-          this.downloadFile = config.baseurl + "/api/download/"+response['data']['file'];
-          this.downloadTemplateFile = "";
+          this.isExporting = false;
+          this.downloadFile = config.baseurl + '/api/download/' + response['data']['file'];
+          this.downloadTemplateFile = '';
         }else{
-          alert("上传失败：" +  response["code"] + response["data"] + response["message"] )
+          alert('上传失败：' +  response['code'] + response['data'] + response['message'] )
         }
-         
-      })
+      });
   }
 
   closeUploadModal(){
     this.uploadModalVisible = false;
   }
-  
+
   beforeUpload = (file: UploadFile): boolean => {
     this.fileList.push(file);
     return false;
@@ -227,37 +229,37 @@ export class SalaryCalculatorComponent implements OnInit {
     );
   }
 
-  openChangeTableModal():void{
+  openChangeTableModal(): void {
     this.transferModalVisible = true ;
   }
 
-  closeChangeTableModal():void{
+  closeChangeTableModal(): void {
     this.transferModalVisible = false ;
   }
 
-  closePreviewModal():void{
+  closePreviewModal(): void {
     this.previewModalVisible = false;
   }
 
-  openTemplateModal():void{
+  openTemplateModal(): void {
     this.templateUploadVisible = true;
   }
 
-  closeTemplateUploadModal():void{
-    this.templateUploadVisible = false ; 
+  closeTemplateUploadModal(): void {
+    this.templateUploadVisible = false ;
   }
 
-  onUploadSuccess(event:string):void{
-    this.downloadTemplateFile = event; 
+  onUploadSuccess(event:string): void {
+    this.downloadTemplateFile = event;
   }
 
-  onUploadError():void{
+  onUploadError(): void {
 
   }
 
-  getKeys(data):string[]{
-    let keys = Object.keys(data).filter((key)=>{
-      return key != "__name__" && key != "__id_card__"
+  getKeys(data):string[] {
+    const keys = Object.keys(data).filter((key) => {
+      return key !== '__name__' && key !== '__id_card__';
     })
     return keys;
   }

@@ -3,6 +3,7 @@ import { UserGroupService } from '../../../service/usergroup.service';
 import { UserGroup } from '../../../model/usergroup';
 import { NzModalService } from 'ng-zorro-antd';
 import { NzMessageService } from 'ng-zorro-antd';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-usergroups',
@@ -27,14 +28,16 @@ export class UsergroupsComponent implements OnInit {
   loading = false ; 
 
   //
-  userDrawerVisible:boolean = false ; 
+  userDrawerVisible:boolean = false ;
 
   constructor(private groupService: UserGroupService,
               private modalService: NzModalService,
+              private titleService: Title,
               public msg: NzMessageService) { }
 
   ngOnInit() {
     this.getGroups();
+    this.titleService.setTitle('用户组管理');
   }
 
   getGroups():void {

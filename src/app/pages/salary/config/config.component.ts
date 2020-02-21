@@ -3,6 +3,7 @@ import { Profile } from 'src/app/model/profile';
 import { ProfileService } from 'src/app/service/profile.service';
 import { RelatedSalary, SalaryProfileConfig } from 'src/app/model/salary';
 import { SalaryService } from 'src/app/service/salary.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-config',
@@ -26,10 +27,11 @@ export class SalaryConfigComponent implements OnInit {
 
   widthConfig = ['100px', '200px', '200px', '100px', '100px', '100px'];
   
-  constructor(private salaryService:SalaryService) { }
+  constructor(private salaryService: SalaryService, private titleService: Title) { }
 
   ngOnInit() {
     this.getConfig();
+    this.titleService.setTitle('特殊人员配置');
   }
 
   getConfig(){

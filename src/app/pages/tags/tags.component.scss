@@ -19,12 +19,13 @@
             margin: 5px;
             float: left;
             width: 150px;
-            background: steelblue;
+            background: beige;
             text-align: center;
-            color: white;
+            color: black;
             padding: 5px;
             border-radius: 10px;
             position: relative;
+            box-shadow: 1px 1px 1px #d1d9e6;
             cursor: pointer;
         }
     }
@@ -34,7 +35,10 @@
 .tag-table{
     width: 700px;
     margin: auto;
+    padding: 10px;
+    background: white;
     
+    box-shadow: 1px 1px 1px #d1d9e6;
     a {
         display: inline-block;
         padding: 5px;

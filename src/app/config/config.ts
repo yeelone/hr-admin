@@ -5,6 +5,7 @@
 // for debug 
 const config = {
     version: '1.1.1',
+    title: '工资模板计算系统',
     baseurl : 'http://127.0.0.1:8080',
     api: 'http://127.0.0.1:8080/api'
 }

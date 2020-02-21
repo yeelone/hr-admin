@@ -13,6 +13,7 @@
         .card {
             float: left;
             margin-left: 20px;
+            box-shadow: 1px 1px 1px #d1d9e6;
         }
     }
 
@@ -20,7 +21,7 @@
         height: 150px;
         line-height: 32px;
         margin: 20px;
-        box-shadow: 5px 5px 9px #cccccc;
+        box-shadow: 1px 1px 1px #d1d9e6;
 
         ul {
             list-style: none;
@@ -38,7 +39,7 @@
     .card{
         background-color: white;
         border-radius: 10px;
-        box-shadow: 5px 5px 8px #f1f1f1;
+        box-shadow: 1px 1px 1px #d1d9e6;
 
         .card-header{
             text-align: center;
@@ -61,19 +62,19 @@
     }
 
     .card-1 {
-        background-image: linear-gradient(to top, #6a85b6 0%, #bac8e0 100%);
+        background:lemonchiffon;
     }
 
     .card-2 {
-        background-image: linear-gradient(to top, #6a85b6 0%, #bac8e0 100%);
+        background:aquamarine;
     }
 
     .card-3 {
-        background-image: linear-gradient(to top, #6a85b6 0%, #bac8e0 100%);
+        background:deepskyblue;
     }
 
     .card-4 {
-        background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
+        background:#ff0844;
         color: white;
     }
 

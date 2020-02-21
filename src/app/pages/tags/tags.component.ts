@@ -4,6 +4,7 @@ import { UploadService } from '../../service/upload.service';
 import { Tag } from '../../model/tag';
 import { NzMessageService, UploadFile } from 'ng-zorro-antd';
 import config from '../../config/config';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tags',
@@ -42,10 +43,12 @@ export class TagsComponent implements OnInit {
 
   constructor(private msg: NzMessageService,
             private uploadService: UploadService,
+            private titleService: Title,
             private tagService: TagsService) { }
 
   ngOnInit() {
     this.getTags();
+    this.titleService.setTitle('标签信息管理');
   }
 
   getTags(): void {

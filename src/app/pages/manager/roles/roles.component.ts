@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Role } from '../../../model/role';
 import { User } from '../../../model/user';
 import { RoleService } from '../../../service/role.service';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html',
@@ -23,10 +24,11 @@ export class RolesComponent implements OnInit {
 
   userDrawerVisible:boolean = false ; 
 
-  constructor(private roleService: RoleService,) { }
+  constructor(private roleService: RoleService, private titleService: Title) { }
 
   ngOnInit() {
      this.getRoles();
+     this.titleService.setTitle('用户角色管理');
   }
 
   getRoles():void {

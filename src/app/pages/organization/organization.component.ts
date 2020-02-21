@@ -8,6 +8,7 @@ import { NzModalService } from 'ng-zorro-antd';
 import { NzMessageService,UploadFile} from 'ng-zorro-antd';
 import config from '../../config/config';
 import { Profile } from 'src/app/model/profile';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-organization',
   templateUrl: './organization.component.html',
@@ -51,12 +52,14 @@ export class OrganizationComponent implements OnInit {
 
   constructor(private groupService: GroupService,
               private tagService: TagsService,
+              private titleService: Title,
               private modalService: NzModalService,
               public msg: NzMessageService,
               private uploadService: UploadService) { }
 
   ngOnInit() {
     this.getTopGroup();
+    this.titleService.setTitle('组织信息管理');
   }
 
   getTopGroup(): void {

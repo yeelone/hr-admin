@@ -72,7 +72,7 @@ export class EmployeeComponent implements OnInit {
   constructor(private profileService: ProfileService,
               private uploadService: UploadService,
               private modalService: NzModalService,
-              public titleSet: Title,
+              private titleService: Title ,
               private msg: NzMessageService) {
                }
 
@@ -81,7 +81,7 @@ export class EmployeeComponent implements OnInit {
     this.targetGroup.id = '0' ;
     this.defaultTemplateFile = config.baseurl + '/api/download/template/人员导入模板.xlsx';
     this.getProfiles();
-    this.titleSet.setTitle('人力资源管理');
+    this.titleService.setTitle('员工信息管理');
   }
 
   changeSubmitStatus(event: boolean) {
@@ -134,7 +134,7 @@ export class EmployeeComponent implements OnInit {
       .subscribe(response => {
         this.profiles = response['data']['profileList'];
         this.total = response['data']['totalCount'];
-        this.loading = false ; 
+        this.loading = false ;
       })
   }
 

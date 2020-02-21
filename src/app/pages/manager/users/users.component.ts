@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../../model/user';
 import { UserService } from '../../../service/user.service';
 import { NzModalService,NzMessageService } from 'ng-zorro-antd';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-users',
@@ -49,10 +50,12 @@ export class UsersComponent implements OnInit {
 
   constructor(private userService: UserService,
               private modalService: NzModalService,
+              private titleService: Title,
               private msg: NzMessageService) { }
 
   ngOnInit() {
     this.getUsers();
+    this.titleService.setTitle('用户管理');
   }
 
   changeSubmitStatus(event:boolean){
