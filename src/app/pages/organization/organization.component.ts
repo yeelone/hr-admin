@@ -49,7 +49,8 @@ export class OrganizationComponent implements OnInit {
 
   rules: string[] = [];
   ruleModalVisible = false;
-
+  defaultTemplateFile = '';
+  defaultTemplateFile2 = '';
   constructor(private groupService: GroupService,
               private tagService: TagsService,
               private titleService: Title,
@@ -59,6 +60,8 @@ export class OrganizationComponent implements OnInit {
 
   ngOnInit() {
     this.getTopGroup();
+    this.defaultTemplateFile = config.baseurl + '/api/download/template/组织-导入人员模板.xlsx';
+    this.defaultTemplateFile2 = config.baseurl + '/api/download/template/组织与标签关联模板.xlsx';
     this.titleService.setTitle('组织信息管理');
   }
 
@@ -226,6 +229,7 @@ export class OrganizationComponent implements OnInit {
         .subscribe(
           (event: {}) => {
             this.uploading = false;
+            console.log(event);
             if ( event['data']['file'].length ) {
               this.errFile =  config.baseurl + '/api/download/' + event['data']['file'];
             }

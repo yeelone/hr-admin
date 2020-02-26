@@ -40,7 +40,7 @@ export class TagsComponent implements OnInit {
   errFile = '';
 
   isSpinning = false ;
-
+  defaultTemplateFile = '';
   constructor(private msg: NzMessageService,
             private uploadService: UploadService,
             private titleService: Title,
@@ -49,6 +49,7 @@ export class TagsComponent implements OnInit {
   ngOnInit() {
     this.getTags();
     this.titleService.setTitle('标签信息管理');
+    this.defaultTemplateFile = config.baseurl + '/api/download/template/批量标签关联模板.xlsx';
   }
 
   getTags(): void {

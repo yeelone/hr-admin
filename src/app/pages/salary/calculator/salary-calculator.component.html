@@ -44,7 +44,7 @@
               
                 <div nz-row *ngIf="errFile">
                 <div nz-col nzSpan="12">
-                  <a href="{{errFile}}"  class="download-btn"> 点击下载错误信息 </a>
+                  <a  href="{{errFile}}"  class="download-btn"> 点击下载错误信息 </a>
                   </div>
                 </div>
               
@@ -121,6 +121,7 @@
       一、上传的模板表格名必须为 <span style="color:red">账套名字</span>；<br>
       二、上传的项目名为系统模板配置中的‘显示名’，不是字段名;<br>
       三、必须第一行开始;<br>
+      四、必须是xlsx格式;<br>
     </p>
     <p>
        <a href="{{defaultTemplateFile}}" *ngIf="defaultTemplateFile"> 查看模板 </a>

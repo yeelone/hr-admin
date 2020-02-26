@@ -38,7 +38,7 @@
         <nz-table #basicTable  [nzHideOnSinglePage]="'true'" [nzNoResult]="noresultTempalte"  >
             <tbody>
                 <tr *ngFor="let data of bodyString">
-                <td *ngFor="let item of data">{{item}}</td>
+                    <td *ngFor="let item of data" class="record-item">{{item}}</td>
                 </tr>
             </tbody>
         </nz-table>

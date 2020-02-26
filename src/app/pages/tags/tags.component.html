@@ -10,13 +10,13 @@
   <div class="tag-container" *ngIf="!showTag">
       <ul class="tag-list">
           <li *ngFor="let t of parentTags ; let i = index;trackBy: trackByIndex" class="tag-item" (click)="topTag=t;currentParentTagIndex=i;showTag=true;">
-            <span class="content">{{t.name}}</span>
+            <span class="content"><i nz-icon nzType="tags" nzTheme="outline"></i> {{t.name}}</span>
           </li>  
         </ul>  
   </div>
   
 <div *ngIf="showTag" class="tag-table">
-  <a href="javascript:;" (click)="showTag=false;">返回标签列表</a>
+  <a href="javascript:;" (click)="showTag=false;" class="back-button">返回标签列表</a>
   <table>
      <thead>
        <tr>
@@ -33,7 +33,7 @@
            <a (click)="openProfileSelectorForm(data)"><i nz-icon type="team" theme="outline"></i></a>
            <nz-divider [nzType]="vertical"></nz-divider>
            <nz-popconfirm [nzTitle]="'确定删除?'" (nzOnConfirm)="deleteTag(data.id)">
-               <a nz-popconfirm style="color:red;"><i class="anticon anticon-close"></i></a>
+               <a nz-popconfirm class="del-button"><i class="anticon anticon-close"></i></a>
            </nz-popconfirm>
          </td>
        </tr>
@@ -45,7 +45,7 @@
          <div nz-col nzSpan="12" class="tag-action" ><a (click)="openEditForm(currentParentTagIndex)"> <i class="anticon anticon-file-add"></i>  子标签</a></div>
          <div nz-col nzSpan="12" class="tag-action" >
            <nz-popconfirm [nzTitle]="'确定删除整个组吗?'" (nzOnConfirm)="deleteTag(topTag.id)">
-             <a nz-popconfirm class="warn-brn"><i class="anticon anticon-close"></i>删除</a>
+             <a nz-popconfirm class="warn-brn "><i class="anticon anticon-close"></i>删除</a>
            </nz-popconfirm>
          </div>
        </div>
@@ -67,7 +67,17 @@
 </nz-drawer>
 
 <nz-modal [(nzVisible)]="importModalVisible" nzTitle="批量导入" (nzOnCancel)="closeImportModal()" (nzOnOk)="closeImportModal()">
-    <nz-upload
+    <p>
+        注意：<br>
+        一、上传的模板表格名必须为 <span style="color:red">Sheet1</span>；<br>
+        二、上传的要素必须与系统一一对应<br>
+        三、必须第一行开始;<br>
+        四、表中的标签，存在则关联，不存在时则先创建再关联;<br>
+
+        <a class="import-template-download-link" href="{{defaultTemplateFile}}" > 查看导入模板 </a>
+    </p>
+
+  <nz-upload
         [(nzFileList)]="fileList"
         [nzBeforeUpload]="beforeUpload">
         <button nz-button>
@@ -75,7 +85,7 @@
         </button>
     </nz-upload>
     <button nz-button [nzType]="'primary'" [nzLoading]="uploading" (click)="handleUpload()" [disabled]="fileList.length == 0" style="margin-top: 16px">
-       {{ uploading ? 'Uploading' : 'Start Upload' }}
+       {{ uploading ? 'Uploading' : '上传并解析处理' }}
     </button>
 
     <p *ngIf="errFile">  <a href="{{errFile}}" > 发现错误，点击查看 </a> </p>

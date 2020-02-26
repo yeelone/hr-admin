@@ -10,20 +10,10 @@ import { SalaryTemplate } from '../model/salary';
 })
 export class TemplateService extends MyService {
 
-  constructor(private http: HttpClient) {super() }
+  constructor(private http: HttpClient) {super();}
 
-  get(id:number): Observable<SalaryTemplate[]> {
-    let url = '/api/v1/salary/template/' + id;
-
-    return this.http.get<SalaryTemplate[]>(url)
-      .pipe(
-        tap(response => this.log('fetched template with fields')),
-        catchError(this.handleError('get', []))
-    );
-  }
-
-  getAuditing(id:string): Observable<SalaryTemplate[]> {
-    let url = '/api/v1/salary/template/' + id+'/audit';
+  get(id: number): Observable<SalaryTemplate[]> {
+    const url = '/api/v1/salary/template/' + id;
 
     return this.http.get<SalaryTemplate[]>(url)
       .pipe(
@@ -32,8 +22,18 @@ export class TemplateService extends MyService {
     );
   }
 
-  create(body:SalaryTemplate): Observable<Response[]> {
-    let url = '/api/v1/salary/template/config';
+  getAuditing(id: string): Observable<SalaryTemplate[]> {
+    const url = '/api/v1/salary/template/' + id + '/audit';
+
+    return this.http.get<SalaryTemplate[]>(url)
+      .pipe(
+        tap(response => this.log('fetched template with fields')),
+        catchError(this.handleError('get', []))
+    );
+  }
+
+  create(body: SalaryTemplate): Observable<Response[]> {
+    const url = '/api/v1/salary/template/config';
 
     return this.http.post<Response[]>(url,body)
       .pipe(
@@ -42,8 +42,8 @@ export class TemplateService extends MyService {
     );
   }
 
-  list():Observable<SalaryTemplate[]>{
-    let url = '/api/v1/salary/template';
+  list(): Observable<SalaryTemplate[]> {
+    const url = '/api/v1/salary/template';
 
     return this.http.get<SalaryTemplate[]>(url)
       .pipe(
@@ -52,8 +52,8 @@ export class TemplateService extends MyService {
     );
   }
 
-  listAccountTemplate(id:number):Observable<SalaryTemplate[]>{
-    let url = '/api/v1/salary/account/'+id+'/template';
+  listAccountTemplate(id:number): Observable<SalaryTemplate[]>{
+    const url = '/api/v1/salary/account/' + id + '/template';
 
     return this.http.get<SalaryTemplate[]>(url)
       .pipe(
@@ -62,8 +62,8 @@ export class TemplateService extends MyService {
     );
   }
 
-  delete(id:number):Observable<Response[]>{
-    let url = '/api/v1/salary/template/' + id;
+  delete(id: number): Observable<Response[]> {
+    const url = '/api/v1/salary/template/' + id;
 
     return this.http.delete<Response[]>(url)
       .pipe(
@@ -72,15 +72,14 @@ export class TemplateService extends MyService {
     );
   }
 
-  updateOrders(orders:{}):Observable<Response[]>{
-    let url = '/api/v1/salary/template/order';
+  updateOrders(orders: {}): Observable<Response[]> {
+    const url = '/api/v1/salary/template/order';
 
-    return this.http.post<Response[]>(url,{orders})
+    return this.http.post<Response[]>(url, {orders})
       .pipe(
         tap(response => this.log('update template orders ')),
         catchError(this.handleError('updateOrders', []))
     );
   }
-
 
 }

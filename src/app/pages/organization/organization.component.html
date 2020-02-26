@@ -68,18 +68,35 @@
 </div>
 
 <nz-modal [(nzVisible)]="importModalVisible" nzTitle="批量导入" (nzOnCancel)="closeImportModal()" (nzOnOk)="closeImportModal()">
-    <nz-upload
+    <p>
+        导入人员表，将会批量将人员与分类进行关联。
+        注意：<br>
+        一、上传的模板表格名必须为 <span style="color:red">Sheet1</span>；<br>
+        二、上传的要素必须与系统一一对应<br>
+        三、必须第一行开始;<br>
+        四、分类以. 符号分隔，比如 部门.开发部   学历.本科,必须是英文符号  ;<br>
+    </p>
+    <p>
+      <nz-upload
         [(nzFileList)]="fileList"
         [nzBeforeUpload]="beforeUpload">
         <button nz-button>
           <i class="anticon anticon-upload"></i><span>选择上传文件</span>
         </button>
-    </nz-upload>
+      </nz-upload>
+        <a class="import-template-download-link" href="{{defaultTemplateFile}}" > 查看 "导入人员表" 模板 </a>
+        <a class="import-template-download-link" href="{{defaultTemplateFile2}}" > 查看 “导入系数表” 模板 </a>
+    </p>
     <button nz-button [nzType]="'primary'" [nzLoading]="uploading" (click)="handleUpload()" [disabled]="fileList.length == 0" style="margin-top: 16px">
-       {{ uploading ? 'Uploading' : 'Start Upload' }}
-    </button>
-    <p>请仔细检查您的表，如果分类不存在，系统将自动为您创建。</p>
-    <p *ngIf="errFile">  <a href="{{errFile}}" > 发现错误，点击查看 </a> </p>
+        {{ uploading ? '正在上传...' : '开始上传并处理' }}
+     </button>
+    
+    <div class="error-msg-container" *ngIf="errFile">
+        <p>导入失败，请仔细检查您的表，如果分类不存在，系统将自动为您创建。</p>
+        <p>{{importErrorMsg}}</p>
+
+        <p> <a  href="{{errFile}}" > 发现错误，点击查看 </a></p>
+    </div>
 </nz-modal>
 
 <nz-modal [(nzVisible)]="tagModalVisible" nzTitle="关联标签"  [nzWidth]="800" [nzOkLoading]="isOkLoading" (nzOnCancel)="closeTagModal()" (nzOnOk)="submitTags()">

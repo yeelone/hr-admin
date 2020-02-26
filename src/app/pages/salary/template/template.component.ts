@@ -35,7 +35,7 @@ export class TemplateComponent implements OnInit {
     this.titleService.setTitle('模板配置');
   }
 
-  getList(){
+  getList() {
     this.templateService.list()
     .subscribe(response => {
       this.list = response['data']['List'];

@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgZorroAntdModule, NZ_I18N, zh_CN, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_I18N, zh_CN, NZ_ICONS } from 'ng-zorro-antd';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { AccountBookFill, AlertFill, AlertOutline } from '@ant-design/icons-angular/icons';
 import { registerLocaleData } from '@angular/common';
@@ -36,7 +36,7 @@ enableProdMode();
     NgZorroAntdModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    SortablejsModule,
+    SortablejsModule.forRoot({ animation: 150 }),
     CustomDirectiveModule,
     SharedModule,
   ],

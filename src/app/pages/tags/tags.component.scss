@@ -18,15 +18,16 @@
         li{
             margin: 5px;
             float: left;
-            width: 150px;
+            min-width: 150px;
             background: beige;
             text-align: center;
             color: black;
-            padding: 5px;
+            padding: 20px;
             border-radius: 10px;
             position: relative;
             box-shadow: 1px 1px 1px #d1d9e6;
             cursor: pointer;
+            font-size: 18px;
         }
     }
 }
@@ -39,16 +40,16 @@
     background: white;
     
     box-shadow: 1px 1px 1px #d1d9e6;
-    a {
-        display: inline-block;
-        padding: 5px;
-        border: 1px solid #cccccc;
-        background: white;
-        border-radius: 10px;
-        margin: 5px;
-        width: 120px;
-        text-align: center;
-    }
+    // a {
+    //     display: inline-block;
+    //     padding: 5px;
+    //     border: 1px solid #cccccc;
+    //     background: white;
+    //     border-radius: 10px;
+    //     margin: 5px;
+    //     width: 120px;
+    //     text-align: center;
+    // }
 
     table{
             width:100%;        

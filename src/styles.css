@@ -70,3 +70,29 @@ app-root {
     border-radius: 5px;
     color: white;
 }
+
+.import-template-download-link {
+    display: block;
+    margin-top: 10px;
+    box-shadow: 0px 1px 5px #d1d9e6;
+    padding: 10px;
+    background: aliceblue;
+}
+
+.back-button {
+    padding: 6px;
+    margin: 10px;
+    box-shadow: 1px 1px 1px;
+    box-shadow: 0px 1px 5px #d1d9e6;
+    display: inline-block;
+    background: lightblue;
+    border-radius: 4px;
+}
+
+.del-button {
+    color: white;
+    background: darkred;
+    min-width: 40px;
+    display: inline-block;
+    border-radius: 2px;
+}

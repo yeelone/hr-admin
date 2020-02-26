@@ -30,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let item of config; let i = index;">
+            <ng-container *ngFor="let item of templateConfig; let i = index;">
             <tr  *ngIf="!item.invalid">
                 <td>
                     <nz-select style="width: 150px;" [(ngModel)]="item.type" (ngModelChange)="onSelectChange(i,item.type)" nzAllowClear nzPlaceHolder="Choose">
@@ -90,7 +90,7 @@
             </ng-container>
         </tbody>
         <ng-template #footer>
-           <button nz-button nzType="dashed" (click)="addInput()"  *ngIf="editable">点击新增模板项目</button>
+            <button nz-button nzType="dashed" (click)="addInput()"  *ngIf="editable">点击新增模板项目</button>
             <span *appCanAccess="['SET_TEMPLATE']" class="template-action-bar" >
                 <button nz-button nzType="dashed" (click)="openInitDataModal()" >上传固定初始数据</button>
                 <div *ngIf="isCreateAction;else other_content" >
@@ -107,6 +107,10 @@
                       </ng-template>
                 </ng-template>
             </span>
+
+            <p *ngIf="errMessge" class="err-msg">
+                {{errMessge}}
+            </p>
         </ng-template>
     </nz-table>
 </div>
@@ -140,7 +144,7 @@
     <nz-table [nzBordered]="'true'"	>
         <thead>
             <tr>
-                <th *ngFor="let item of config; let i = index;" >{{item.alias}}</th>
+                <th *ngFor="let item of templateConfig; let i = index;" >{{item.alias}}</th>
             </tr>
         </thead>
     </nz-table>
@@ -159,7 +163,7 @@
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let item of config; let i = index;">
+            <ng-container *ngFor="let item of templateConfig; let i = index;">
             <tr  *ngIf="item.invalid">
                 <td>
                     <nz-select style="width: 150px;" [(ngModel)]="item.type" (ngModelChange)="onSelectChange(i,item.type)" nzAllowClear nzPlaceHolder="Choose">
@@ -216,7 +220,7 @@
 </nz-drawer>
 
 <nz-modal [(nzVisible)]="fieldModalVisible" nzTitle="请输入值" (nzOnCancel)="closeUpdateFieldForm()" (nzOnOk)="updateField()">
-    <div *ngIf="config[currentIndex]">
+    <div *ngIf="templateConfig[currentIndex]">
         <nz-table #basicTable nzBordered     [nzNoResult]="noresultTempalte">
             <thead>
                 <tr>
@@ -227,93 +231,93 @@
             <tbody>
                 <tr>
                     <td>Key</td>
-                    <td> {{config[currentIndex].key}} </td>
+                    <td> {{templateConfig[currentIndex].key}} </td>
                 </tr>
                 <tr>
                     <td>字段名</td>
-                    <td>  <input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].name"  value="{{config[currentIndex].name}}"></td>
+                    <td>  <input nz-input nzSize="small" class="form-control" [(ngModel)]="templateConfig[currentIndex].name"  value="{{templateConfig[currentIndex].name}}"></td>
                 </tr>
                 <tr>
                     <td>字段别名</td>
-                    <td> <input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].alias"  value="{{config[currentIndex].alias}}"> </td>
+                    <td> <input nz-input nzSize="small" class="form-control" [(ngModel)]="templateConfig[currentIndex].alias"  value="{{templateConfig[currentIndex].alias}}"> </td>
                 </tr>
-                <ng-container *ngIf="config[currentIndex].type == 'Buildin'">
+                <ng-container *ngIf="templateConfig[currentIndex].type == 'Buildin'">
                     <tr >
                         <td>函数名</td>
-                        <td><input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].call"  value="{{config[currentIndex].call}}"></td>
+                        <td><input nz-input nzSize="small" class="form-control" [(ngModel)]="templateConfig[currentIndex].call"  value="{{templateConfig[currentIndex].call}}"></td>
                     </tr>
                     <tr >
                         <td>函数依赖字段</td>
-                        <td><textarea disabled  nz-input rows="2" nzSize="small" class="form-control" [(ngModel)]="require"  value="{{config[currentIndex].require}}" ></textarea></td>
+                        <td><textarea disabled  nz-input rows="2" nzSize="small" class="form-control" [(ngModel)]="require"  value="{{templateConfig[currentIndex].require}}" ></textarea></td>
                     </tr>
                     <tr >
                         <td>函数依赖参数</td>
                         <td>
                             <textarea nz-input nzSize="small" class="form-control" 
-                                *ngFor="let p of config[currentIndex].params; let i = index; trackBy:trackByIdx "
-                                [(ngModel)]="config[currentIndex].params[i]"  
-                                value="{{config[currentIndex].params[i]}}"
+                                *ngFor="let p of templateConfig[currentIndex].params; let i = index; trackBy:trackByIdx "
+                                [(ngModel)]="templateConfig[currentIndex].params[i]"  
+                                value="{{templateConfig[currentIndex].params[i]}}"
                                 (ngModelChange)="onFuncParamsInput($event,i)"
                                 ></textarea>
                         </td>
                     </tr>
                 </ng-container>
                 
-                <ng-container *ngIf="config[currentIndex].type == 'Calculate'">
+                <ng-container *ngIf="templateConfig[currentIndex].type == 'Calculate'">
                     <tr>
                         <td>公式 </td>
                         <td>
-                            <textarea nz-input rows="4" nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].formula"  value="{{config[currentIndex].formula}}" (ngModelChange)="onFormulaInput($event)"></textarea>
+                            <textarea nz-input rows="4" nzSize="small" class="form-control" [(ngModel)]="templateConfig[currentIndex].formula"  value="{{templateConfig[currentIndex].formula}}" (ngModelChange)="onFormulaInput($event)"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>公式依赖</td>
                         <td>
-                            <textarea disabled nz-input rows="2" nzSize="small" class="form-control" [(ngModel)]="require"  value="{{config[currentIndex].require}}"></textarea>
+                            <textarea disabled nz-input rows="2" nzSize="small" class="form-control" [(ngModel)]="require"  value="{{templateConfig[currentIndex].require}}"></textarea>
                         </td>
                     </tr>
                 </ng-container>
-                <ng-container *ngIf="config[currentIndex].type == 'Input'">
+                <ng-container *ngIf="templateConfig[currentIndex].type == 'Input'">
                     <tr>
                         <td>固定值</td>
                         <td>
-                            <input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].value"  value="{{config[currentIndex].value}}">
+                            <input nz-input nzSize="small" class="form-control" [(ngModel)]="templateConfig[currentIndex].value"  value="{{templateConfig[currentIndex].value}}">
                         </td>
                     </tr>
                 </ng-container>
             
-                <ng-container *ngIf="config[currentIndex].type == 'Related'">
+                <ng-container *ngIf="templateConfig[currentIndex].type == 'Related'">
                     <tr>
                         <td>关联账套</td>
-                        <td> <input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].related_templateaccount"  value="{{config[currentIndex].related_templateaccount}}"></td>
+                        <td> <input nz-input nzSize="small" class="form-control" [(ngModel)]="templateConfig[currentIndex].related_templateaccount"  value="{{templateConfig[currentIndex].related_templateaccount}}"></td>
                     </tr>
 
                     <tr>
                         <td>关联模板</td>
-                        <td> <input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].related_template"  value="{{config[currentIndex].related_template}}"></td>
+                        <td> <input nz-input nzSize="small" class="form-control" [(ngModel)]="templateConfig[currentIndex].related_template"  value="{{templateConfig[currentIndex].related_template}}"></td>
                     </tr>
                     <tr>
                         <td>关联健</td>
                         <td>                  
-                            <input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].related_key"  value="{{config[currentIndex].related_key}}">
+                            <input nz-input nzSize="small" class="form-control" [(ngModel)]="templateConfig[currentIndex].related_key"  value="{{templateConfig[currentIndex].related_key}}">
                         </td>
                     </tr>
                     <tr>
                         <td>关联年份</td>
                         <td>
-                            <input nz- nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].related_year"  value="{{config[currentIndex].related_year}}">
+                            <input nz- nzSize="small" class="form-control" [(ngModel)]="templateConfig[currentIndex].related_year"  value="{{templateConfig[currentIndex].related_year}}">
                         </td>
                     </tr>
                     <tr>
                         <td>关联月份</td>
                         <td>
-                            <input nz-input nzSize="small" class="form-control" [(ngModel)]="config[currentIndex].related_month"  value="{{config[currentIndex].related_month}}">        
+                            <input nz-input nzSize="small" class="form-control" [(ngModel)]="templateConfig[currentIndex].related_month"  value="{{templateConfig[currentIndex].related_month}}">        
                         </td>
                     </tr>
                 </ng-container>
                 <br>
                 <span>是否只保留正整数</span>
-                <nz-switch [(ngModel)]="config[currentIndex].must_rounding" nzCheckedChildren="是" nzUnCheckedChildren="否"></nz-switch>
+                <nz-switch [(ngModel)]="templateConfig[currentIndex].must_rounding" nzCheckedChildren="是" nzUnCheckedChildren="否"></nz-switch>
             </tbody>
         </nz-table>
        
@@ -322,7 +326,7 @@
 
 <nz-modal [(nzVisible)]="initUploadVisible" nzTitle="上传初始化数据" (nzOnCancel)="closeInitUploadModal()" (nzOnOk)="closeInitUploadModal()">
     <div style="height: 40px; border: 1px solid darkturquoise;    line-height: 2.5;">
-        <a href="{{init_data_file}}" *ngIf="init_data_file"> 点击查看已上传的文件 </a>
+        <a href="{{config.api + '/' +init_data_file}}" *ngIf="init_data_file"> 点击查看已上传的文件 </a>
         <button nz-button (click)="removeInitUploadFile()" style="float:right;margin: 3px;"><i nz-icon type="close"></i> 关闭上传文件 </button>
     </div>
     <p>

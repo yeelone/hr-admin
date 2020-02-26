@@ -103,7 +103,7 @@
               <i class="anticon anticon-upload"></i><span>选择上传文件</span>
             </button>
         </nz-upload>
-        <a href="{{defaultTemplateFile}}" > 查看导入模板 </a>
+        <a class="import-template-download-link" href="{{defaultTemplateFile}}" > 查看导入模板 </a>
     </p>
     <button nz-button [nzType]="'primary'" [nzLoading]="uploading" (click)="handleUpload()" [disabled]="fileList.length == 0" style="margin-top: 16px">
             {{ uploading ? 'Uploading' : 'Start Upload' }}
