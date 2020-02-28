@@ -9,13 +9,13 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class AuditService  extends MyService {
 
-  constructor(private http: HttpClient) { super() }
+  constructor(private http: HttpClient) { super(); }
 
-  getAudits(state:number , offset:number,limit:number): Observable<Audit[]> {
+  getAudits(state: number , offset: number, limit: number): Observable<Audit[]> {
     let url = '/api/v1/audit/list';
 
-    if ( limit ){
-      url += "?offset="+String(offset)+"&limit="+String(limit) +"&state="+String(state);
+    if ( limit ) {
+      url += '?offset=' + String(offset) + '&limit=' + String(limit) + '&state=' + String(state);
     }
     return this.http.get<Audit[]>(url)
       .pipe(
@@ -24,9 +24,9 @@ export class AuditService  extends MyService {
     );
   }
 
-  updateState(audit:Audit): Observable<Response[]> {
-    let url = '/api/v1/audit/' + String(audit.id);
-   
+  updateState(audit: Audit): Observable<Response[]> {
+    const url = '/api/v1/audit/' + String(audit.id);
+
     audit.state = +audit.state;
     return this.http.post<Response[]>(url, audit)
       .pipe(
@@ -34,6 +34,5 @@ export class AuditService  extends MyService {
         catchError(this.handleError('updateState', []))
     );
   }
-
 
 }

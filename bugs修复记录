@@ -1,1 +1,4 @@
 1\UserGroupEditorComponent 更新有Bug
+
+
+存在未复核状态的模式，将锁定状态，在审核之前不能再次修改

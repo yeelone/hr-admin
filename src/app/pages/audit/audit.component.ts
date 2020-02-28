@@ -3,6 +3,7 @@ import { Audit,AuditStateMap } from '../../model/audit';
 import { AuditService } from '../../service/audit.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Title } from '@angular/platform-browser';
+import config from 'src/app/config/config';
 @Component({
   selector: 'app-audit',
   templateUrl: './audit.component.html',
@@ -12,7 +13,7 @@ export class AuditComponent implements OnInit {
   audits: Audit[] = [] ;
   current: Audit ;
   total = 0;
-  state = -1 ;
+  state = 1 ;
   loading = false;
 
   modalVisible = false;
@@ -21,7 +22,7 @@ export class AuditComponent implements OnInit {
   objectMap = {
     Profile : '用户档案',
     Template : '模板'
-  }
+  };
 
   actionMap = {
     1 : '创建',
@@ -30,7 +31,7 @@ export class AuditComponent implements OnInit {
   };
 
   stateMap = AuditStateMap;
-
+  listOfState = [{ text: '不通过', value: '2' },{ text: '通过', value: '1' }, { text: '待审核', value: '0' }, { text: '所有', value: '-1' }];
   body = []; // 后端审核内容格式为 档案ID：6524; 员工姓名:林**; 这样的格式。在显示之前要进行一定的格式化。
 
   selectedValue ;
@@ -57,6 +58,13 @@ export class AuditComponent implements OnInit {
         this.total = response['data']['totalCount'];
         this.loading = false ;
       });
+  }
+
+  filter(state: number, searchAddress: string): void {
+    this.state = state;
+    this.offset = 0 ;
+    this.pageIndex = 1 ;
+    this.getData();
   }
 
   getData(): void {
@@ -118,9 +126,16 @@ export class AuditComponent implements OnInit {
 
   formatBody(body: string): void {
     this.body = [];
-    let data = body.split(';');
+    const data = body.split(';');
     for (let i = 0; i < data.length; i++) {
       const line = data[i].split(':');
+
+      for ( let j = 0 ; j < line.length; j++) {
+          if ( line[j].startsWith('(file)[') ) {
+             const url = config.api + '/' + line[j].substr(7, line[j].length - 8);
+             line[j] = '<a href=' + url + '> 查看变更文件 </a>';
+          }
+      }
       this.body.push(line);
     }
   }

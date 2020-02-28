@@ -12,7 +12,7 @@
       <button nz-button (click)="openModal()" class="ok-btn">变更标签</button>
     </div>
     <ul class="profile-tag-container">
-      <li *ngFor="let item of tags; let i = index ;"  class="">
+      <li *ngFor="let item of tags; let i = index ;">
         <ul style="list-style:none;">
           <li *ngFor="let c of item['children']">
             <span class="tag-container" >

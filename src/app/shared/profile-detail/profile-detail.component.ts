@@ -45,7 +45,6 @@ export class ProfileDetailComponent implements OnInit {
         response => {
           if (response['code'] !== 200 ) {
             alert('获取用户详细信息失败，请联系系统管理员' + response['message'] );
-            console.log('获取用户详细信息失败，请联系系统管理员' + response['message'] );
             return ;
           }
 
@@ -63,7 +62,6 @@ export class ProfileDetailComponent implements OnInit {
         response => {
           if (response['code'] !== 200 ) {
             alert('获取职工变更记录失败，请联系系统管理员' + response['message'] );
-            console.log('获取职工变更记录失败，请联系系统管理员' + response['message'] );
             return ;
           }
 
@@ -107,7 +105,7 @@ export class ProfileDetailComponent implements OnInit {
     this.isOkLoading = true;
 
     if ( this.tags ) {
-      for(let i = 0; i < this.tags.length; i++) {
+      for (let i = 0; i < this.tags.length; i++) {
         for ( let j = 0; j < this.tags[i].children.length; j++) {
           if ( this.checkedResult.hasOwnProperty(this.tags[i].children[j].id) ) {
             continue;
@@ -125,10 +123,9 @@ export class ProfileDetailComponent implements OnInit {
       }
     }
     this.profileService.addProfileTagRelationship(this.profile.id, ids)
-      .subscribe(response =>{
-          if (response['code'] !== 200 ){
+      .subscribe(response => {
+          if (response['code'] !== 200 ) {
             alert('更新档案与系数关联，请联系系统管理员' + response['message'] );
-            console.log('更新档案与系数关联，请联系系统管理员' + response['message'] );
             return ;
           }
           this.getProfile(this.profile.id);

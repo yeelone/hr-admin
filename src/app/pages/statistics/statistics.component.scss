@@ -11,8 +11,10 @@
     div{
         color: #84fab0 !important;
     }
+    box-shadow: 1px 1px 7px #d1d9e6;
+    min-height: 200px;
+    background: white;
 
-    
 }
 
 
@@ -35,8 +37,8 @@
 }
 
 .statistics-container {
-    background: white;    
     color: black;
+    padding: 20px;
 }
 .statistics-btn{
     border: 0px;

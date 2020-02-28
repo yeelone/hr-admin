@@ -10,16 +10,16 @@ import { StatisticsQuery } from '../model/statistics';
 })
 export class StatisticsService extends MyService {
 
-  constructor(private http: HttpClient) {super() }
+  constructor(private http: HttpClient) {super(); }
 
-  getAnnual(year: string ,profile:number[], department:number[]): Observable<Response[]> {
+  getAnnual(year: string , profile: number[], department: number[]): Observable<Response[]> {
     let url = '/api/v1/statistics/annual_income/employee?year=' + year ;
     if ( profile && profile.length > 0 ) {
-      url += '&profiles=' + profile.join(",")
+      url += '&profiles=' + profile.join(',');
     }
 
     if ( department && department.length > 0 ) {
-      url += '&departments=' + department.join(",")
+      url += '&departments=' + department.join(',');
     }
 
     return this.http.get<Response[]>(url)
@@ -29,15 +29,15 @@ export class StatisticsService extends MyService {
     );
   }
   getDetail(salary: StatisticsQuery ): Observable<Response[]> {
-    let url = '/api/v1/statistics/query/detail' ;
+    const url = '/api/v1/statistics/query/detail' ;
 
-    let data = {
-      account:+salary.account,
-      templates:salary.templates,
-      year:salary.year
-    }
+    const data = {
+      account: +salary.account,
+      templates: salary.templates,
+      year: salary.year
+    };
 
-    return this.http.post<Response[]>(url,data )
+    return this.http.post<Response[]>(url, data )
       .pipe(
         tap(response => this.log('get detail  salary')),
         catchError(this.handleError('getDetail', []))
@@ -45,24 +45,23 @@ export class StatisticsService extends MyService {
   }
 
   getDepartmentIncome(salary: StatisticsQuery ): Observable<Response[]> {
-    let url = '/api/v1/statistics/query/department/income' ;
+    const url = '/api/v1/statistics/query/department/income' ;
 
-    let data = {
-      account:+salary.account,
-      templates:salary.templates,
-      year:salary.year
-    }
+    const data = {
+      account: +salary.account,
+      templates: salary.templates,
+      year: salary.year
+    };
 
-    return this.http.post<Response[]>(url,data )
+    return this.http.post<Response[]>(url, data )
       .pipe(
         tap(response => this.log('get detail  salary')),
         catchError(this.handleError('getDetail', []))
     );
   }
 
-  
   getTransferRecord(): Observable<Response[]> {
-    let url = '/api/v1/record/transfer' ;
+    const url = '/api/v1/record/transfer' ;
 
     return this.http.get<Response[]>(url)
       .pipe(
@@ -70,5 +69,4 @@ export class StatisticsService extends MyService {
         catchError(this.handleError('getTransferRecord', []))
     );
   }
-
 }

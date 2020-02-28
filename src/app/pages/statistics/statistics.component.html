@@ -53,7 +53,7 @@
                           <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="onFieldChecked($event,template)">
                             <div nz-row>
                               <div nz-col nzSpan="8"  *ngFor="let field of fields[month][template]" >
-                                <label nz-checkbox nzValue="{{field}}" style="color:white;">{{field}}</label>
+                                <label nz-checkbox nzValue="{{field}}">{{field}}</label>
                               </div>
                             </div>
                           </nz-checkbox-wrapper>
@@ -83,7 +83,7 @@
        <a href="{{detailFile}}"  *ngIf="showDetailFile">点击下载 </a>
     </ng-template>
      </nz-card>
-    <nz-card class='statistics-btn' nzTitle="查询部室或支行收入明细" *appCanAccess="['QUERY_DETAIL']">
+    <nz-card class='statistics-btn' nzTitle="查询部门收入明细" *appCanAccess="['QUERY_DETAIL']">
         <button nz-button [nzLoading]="isLoading" nzType="primary" (click)="submitDepartmentQuery()">提交查询</button>
         <a href="{{departmentIncomeFile}}"  *ngIf="showDepartmentIncomeFile">点击下载 </a>
     </nz-card>

@@ -345,14 +345,13 @@ export class TemplateEditorComponent implements OnInit {
     }
 
     this.isConfirmLoading = true ;
-
     this.templateService.create(t)
         .subscribe(response => {
           if ( response['code'] === 200 ){
             this.msg.success('模板创建已提交审核。');
           } else {
             this.msg.error('模板创建失败，错误信息:' + response['message'] + response['data']);
-            this.errMessge = response['data'] ;
+            this.errMessge = response['message'] + ' ' + response['data'] ;
           }
           this.isConfirmLoading = false;
           this.changeMessageModalVisible = false;

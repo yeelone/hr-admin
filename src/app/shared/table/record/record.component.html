@@ -21,6 +21,7 @@
             <th>模块</th>
             <th>时间</th>
             <th>内容</th>
+            <th>已阅</th>
             </tr>
         </thead>
         <tbody>
@@ -28,12 +29,20 @@
                 <td>{{data.id}}</td>
                 <td>{{data.object}}</td>
                 <td>{{data.CreatedAt | date:'yy-MM-dd'}}</td>
-                <td><a (click)="showBodyModal(data.body)">{{data.body}}</a></td>
+                <td><a (click)="showBodyModal(data.id, data.body)">{{data.body}}</a></td>
+                <td>
+                    <nz-switch
+                        [ngModel]="checkMap.get(data.id)"
+                        [nzCheckedChildren]="checkedTemplate"
+                        [nzUnCheckedChildren]="unCheckedTemplate"
+                        [nzDisabled]="true"
+                        ></nz-switch>
+                </td>
             </tr>
         </tbody>
 </nz-table>
-    
-<nz-modal [(nzVisible)]="bodyModal" nzTitle="具体内容" (nzOnCancel)="closeBodyModal()" (nzOnOk)="closeBodyModal()">
+
+<nz-modal [(nzVisible)]="bodyModal" nzTitle="具体内容" (nzOnCancel)="closeBodyModal()" (nzOnOk)="okModal()">
     <div>
         <nz-table #basicTable  [nzHideOnSinglePage]="'true'" [nzNoResult]="noresultTempalte"  >
             <tbody>
