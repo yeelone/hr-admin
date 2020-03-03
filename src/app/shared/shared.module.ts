@@ -31,6 +31,8 @@ import { SortablejsModule } from 'angular-sortablejs';
 import { RouterModule } from '@angular/router';
 import { NagivatorComponent } from './layout/nagivator/nagivator.component';
 import { TemplateAccountSelectorComponent } from './template-account-selector/template-account-selector.component';
+import { ProfileSalaryQueryComponent } from './profile-salary-query/profile-salary-query.component';
+import { AdjustComponent } from './adjust/adjust.component';
 
 const COMPONENTS = [
     GroupEditorComponent,
@@ -51,6 +53,7 @@ const COMPONENTS = [
     LoginFormComponent,
     HeaderComponent,
     UploadComponent,
+    AdjustComponent,
     GroupTreeSelectorComponent,
     ProfileDetailComponent,
     TagSelectorComponent,
@@ -74,6 +77,7 @@ const MODULES = [
 @NgModule({
   declarations: [
     ...COMPONENTS,
+    ProfileSalaryQueryComponent,
   ],
   exports:[
     ...COMPONENTS,

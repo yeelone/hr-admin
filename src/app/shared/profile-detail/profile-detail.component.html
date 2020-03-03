@@ -1,13 +1,15 @@
 
 <nz-tabset >
-  <nz-tab nzTitle="基本信息" >
+  <nz-tab [nzTitle]="titleTemplate">
+    <ng-template #titleTemplate><i nz-icon nzType="idcard" nzTheme="outline"></i>基本信息</ng-template>
     <nz-spin [nzSize]="'large'" [nzSpinning]="loading">
       <div style="width: 650px;margin: auto;">
         <app-profile-editor [profile]="profile" ></app-profile-editor>
       </div>
     </nz-spin>
   </nz-tab>
-  <nz-tab nzTitle="关联标签">
+  <nz-tab [nzTitle]="titleTemplate2">
+    <ng-template #titleTemplate2><i nz-icon nzType="tags" nzTheme="outline"></i>关联标签</ng-template>
     <div style="margin:20px;text-align:center;">
       <button nz-button (click)="openModal()" class="ok-btn">变更标签</button>
     </div>
@@ -30,7 +32,8 @@
       </li>
     </ul>
   </nz-tab>
-   <nz-tab nzTitle="调动记录">
+   <nz-tab [nzTitle]="titleTemplate3">
+    <ng-template #titleTemplate3><i nz-icon nzType="ordered-list" nzTheme="outline"></i>调动记录</ng-template>
      <div style="margin:auto;width:500px;">
         <nz-timeline>
         <nz-timeline-item *ngFor="let record of transferRecords ; let i = index">
@@ -39,8 +42,15 @@
         </nz-timeline-item>
       </nz-timeline>
      </div>
-      
    </nz-tab>
+
+   <nz-tab [nzTitle]="titleTemplate4">
+    <ng-template #titleTemplate4><i nz-icon nzType="transaction" nzTheme="outline"></i>工资明细</ng-template>
+     <div style="margin:auto;width:80%;">
+      <app-profile-salary-query></app-profile-salary-query>
+     </div>
+   </nz-tab>
+
 </nz-tabset>
 
 <div nz-col nzSpan="12"  *ngFor="let t of selectedTags;let i=index;" >

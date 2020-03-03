@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Profile } from '../../../model/profile';
+import { Profile } from '../../model/profile';
 import { NzMessageService, UploadFile } from 'ng-zorro-antd';
-import { SalaryService } from '../../../service/salary.service';
+import { SalaryService } from '../../service/salary.service';
 import { Template } from 'src/app/model/template';
 import * as moment from 'moment';
 import { User } from 'src/app/model/user';
@@ -50,7 +50,7 @@ export class AdjustComponent implements OnInit {
    
     this.groupService.getTopGroup()
       .subscribe(resp => {
-        if ( resp['code'] == 200 ){
+        if ( resp['code'] === 200 ){
           this.groupMap = {};
           let groups = resp['data']['groupList'];
           for(let i = 0 ;i< groups.length;i++){
@@ -62,10 +62,8 @@ export class AdjustComponent implements OnInit {
               this.profileInfoMap[this.groupMap[g.parent]] = g.name;
             }
           }
-          
         }
       });
-    
   }
 
   closeModal():void{
@@ -124,7 +122,7 @@ export class AdjustComponent implements OnInit {
            let fields = template[key] ;
            for (let j=0 ; j< fields.length;j++){
              let field = fields[j];
-             if (field['type'] != 'Base' && field['type'] != 'Related' && field['value'] != 0){
+             if (field['type'] !== 'Base' && field['type'] !== 'Related' && field['value'] !== 0){
                valid++ ;
              }
            }

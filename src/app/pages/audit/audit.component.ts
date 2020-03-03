@@ -13,7 +13,7 @@ export class AuditComponent implements OnInit {
   audits: Audit[] = [] ;
   current: Audit ;
   total = 0;
-  state = 1 ;
+  state = -1 ;
   loading = false;
 
   modalVisible = false;

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SalaryComponent } from './salary.component';
 import { SalaryCalculatorComponent } from './calculator/salary-calculator.component';
-import { AdjustComponent } from './adjust/adjust.component';
 import { TemplateaccountComponent } from './templateaccount/templateaccount.component';
 import { TemplateComponent } from './template/template.component';
 import { TemplateEditorComponent } from './component/template-editor/template-editor.component';
@@ -16,7 +15,6 @@ const routes: Routes = [
   { path: 'template/create', component: TemplateEditorComponent },
   { path: 'template/update/:id', component: TemplateEditorComponent},
   { path: 'template/show/:id', component: TemplateEditorComponent },
-  { path: 'adjust', component: AdjustComponent },
   { path: 'config', component: SalaryConfigComponent },
 ];
 

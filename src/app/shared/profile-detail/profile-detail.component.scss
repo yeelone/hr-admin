@@ -1,6 +1,7 @@
 .tag-container{
     padding: 5px;
-        background: gainsboro;
+    box-shadow: 0px 5px 10px #d1d9e6;
+    background: antiquewhite;   
         display: block;
         max-width: 310px;
         min-width: 100px;
@@ -12,7 +13,8 @@
 
 .transfer-content{
         font-size: larger;
-        background: antiquewhite;
+        box-shadow: 0px 5px 10px #d1d9e6;
+    background: antiquewhite;
         padding: 10px;
         border-radius: 5px;
 }
