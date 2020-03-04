@@ -1,9 +1,62 @@
-<div class="container">
-    <div>
-        <nz-month-picker  [(ngModel)]="selectedMonth" nzPlaceHolder="指定月份"></nz-month-picker>
-        <button nz-button nzType="primary"  (click)="query()"><i nz-icon type="flag" theme="outline"></i>查询</button> 
+
+<div id="salary-detail-container">
+
+    <div class="action-bar">
+      <div nz-row>
+          <div nz-col nzSpan="6">
+            <nz-month-picker  [(ngModel)]="selectedMonth" nzPlaceHolder="指定月份"  ></nz-month-picker>
+          </div>
+          <div nz-col nzSpan="4">
+            <button nz-button nzType="primary" class="btn btn-link" (click)="showProfileSalary()">查询</button>
+          </div>
+        </div>
     </div>
-</div>
-
-
-<app-adjust></app-adjust>
+    
+    <nz-card style="width:100%;" nzTitle="个人信息" >
+        <table>
+          <tbody>
+              <tr>
+                <td style="color: white;background: darkcyan;">姓名</td>
+                <td style="color: white;background: darkcyan;">身份证号码</td>
+                <td style="color: white;background: darkcyan;">核算月部门</td>
+                <td style="color: white;background: darkcyan;">核算月岗位</td>
+              </tr>
+               <tr>
+                  <td>{{profile.name}}</td>
+                  <td>{{profile.id_card}}</td>
+                  <td style="color: white;background: indianred;">{{department}}</td>
+                  <td style="color: white;background: indianred;">{{post}}</td>
+              </tr>
+          </tbody>
+        </table>
+    </nz-card>
+  <div *ngFor="let template of templates; let i = index;" class="detail-box" >
+    <h2> {{getKey(template)}}</h2>
+    <nz-table #basicTable nzBordered  [nzNoResult]="noresultTempalte" [nzWidthConfig]="['200px','150px']">
+      <thead>
+          <tr>
+            <th>项目</th>
+            <th>值</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let field of template[getKey(template)]; let j = index;">
+              <ng-container *ngIf="field['type'] == 'Base' || field['type'] == 'Related' || field['value'] == 0 ;else other_fields">
+              </ng-container>
+              <ng-template #other_fields>
+                <td>{{field['key']}} </td>
+                <td>
+                    <input #inputElement class="form-control" style="width: 120px" nz-input
+                        [disabled]="inputBtnDisable[field['key']]" 
+                        (dblclick)="enableInput(field['key'])"
+                        placeholder="输入数字" 
+                        value="{{field['value']}}" >
+                </td>
+              </ng-template>
+          </tr>
+        </tbody>
+      </nz-table>
+    <ng-template #noresultTempalte>
+    </ng-template>
+  </div>
+  </div>

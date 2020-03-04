@@ -1,0 +1,24 @@
+#salary-detail-container {
+    background: azure;
+    display: block;
+    width: 900px;
+    margin: auto;
+    box-shadow: 5px -1px 13px #cccccc;
+    padding: 20px;
+
+    .action-bar{
+        margin: 10px;
+    }
+
+    .detail-box{
+        margin: 10px;
+    }
+
+    td{
+        padding: 10px;
+    }
+
+    td, th {
+        border: solid 1px #cccccc;
+    } 
+}

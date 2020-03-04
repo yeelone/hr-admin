@@ -37,8 +37,9 @@
      <div style="margin:auto;width:500px;">
         <nz-timeline>
         <nz-timeline-item *ngFor="let record of transferRecords ; let i = index">
-           <p class="transfer-content">{{record.created_at | date:'yyyy-MM-dd'}}  {{record.old_group_name}} ==> {{record.new_group_name}} </p>
-           <p class="transfer-content">{{record.description}}</p>
+           <p class="transfer-content">{{record.created_at | date:'yyyy-MM-dd'}}</p>
+           <p class="transfer-content">{{record.old_group_name}} ==> {{record.new_group_name}} </p>
+           <p *ngIf="record.description" class="transfer-content">{{record.description}}</p>
         </nz-timeline-item>
       </nz-timeline>
      </div>
@@ -47,7 +48,7 @@
    <nz-tab [nzTitle]="titleTemplate4">
     <ng-template #titleTemplate4><i nz-icon nzType="transaction" nzTheme="outline"></i>工资明细</ng-template>
      <div style="margin:auto;width:80%;">
-      <app-profile-salary-query></app-profile-salary-query>
+      <app-profile-salary-query [profile]="profile"></app-profile-salary-query>
      </div>
    </nz-tab>
 
