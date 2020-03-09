@@ -100,7 +100,7 @@ export class TemplateEditorComponent implements OnInit {
               this.templateID = t.id;
               this.templateName =  t.name;
               this.templateType = t.type;
-            })
+            });
         }
     } else {
       let one = new Template();
@@ -263,36 +263,36 @@ export class TemplateEditorComponent implements OnInit {
     this.currentIndex = index;
     let oldFieldName = '';
     if ( item.type !== 'Base') {
-      oldFieldName = this.config[index].key;
-      this.config[index].key = item.name;
+      oldFieldName = this.templateConfig[index].key;
+      this.templateConfig[index].key = item.name;
     }
 
     // 遍历所有fields，如果发现有依赖于当前字段的，自动更新依赖
 
     for (let i = 0; i < this.templateConfig.length; i++) {
       if ( item.type === 'Calculate' ) {
-         if ( this.config[i].formula.includes('[' + oldFieldName + ']')) {
-            this.config[i].formula = this.config[i].formula.replace('[' + oldFieldName + ']', '[' + item.name + ']');
-            this.config[i].require = this.resovleFormulaRequire(this.config[i].formula);
-            this.changeMessage.push('因字段名变动，已自动将[' + this.config[i].name + ']的公式以及相关依赖进行更新，请注意检查');
+         if ( this.templateConfig[i].formula.includes('[' + oldFieldName + ']')) {
+            this.templateConfig[i].formula = this.templateConfig[i].formula.replace('[' + oldFieldName + ']', '[' + item.name + ']');
+            this.templateConfig[i].require = this.resovleFormulaRequire(this.templateConfig[i].formula);
+            this.changeMessage.push('因字段名变动，已自动将[' + this.templateConfig[i].name + ']的公式以及相关依赖进行更新，请注意检查');
           }
       }
       if ( item.type === 'Buildin' ) {
-        if ( this.config[i].params ) {
-          for (let j = 0; j < this.config[i].params.length;j++){
-            if ( this.config[i].params[j] === oldFieldName ) {
-              this.changeMessage.push('因字段名变动，已自动将 [' + this.config[i].name + '] 的函数参数 [' +
-                              this.config[i].params[j] + '] 更新为 [' + item.name + '] ，请注意检查');
-              this.config[i].params[j] = item.name;
+        if ( this.templateConfig[i].params ) {
+          for (let j = 0; j < this.templateConfig[i].params.length;j++){
+            if ( this.templateConfig[i].params[j] === oldFieldName ) {
+              this.changeMessage.push('因字段名变动，已自动将 [' + this.templateConfig[i].name + '] 的函数参数 [' +
+                              this.templateConfig[i].params[j] + '] 更新为 [' + item.name + '] ，请注意检查');
+              this.templateConfig[i].params[j] = item.name;
             }
           }
         }
-        if ( this.config[i].require ) {
-          for (let j = 0; j < this.config[i].require.length; j++) {
-            if ( this.config[i].require[j] === oldFieldName ) {
-              this.changeMessage.push('因字段名变动，已自动将[' + this.config[i].name + ']的函数依赖 [' +
-                        this.config[i].require[j] + '] 更新为 [' + item.name + '] ，请注意检查');
-              this.config[i].require[j] = item.name;
+        if ( this.templateConfig[i].require ) {
+          for (let j = 0; j < this.templateConfig[i].require.length; j++) {
+            if ( this.templateConfig[i].require[j] === oldFieldName ) {
+              this.changeMessage.push('因字段名变动，已自动将[' + this.templateConfig[i].name + ']的函数依赖 [' +
+                        this.templateConfig[i].require[j] + '] 更新为 [' + item.name + '] ，请注意检查');
+              this.templateConfig[i].require[j] = item.name;
             }
           }
         }
@@ -327,7 +327,7 @@ export class TemplateEditorComponent implements OnInit {
     t.file = this.init_data_file;
     t.body = new Map<string, Template>();
 
-    if ( !this.templateName.length ){
+    if ( !this.templateName.length ) {
       this.msg.error('请一定要输入模板名');
       return ;
     }
@@ -347,7 +347,7 @@ export class TemplateEditorComponent implements OnInit {
     this.isConfirmLoading = true ;
     this.templateService.create(t)
         .subscribe(response => {
-          if ( response['code'] === 200 ){
+          if ( response['code'] === 200 ) {
             this.msg.success('模板创建已提交审核。');
           } else {
             this.msg.error('模板创建失败，错误信息:' + response['message'] + response['data']);
@@ -396,7 +396,7 @@ export class TemplateEditorComponent implements OnInit {
     }
 
     if (this.templateConfig[this.currentIndex].type === 'Buildin' ){
-      let required = this.templateConfig[this.currentIndex].require;
+      const required = this.templateConfig[this.currentIndex].require;
       let allKeys = {};
       for ( let i = 0; i < this.templateConfig.length; i++) {
         allKeys[this.templateConfig[i].key] = true ;

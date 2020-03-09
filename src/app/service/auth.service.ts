@@ -9,29 +9,31 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService extends MyService{
+export class AuthService extends MyService {
 
-  constructor(private http: HttpClient,private router: Router,) { super() }
+  constructor(private http: HttpClient, private router: Router) { super(); }
 
-  login(u:User): Observable<Response[]> {
-    let url = '/api/login';
-    let data = {
-      username: u.username, 
-      password:u.password
-    }
-    return this.http.post<Response[]>(url,data)
+  login(u: User, captchaId: string, captchaValue: string): Observable<Response[]> {
+    const url = '/api/login';
+    const data = {
+      username: u.username,
+      password: u.password,
+      captchaId: captchaId,
+      captchaValue: captchaValue,
+    };
+    return this.http.post<Response[]>(url, data)
       .pipe(
         tap(response => {
             if ( response['code'] === 200  ) {
-              let currentUser:User = new User();
+              let currentUser: User = new User();
               currentUser = response['data']['user'];
               currentUser.token = response['data']['token'];
               localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
-              this.log('login success')
-            }else{
-              this.handleError('login', [])
-              console.log("login error", response);
+              this.log('login success');
+            } else {
+              this.handleError('login', []);
+              console.log('login error', response);
             }
         } ),
         catchError(this.handleError('login', []))
@@ -42,7 +44,7 @@ export class AuthService extends MyService{
         // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     localStorage.removeItem('permissions');
-    this.router.navigate(["login"]);
+    this.router.navigate(['login']);
   }
 
 }

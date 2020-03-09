@@ -8,7 +8,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomDirectiveModule } from 'src/app/directive/directive.module';
 import { SalaryCalculatorComponent } from './calculator/salary-calculator.component';
-import { AdjustComponent } from '../../shared/adjust/adjust.component';
 import { TemplateComponent } from './template/template.component';
 import { TemplateaccountComponent } from './templateaccount/templateaccount.component';
 import { SortablejsModule } from 'angular-sortablejs';
@@ -21,10 +20,8 @@ import { TemplateEditorComponent } from './component/template-editor/template-ed
 import { SalaryConfigComponent } from './config/config.component';
 
 const COMPONENTS = [
-  
   SalaryComponent,
   TemplateComponent,
-  AdjustComponent,
   TemplateaccountComponent,
   SalaryCalculatorComponent,
   BuildinfuncSelectorComponent,

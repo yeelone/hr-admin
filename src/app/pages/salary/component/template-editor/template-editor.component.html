@@ -92,7 +92,7 @@
         <ng-template #footer>
             <button nz-button nzType="dashed" (click)="addInput()"  *ngIf="editable">点击新增模板项目</button>
             <span *appCanAccess="['SET_TEMPLATE']" class="template-action-bar" >
-                <button nz-button nzType="dashed" (click)="openInitDataModal()" >上传固定初始数据</button>
+                <button nz-button nzType="dashed" (click)="openInitDataModal()" >上传固定数据  <span *ngIf="init_data_file" ><i nz-icon nzType="check" nzTheme="outline" ></i> （有一份上传数据）</span> </button>
                 <div *ngIf="isCreateAction;else other_content" >
                     <button nz-button nzType="primary" (click)="create()" [nzLoading]="isConfirmLoading" *ngIf="editable">新建模板</button>
                 </div>
@@ -128,9 +128,11 @@
                 <p class="item">7 数据取自上传:这一项主要是用于初始化数据的，有一些工资项，因为历史原因，每个人都不太一样，可用于从excel导入。</p>
             </li>
             <li>
-                <p class="subject">固定上传初始数据</p>
+                <p class="subject">固定上传数据</p>
                 <p class="item">
-                    固定上传数据，就是从excel上传数据之后，系统会为从这个表里取得数据对系统进行数据初始化操作。只需要上传一次。
+                    固定上传数据，就是从excel上传数据之后，计算的时候系统会为从这个表里取得数据。只需要上传一次。
+                    使用场景： 比如单位所有人的基本工资都是1200元，但是单位会为一些特殊人才设置不同的基本工资，就可以在这个固定上传数据里进行覆盖上传。在表里指定的人，将以表
+                    里的金额为准。这只是一个特殊渠道的设置，同样的功能也可以使用“特殊人员配置”来完成 。
                 </p> 
             </li>
         </ul>

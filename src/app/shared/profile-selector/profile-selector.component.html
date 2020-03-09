@@ -8,7 +8,7 @@
     <div nz-col nzSpan="16">
       <div nz-row>
         <nz-input-group nzSearch nzSize="default" [nzSuffix]="suffixButton">
-            <input type="text" nz-input placeholder="search" [(ngModel)]="searchValue">
+            <input type="text" nz-input placeholder="search" [(ngModel)]="searchValue" (keyup.enter)="searchProfile()">
           </nz-input-group>
           <ng-template #suffixButton>
             <button nz-button nzType="primary" nzSize="default" nzSearch (click)="searchProfile()">搜索</button>
@@ -24,6 +24,7 @@
                         [nzShowPagination]="pagination"
                         [nzFrontPagination]="'false'"
                         [nzPageSize]="limit"
+                        [nzHideOnSinglePage]="'true'"
                         [(nzPageIndex)]="pageIndex"
                         (nzPageIndexChange)="getData()"
                         [nzShowPagination]="'true'"
@@ -31,17 +32,17 @@
                         [nzScroll]="{ y: '420px' }">
                    <thead>
                       <tr>
-                        <th>序号{{total}}</th>
-                        <th>姓名</th>
-                        <th>操作 <a (click)="checkAllProfiles()">全部</a></th>
+                        <th nzWidth="50px">序号</th>
+                        <th nzWidth="50px">姓名</th>
+                        <th nzWidth="50px">操作 <a (click)="checkAllProfiles()">全部</a></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr *ngFor="let p of profileTable.data;let i = index" class="custom-tr">
-                        <td style="padding:2px">{{i+1}}</td>
+                        <td style="padding:2px;text-align: center;">{{i+1}}</td>
                         <td style="padding:2px">{{p.name}}</td>
-                        <td style="padding:2px">
-                            <nz-switch [ngModel]="selectedMap[p.id]"  (ngModelChange)="checkProfile(p)" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+                        <td style="padding:2px;text-align: center;">
+                            <nz-switch [ngModel]="selectedMap[p.id]"  nzSize="small" (ngModelChange)="checkProfile(p)" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
                             <ng-template #checkedTemplate><i class="anticon anticon-check"></i></ng-template>
                             <ng-template #unCheckedTemplate><i class="anticon anticon-cross"></i></ng-template>
                         </td>
@@ -55,9 +56,9 @@
             <nz-table [nzData]="checkedProfiles" #checkedProfileTable nzSize="small" [nzBordered]="'true'" [nzScroll]="{ y: '420px' }">
                 <thead>
                     <tr>
-                      <th>序号</th>
-                      <th>姓名</th>
-                      <th>操作</th>
+                      <th nzWidth="50px">序号</th>
+                      <th nzWidth="50px">姓名</th>
+                      <th nzWidth="50px">操作</th>
                     </tr>
                   </thead>
                   <tbody>

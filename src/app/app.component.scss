@@ -39,6 +39,11 @@
     border:0px;
 }
 
+
+:host ::ng-deep .ant-input-suffix{
+    right: 0px !important;
+  }
+
 :host ::ng-deep .ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left{
         border-right:  0px;
 }

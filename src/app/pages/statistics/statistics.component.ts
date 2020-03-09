@@ -88,6 +88,7 @@ export class StatisticsComponent implements OnInit {
       .subscribe(response => {
         if ( response['code'] === 200 ){
           this.fields = response['data']['fields'];
+          console.log(this.fields);
         } else {
         }
         this.fieldSpinning = false;

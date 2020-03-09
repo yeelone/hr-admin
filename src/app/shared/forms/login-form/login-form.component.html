@@ -2,7 +2,7 @@
     <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
        <nz-form-item>
          <div class="logo-div">
-           <img [src]="logo"  width="150">
+           <img [src]="logo"  width="100">
            <p>后台管理系统</p>
          </div>
        </nz-form-item>
@@ -11,7 +11,7 @@
           <nz-input-group nzPrefixIcon="anticon anticon-user">
             <input type="text" nz-input formControlName="username" placeholder="用户名">
           </nz-input-group>
-          <nz-form-explain *ngIf="validateForm.get('username').dirty && validateForm.get('username').errors">请输入用户名!</nz-form-explain>
+          <nz-form-explain *ngIf="validateForm.get('username').dirty && validateForm.get('username').errors">用户名或密码不正确</nz-form-explain>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
@@ -19,9 +19,20 @@
           <nz-input-group nzPrefixIcon="anticon anticon-lock">
             <input type="password" nz-input formControlName="password" placeholder="密码">
           </nz-input-group>
-          <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">请输入密码!</nz-form-explain>
+          <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">用户名或密码不正确</nz-form-explain>
         </nz-form-control>
       </nz-form-item>
+      <nz-form-item>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="anticon anticon-lock">
+              <input type="text" nz-input formControlName="captcha" placeholder="验证码" style="width: 200px">
+              <a href="javascript:;" (click)="genCaptcha()">
+                <img src="{{ captchaImage }}" alt="">
+              </a>
+            </nz-input-group>
+            <nz-form-explain *ngIf="validateForm.get('captcha').dirty && validateForm.get('captcha').errors">验证码错误</nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
       <nz-form-item>
         <nz-form-control>
           <button nz-button class="login-form-button purple-btn" [nzType]="'primary'"  >登录</button>

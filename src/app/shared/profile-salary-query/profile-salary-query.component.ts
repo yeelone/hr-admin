@@ -41,6 +41,8 @@ export class ProfileSalaryQueryComponent implements OnInit {
   showProfileSalary(): void {
     const month =  moment(this.selectedMonth).format('MM');
     const year =  moment(this.selectedMonth).format('YYYY');
+    this.templates = [];
+    this.loading = true;
     this.salaryService.getProfileSalaryByYearAndMonth(this.profile.id, year, month)
       .subscribe(response => {
         if ( response['code'] !== 200 ) {
@@ -49,6 +51,7 @@ export class ProfileSalaryQueryComponent implements OnInit {
         }
         // 处理一下模板
         const list = response['data']['template_list'] ;
+        if ( !list ) {return ; }
         for ( let i = 0 ; i < list.length ; i++) {
            const template = list[i];
            const key = Object.keys(template)[0];
@@ -66,6 +69,7 @@ export class ProfileSalaryQueryComponent implements OnInit {
         }
         this.department = response['data']['department'];
         this.post = response['data']['post'];
+        this.loading = false;
         this.disableAllInput();
       });
   }

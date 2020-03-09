@@ -45,7 +45,6 @@
         <div class="card-container">
           <div style="margin:auto"><nz-spin [nzSpinning]="fieldSpinning"> </nz-spin></div>
           <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
-             
                  <nz-tab *ngFor="let month of tabs" [nzTitle]="month">
                   <div *ngIf="fields[month]">
                       <nz-tabset [nzTabPosition]="'left'" [nzType]="'line'"  style="height:450px;">
@@ -59,10 +58,8 @@
                           </nz-checkbox-wrapper>
                         </nz-tab>
                       </nz-tabset>
-
                   </div>
                  </nz-tab>
-            
           </nz-tabset>
         </div>
     </div>
@@ -87,9 +84,11 @@
         <button nz-button [nzLoading]="isLoading" nzType="primary" (click)="submitDepartmentQuery()">提交查询</button>
         <a href="{{departmentIncomeFile}}"  *ngIf="showDepartmentIncomeFile">点击下载 </a>
     </nz-card>
+    
     <nz-card *appCanAccess="['QUERY_PROFILE_SALARY']" class='profile-detail-btn'>
-        <p> <a routerLink="/salary/adjust">查询个人明细2</a></p>
+        <p> <a routerLink="/salary/adjust">查询个人明细</a></p>
     </nz-card>
+
     <nz-card *appCanAccess="['RECORD_TRANSFER']" class='profile-transfer-btn'>
       <button nz-button [nzLoading]="isTransferLoading" nzType="primary" (click)="submitTransferQuery()">下载员工调动记录</button>
       <a href="{{transferRecordFile}}"  *ngIf="showTransferRecordFile">点击下载 </a>

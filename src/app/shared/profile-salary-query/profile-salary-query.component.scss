@@ -1,9 +1,8 @@
 #salary-detail-container {
-    background: azure;
     display: block;
     width: 900px;
     margin: auto;
-    box-shadow: 5px -1px 13px #cccccc;
+    box-shadow: 0px 5px 10px #d1d7ff;
     padding: 20px;
 
     .action-bar{
@@ -21,4 +20,9 @@
     td, th {
         border: solid 1px #cccccc;
     } 
+
+    .form-control{
+        color: black; 
+        cursor: not-allowed;
+    }
 }
