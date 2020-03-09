@@ -1,4 +1,4 @@
-import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UploadService } from '../../service/upload.service';
 import { NzMessageService, UploadFile } from 'ng-zorro-antd';
 
@@ -32,7 +32,7 @@ export class UploadComponent implements OnInit {
   ngOnInit() {
   }
 
-  closeUploadModal(){
+  closeUploadModal() {
     this.uploadModalVisible = false;
   }
 

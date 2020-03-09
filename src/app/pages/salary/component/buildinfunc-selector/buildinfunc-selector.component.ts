@@ -1,4 +1,4 @@
-import { Component, OnInit,EventEmitter,Output,Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ToolService } from '../../../../service/tool.service';
 import { BuildinFunc, Template } from '../../../../model/template';
 import {
@@ -22,14 +22,14 @@ import {
   ]
 })
 export class BuildinfuncSelectorComponent implements OnInit {
-  visible:boolean = false;
+  visible = false;
 
   validateForm: FormGroup;
   controlArray: Array<{ id: number, controlInstance: string }> = [];
 
-  currentChooseFunc:BuildinFunc;
-  needRequired:boolean = false;
-  paramCount:number = 1;
+  currentChooseFunc: BuildinFunc;
+  needRequired = false;
+  paramCount = 1;
 
   allFunctions: BuildinFunc[] = [];
   checkedMap = {};
@@ -38,12 +38,12 @@ export class BuildinfuncSelectorComponent implements OnInit {
   fields: Template[] = [];
 
   @Output()
-  selectedFunc:EventEmitter<BuildinFunc>=new EventEmitter();
+  selectedFunc: EventEmitter<BuildinFunc> = new EventEmitter();
 
   @Output()
-  onClose:EventEmitter<boolean>=new EventEmitter();
+  onClose: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private toolService: ToolService,private fb: FormBuilder) { }
+  constructor(private toolService: ToolService, private fb: FormBuilder) { }
 
   onChange():void{}
 

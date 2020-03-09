@@ -45,7 +45,7 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS,],
+  declarations: [...COMPONENTS],
   imports: [
     ...MODULES,
   ]

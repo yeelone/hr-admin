@@ -11,7 +11,7 @@
          <div  *ngIf="current==0">
             <nz-card [nzBordered]="false" >
               <p>变动表</p>
-               <app-record></app-record>
+               <app-record (allChecked)="setChecked($event)" ></app-record>
             </nz-card>
          </div>
 
@@ -69,7 +69,7 @@
       <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
         <span>Previous</span>
       </button>
-      <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
+      <button nz-button nzType="default" (click)="next()" *ngIf="current < 2" [disabled]="disable">
         <span>Next</span>
       </button>
       <button nz-button nzType="primary" (click)="finish()" *ngIf="current === 2">
@@ -80,7 +80,7 @@
 
 
 <nz-modal [(nzVisible)]="transferModalVisible" nzTitle="变动表" (nzOnCancel)="closeChangeTableModal()" nzWidth="900">
-  <app-record></app-record>
+  <app-record ></app-record>
 </nz-modal>
 
 <nz-modal [(nzVisible)]="uploadModalVisible" nzTitle="导入数据" (nzOnCancel)="closeUploadModal()" nzOkText="上传完毕，开始核算工资" (nzOnOk)="start()" nzWidth="1100">

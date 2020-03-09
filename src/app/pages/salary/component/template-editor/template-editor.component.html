@@ -92,7 +92,7 @@
         <ng-template #footer>
             <button nz-button nzType="dashed" (click)="addInput()"  *ngIf="editable">点击新增模板项目</button>
             <span *appCanAccess="['SET_TEMPLATE']" class="template-action-bar" >
-                <button nz-button nzType="dashed" (click)="openInitDataModal()" >上传固定数据  <span *ngIf="init_data_file" ><i nz-icon nzType="check" nzTheme="outline" ></i> （有一份上传数据）</span> </button>
+                <button nz-button nzType="dashed" (click)="openInitDataModal()" >上传固定数据  <span *ngIf="init_data_file" class="number-tip"> 1 </span> </button>
                 <div *ngIf="isCreateAction;else other_content" >
                     <button nz-button nzType="primary" (click)="create()" [nzLoading]="isConfirmLoading" *ngIf="editable">新建模板</button>
                 </div>

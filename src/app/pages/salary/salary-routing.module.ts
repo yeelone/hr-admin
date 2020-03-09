@@ -6,6 +6,7 @@ import { TemplateaccountComponent } from './templateaccount/templateaccount.comp
 import { TemplateComponent } from './template/template.component';
 import { TemplateEditorComponent } from './component/template-editor/template-editor.component';
 import { SalaryConfigComponent } from './config/config.component';
+import { AdjustComponent } from 'src/app/shared/adjust/adjust.component';
 
 const routes: Routes = [
   {path: '', component: SalaryComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'template/update/:id', component: TemplateEditorComponent},
   { path: 'template/show/:id', component: TemplateEditorComponent },
   { path: 'config', component: SalaryConfigComponent },
+  { path: 'adjust', component: AdjustComponent },
 ];
 
 @NgModule({

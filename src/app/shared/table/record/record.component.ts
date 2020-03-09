@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
 import { RecordService } from '../../../service/record.service';
 import { Record } from '../../../model/record';
 
@@ -26,6 +26,9 @@ export class RecordComponent implements OnInit {
 
   constructor(private recordService: RecordService) { }
 
+  @Output()
+  allChecked: EventEmitter<boolean> = new EventEmitter();
+
   ngOnInit() {
     const dateObj = new Date();
     const month = dateObj.getUTCMonth() + 1; // months from 1-12
@@ -41,7 +44,6 @@ export class RecordComponent implements OnInit {
         this.records = response['data']['recordList'];
 
         for ( let i = 0 ; i < this.records.length; i++) {
-          console.log(this.checkMap);
           if ( this.checkMap.has(this.records[i].id) ) {
             continue;
           }
@@ -65,30 +67,41 @@ export class RecordComponent implements OnInit {
     this.getList();
   }
 
-    showBodyModal(id: number, body: string): void {
-      this.formatBody(body);
-      this.bodyModal = true;
-      this.currentItemID = id;
-    }
+  showBodyModal(id: number, body: string): void {
+    this.formatBody(body);
+    this.bodyModal = true;
+    this.currentItemID = id;
+  }
 
-    closeBodyModal(): void {
-      this.bodyModal = false;
-    }
+  closeBodyModal(): void {
+    this.bodyModal = false;
+  }
 
-    okModal(): void {
-      this.checkMap.set(this.currentItemID, true);
-      this.bodyModal = false;
-    }
-
-    formatBody(body: string): void {
-      this.bodyString = [];
-      const data = body.split(';');
-      for (let i = 0; i < data.length; i++) {
-        const s = data[i].replace('：', ':');
-        const line = s.split(':');
-        if (line.length === 2 ) {
-          this.bodyString.push(line);
+  okModal(): void {
+    this.checkMap.set(this.currentItemID, true);
+    let size = 0 ;
+    this.checkMap.forEach( (value, key) => {
+        if ( value ) {
+          size++;
+          if ( size === this.total ) {
+            this.allChecked.emit(true);
+          } else {
+            this.allChecked.emit(false);
+          }
         }
+    });
+    this.bodyModal = false;
+  }
+
+  formatBody(body: string): void {
+    this.bodyString = [];
+    const data = body.split(';');
+    for (let i = 0; i < data.length; i++) {
+      const s = data[i].replace('：', ':');
+      const line = s.split(':');
+      if (line.length === 2 ) {
+        this.bodyString.push(line);
       }
     }
+  }
 }

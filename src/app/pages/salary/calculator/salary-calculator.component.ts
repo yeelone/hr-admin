@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TemplateaccountService } from '../../../service/templateaccount.service';
 import { SalaryService } from '../../../service/salary.service';
 import { UploadService } from '../../../service/upload.service';
-import { SalaryTemplateAccount,QuerySalary } from '../../../model/salary';
+import { SalaryTemplateAccount, QuerySalary } from '../../../model/salary';
 import { NzMessageService, UploadFile } from 'ng-zorro-antd';
 import config from '../../../config/config';
 
@@ -45,6 +45,8 @@ export class SalaryCalculatorComponent implements OnInit {
 
   index = 'First-content';
 
+  disable = true;
+
   pre(): void {
     this.current -= 1;
     this.changeContent();
@@ -57,6 +59,10 @@ export class SalaryCalculatorComponent implements OnInit {
 
   finish(): void {
     console.log('done');
+  }
+
+  setChecked(event): void {
+    this.disable = !event;
   }
 
   changeContent(): void {
@@ -115,7 +121,7 @@ export class SalaryCalculatorComponent implements OnInit {
           uploadFields.push(fields[j].key);
         }
       }
-      if ( uploadFields.length > 0 ){
+      if ( uploadFields.length > 0 ) {
         temp['name'] = ts[i].name;
         temp['fields'] = uploadFields;
         this.shouldUpload.push(temp);
@@ -188,13 +194,13 @@ export class SalaryCalculatorComponent implements OnInit {
           this.isExporting = false;
           this.downloadFile = config.baseurl + '/api/download/' + response['data']['file'];
           this.downloadTemplateFile = '';
-        }else{
-          alert('上传失败：' +  response['code'] + response['data'] + response['message'] )
+        } else {
+          alert('上传失败：' +  response['code'] + response['data'] + response['message'] );
         }
       });
   }
 
-  closeUploadModal(){
+  closeUploadModal() {
     this.uploadModalVisible = false;
   }
 
@@ -214,16 +220,16 @@ export class SalaryCalculatorComponent implements OnInit {
       (event: {}) => {
         this.uploadedFile = event['data']['file'];
         this.uploading = false;
-        this.uploadFinish = true; 
-        this.canStart = true ; 
+        this.uploadFinish = true;
+        this.canStart = true ;
         this.previewModalVisible = true ;
         this.previewData = event['data']['preview'];
         this.msg.success('上传成功,正在为您处理预览校验数据');
       },
       err => {
         this.uploading = false;
-        this.canStart = false ; 
-        this.uploadFinish = false;  
+        this.canStart = false ;
+        this.uploadFinish = false;
         this.msg.error('上传失败，请仔细检查上传文件是否符合格式要求');
       }
     );
@@ -249,7 +255,7 @@ export class SalaryCalculatorComponent implements OnInit {
     this.templateUploadVisible = false ;
   }
 
-  onUploadSuccess(event:string): void {
+  onUploadSuccess(event: string): void {
     this.downloadTemplateFile = event;
   }
 
@@ -257,10 +263,10 @@ export class SalaryCalculatorComponent implements OnInit {
 
   }
 
-  getKeys(data):string[] {
+  getKeys(data): string[] {
     const keys = Object.keys(data).filter((key) => {
       return key !== '__name__' && key !== '__id_card__';
-    })
+    });
     return keys;
   }
 
