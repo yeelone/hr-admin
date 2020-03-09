@@ -20,55 +20,54 @@ export class CanAccessDirective  implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    let currentUser = JSON.parse(localStorage.getItem('currentUser')) || new User();
-    let ps = JSON.parse(localStorage.getItem('permissions')) || {} ;
-    
+    const currentUser = JSON.parse(localStorage.getItem('currentUser')) || new User();
+    const ps = JSON.parse(localStorage.getItem('permissions')) || {} ;
+
     let role: Role;
-    if (Object.keys(currentUser).length ){
-      if ( !currentUser.roles ) return ;
-      if (  currentUser.roles.length ){
+    if (Object.keys(currentUser).length ) {
+      if ( !currentUser.roles ) { return ; }
+      if (  currentUser.roles.length ) {
         role = currentUser.roles[0];
       }
     }
-    if ( Object.keys(ps).length  ){
+    if ( Object.keys(ps).length  ) {
       this.accessMap = ps ;
       this.applyPermission();
       return ;
     }
 
-    if ( !role ) return ;
+    if ( !role ) { return ; }
     this.service = this.permissionService.getPermission(role.id)
       .subscribe(
         response => {
           if (response['code'] === 200 ){
             this.permissions = response['data']['fields'];
-            for(let k1 in this.permissions){
-              for ( let k2 in this.permissions[k1]){
+            // tslint:disable-next-line: forin
+            for (const k1 in this.permissions) {
+              for ( const k2 in this.permissions[k1]){
                 if (this.permissions[k1][k2]['checked']){
-                  this.accessMap[this.permissions[k1][k2]['id']] = true; 
+                  this.accessMap[this.permissions[k1][k2]['id']] = true;
                 }
               }
             }
             localStorage.setItem('permissions', JSON.stringify(this.accessMap));
             this.applyPermission();
-          }else{
-            this.authorized = false ; 
-            console.log(response['message'])
+          } else {
+            this.authorized = false ;
           }
         },
-        err => {console.log(err)}
-      )
-  
+        err => {console.log(err); }
+      );
   }
 
-  private applyPermission(): void { 
+  private applyPermission(): void {
 
-    for(let key of this.appCanAccess){
-      if ( this.accessMap[key] ){
-        this.authorized = true; 
+    for (const key of this.appCanAccess) {
+      if ( this.accessMap[key] ) {
+        this.authorized = true;
       }
     }
-    
+
     if (this.authorized) {
           this.viewContainer.createEmbeddedView(this.templateRef);
         } else {
@@ -80,7 +79,6 @@ export class CanAccessDirective  implements OnInit, OnDestroy{
     if ( this.service) {
       this.service.unsubscribe();
     }
-    
   }
 
 }

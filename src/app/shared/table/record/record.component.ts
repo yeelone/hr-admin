@@ -47,7 +47,16 @@ export class RecordComponent implements OnInit {
           if ( this.checkMap.has(this.records[i].id) ) {
             continue;
           }
-           this.checkMap.set(this.records[i].id, false);
+          const key = 'record-' + this.records[i].id;
+          const record = localStorage.getItem(key) || '0';
+          console.log(record);
+
+          if ( record === '1' ) {
+            this.checkMap.set(this.records[i].id, true);
+          } else {
+            this.checkMap.set(this.records[i].id, false);
+          }
+          
         }
 
         this.total = response['data']['totalCount'];
@@ -79,8 +88,11 @@ export class RecordComponent implements OnInit {
 
   okModal(): void {
     this.checkMap.set(this.currentItemID, true);
+    // 保存在localstorage里，避免用户刷新时要重新从头开始
+    const key = 'record-' + this.currentItemID;
+    localStorage.setItem(key, '1');
     let size = 0 ;
-    this.checkMap.forEach( (value, key) => {
+    this.checkMap.forEach( (value, _) => {
         if ( value ) {
           size++;
           if ( size === this.total ) {
