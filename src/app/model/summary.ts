@@ -3,4 +3,5 @@ export class Summary{
     user_count: number;
     group_count: number;
     audit_count: number;
+    tag_count: number;
 }

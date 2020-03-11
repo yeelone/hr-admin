@@ -17,6 +17,17 @@
         }
     }
 
+    .column-container{
+        width: 400px;
+        height: 300px;
+        padding: 10px;
+        float: left;
+
+        div {
+            margin: 10px;
+        }
+    }
+
     .health-container {
         line-height: 32px;
         margin: 20px;
@@ -59,25 +70,41 @@
                 font-size: 20px;
             }
         }
+
+        .card-content2{
+            text-align: center;
+            span{
+                color: black;
+                font-size: 20px;
+            }
+        }
     }
 
     .card-1 {
-        background:lemonchiffon;
+        // background:lemonchiffon;
+        border: 2px solid lemonchiffon;
     }
 
     .card-2 {
-        background:aquamarine;
+        // background:aquamarine;
+        border: 2px solid #C5CAE9;
     }
 
     .card-3 {
-        background:deepskyblue;
+        // background:deepskyblue;
+        border: 2px solid #B2EBF2;
     }
 
     .card-4 {
-        background:#ff0844;
-        color: white;
+        // background:#ff0844;
+        // color: white;
+        border: 2px solid #F8BBD0;
     }
-
+    .card-5 {
+        // background:#ff0844;
+        // color: white;
+        border: 2px solid #FFCCBC;
+    }
 }
 
 

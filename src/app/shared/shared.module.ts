@@ -37,6 +37,7 @@ import { DiskComponent } from './chart/disk/disk.component';
 import { RamComponent } from './chart/ram/ram.component';
 import { ChartsModule } from 'ng2-charts';
 import { HealthComponent } from './chart/health/health.component';
+import { ProfileChartComponent } from './chart/profile-chart/profile-chart.component';
 
 const COMPONENTS = [
     GroupEditorComponent,
@@ -70,6 +71,7 @@ const COMPONENTS = [
     DiskComponent,
     RamComponent,
     HealthComponent,
+    ProfileChartComponent,
 ];
 
 const MODULES = [
@@ -87,6 +89,7 @@ const MODULES = [
     ...COMPONENTS,
     ProfileSalaryQueryComponent,
     HealthComponent,
+    ProfileChartComponent,
   ],
   exports:[
     ...COMPONENTS,

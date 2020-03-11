@@ -1,0 +1,32 @@
+<div class="flex">
+        <div class="flex-item">
+          <div style="display: block;">
+          <canvas baseChart width="600" height="200"
+                      [datasets]="lineChartData"
+                      [labels]="lineChartLabels"
+                      [options]="lineChartOptions"
+                      [colors]="lineChartColors"
+                      [legend]="lineChartLegend"
+                      [chartType]="lineChartType"
+                      [plugins]="lineChartPlugins"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+        <div class="flex-item">
+          <table class="table table-responsive table-condensed">
+            <tr>
+              <th *ngFor="let label of lineChartLabels">{{label}}</th>
+            </tr>
+            <tr *ngFor="let d of lineChartData; let i=index" [class]="'line-'+i">
+              <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div>
+            <button nz-button [nzType]="primary" (click)="getYearData()"> 查询最近10年 </button>
+            <button nz-button [nzType]="primary" (click)="getMonthData()"> 最近12个月 </button>
+            <button nz-button [nzType]="primary" (click)="getDayData()"> 最近7天 </button>
+        </div>
+      </div>

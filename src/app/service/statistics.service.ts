@@ -69,4 +69,57 @@ export class StatisticsService extends MyService {
         catchError(this.handleError('getTransferRecord', []))
     );
   }
+
+  getProfileIncreaseMonth(amount: number): Observable<Response[]> {
+    const url = '/api/v1/statistics/profile/increase' ;
+
+    const data = {
+      getYear: false,
+      getMonth: true,
+      getDay: false,
+      amount: amount
+    };
+
+    return this.http.post<Response[]>(url, data)
+      .pipe(
+        tap(response => this.log('get profile increase')),
+        catchError(this.handleError('getProfileIncreaseMonth', []))
+    );
+  }
+
+  getProfileIncreaseYear(amount: number): Observable<Response[]> {
+    const url = '/api/v1/statistics/profile/increase' ;
+
+    const data = {
+      getYear: true,
+      getMonth: false,
+      getDay: false,
+      amount: amount
+    };
+
+    return this.http.post<Response[]>(url, data)
+      .pipe(
+        tap(response => this.log('get profile increase')),
+        catchError(this.handleError('getProfileIncreaseYear', []))
+    );
+  }
+
+  getProfileIncreaseDay(amount: number): Observable<Response[]> {
+    const url = '/api/v1/statistics/profile/increase' ;
+
+    const data = {
+      getYear: false,
+      getMonth: false,
+      getDay: true,
+      amount: amount
+    };
+
+    return this.http.post<Response[]>(url, data)
+      .pipe(
+        tap(response => this.log('get profile increase')),
+        catchError(this.handleError('getProfileIncreaseDay', []))
+    );
+  }
+
+
 }
