@@ -86,6 +86,7 @@ app-root {
     box-shadow: 0px 1px 5px #d1d9e6;
     display: inline-block;
     background: lightblue;
+    color: white;
     border-radius: 4px;
 }
 

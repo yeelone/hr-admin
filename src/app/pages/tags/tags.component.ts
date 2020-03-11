@@ -143,7 +143,7 @@ export class TagsComponent implements OnInit {
     } else {
       this.currentTag.name = tag.name ;
       this.currentTag.coefficient = tag.coefficient;
-      this.currentTag.commensalism_group_ids = tag.commensalism_group_ids;
+      this.currentTag.commensalismGroupIds = tag.commensalismGroupIds;
       this.tagService.updateTag(+this.currentTag.id, this.currentTag)
             .subscribe(response => {
               this.isOkLoading = false;

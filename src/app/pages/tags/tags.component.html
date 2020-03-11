@@ -10,7 +10,8 @@
   <div class="tag-container" *ngIf="!showTag">
       <ul class="tag-list">
           <li *ngFor="let t of parentTags ; let i = index;trackBy: trackByIndex" class="tag-item" (click)="topTag=t;currentParentTagIndex=i;showTag=true;">
-            <span class="content"><i nz-icon nzType="tags" nzTheme="outline"></i> {{t.name}}</span>
+            <p class="content"><i nz-icon nzType="tags" nzTheme="outline"></i> {{t.name}}</p>
+            <p class="tag-count" >关联人数 <br>{{ t.profileCount}}</p>
           </li>  
         </ul>  
   </div>
@@ -22,6 +23,7 @@
        <tr>
          <th style="background-color: lemonchiffon;"><a (click)="updateEditForm(topTag)">{{topTag.name}}</a></th>
          <th>标签</th>
+         <th>人数</th>
          <th>操作</th>
        </tr>
      </thead>
@@ -29,6 +31,7 @@
        <tr *ngFor="let data of childrenTags[topTag.id]">
          <td><a (click)="updateEditForm(data)"> {{data.name}}</a></td>
          <td>{{data.coefficient}}</td>
+         <td>{{data.profileCount}}</td>
          <td>
            <a (click)="openProfileSelectorForm(data)"><i nz-icon type="team" theme="outline"></i></a>
            <nz-divider [nzType]="vertical"></nz-divider>
@@ -40,7 +43,7 @@
      </tbody>
      <tfoot>
        <tr>
-         <td colspan="3">
+         <td colspan="4">
           <div nz-row>
          <div nz-col nzSpan="12" class="tag-action" ><a (click)="openEditForm(currentParentTagIndex)"> <i class="anticon anticon-file-add"></i>  子标签</a></div>
          <div nz-col nzSpan="12" class="tag-action" >

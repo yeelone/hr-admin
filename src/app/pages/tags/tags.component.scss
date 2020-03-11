@@ -29,27 +29,25 @@
             cursor: pointer;
             font-size: 18px;
         }
+
+        .tag-count{
+            font-size: 12px;
+            background: antiquewhite;
+            padding: 4px;
+            border-radius: 5px;
+            box-shadow: 1px 1px 1px #d1d9e6;
+        }
     }
 }
 
-
 .tag-table{
     width: 700px;
+    min-height: 450px;
     margin: auto;
     padding: 10px;
     background: white;
     
     box-shadow: 1px 1px 1px #d1d9e6;
-    // a {
-    //     display: inline-block;
-    //     padding: 5px;
-    //     border: 1px solid #cccccc;
-    //     background: white;
-    //     border-radius: 10px;
-    //     margin: 5px;
-    //     width: 120px;
-    //     text-align: center;
-    // }
 
     table{
             width:100%;        

@@ -38,7 +38,7 @@
                 <nz-select style="width: 80%;margin:20px;" [(ngModel)]="selectedTemplate" (ngModelChange)="selectedChange($event)" [nzSize]="size"  nzPlaceHolder="请选择模板">
                     <nz-option *ngFor="let option of templates" [nzLabel]="option.name" [nzValue]="option"></nz-option>
                 </nz-select>
-                <div [sortablejs]="selectedTemplates" [sortablejsOptions]="{ animation: 150 }" class="selected-templates">
+                <div class="selected-templates">
                     <div *ngFor="let item of selectedTemplates;let i = index ;" class="select-item">
                         {{ item.name }}
                         <button nz-button nzType="dashed" (click)="deleteSelectedTemplate(i)">X</button>
