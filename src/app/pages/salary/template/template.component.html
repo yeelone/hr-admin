@@ -14,7 +14,7 @@
             <th>操作</th>
             </tr>
         </thead>
-        <tbody  [sortablejs]="list" [sortablejsOptions]="options">
+        <tbody  >
             <tr *ngFor="let item of basicTable.data" >
                 <td>{{item.order}}</td>
                 <td>{{item.name}}</td>

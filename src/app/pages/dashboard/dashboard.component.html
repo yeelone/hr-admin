@@ -27,15 +27,27 @@
           </div>
   </div>
 
-  <div class="health-container card">
-    <div class="card-header">系统运行状况</div>
-    <div class="card-content">
-        <ul >
-            <li *ngFor="let m of messages;" style="color:black">
-                {{m}}
-            </li>
-          </ul>
-    </div>
+  <div class="row-container">
+      <div class="health-container card">
+          <div class="card-header">存储空间使用状况</div>
+          <div class="card-content">
+            <app-disk></app-disk>
+          </div>
+        </div>
+      
+        <div class="health-container card">
+            <div class="card-header">内存使用状况</div>
+            <div class="card-content">
+              <app-ram></app-ram>
+            </div>
+        </div>
+
+        <div class="health-container card">
+            <div class="card-header">CPU使用状况</div>
+            <div class="card-content">
+              <app-cpu></app-cpu>
+            </div>
+        </div>
   </div>
 
 <div class="record-container card">

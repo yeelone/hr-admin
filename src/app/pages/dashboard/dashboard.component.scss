@@ -1,6 +1,6 @@
 .container {
 
-    width: 50%;
+    width:85%;
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -18,10 +18,10 @@
     }
 
     .health-container {
-        height: 150px;
         line-height: 32px;
         margin: 20px;
         box-shadow: 1px 1px 1px #d1d9e6;
+        width: 350px;
 
         ul {
             list-style: none;

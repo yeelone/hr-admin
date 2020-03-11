@@ -11,7 +11,6 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomDirectiveModule } from 'src/app/directive/directive.module';
-import { SortablejsModule } from 'angular-sortablejs';
 
 const COMPONENTS = [
   UsersComponent,
@@ -29,7 +28,6 @@ const MODULES = [
   FormsModule,
   ReactiveFormsModule,
    CustomDirectiveModule,
-    SortablejsModule,
 ];
 
 

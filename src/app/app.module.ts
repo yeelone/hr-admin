@@ -12,8 +12,6 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { httpInterceptorProviders } from './http-interceptors';
 
-import { SortablejsModule } from 'angular-sortablejs';
-
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './shared/injectable/authguard';
@@ -36,11 +34,10 @@ enableProdMode();
     NgZorroAntdModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    SortablejsModule.forRoot({ animation: 150 }),
     CustomDirectiveModule,
     SharedModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN },{ provide: NZ_ICONS, useValue: icons },httpInterceptorProviders,AuthGuard,Title],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN }, { provide: NZ_ICONS, useValue: icons }, httpInterceptorProviders,AuthGuard,Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

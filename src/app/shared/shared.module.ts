@@ -27,12 +27,16 @@ import { TransferComponent } from './table/transfer/transfer.component';
 import { RecordComponent } from './table/record/record.component';
 import { GroupTagRuleEditorComponent } from './forms/group-tag-rule-editor/group-tag-rule-editor.component';
 import { CustomDirectiveModule } from '../directive/directive.module';
-import { SortablejsModule } from 'angular-sortablejs';
 import { RouterModule } from '@angular/router';
 import { NagivatorComponent } from './layout/nagivator/nagivator.component';
 import { TemplateAccountSelectorComponent } from './template-account-selector/template-account-selector.component';
 import { ProfileSalaryQueryComponent } from './profile-salary-query/profile-salary-query.component';
 import { AdjustComponent } from './adjust/adjust.component';
+import { CpuComponent } from './chart/cpu/cpu.component';
+import { DiskComponent } from './chart/disk/disk.component';
+import { RamComponent } from './chart/ram/ram.component';
+import { ChartsModule } from 'ng2-charts';
+import { HealthComponent } from './chart/health/health.component';
 
 const COMPONENTS = [
     GroupEditorComponent,
@@ -61,7 +65,11 @@ const COMPONENTS = [
     RecordComponent,
     GroupTagRuleEditorComponent,
     NagivatorComponent,
-    TemplateAccountSelectorComponent
+    TemplateAccountSelectorComponent,
+    CpuComponent,
+    DiskComponent,
+    RamComponent,
+    HealthComponent,
 ];
 
 const MODULES = [
@@ -70,14 +78,15 @@ const MODULES = [
     CommonModule,
     NgZorroAntdModule,
     CustomDirectiveModule,
-    SortablejsModule,
-    RouterModule
+    RouterModule,
+    ChartsModule,
 ];
 
 @NgModule({
   declarations: [
     ...COMPONENTS,
     ProfileSalaryQueryComponent,
+    HealthComponent,
   ],
   exports:[
     ...COMPONENTS,

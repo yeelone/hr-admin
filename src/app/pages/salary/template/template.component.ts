@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NzModalService} from 'ng-zorro-antd';
 import { SalaryTemplate } from '../../../model/salary';
 import { TemplateService } from '../../../service/template.service';
-import { SortablejsOptions } from 'angular-sortablejs';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -15,19 +14,15 @@ export class TemplateComponent implements OnInit {
   isOkLoading = false;
   updateOrderBtnVisible = false;
 
-  options: SortablejsOptions = {
-    animation: 150
-  };
-
   constructor(private templateService: TemplateService, private modalService: NzModalService, private titleService: Title) { 
-    this.options = {
-      onUpdate: (event: any) => {
-        this.updateOrderBtnVisible = true ;
-        for( let i = 0 ; i < this.list.length; i++) {
-          this.list[i].order = i + 1 ;
-        }
-      }
-    };
+    // this.options = {
+    //   onUpdate: (event: any) => {
+    //     this.updateOrderBtnVisible = true ;
+    //     for( let i = 0 ; i < this.list.length; i++) {
+    //       this.list[i].order = i + 1 ;
+    //     }
+    //   }
+    // };
   }
 
   ngOnInit() {

@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
 
   // pagination
   pagination = true ;
-  defaultLimit = 20;
+  defaultLimit = 10;
   pageIndex = 1 ;
   limit = this.defaultLimit ;
   offset = 0;
@@ -27,26 +27,14 @@ export class DashboardComponent implements OnInit {
   loading = false;
   summary: Summary = new Summary();
 
-  constructor(private healthService: HealthService,
+  constructor(
     private titleService: Title ,
     private summaryService: SummaryService, private recordService: RecordService) { }
 
   ngOnInit() {
-    this.getData();
     this.getRecords();
     this.getSummary();
     this.titleService.setTitle(config.title + ' Dashboard');
-  }
-
-  getData(): void {
-    this.healthService.getHealth()
-     .subscribe(response => {
-      if (response['code'] !== 200 ) {
-        return ;
-      } else {
-        this.messages = response['data'].split(';');
-      }
-     });
   }
 
   getSummary(): void {
@@ -68,7 +56,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getRecords(): void {
-    this.recordService.getOperationRecords(this.offset,this.limit )
+    this.recordService.getOperationRecords(this.offset, this.limit )
        .subscribe(response => {
         this.records = response['data']['operateRecordList'];
         this.total = response['data']['totalCount'];

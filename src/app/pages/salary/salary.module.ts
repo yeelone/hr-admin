@@ -10,7 +10,6 @@ import { CustomDirectiveModule } from 'src/app/directive/directive.module';
 import { SalaryCalculatorComponent } from './calculator/salary-calculator.component';
 import { TemplateComponent } from './template/template.component';
 import { TemplateaccountComponent } from './templateaccount/templateaccount.component';
-import { SortablejsModule } from 'angular-sortablejs';
 import { BuildinfuncSelectorComponent } from './component/buildinfunc-selector/buildinfunc-selector.component';
 import { CoefficientSelectorComponent } from './component/coefficient-selector/coefficient-selector.component';
 import { FormulaInputComponent } from './component/formula-input/formula-input.component';
@@ -41,7 +40,6 @@ const MODULES = [
   FormsModule,
   ReactiveFormsModule,
   CustomDirectiveModule,
-  SortablejsModule,
 ];
 
 @NgModule({
