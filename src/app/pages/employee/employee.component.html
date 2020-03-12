@@ -71,23 +71,43 @@
         </nz-content>
       </nz-layout>
     
-<nz-modal [(nzVisible)]="visible" nzTitle="新增或修改用户信息" (nzOnCancel)="closeEditForm()" nzOkDisabled="'true'"  [nzFooter]="modalFooter">
-    <app-profile-editor [profile]="selectedProfile" (onSubmit)="changeSubmitStatus($event)"></app-profile-editor>
+<nz-modal [nzStyle]="{ top: '20px'}" [nzWidth]="'80%'" [(nzVisible)]="visible" nzTitle="新增或修改用户信息" (nzOnCancel)="closeEditForm()" nzOkDisabled="'true'"  [nzFooter]="modalFooter">
+    <nz-steps [nzCurrent]="current" nzSize="small" *ngIf="!selectedProfile">
+        <nz-step nzTitle="基本信息"></nz-step>
+        <nz-step nzTitle="分组"></nz-step>
+    </nz-steps>
+    <div class="steps-content">
+        <div  *ngIf="current==0">
+            <app-profile-editor [profile]="selectedProfile" (onSubmit)="changeSubmitStatus($event)"></app-profile-editor>
+        </div>
+        <div  *ngIf="current==1">
+            <app-profile-group-selector [targetProfile]="selectedProfile?.id"></app-profile-group-selector>
+          </div>
+    </div>
+
+    <div class="steps-action" *ngIf="!selectedProfile">
+        <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+          <span>Previous</span>
+        </button>
+        <button nz-button nzType="default" (click)="next()" *ngIf="current < 1" [disabled]="disable">
+          <span>Next</span>
+        </button>
+  </div>
 </nz-modal>
 <ng-template #modalFooter>
 </ng-template>
 
-<nz-modal [(nzVisible)]="deleteModalVisible" nzTitle="删除" (nzOnCancel)="closeDeleteModal()" (nzOnOk)="onDelete()">
+<nz-modal [nzStyle]="{ top: '20px' }" [(nzVisible)]="deleteModalVisible" nzTitle="删除" (nzOnCancel)="closeDeleteModal()" (nzOnOk)="onDelete()">
     <span>{{targetProfile.name}}</span>
     
     <textarea nz-input [(ngModel)]="remark" rows="6"></textarea>
 </nz-modal>
 
-<nz-modal [(nzVisible)]="freezeModalVisible" nzTitle="冻结/解冻" (nzOnCancel)="closeFreezeModal()" (nzOnOk)="onFreeze()">
+<nz-modal [nzStyle]="{ top: '20px' }" [(nzVisible)]="freezeModalVisible" nzTitle="冻结/解冻" (nzOnCancel)="closeFreezeModal()" (nzOnOk)="onFreeze()">
     <textarea nz-input [(ngModel)]="remark" rows="6"></textarea>
 </nz-modal>
 
-<nz-modal [(nzVisible)]="importModalVisible" nzTitle="批量导入" (nzOnCancel)="closeImportModal()" (nzOnOk)="closeImportModal()">
+<nz-modal [nzStyle]="{ top: '20px' }" [(nzVisible)]="importModalVisible" nzTitle="批量导入" (nzOnCancel)="closeImportModal()" (nzOnOk)="closeImportModal()">
     
     <p>
         注意：<br>

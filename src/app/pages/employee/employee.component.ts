@@ -26,10 +26,10 @@ export class EmployeeComponent implements OnInit {
   queryFreezed = 'false'; // 请求冻结的，或者是激活的
 
   defaultLimit = 10;
-  // editor drawer 
+  // editor drawer
   visible = false ;
 
-  // modal 
+  // modal
   isOkLoading = false;
   modalVisible = false ;
   importModalVisible = false;
@@ -69,6 +69,7 @@ export class EmployeeComponent implements OnInit {
   importErrorFile = '';
   importErrorMsg = '';
 
+  current = 0;
   constructor(private profileService: ProfileService,
               private uploadService: UploadService,
               private modalService: NzModalService,
@@ -84,8 +85,17 @@ export class EmployeeComponent implements OnInit {
     this.titleService.setTitle('员工信息管理');
   }
 
-  changeSubmitStatus(event: boolean) {
-    this.getData();
+  pre(): void {
+    this.current -= 1;
+  }
+
+  next(): void {
+    this.current += 1;
+  }
+
+  changeSubmitStatus(result: boolean, id: number) {
+    // this.getData();
+    this.selectedProfile.id = id;
   }
 
   showFreezedProfiles() {
@@ -93,13 +103,12 @@ export class EmployeeComponent implements OnInit {
     this.ngOnInit();
   }
 
-  getProfiles():void {
+  getProfiles(): void {
     this.loading = true ;
     this.profileService.getProfiles(this.offset, this.limit, this.queryFreezed)
       .subscribe(response => {
         if ( response['code'] === 200 ) {
            this.profiles = response['data']['profileList'];
-           console.log(this.profiles);
            this.total = response['data']['totalCount'];
         } else {
           this.msg.error(response['message']);
@@ -128,19 +137,19 @@ export class EmployeeComponent implements OnInit {
     this.getProfilesByGroup();
   }
 
-  getProfilesByGroup(): void{
+  getProfilesByGroup(): void {
     this.loading = true ;
     this.profileService.getProfilesByGroup(+this.targetGroup.id, this.offset , this.limit, this.queryFreezed)
       .subscribe(response => {
         this.profiles = response['data']['profileList'];
         this.total = response['data']['totalCount'];
         this.loading = false ;
-      })
+      });
   }
 
-  updateProfile(profile:Profile):void{
-      this.loading = true ; 
-      this.profileService.updateProfile(profile,this.remark)
+  updateProfile(profile: Profile): void {
+      this.loading = true ;
+      this.profileService.updateProfile(profile, this.remark)
         .subscribe(response => {
           this.profiles = response['data']['profileList'];
           this.total = response['data']['totalCount'];
@@ -149,18 +158,18 @@ export class EmployeeComponent implements OnInit {
         });
   }
 
-  nzPageSizeChange(event:number):void {
+  nzPageSizeChange(event: number): void {
     this.limit = event;
     this.offset = 0 ;
-    this.profiles.splice(0,this.profiles.length) ;
-    if ( this.targetGroup.id ){
+    this.profiles.splice(0, this.profiles.length) ;
+    if ( this.targetGroup.id ) {
       this.getProfilesByGroup();
     } else {
       this.getProfiles();
     }
   }
 
-  getData():void{
+  getData(): void {
     this.offset = ( this.pageIndex - 1 ) * this.limit ;
     if ( this.targetGroup.id ){
       this.getProfilesByGroup();
@@ -203,8 +212,12 @@ export class EmployeeComponent implements OnInit {
   openEditForm(profile: Profile): void {
     if (profile) {
       this.selectedProfile = profile;
+    } else {
+      this.selectedProfile = null;
     }
+
     this.visible = true;
+    this.current = 0;
   }
 
   closeEditForm(): void {
@@ -266,15 +279,15 @@ export class EmployeeComponent implements OnInit {
 
   onDelete(): void {
     this.isOkLoading = true;
-    this.profileService.deleteProfile(this.targetProfile.id,this.remark)
+    this.profileService.deleteProfile(this.targetProfile.id, this.remark)
         .subscribe(response => {
           this.isOkLoading = false;
           if ( response['code'] !== 200 ) {
             alert('删除失败');
-          } 
+          }
           this.getData();
           alert('删除成功');
-    })
+    });
   }
 
   showDeleteConfirm(id: number,name: string): void {
@@ -291,33 +304,33 @@ export class EmployeeComponent implements OnInit {
               this.isOkLoading = false;
               if ( response['code'] !== 200 ) {
                 reject();
-              } 
+              }
               this.getData();
               resolve();
-            })
+            });
         }).catch(() => console.log('Oops errors!')),
       nzCancelText: 'No',
       nzOnCancel  : () => console.log('Cancel')
     });
   }
 
-  import(){
+  import() {
     this.importModalVisible = true ;
   }
 
-  closeImportModal(){
+  closeImportModal() {
     this.importModalVisible = false ;
   }
 
-  openImportModal(){
+  openImportModal() {
     this.importModalVisible = true ;
   }
 
-  closeMoveModal(){
+  closeMoveModal() {
     this.moveModalVisible = false ;
   }
 
-  openMoveModal(){
+  openMoveModal() {
     let idList = [];
     this.targetGroup = new Group();
     // if ( this.targetGroup.id == "0"){
@@ -325,13 +338,13 @@ export class EmployeeComponent implements OnInit {
     //   return ;
     // }
 
-    for ( const key in this.checkedMap ){
+    for ( const key in this.checkedMap ) {
       if ( this.checkedMap[key] ) {
         idList.push(+key);
       }
     }
 
-    if (idList.length > 1 ){
+    if (idList.length > 1 ) {
       alert('一次只能调动一个员工');
       return ;
     }
@@ -354,7 +367,7 @@ export class EmployeeComponent implements OnInit {
 
   // 获取用户选择调动的类型，比如岗位，部门，学历 ，职称
   getGroupType(event: Group[]): void {
-    let typeID: number = +event[0].id ;
+    const typeID = +event[0].id ;
     if (this.selectedProfile.groups) {
       for ( let i = 0 ; i < this.selectedProfile.groups.length ; i++) {
       if ( this.selectedProfile.groups[i].parent === typeID ) {
@@ -366,18 +379,18 @@ export class EmployeeComponent implements OnInit {
   }
 
   moveProfile() {
-    let oldG: number = 0 ;
-    if (this.selectedProfile.groups){
+    let oldG = 0 ;
+    if (this.selectedProfile.groups) {
         for (let i = 0; i < this.selectedProfile.groups.length; i++ ) {
           let g = this.selectedProfile.groups[i];
-          if ( this.targetGroup.id === g.id || this.targetGroup.id === String(g.parent) ){
+          if ( this.targetGroup.id === g.id || this.targetGroup.id === String(g.parent) ) {
             oldG = +g.id ;
           }
         }
     }
 
     this.moveLoading = true;
-    this.profileService.moveProfile(+this.selectedProfile.id,oldG, this.moveToNewGroupID ,this.description ,this.remark)
+    this.profileService.moveProfile(+this.selectedProfile.id, oldG, this.moveToNewGroupID , this.description , this.remark)
       .subscribe(
         response => {
           if ( response['code'] === 200 ){

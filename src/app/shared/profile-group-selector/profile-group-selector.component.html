@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="card" *ngFor="let g of parentGroups;">
+        <span class="title">{{g.name}} </span>
+        <app-group-selector [target]="g.id" (selectedValue)="getSelectedGroup($event)" [defaultValues]="defaultValueMap.get(g.id)"></app-group-selector>
+    </div>
+
+    <div class="action">
+        <button nz-button nzType="primary" (click)="submit()">提交</button>
+    </div>
+</div>

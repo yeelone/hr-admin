@@ -14,7 +14,7 @@ export class GroupSelectorComponent implements OnInit {
 
   defaultGroupIds: number[] = [];
   public nzOptions = null;
-  public values: string[] = null;
+  public values: string[] = [''];
   private parent = 0 ;
 
   @Input()
@@ -22,6 +22,7 @@ export class GroupSelectorComponent implements OnInit {
     this.parent = gid;
     this.getGroups();
   }
+
   @Input()
   set defaultValues(groups: number[]) {
     this.defaultGroupIds = groups;
@@ -34,11 +35,12 @@ export class GroupSelectorComponent implements OnInit {
   constructor(private groupService: GroupService) { }
 
   ngOnInit() {
-    this.defaultGroupIds = [];
     this.values = [];
   }
 
   getGroups(): void {
+    this.values = [];
+
     this.groupService.getGroupByParent(String(this.parent))
       .subscribe(response => {
         if ( response['code'] !== 200 ) {
@@ -69,12 +71,16 @@ export class GroupSelectorComponent implements OnInit {
           };
           tree.push(obj);
         }
-        for ( let i = 0; i < this.defaultGroupIds.length; i++) {
-          const id = this.defaultGroupIds[i];
-          if ( id !== 0 ) {
-            this.values.push(this.groupMap.get(id.toString()));
+
+        if ( this.defaultGroupIds ) {
+          for ( let i = 0; i < this.defaultGroupIds.length; i++) {
+            const id = this.defaultGroupIds[i];
+            if ( id !== 0 ) {
+              this.values = [this.groupMap.get(id.toString())];
+            }
           }
         }
+
         this.nzOptions = tree ;
       });
   }

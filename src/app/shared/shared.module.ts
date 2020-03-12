@@ -38,6 +38,7 @@ import { RamComponent } from './chart/ram/ram.component';
 import { ChartsModule } from 'ng2-charts';
 import { HealthComponent } from './chart/health/health.component';
 import { ProfileChartComponent } from './chart/profile-chart/profile-chart.component';
+import { ProfileGroupSelectorComponent } from './profile-group-selector/profile-group-selector.component';
 
 const COMPONENTS = [
     GroupEditorComponent,
@@ -72,6 +73,7 @@ const COMPONENTS = [
     RamComponent,
     HealthComponent,
     ProfileChartComponent,
+    ProfileGroupSelectorComponent
 ];
 
 const MODULES = [
@@ -90,6 +92,7 @@ const MODULES = [
     ProfileSalaryQueryComponent,
     HealthComponent,
     ProfileChartComponent,
+    ProfileGroupSelectorComponent,
   ],
   exports:[
     ...COMPONENTS,
