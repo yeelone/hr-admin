@@ -13,7 +13,11 @@
     <div style="margin:20px;text-align:center;">
       <button nz-button (click)="openModal()" class="ok-btn">变更标签</button>
     </div>
+    
     <ul class="profile-tag-container">
+        <div class="profile-image">
+            <img src="{{baseurl}}" alt="">
+          </div>
       <li *ngFor="let item of tags; let i = index ;">
         <ul style="list-style:none;">
           <li *ngFor="let c of item['children']">

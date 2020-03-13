@@ -6,14 +6,14 @@ import { TagsService } from '../../service/tags.service';
 import { Profile } from '../../model/profile';
 import { Tags, Tag } from '../../model/tag';
 import { TransferRecord } from '../../model/transfer';
-
+import config from '../../config/config';
 @Component({
   selector: 'app-profile-detail',
   templateUrl: './profile-detail.component.html',
   styleUrls: ['./profile-detail.component.scss']
 })
 export class ProfileDetailComponent implements OnInit {
-  profile: Profile;
+  profile: Profile = new Profile();
   tags: Tags[] = [];
   transferRecords: TransferRecord[];
   loading = false;
@@ -24,7 +24,7 @@ export class ProfileDetailComponent implements OnInit {
   checkedResult: any = {};
   defaultChecked: Tag[] = [];
   isOkLoading = false ;
-
+  baseurl = config.api + '/static/img/boy.jpg';
   constructor(private route: ActivatedRoute, private profileService: ProfileService,
     private tagsService: TagsService, private titleService: Title ) {
   }
@@ -32,9 +32,6 @@ export class ProfileDetailComponent implements OnInit {
   ngOnInit() {
       const id = this.route.snapshot.paramMap.get('id');
       this.getProfile(+id);
-      if ( this.profile ) {
-          this.titleService.setTitle( this.profile.name );
-      }
       this.getRecords(+id);
   }
 
@@ -49,6 +46,12 @@ export class ProfileDetailComponent implements OnInit {
           }
 
           this.profile = response['data']['profile'];
+          this.titleService.setTitle( this.profile.name );
+          if ( this.profile.gender === '男') {
+            this.baseurl = config.api + '/static/img/boy.jpg';
+          } else {
+            this.baseurl = config.api + '/static/img/girl.jpg';
+          }
           this.tags = response['data']['tags'];
           this.loading = false;
         }

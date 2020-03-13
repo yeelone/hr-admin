@@ -1,31 +1,33 @@
 .tag-container{
     padding: 5px;
     box-shadow: 0px 5px 10px #d1d9e6;
-    background: antiquewhite;   
-        display: block;
-        max-width: 310px;
-        min-width: 100px;
-        float: left;
-        margin: 10px;
-        text-align: center;
-        border-radius: 5px;
+    background: rgba(234,114,93,.05);
+    border-left: 3px solid rgba(234,114,93,.3);
+    display: block;
+    max-width: 310px;
+    min-width: 100px;
+    float: left;
+    margin: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.profile-image{
+    width: 250px;
+    float: left;
 }
 
 .transfer-content{
-        font-size: larger;
-        box-shadow: 0px 5px 10px #d1d9e6;
-    background: antiquewhite;
-        padding: 10px;
-        border-radius: 5px;
+    font-size: larger;
+    box-shadow: 0px 5px 10px #d1d9e6;
+    background: rgba(234,114,93,.05);
+    border-left: 3px solid rgba(234,114,93,.3);
+    padding: 10px;
+    border-radius: 5px;
 }
-
 
 .profile-tag-container{
     list-style: none;
     width: 50%;
     margin: auto;
-
-    li {
-        
-    }
 }

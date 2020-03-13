@@ -10,7 +10,8 @@
   }
 
 .container {
-    background: blanchedalmond;
+  background: rgba(234,114,93,.05);
+  border-top: 3px solid rgba(234,114,93,.3);
     padding: 20px;
     border-radius: 2px;
     overflow: auto;
