@@ -1,0 +1,47 @@
+
+.container {
+    .notify {
+        span{
+            margin-left: 5px;
+            padding: 5px;
+            border: 1px solid #d1d9ed;
+        }
+
+        button {
+            float: right;
+        }
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        li {
+            box-shadow: 1px 1px 8px #d1d9ed;
+            padding: 10px;
+            margin-top: 20px;
+
+            .title {
+                font-size: 15px;
+                color: black;
+            }
+
+            .special {
+                color: crimson;
+                font-size: 18px;
+                font-weight: bold;
+            }
+            
+            .sender{
+                
+            }
+
+            .date {
+                color: grey;
+            }
+
+            button {
+                float: right;
+                margin: -5px;
+            }
+        }
+    }
+}

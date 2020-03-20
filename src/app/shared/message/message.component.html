@@ -1,0 +1,30 @@
+<div class="container">
+
+    <span *ngIf="notify" class="notify">
+        <span>[私信:{{notify?.private}}] </span>
+        <span>[群消息:{{notify?.public}}] </span>
+        <span>[系统信息:{{notify?.global}}] </span>
+
+        <button nz-button nzType="primary" (click)="getData()">
+            <i nz-icon nzType="reload" nzTheme="outline"></i>刷新
+        </button>
+    </span>
+
+    <div class="list">
+        <ul>
+            <li *ngFor="let m of messages" class="item">
+                <p [ngClass]=" check[m.id] ? 'title' : 'special' " >{{m.title}}</p>
+                <p >{{m.text}}</p>
+                <div>
+                   <span class="sender"> [{{m.messageType}}]  </span>
+                   <span class="sender"> 发件人:{{m.senderName}}</span>
+                   <span class="date"> {{m.date | date:'yyyy-MM-dd hh:mm' }}</span>
+
+                   <button nz-button nzType="primary" (click)="setStatus(m.id,m.messageType)"><i nz-icon nzType="check"></i>已读</button>
+                </div>
+            </li>
+        </ul> 
+    </div>
+</div>
+
+

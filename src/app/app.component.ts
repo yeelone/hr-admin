@@ -9,9 +9,9 @@ import config from './config/config';
 export class AppComponent implements OnInit {
   title = 'app';
   version = '';
-  
+
   ngOnInit() {
     this.version = config.version;
-    console.log("Power by Jiangyilong 2018 Version " + this.version);
+    console.log('Power by Jiangyilong 2018 Version ' + this.version);
   }
 }

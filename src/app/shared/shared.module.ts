@@ -39,6 +39,7 @@ import { ChartsModule } from 'ng2-charts';
 import { HealthComponent } from './chart/health/health.component';
 import { ProfileChartComponent } from './chart/profile-chart/profile-chart.component';
 import { ProfileGroupSelectorComponent } from './profile-group-selector/profile-group-selector.component';
+import { MessageComponent } from './message/message.component';
 
 const COMPONENTS = [
     GroupEditorComponent,
@@ -93,6 +94,7 @@ const MODULES = [
     HealthComponent,
     ProfileChartComponent,
     ProfileGroupSelectorComponent,
+    MessageComponent,
   ],
   exports:[
     ...COMPONENTS,

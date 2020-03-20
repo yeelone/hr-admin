@@ -1,4 +1,13 @@
 <div class="header">
+  <span (click)="messageVisible=true">
+      <i class="anticon anticon-mail"></i> 
+      <span *ngIf="notify">
+          <span>[私信:{{notify?.private}}] </span>
+          <span>[群消息:{{notify?.public}}] </span>
+          <span>[系统信息:{{notify?.global}}] </span>
+      </span>
+      
+  </span>
   <nz-dropdown [nzTrigger]="'click'">
       <a nz-dropdown>
         <i class="anticon anticon-user"></i> 
@@ -26,3 +35,6 @@
   </nz-spin>
 </nz-modal>
 
+<nz-drawer  [nzWidth]="600" [nzVisible]="messageVisible" nzTitle="消息中心" (nzOnClose)="closeDrawer()">
+    <app-message></app-message>
+</nz-drawer>

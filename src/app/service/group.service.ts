@@ -10,7 +10,7 @@ import { MyService } from './service';
 })
 export class GroupService  extends MyService {
   private groupUrl = '/api/v1/group';
-  constructor(private http: HttpClient) { super() }
+  constructor(private http: HttpClient) { super(); }
 
   getTopGroup(): Observable<Response[]> {
     let url = "/api/v1/group?where_key=parent&where_value=0";
@@ -20,7 +20,7 @@ export class GroupService  extends MyService {
         catchError(this.handleError('getGroups', []))
       );
   }
-  
+
   getGroupByParent(parent:string): Observable<Response[]> {
     let url = "/api/v1/group?where_key=parent&where_value=" + parent;
     return this.http.get<Response[]>(url)
