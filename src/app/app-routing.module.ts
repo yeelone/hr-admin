@@ -4,7 +4,7 @@ import { ProfileDetailComponent } from './shared/profile-detail/profile-detail.c
 import { AuthGuard } from './shared/injectable/authguard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/task', pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'profile/:id', component: ProfileDetailComponent, canActivate: [AuthGuard] },
    { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard]},
   { path: 'employee',  loadChildren: './pages/employee/employee.module#EmployeeModule', canActivate: [AuthGuard] },

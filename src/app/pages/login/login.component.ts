@@ -9,6 +9,6 @@ const baseurl = config.baseurl;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-   chrome = baseurl + "/api/static/img/chrome.png";
-   icon = baseurl + "/api/static/img/icon-min.png";
+   chrome = baseurl + '/api/static/img/chrome.png';
+   icon = baseurl + '/api/static/img/icon-min.png';
 }

@@ -9,8 +9,7 @@
           <span style="font-size: 16px; color: white; text-shadow: 1px 1px 1px #cccccc;color: blanchedalmond;">新阶段工资模板计算系统</span> 
         </span>
     </li>
-     <!-- <li nz-menu-item *appCanAccess="['Dashboard']"> -->
-     <li nz-menu-item>
+     <li nz-menu-item *appCanAccess="['DASHBOARD']">
       <span title>
         <i nz-icon nzType="home" nzTheme="outline"></i>
         <span><a routerLink="/dashboard">dashboard</a></span>
@@ -61,15 +60,15 @@
       <li nz-submenu *appCanAccess="['ADD_PERMISSIONS', 'CREATE_USER','CREATE_USER_GROUP','CREATE_ROLE']">
       <span title><i class="anticon anticon-setting"></i> 管理 </span>
         <ul>
-            <li nz-menu-item> <span><a routerLink="/manager/users">用户管理</a></span> </li>
-            <li nz-menu-item> <span><a routerLink="/manager/groups">群组管理</a></span></li>
-            <li nz-menu-item> <span><a routerLink="/manager/roles">角色管理</a></span></li>
-            <li nz-menu-item> <span><a routerLink="/manager/permission">权限管理</a></span></li>
-            <li nz-menu-item> <span><a routerLink="/manager/backup">备份与还原</a></span></li>
+            <li nz-menu-item> <span><a routerLink="/manager/users" *appCanAccess="['CREATE_USER']">用户管理</a></span> </li>
+            <li nz-menu-item> <span><a routerLink="/manager/groups" *appCanAccess="['CREATE_USER_GROUP']">群组管理</a></span></li>
+            <li nz-menu-item> <span><a routerLink="/manager/roles" *appCanAccess="['CREATE_ROLE']">角色管理</a></span></li>
+            <li nz-menu-item> <span><a routerLink="/manager/permission" *appCanAccess="['ADD_PERMISSIONS']">权限管理</a></span></li>
+            <li nz-menu-item> <span><a routerLink="/manager/backup"  *appCanAccess="['BACKUP']">备份</a></span></li>
         </ul>
     </li>
 
-     <li nz-menu-item *appCanAccess="['LIST_AUDIT']" style="float:right;">
+     <li nz-menu-item style="float:right;">
         <app-header></app-header>
      </li>
   </ul>  

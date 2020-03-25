@@ -1,11 +1,32 @@
 
-<div>
-  <button nz-button (click)="backup()"> 备份 </button>
-  <ul>
-    <li *ngFor="let file of backupFiles;let i = index ">
-      <a href="{{ file }}" target="_blank"> {{i+1}} - {{getName(file)}}</a>
-    </li>
-  </ul>
-
+<div class="container">
+  <div class="action">
+    <button nz-button (click)="backup()" *appCanAccess="['BACKUP']"> 开始备份 </button>
+  </div>
+  <nz-table #rowTable *appCanAccess="['BACKUP_FILES']"
+        [nzData]="backupFiles" 
+        [nzBordered]="'true'"
+        [nzSimple]="'false'"
+        [nzSize]="'small'"
+        [nzShowPagination]="'false'"
+        [nzFrontPagination]="'false'"
+        [nzHideOnSinglePage]="'true'"
+        [nzWidthConfig]="['60px','100px','200px']"
+        >
+        <thead>
+            <tr>
+            <th>时间</th>
+            <th>大小</th>
+            <th>文件</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of rowTable.data; let i = index ">
+                <td>{{data.date | date:'yyyy-MM-dd hh:mm' }}</td>
+                <td>{{data.size| filesize }}</td>
+                <td> <a href="{{ data.path }}" target="_blank">  {{getName(data.path)}}</a></td>
+            </tr>
+        </tbody>
+</nz-table>
 </div>
 

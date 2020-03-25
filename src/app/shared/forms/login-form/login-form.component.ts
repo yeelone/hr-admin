@@ -67,9 +67,20 @@ export class LoginFormComponent implements OnInit {
             }
             for (let i = 0; i < roles.length; i++) {
               if ( roles[i].name === '查询岗') {
-                this.returnUrl = '/statistics';
+                this.returnUrl = '/salary/adjust';
               }
             }
+            let accessMap = {};
+            const permissions = response['data']['permissions'];
+            // tslint:disable-next-line: forin
+            for (const k1 in permissions) {
+              for ( const k2 in permissions[k1]) {
+                if (permissions[k1][k2]['checked']) {
+                  accessMap[permissions[k1][k2]['id']] = true;
+                }
+              }
+            }
+            localStorage.setItem('permissions', JSON.stringify(accessMap));
             location.href = this.returnUrl;
             // this.router.navigate([this.returnUrl]);
           } else {

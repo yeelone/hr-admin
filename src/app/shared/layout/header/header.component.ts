@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   visible = false;
   notify: MessageCount;
   newPassword = '';
-  messageVisible = true;
+  messageVisible = false;
   isSubmiting = false;
   constructor(private authService: AuthService, private userService: UserService, 
       private messageService: MessageService,
@@ -74,5 +74,6 @@ export class HeaderComponent implements OnInit {
 
   closeDrawer(): void {
     this.messageVisible = false;
+    this.getMsgCount();
   }
 }

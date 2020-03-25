@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BackupService } from '../../../service/backup.service';
 import config from '../../../config/config';
 import { Title } from '@angular/platform-browser';
+import { CustomFile } from 'src/app/model/fileResponse';
 
 @Component({
   selector: 'app-backup',
@@ -10,7 +11,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class BackupComponent implements OnInit {
 
-  backupFiles: string[] = [];
+  backupFiles: CustomFile[] = [];
 
   constructor(private backService: BackupService, private titleService: Title) { }
 
@@ -34,10 +35,10 @@ export class BackupComponent implements OnInit {
      this.backService.list()
     .subscribe(
       ( response ) => {
-        const files: string[] = response['data']['Files'];
-
-        for ( let i = 0; i < files.length; i++ ) {
-            this.backupFiles.push( config.api  + files[i]);
+        this.backupFiles = response['data']['Files'];
+        console.log(this.backupFiles);
+        for ( let i = 0; i < this.backupFiles.length; i++ ) {
+          this.backupFiles[i].path = config.api  + this.backupFiles[i].path;
         }
       },
       ( error ) => {console.log(error); }

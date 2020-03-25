@@ -29,7 +29,6 @@ export class AuthService extends MyService {
               currentUser = response['data']['user'];
               currentUser.token = response['data']['token'];
               localStorage.setItem('currentUser', JSON.stringify(currentUser));
-
               this.log('login success');
             } else {
               this.handleError('login', []);

@@ -1268,6 +1268,11 @@ amdefine@>=0.0.4:
   resolved "https://registry.npm.taobao.org/amdefine/download/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
+angular-pdf-generator@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/angular-pdf-generator/-/angular-pdf-generator-0.1.0.tgz#9c22f19ea31149eb7787844d274156340de1ccc0"
+  integrity sha512-u2eGItahlg517yeBZMPT13f1AM5FvYgBojJMYhXEt+I718lj9rRFqeU8xzMj6HdYC7JUnkekZFNZKaF85LmQ4A==
+
 ansi-colors@4.1.1:
   version "4.1.1"
   resolved "https://registry.npm.taobao.org/ansi-colors/download/ansi-colors-4.1.1.tgz#cbb9ae256bf750af1eab344f229aa27fe94ba348"
@@ -3320,6 +3325,11 @@ fileset@^2.0.3:
     glob "^7.0.3"
     minimatch "^3.0.3"
 
+"filesize@>= 4.0.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/filesize/-/filesize-6.1.0.tgz#e81bdaa780e2451d714d71c0d7a4f3238d37ad00"
+  integrity sha512-LpCHtPQ3sFx67z+uh2HnSyWSLLu5Jxo21795uRDuar/EOuYWXib5EmPaGIBuSnRqH2IODiKA2k5re/K9OnN/Yg==
+
 fill-range@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/fill-range/download/fill-range-4.0.0.tgz#d544811d428f98eb06a63dc402d2403c328c38f7"
@@ -5211,6 +5221,13 @@ ng2-charts@^2.3.0:
     "@types/chart.js" "^2.7.48"
     lodash "^4.17.11"
     tslib "^1.9.0"
+
+ngx-filesize@^2.0.12:
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/ngx-filesize/-/ngx-filesize-2.0.12.tgz#ab0145a7d6c4482f5e599671281c99d0ff43e0b4"
+  integrity sha512-hwaBxf2R7AyCL+7KgCn3pfLjKurD68Vowgp3EBELDKUt3ppHh6ksc/OOQkhnN+jxTORkhsVv3/oeTtg5BIbRkw==
+  dependencies:
+    filesize ">= 4.0.0"
 
 nice-try@^1.0.4:
   version "1.0.5"

@@ -23,6 +23,9 @@
     background: #ecf0f3 !important;
 }
 
+:host ::ng-deep .ant-menu-item, .ant-menu-submenu-title{
+    padding: 0 10px;
+}
 :host > ::ng-deep .ant-layout {
     margin-bottom: 48px;
 }

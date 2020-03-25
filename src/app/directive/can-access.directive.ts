@@ -1,4 +1,4 @@
-import { Directive ,Input,OnInit, OnDestroy,TemplateRef,ViewContainerRef} from '@angular/core';
+import { Directive , Input, OnInit, OnDestroy, TemplateRef, ViewContainerRef} from '@angular/core';
 import { PermissionService } from '../service/permission.service';
 import { Permission } from '../model/permission';
 import { User } from '../model/user';
@@ -11,7 +11,7 @@ export class CanAccessDirective  implements OnInit, OnDestroy{
   @Input('appCanAccess') appCanAccess: string[];
 
   permissions: Permission[] = [];
-  authorized:boolean = false ;
+  authorized = false ;
   accessMap = {};
   service = null ;
   constructor(private templateRef: TemplateRef<any>,
@@ -40,12 +40,12 @@ export class CanAccessDirective  implements OnInit, OnDestroy{
     this.service = this.permissionService.getPermission(role.id)
       .subscribe(
         response => {
-          if (response['code'] === 200 ){
+          if (response['code'] === 200 ) {
             this.permissions = response['data']['fields'];
             // tslint:disable-next-line: forin
             for (const k1 in this.permissions) {
-              for ( const k2 in this.permissions[k1]){
-                if (this.permissions[k1][k2]['checked']){
+              for ( const k2 in this.permissions[k1]) {
+                if (this.permissions[k1][k2]['checked']) {
                   this.accessMap[this.permissions[k1][k2]['id']] = true;
                 }
               }

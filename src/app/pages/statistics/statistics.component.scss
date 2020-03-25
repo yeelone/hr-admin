@@ -19,13 +19,14 @@
 
 
 .profile-detail-btn {
-    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-
+    background-image: linear-gradient(60deg, #96deda 0%, #50c9c3 100%);
+    margin: 5px;
     a {
         font-size: 18px;
         display: block;
         margin: auto;
         width: 124px;
+        color: white;
     }
 }
 .profile-transfer-btn {

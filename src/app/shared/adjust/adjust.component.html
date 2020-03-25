@@ -15,7 +15,6 @@
         </div>
       </div>
   </div>
-   <nz-spin nzSimple [nzSize]="'large'" [nzSpinning]="loading">
   <nz-card style="width:100%;" nzTitle="个人信息" >
       <p></p>
       <table>
@@ -43,7 +42,6 @@
         </tbody>
       </table>
   </nz-card>
-  </nz-spin>
 <div *ngFor="let template of templates; let i = index;" class="detail-box" >
   <h2> {{getKey(template)}}</h2>
   <nz-table #basicTable nzBordered  [nzNoResult]="noresultTempalte" [nzWidthConfig]="['200px','150px']">

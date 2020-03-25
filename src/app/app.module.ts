@@ -20,6 +20,7 @@ registerLocaleData(zh);
 import { enableProdMode } from '@angular/core';
 import { CustomDirectiveModule } from './directive/directive.module';
 import { SharedModule } from './shared/shared.module';
+
 enableProdMode();
 
 @NgModule({

@@ -13,7 +13,7 @@ export class GroupService  extends MyService {
   constructor(private http: HttpClient) { super(); }
 
   getTopGroup(): Observable<Response[]> {
-    let url = "/api/v1/group?where_key=parent&where_value=0";
+    const url = '/api/v1/group?where_key=parent&where_value=0';
     return this.http.get<Response[]>(url)
       .pipe(
         tap(response => this.log('fetched groups')),
@@ -21,8 +21,8 @@ export class GroupService  extends MyService {
       );
   }
 
-  getGroupByParent(parent:string): Observable<Response[]> {
-    let url = "/api/v1/group?where_key=parent&where_value=" + parent;
+  getGroupByParent(parent: string): Observable<Response[]> {
+    const url = '/api/v1/group?where_key=parent&where_value=' + parent;
     return this.http.get<Response[]>(url)
       .pipe(
         tap(response => this.log('fetched groups')),
@@ -38,16 +38,16 @@ export class GroupService  extends MyService {
       );
   }
 
-  getGroup(id:number): Observable<Response[]> {
-    return this.http.get<Response[]>(this.groupUrl + "/" + String(id))
+  getGroup(id: number): Observable<Response[]> {
+    return this.http.get<Response[]>(this.groupUrl + '/' + String(id))
       .pipe(
         tap(response => this.log('fetched group')),
         catchError(this.handleError('getGroup', []))
       );
   }
 
-  deleteGroup(id:number): Observable<Response[]> {
-    let url = '/api/v1/group/' + String(id);
+  deleteGroup(id: number): Observable<Response[]> {
+    const url = '/api/v1/group/' + String(id);
 
     return this.http.delete<Response[]>(url)
       .pipe(
@@ -56,27 +56,26 @@ export class GroupService  extends MyService {
     );
   }
 
-  createGroup(g:Group):Observable<Response[]>{
-    let url = "/api/v1/group";
-    return this.http.post<Response[]>(url,g)
+  createGroup(g: Group): Observable<Response[]> {
+    const url = '/api/v1/group';
+    return this.http.post<Response[]>(url, g)
       .pipe(
         tap(response => this.log('create group')),
         catchError(this.handleError('createGroup', []))
       );
   }
 
-
-  updateGroup(g:Group):Observable<Response[]>{
-    let url = "/api/v1/group/" + g.id;
-    return this.http.put<Response[]>(url,g)
+  updateGroup(g: Group): Observable<Response[]> {
+    const url = '/api/v1/group/' + g.id;
+    return this.http.put<Response[]>(url, g)
       .pipe(
         tap(response => this.log('update group')),
         catchError(this.handleError('updateGroup', []))
       );
   }
 
-  lockGroup(id:number):Observable<Response[]>{
-    let url = "/api/v1/group/"+id+"/lock";
+  lockGroup(id: number): Observable<Response[]> {
+    const url = '/api/v1/group/' + id + '/lock';
     return this.http.get<Response[]>(url)
       .pipe(
         tap(response => this.log('update group')),
@@ -84,25 +83,16 @@ export class GroupService  extends MyService {
       );
   }
 
-  unlockGroup(id:number):Observable<Response[]>{
-    let url = "/api/v1/group/"+id+"/unlock";
+  unlockGroup(id: number): Observable<Response[]> {
+    const url = '/api/v1/group/' + id + '/unlock';
     return this.http.get<Response[]>(url)
       .pipe(
         tap(response => this.log('update group')),
         catchError(this.handleError('updateGroup', []))
       );
   }
-  invalidGroup(id:number):Observable<Response[]>{
-    let url = "/api/v1/group/"+id+"/invalid";
-    return this.http.get<Response[]>(url)
-      .pipe(
-        tap(response => this.log('update group')),
-        catchError(this.handleError('updateGroup', []))
-      );
-  }
-
-  validGroup(id:number):Observable<Response[]>{
-    let url = "/api/v1/group/"+id+"/valid";
+  invalidGroup(id: number): Observable<Response[]> {
+    const url = '/api/v1/group/' + id + '/invalid';
     return this.http.get<Response[]>(url)
       .pipe(
         tap(response => this.log('update group')),
@@ -110,14 +100,23 @@ export class GroupService  extends MyService {
       );
   }
 
-  addGroupTagRelationship(group_id:number, tag_id_list:number[],rules:String[]):Observable<Response[]>{
-    let url = "/api/v1/group/" + group_id + "/tags";
-    let data = {
-      group:group_id ,
-      tags:tag_id_list,
+  validGroup(id: number): Observable<Response[]> {
+    const url = '/api/v1/group/' + id + '/valid';
+    return this.http.get<Response[]>(url)
+      .pipe(
+        tap(response => this.log('update group')),
+        catchError(this.handleError('updateGroup', []))
+      );
+  }
+
+  addGroupTagRelationship(group_id: number, tag_id_list: number[], rules: String[]): Observable<Response[]> {
+    const url = '/api/v1/group/' + group_id + '/tags';
+    const data = {
+      group: group_id,
+      tags: tag_id_list,
       rules
-      }
-    return this.http.put<Response[]>(url,data)
+      };
+    return this.http.put<Response[]>(url, data)
       .pipe(
         tap(response => this.log('add relate group tags ')),
         catchError(this.handleError('addGroupTagRelationship', []))

@@ -14,7 +14,7 @@
         <ul>
             <li *ngFor="let m of messages" class="item">
                 <p [ngClass]=" check[m.id] ? 'title' : 'special' " >{{m.title}}</p>
-                <p >{{m.text}}</p>
+                <p >{{m.id}} {{m.text}}</p>
                 <div>
                    <span class="sender"> [{{m.messageType}}]  </span>
                    <span class="sender"> 发件人:{{m.senderName}}</span>

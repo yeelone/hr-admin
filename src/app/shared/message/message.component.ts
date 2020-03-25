@@ -54,7 +54,6 @@ export class MessageComponent implements OnInit {
   setStatus(id: number, mType: string): void {
 
     this.check[id] = true;
-    return ;
     this.messageService.setStatus(id)
       .subscribe(
         response => {
