@@ -52,7 +52,7 @@
                     <tr *ngFor="let data of rowSelectionTable.data">
                         <td nzShowCheckbox [(nzChecked)]="checkedMap[data.id]" (nzCheckedChange)="checkItem($event)"></td>
                         <td>{{data.id}}</td>
-                        <td><a  [routerLink]="['/profile/', data.id]" target="_blank" > {{data.name}}  </a></td>
+                        <td><a  [routerLink]="['/profile/', data.id]"   > {{data.name}}  </a></td>
                         <td>{{data.id_card}}</td>
                         <td>{{data.bank_card}}</td> 
                         <td>{{stateMap[data.audit_state]}}</td>

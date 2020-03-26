@@ -8,14 +8,14 @@ const baseurl = config.baseurl;
 })
 export class NagivatorComponent implements OnInit {
   isCollapsed = false;
-  
-  logo = baseurl + "/api/static/img/icon-min.png"
+
+  logo = baseurl + '/api/static/img/icon-min.png';
 
   constructor() { }
 
   ngOnInit() {
   }
-  
+
 
   toggleCollapsed(): void {
     this.isCollapsed = !this.isCollapsed;

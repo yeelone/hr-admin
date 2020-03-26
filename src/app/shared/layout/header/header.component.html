@@ -1,5 +1,10 @@
 <div class="header">
-  <span (click)="messageVisible=true">
+  <span title>
+        <img [src]="logo" width="35"> 
+         <span style="font-size: 16px; color: white; text-shadow: 1px 1px 1px #cccccc;color: blanchedalmond;">新阶段工资模板计算系统</span> 
+  </span>
+
+  <span (click)="messageVisible=true" class="message-container">
       <i class="anticon anticon-mail"></i> 
       <span *ngIf="notify">
           <span>[私信:{{notify?.private}}] </span>
@@ -7,31 +12,39 @@
           <span>[系统信息:{{notify?.global}}] </span>
       </span>
   </span>
-  <nz-dropdown [nzTrigger]="'click'">
-      <a nz-dropdown>
-        <i class="anticon anticon-user"></i> 
-        {{currentUser.username}} 
-         <span *ngFor="let r of roles;" >
-         [{{r.name}}]
-      </span>
-        <i class="anticon anticon-down"></i>
-      </a>
-      <ul nz-menu>
-        <li nz-menu-item>{{currentUser.username}}</li>
-        <li nz-menu-item (click)="openModal()">修改密码</li>
-        <li nz-menu-item (click)="logout()">注销</li>
-      </ul>
-    </nz-dropdown>
+  <div class="userinfo">
+      <nz-dropdown [nzTrigger]="'click'">
+          <a nz-dropdown>
+            <i class="anticon anticon-user"></i> 
+            {{currentUser.username}} 
+             <span *ngFor="let r of roles;" >
+             [{{r.name}}]
+          </span>
+            <i class="anticon anticon-down"></i>
+          </a>
+          <ul nz-menu>
+            <li nz-menu-item>{{currentUser.username}}</li>
+            <li nz-menu-item (click)="openModal()">修改密码</li>
+            <li nz-menu-item (click)="logout()">注销</li>
+          </ul>
+        </nz-dropdown>
+  </div>
+  
 </div>
 
 <nz-modal [(nzVisible)]="visible" nzTitle="修改密码" (nzOnCancel)="closeModal()" (nzOnOk)="resetPassword()">
   <nz-spin [nzSize]="'large'"  [nzSpinning]="isSubmiting">
-  <span>
-    {{currentUser.username}} 
-  </span>
+  <p>
+   当前用户： {{currentUser.username}} 
+  </p>
 
-  <input type="text" nz-input  [(ngModel)]="newPassword">
-  </nz-spin>
+  <p>请输入旧密码: <input type="password" nz-input  [(ngModel)]="oldPassword">
+  </p>
+  
+  <p>请输入新密码: <input type="password" nz-input  [(ngModel)]="newPassword"></p>
+  
+
+</nz-spin>
 </nz-modal>
 
 <nz-drawer  [nzWidth]="600" [nzVisible]="messageVisible" nzTitle="消息中心" (nzOnClose)="closeDrawer()">

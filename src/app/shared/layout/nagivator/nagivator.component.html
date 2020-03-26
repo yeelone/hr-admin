@@ -1,14 +1,7 @@
 <div  class="nav-bar">
- 
-  <ul nz-menu [nzMode]="'horizontal'" [nzMode]="'inline'" nzTheme='dark' [nzInlineCollapsed]="isCollapsed">
+    <!-- [nzMode]="'horizontal'" -->
+  <ul nz-menu  [nzMode]="'inline'" nzTheme='dark' [nzInlineCollapsed]="isCollapsed">
     
-    <li nz-menu-item>
-       <span title>
-         <img [src]="logo" width="35"> 
-
-          <span style="font-size: 16px; color: white; text-shadow: 1px 1px 1px #cccccc;color: blanchedalmond;">新阶段工资模板计算系统</span> 
-        </span>
-    </li>
      <li nz-menu-item *appCanAccess="['DASHBOARD']">
       <span title>
         <i nz-icon nzType="home" nzTheme="outline"></i>
@@ -67,10 +60,6 @@
             <li nz-menu-item> <span><a routerLink="/manager/backup"  *appCanAccess="['BACKUP']">备份</a></span></li>
         </ul>
     </li>
-
-     <li nz-menu-item style="float:right;">
-        <app-header></app-header>
-     </li>
   </ul>  
   
 </div>

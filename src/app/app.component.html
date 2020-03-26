@@ -1,6 +1,15 @@
   <nz-layout>
-       <app-nagivator ></app-nagivator> 
-      <nz-content>
-        <router-outlet></router-outlet>
-      </nz-content>
+      <nz-header>
+          <app-header></app-header>
+      </nz-header>
+
+      <nz-layout>
+          <nz-sider nzWidth="200px" nzTheme="dark">
+              <app-nagivator ></app-nagivator> 
+            </nz-sider>
+            <nz-layout class="inner-layout">
+                <nz-content><router-outlet></router-outlet></nz-content>
+              </nz-layout>
+        
+      </nz-layout>
   </nz-layout>

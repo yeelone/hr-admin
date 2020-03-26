@@ -6,11 +6,12 @@ import { UserService } from '../../../service/user.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { MessageService } from 'src/app/service/message.service';
 import { MessageCount } from 'src/app/model/message';
-
+import config from '../../../config/config';
+const baseurl = config.baseurl;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
   currentUser: User;
@@ -18,8 +19,11 @@ export class HeaderComponent implements OnInit {
   visible = false;
   notify: MessageCount;
   newPassword = '';
+  oldPassword = '';
   messageVisible = false;
   isSubmiting = false;
+
+  logo = baseurl + '/api/static/img/icon-min.png';
   constructor(private authService: AuthService, private userService: UserService, 
       private messageService: MessageService,
       private msg: NzMessageService) { }
@@ -37,11 +41,16 @@ export class HeaderComponent implements OnInit {
   resetPassword(): void {
     if (this.newPassword.length > 0 ) {
       this.isSubmiting = true;
-      this.userService.changePassword(this.currentUser.id, this.newPassword)
+      this.userService.changePassword(this.currentUser.id, this.oldPassword, this.newPassword)
         .subscribe(
           response => {
+            if ( response['code'] !== 200 ) {
+              this.msg.error('修改密码出错 ' + response['message']);
+              this.isSubmiting = false;
+              return;
+            }
             this.msg.success('已成功为您修改了密码');
-             this.isSubmiting = false;
+            this.isSubmiting = false;
           },
           err => {
             this.msg.error('修改密码出错 ' + err);

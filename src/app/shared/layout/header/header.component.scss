@@ -1,0 +1,27 @@
+  .header{
+    display: flex;
+    height: 65px;
+    border-bottom: 4px solid blanchedalmond;
+  }
+  
+  .header-title {
+    margin: auto;
+    font-size: 20px;
+    color: white;
+    font-style: oblique;
+  }
+
+  .header a {
+    color: blanchedalmond;
+  }
+
+  .userinfo {
+  }
+
+  .message-container {
+    width: 250px;
+    color: white;
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+  }
