@@ -40,7 +40,7 @@
               <br>
               <div nz-row>
                 <div nz-col nzSpan="12">
-                  <button nz-button nzType="primary" (click)="analysis()"><i nz-icon type="check" theme="outline"></i>开始运算</button>
+                  <button nz-button nzType="primary" (click)="valifyPassword()"><i nz-icon type="check" theme="outline"></i>开始运算</button>
                 </div>
               </div>
               
@@ -79,6 +79,8 @@
       </button>
   </div>
 </div>
+
+<app-password-input [visible]="passwordInputVisible" (change)="whenPasswordInput($event)"></app-password-input>
 
 
 <nz-modal [(nzVisible)]="transferModalVisible" nzTitle="变动表" (nzOnCancel)="closeChangeTableModal()" nzWidth="900">

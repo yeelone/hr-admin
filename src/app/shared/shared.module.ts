@@ -40,6 +40,7 @@ import { HealthComponent } from './chart/health/health.component';
 import { ProfileChartComponent } from './chart/profile-chart/profile-chart.component';
 import { ProfileGroupSelectorComponent } from './profile-group-selector/profile-group-selector.component';
 import { MessageComponent } from './message/message.component';
+import { PasswordInputComponent } from './forms/password-input/password-input.component';
 
 const COMPONENTS = [
     GroupEditorComponent,
@@ -74,7 +75,8 @@ const COMPONENTS = [
     RamComponent,
     HealthComponent,
     ProfileChartComponent,
-    ProfileGroupSelectorComponent
+    ProfileGroupSelectorComponent,
+    PasswordInputComponent
 ];
 
 const MODULES = [
@@ -95,6 +97,7 @@ const MODULES = [
     ProfileChartComponent,
     ProfileGroupSelectorComponent,
     MessageComponent,
+    PasswordInputComponent,
   ],
   exports:[
     ...COMPONENTS,

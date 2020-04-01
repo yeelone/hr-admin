@@ -15,20 +15,20 @@ export class TemplateAccountSelectorComponent implements OnInit {
   @Output()
   onSelected:EventEmitter<SalaryTemplateAccount>=new EventEmitter();
 
-  constructor(private templateAccountService:TemplateaccountService,) { }
+  constructor(private templateAccountService: TemplateaccountService) { }
 
   ngOnInit() {
     this.get();
   }
 
-  get(){
+  get() {
     this.templateAccountService.list()
     .subscribe(response => {
       this.list = response['data']['List'];
-    })
+    });
   }
 
-  onChange():void{
+  onChange(): void {
     this.onSelected.emit(this.list[this.selectedTemplateAccountIndex]);
   }
 }

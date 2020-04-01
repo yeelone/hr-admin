@@ -40,12 +40,11 @@ export class SalaryCalculatorComponent implements OnInit {
   previewData = [];
 
   errFile = '';
-
   current = 0;
-
   index = 'First-content';
-
   disable = true;
+  passwordInputVisible = false;
+  password = '';
 
   pre(): void {
     this.current -= 1;
@@ -85,7 +84,6 @@ export class SalaryCalculatorComponent implements OnInit {
     }
   }
 
-
   constructor(private templateAccountService: TemplateaccountService,
     private salaryService: SalaryService,
     private titleService: Title,
@@ -103,6 +101,16 @@ export class SalaryCalculatorComponent implements OnInit {
     .subscribe(response => {
       this.list = response['data']['List'];
     });
+  }
+
+  whenPasswordInput($event) {
+    this.password = $event;
+    this.passwordInputVisible = false;
+    this.analysis();
+  }
+
+  valifyPassword() {
+    this.passwordInputVisible = true;
   }
 
   analysis() {
@@ -153,7 +161,8 @@ export class SalaryCalculatorComponent implements OnInit {
       month: moment(this.selectedMonth).format('MM'),
       // year:String(dateObj.getUTCFullYear()),
       // month:String(dateObj.getUTCMonth() + 1),
-      file: this.uploadedFile
+      file: this.uploadedFile,
+      password: this.password,
     };
 
     this.isSpinning = true ;
@@ -163,7 +172,9 @@ export class SalaryCalculatorComponent implements OnInit {
         this.disabled = false ;
         if (response['code'] !== 200 ) {
           alert('计算期间发生错误，错误信息:' + response['message']);
-          this.errFile = config.baseurl + '/api/download/' + response['data']['ErrorMessageFile'];
+          if ( response['data']['ErrorMessageFile'].length > 0 ) {
+            this.errFile = config.baseurl + '/api/download/' + response['data']['ErrorMessageFile'];
+          }
           return ;
         }
       });

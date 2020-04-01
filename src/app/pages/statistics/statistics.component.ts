@@ -88,7 +88,6 @@ export class StatisticsComponent implements OnInit {
       .subscribe(response => {
         if ( response['code'] === 200 ){
           this.fields = response['data']['fields'];
-          console.log(this.fields);
         } else {
         }
         this.fieldSpinning = false;
@@ -143,11 +142,11 @@ export class StatisticsComponent implements OnInit {
       .subscribe(
         response => {
            if ( response['code'] === 200 ) {
-              this.detailFile = config.baseurl + '/api/download/'+ response['data']['file'];
+              this.detailFile = config.baseurl + '/api/download/' + response['data']['file'];
               this.showDetailFile = true ;
             } else {
               this.showDetailFile = false;
-              alert(response['message'])
+              alert(response['message']);
             }
             this.isLoading = false;
         }
