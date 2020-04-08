@@ -43,8 +43,9 @@ export class MessageComponent implements OnInit {
     this.messageService.getMessages(uid, this.offset, this.limit, this.status)
       .subscribe(
         response => {
-          this.messages = response['data']['list'];
-          console.log(this.messages);
+          if ( response['data']) {
+            this.messages = response['data']['list'];
+          }
         },
         err => {
         }
