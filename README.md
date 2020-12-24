@@ -2,7 +2,7 @@
 1.1.1
 
 ## 示例
-![image](https://wx4.sinaimg.cn/large/6547935dgy1glzak7s4i8j21b30u0n9q.jpg) 
+![image](https://raw.githubusercontent.com/yeelone/hr-admin/master/demo/20201224215533.png) 
 
 ## 更新日志
 
