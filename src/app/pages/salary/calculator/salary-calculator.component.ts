@@ -42,7 +42,7 @@ export class SalaryCalculatorComponent implements OnInit {
   errFile = '';
   current = 0;
   index = 'First-content';
-  disable = true;
+  disable = false;
   passwordInputVisible = false;
   password = '';
 
