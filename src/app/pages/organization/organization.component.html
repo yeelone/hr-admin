@@ -59,7 +59,7 @@
 
 <div >
     <nz-modal [nzWidth]="300" [nzVisible]="visible" nzTitle="新增或修改群组信息" (nzOnCancel)="closeEditForm()" [nzFooter]="null">
-      <app-group-editor [defaultGroup]="selectedGroup" (afterDelete)="getTopGroup($event)"></app-group-editor>
+      <app-group-editor [defaultGroup]="selectedGroup" (afterDelete)="getTopGroup()"></app-group-editor>
     </nz-modal>
 
     <nz-drawer [nzClosable]="false"  [nzWidth]="900" [nzVisible]="profileDrawerVisible" nzTitle="组员信息" (nzOnClose)="closeProfileEditForm()">

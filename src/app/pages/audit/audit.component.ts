@@ -60,7 +60,7 @@ export class AuditComponent implements OnInit {
       });
   }
 
-  filter(state: number, searchAddress: string): void {
+  filter(state: number): void {
     this.state = state;
     this.offset = 0 ;
     this.pageIndex = 1 ;
