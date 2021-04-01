@@ -2,7 +2,7 @@
 1.1.1
 
 ## 示例
-![image](https://raw.githubusercontent.com/yeelone/hr-admin/master/demo/20201224215533.png) 
+![image](https://wx4.sinaimg.cn/mw690/6547935dgy1glzak7s4i8j21b30u0n9q.jpg) 
 
 ## 更新日志
 
@@ -11,6 +11,35 @@
 2、修复标签页table显示样式
 3、增加“特殊人员配置”功能
 
+# 日期
+ 2019-07-17
+
+# 问题描述
+ 在批量上传标签并关联用户时,比如为用户加上延期支付的标签，此时将用户调至不需要延时支付的岗位时，系统并不知道是不是需要去掉将延期支付的标签。这会造成在调整时出现错误。
+
+ #解决办法
+ 1、在管理台调动界面增加用户标签选择，操作员可以调整
+GroupTransfer
+
+# 更新日志
+1、增加版本号
+2、
+
+## 部署
+[部署体验](https://juejin.cn/post/6932129625166479367)
+
+## 展图
+![image](https://wx4.sinaimg.cn/mw690/6547935dgy1glzak7s4i8j21b30u0n9q.jpg) 
 
 ## 欢迎
-[主页](https://tdongli.com/)
+[访问主页](https://tdongli.com/)
+
+### [鼓励作者，下载领域英语APP]
+[![appstore.png](https://i.loli.net/2021/04/01/Ze3LzDvqHQhG5m8.png) ](https://apps.apple.com/cn/app/id1550241884)
+
+![ic_launcher.png](https://i.loli.net/2021/03/31/VMfApJBv8RmFWdl.png)
+
+![image](https://i.loli.net/2021/03/31/rRgu7HNDAzhYbWm.png) 
+
+
+![微信图片_20210331003708.jpg.jpg](https://i.loli.net/2021/04/01/kjhFvGRmTEx9rc3.jpg)

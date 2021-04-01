@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/ng-gdrc-hr",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -35,6 +36,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -56,7 +63,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-gdrc-hr:build",
+            "browserTarget": "ng-gdrc-hr:build"
           },
           "configurations": {
             "production": {
@@ -130,5 +137,8 @@
       }
     }
   },
-  "defaultProject": "ng-gdrc-hr"
+  "defaultProject": "ng-gdrc-hr",
+  "cli": {
+    "analytics": "07c7ad41-0ac2-4bd4-bfb9-f07e42b83747"
+  }
 }

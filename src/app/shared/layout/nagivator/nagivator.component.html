@@ -1,7 +1,6 @@
 <div  class="nav-bar">
     <!-- [nzMode]="'horizontal'" -->
   <ul nz-menu  [nzMode]="'inline'" nzTheme='dark' [nzInlineCollapsed]="isCollapsed">
-    
      <li nz-menu-item *appCanAccess="['DASHBOARD']">
       <span title>
         <i nz-icon nzType="home" nzTheme="outline"></i>
@@ -11,25 +10,25 @@
 
     <li nz-menu-item *appCanAccess="['CREATE_GROUP']">
       <span title>
-        <i class="anticon anticon-team"></i>
+        <i nz-icon nzType="team" nzTheme="outline"></i>
         <span><a routerLink="/org">机构</a></span>
       </span>
     </li>
     <li nz-menu-item *appCanAccess="['LIST_PROFILES']">
       <span title>
-        <i class="anticon anticon-contacts"></i>
+        <i nz-icon nzType="user" nzTheme="outline"></i>
         <span><a routerLink="/employee">员工</a></span>
       </span>
     </li>
     <li nz-menu-item *appCanAccess="['LIST_TAGS']">
       <span title>
-        <i class="anticon anticon-tag"></i>
+        <i nz-icon nzType="tags" nzTheme="outline"></i>
         <span><a routerLink="/tags">标签</a></span>
       </span>
     </li>
     <li nz-submenu  *appCanAccess="['CALCULATE_SALARY']">
       <span title>
-        <i class="anticon anticon-calculator"></i>
+        <i nz-icon nzType="transaction" nzTheme="outline"></i>
         <span><a routerLink="/salary">薪酬</a></span>
       </span>
       <ul>
@@ -40,18 +39,18 @@
     </li>
     <li nz-menu-item >
       <span title>
-        <i class="anticon anticon-bar-chart"></i>
+        <i nz-icon nzType="table" nzTheme="outline"></i>
         <span><a routerLink="/statistics">统计</a></span>
       </span>
     </li>
      <li nz-menu-item *appCanAccess="['LIST_AUDIT']">
       <span title>
-        <i class="anticon anticon-appstore"></i>
+        <i nz-icon nzType="verified" nzTheme="outline"></i>
         <span><a routerLink="/task">审批</a></span>
       </span>
     </li>
       <li nz-submenu *appCanAccess="['ADD_PERMISSIONS', 'CREATE_USER','CREATE_USER_GROUP','CREATE_ROLE']">
-      <span title><i class="anticon anticon-setting"></i> 管理 </span>
+      <span title><i nz-icon nzType="setting" nzTheme="outline"></i> 管理 </span>
         <ul>
             <li nz-menu-item> <span><a routerLink="/manager/users" *appCanAccess="['CREATE_USER']">用户管理</a></span> </li>
             <li nz-menu-item> <span><a routerLink="/manager/groups" *appCanAccess="['CREATE_USER_GROUP']">群组管理</a></span></li>

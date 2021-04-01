@@ -24,22 +24,20 @@
                 [nzShowSizeChanger]="pagination"
                 (nzPageSizeChange)="nzPageSizeChange($event)"
                 [(nzPageIndex)]="pageIndex"
-                (nzPageIndexChange)="getData()"
-               
-                >
+                (nzPageIndexChange)="getData()" >
                 <thead>
                   <tr>
                     <th nzShowCheckbox [(nzChecked)]="allChecked"  (nzCheckedChange)="checkAll($event)"></th>
                     <th>ID</th>
                     <th nzCustomFilter>
                             用户名
-                        <nz-dropdown nzTrigger="click" [nzClickHide]="false">
+                        <a nz-dropdown nzTrigger="click" [nzClickHide]="false">
                             <i class="anticon anticon-search ant-table-filter-icon" nz-dropdown></i>
                             <div class="custom-filter-dropdown">
                                 <input type="text" nz-input placeholder="搜索用户名" [(ngModel)]="searchValue">
                                 <button nz-button [nzType]="'primary'" (click)="search('username')">Search</button>
                             </div>
-                        </nz-dropdown>  
+                        </a>  
                     </th>
                     <th>身份证号码</th>
                     <th>状态</th>
