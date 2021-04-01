@@ -2,22 +2,22 @@
 <div class="container">
         <ul class="salary-module-list">
                 <li *appCanAccess="['CALCULATE_SALARY']">
-                    <i nz-icon type="calculator" theme="twotone"></i>
+                    <i nz-icon nzType="calculator" nzTheme="outline"></i>
                     <p> <a routerLink="/salary/calculate">工资计算</a> </p>
                 </li>
             
                 <li *appCanAccess="['SALARY_PROFILE_CUSTOM_CONFIG']">
-                        <i nz-icon type="setting" theme="twotone"></i>
+                        <i nz-icon nzType="setting" nzTheme="outline"></i>
                         <p> <a routerLink="/salary/config">特殊人员配置</a> </p>
                 </li>
             
                  <li *appCanAccess="['SET_TEMPLATE']">
-                    <i nz-icon type="switcher" theme="twotone"></i>
+                    <i nz-icon nzType="switcher" nzTheme="outline"></i>
                     <p><a routerLink="/salary/template">配置模板</a></p>
                 </li>
             
                 <li *appCanAccess="['UPDATE_ACCOUNT','CREATE_ACCOUNT']">
-                    <i nz-icon type="build" theme="twotone"></i>
+                    <i nz-icon nzType="build" nzTheme="outline"></i>
                     <p> <a routerLink="/salary/templateaccount">配置账套</a> </p>
                 </li>
             

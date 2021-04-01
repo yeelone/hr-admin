@@ -8,7 +8,9 @@
           </div>
           <!-- <nz-divider></nz-divider> -->
           <div class="group-edit-btn">
-              <a   (click)="openEditForm(g)"><i nz-icon type="edit" theme="outline"></i></a>
+              <a   (click)="openEditForm(g)">
+                <i nz-icon nzType="edit" nzTheme="outline"></i>
+              </a>
           </div>
           
         </li>
@@ -122,7 +124,9 @@
                <td>{{rule}}</td>
                <td>
                  <nz-popconfirm [nzTitle]="'确定删除?'" (nzOnConfirm)="removeRule(i)">
-                    <a nz-popconfirm style="color:red;"><i nz-icon type="close" theme="outline"></i></a>
+                    <a nz-popconfirm style="color:red;">
+                      <i nz-icon nzType="close" nzTheme="outline"></i>
+                    </a>
                 </nz-popconfirm>
                </td>
             </tr>

@@ -329,7 +329,9 @@
 <nz-modal [(nzVisible)]="initUploadVisible" nzTitle="上传初始化数据" (nzOnCancel)="closeInitUploadModal()" (nzOnOk)="closeInitUploadModal()">
     <div style="height: 40px; border: 1px solid darkturquoise;    line-height: 2.5;">
         <a href="{{config.api + '/' +init_data_file}}" *ngIf="init_data_file"> 点击查看已上传的文件 </a>
-        <button nz-button (click)="removeInitUploadFile()" style="float:right;margin: 3px;"><i nz-icon type="close"></i> 关闭上传文件 </button>
+        <button nz-button (click)="removeInitUploadFile()" style="float:right;margin: 3px;">
+            <i nz-icon nzType="close" nzTheme="outline"></i>
+            关闭上传文件 </button>
     </div>
     <p>
       注意：<br>

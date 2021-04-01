@@ -33,7 +33,9 @@
          <td>{{data.coefficient}}</td>
          <td>{{data.profileCount}}</td>
          <td>
-           <a (click)="openProfileSelectorForm(data)"><i nz-icon type="team" theme="outline"></i></a>
+           <a (click)="openProfileSelectorForm(data)">
+             <i nz-icon nzType="team" nzTheme="outline"></i>
+            </a>
            <nz-divider [nzType]="vertical"></nz-divider>
            <nz-popconfirm [nzTitle]="'确定删除?'" (nzOnConfirm)="deleteTag(data.id)">
                <a nz-popconfirm class="del-button"><i class="anticon anticon-close"></i></a>

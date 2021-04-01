@@ -9,7 +9,9 @@
                     <input type="text"  nz-input placeholder="输入名字进行搜索" [(ngModel)]="searchValue" (keyup.enter)="search('name')">
                 </nz-input-group>
                 <ng-template #suffixIconButton>
-                    <button nz-button nzType="primary" nzSearch  (click)="search('name')"><i nz-icon type="search"></i></button>
+                    <button nz-button nzType="primary" nzSearch  (click)="search('name')">
+                        <i nz-icon nzType="search" nzTheme="outline"></i>
+                    </button>
                 </ng-template>
 
                 <button nz-button (click)="showFreezedProfiles()">查看冻结用户</button>
