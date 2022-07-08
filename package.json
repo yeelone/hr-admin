@@ -24,7 +24,7 @@
     "chartjs-plugin-annotation": "^0.5.7",
     "chartjs-plugin-datalabels": "^0.7.0",
     "core-js": "^3.3.2",
-    "moment": "^2.22.2",
+    "moment": "^2.29.4",
     "ng-zorro-antd": "^9.3.0",
     "ng2-charts": "^2.4.2",
     "ngx-filesize": "^2.0.12",
